@@ -117,86 +117,80 @@ Sub SVNToolBarInstall()
     Dim CmdBarIdx As Long
     Dim SVNCmdBartExist
     
-'    SVNCmdBartExist = False
-    
+    'If Subversion command bar already exists, exit subroutine.
     For CmdBarIdx = 1 To Application.CommandBars.Count
         If Application.CommandBars.Item(CmdBarIdx).Name = "Subversion" Then
            SVNCmdBartExist = True
-'           Exit For
-           Exit Sub 'サブルーチンを抜ける
+           Exit Sub
         End If
     Next CmdBarIdx
     
-'    If SVNCmdBartExist = False Then
-        Set SVNCmdBar = Application.CommandBars.Add(Name:="Subversion")
+    Set SVNCmdBar = Application.CommandBars.Add(Name:="Subversion")
             
-        With SVNCmdBar
-            With .Controls.Add(Type:=msoControlButton)
-                .Caption = "ログ表示"
-                .FaceId = 44
-                .OnAction = "TSVNLOG"
-    '            '.Picture = LoadPicture(ThisDocument.Path & "\ico\menulog.bmp")
-            End With
-            With .Controls.Add(Type:=msoControlButton)
-                .Caption = "差分"
-                .FaceId = 195
-                .OnAction = "TSVNDIFF"
-    '            '.Picture = LoadPicture(ThisDocument.Path & "\ico\menucompare.bmp")
-            End With
-            With .Controls.Add(Type:=msoControlButton)
-                .Caption = "コミット"
-                .FaceId = 359
-                .OnAction = "TSVNCI"
-    '            '.Picture = LoadPicture(ThisDocument.Path & "\ico\menucommit.bmp")
-            End With
-            With .Controls.Add(Type:=msoControlButton)
-                .Caption = "追加"
-                .FaceId = 316
-                .OnAction = "TSVNADD"
-    '            '.Picture = LoadPicture(ThisDocument.Path & "\ico\menuadd.bmp")
-            End With
-            With .Controls.Add(Type:=msoControlButton)
-                .Caption = "レポジトリブラウザ"
-                .FaceId = 25
-                .OnAction = "TSVNRB"
-    '            '.Picture = LoadPicture(ThisDocument.Path & "\ico\menurepobrowse.bmp")
-            End With
-            With .Controls.Add(Type:=msoControlButton)
-                .Caption = "ロックを取得"
-                .FaceId = 225
-                .OnAction = "TSVNLOCK"
-            End With
-            With .Controls.Add(Type:=msoControlButton)
-                .Caption = "ロックを開放"
-                .FaceId = 277
-                .OnAction = "TSVNUNLOCK"
-            End With
-            With .Controls.Add(Type:=msoControlButton)
-                .Caption = "メニュー更新"
-                .FaceId = 598
-                .OnAction = "TSVNMENU"
-            End With
-           
-            With .Controls.Add(Type:=msoControlButton)
-                .Caption = "TEST"
-                .FaceId = 100
-                .OnAction = "TSVNTEST"
-            End With
-           
-           .Enabled = True
-           .Visible = True
-        
+    With SVNCmdBar
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "ログ表示"
+            .FaceId = 44
+            .OnAction = "TSVNLOG"
+ '           '.Picture = LoadPicture(ThisDocument.Path & "\ico\menulog.bmp")
         End With
-        Err.Clear
- '   End If
-
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "差分"
+            .FaceId = 195
+            .OnAction = "TSVNDIFF"
+ '           '.Picture = LoadPicture(ThisDocument.Path & "\ico\menucompare.bmp")
+        End With
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "コミット"
+            .FaceId = 359
+            .OnAction = "TSVNCI"
+ '           '.Picture = LoadPicture(ThisDocument.Path & "\ico\menucommit.bmp")
+        End With
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "追加"
+            .FaceId = 316
+            .OnAction = "TSVNADD"
+ '           '.Picture = LoadPicture(ThisDocument.Path & "\ico\menuadd.bmp")
+        End With
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "レポジトリブラウザ"
+            .FaceId = 25
+            .OnAction = "TSVNRB"
+ '           '.Picture = LoadPicture(ThisDocument.Path & "\ico\menurepobrowse.bmp")
+        End With
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "ロックを取得"
+            .FaceId = 225
+            .OnAction = "TSVNLOCK"
+        End With
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "ロックを開放"
+            .FaceId = 277
+            .OnAction = "TSVNUNLOCK"
+        End With
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "メニュー更新"
+            .FaceId = 598
+            .OnAction = "TSVNMENU"
+        End With
+       
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "TEST"
+            .FaceId = 100
+            .OnAction = "TSVNTEST"
+        End With
+       .Enabled = True
+       .Visible = True
+    End With
+    Err.Clear
 End Sub
 
 Private Sub SVNDeleteMenu()
     Dim myCon As CommandBarPopup
     
 '    MsgBox "SVNDeleteMenu"
-    
+
+    'If Subversion menu exists, delete it.
     For Each myCon In Application.CommandBars("Menu Bar").Controls
         If myCon.Caption = "Subversion(&S)" Then
             Application.CommandBars("Menu Bar").Controls("Subversion(&S)").Delete
@@ -253,6 +247,26 @@ Sub AutoExit()
   SVNDeleteCommandBar
 '  SVNDeleteMenu
 End Sub
+
+Function GetSVNControlStatus(ByRef isDotSVN As Boolean, ByRef isTextBase As Boolean)
+    Dim strDotSvn As String
+    Dim strTextBase As String
+
+    strDotSvn = ActiveDocument.Path & "\.svn"
+    strTextBase = ActiveDocument.Path & "\.svn\text-base\" & ActiveDocument.Name & ".svn-base"
+
+    If CreateObject("Scripting.FileSystemObject").FolderExists(strDotSvn) Then
+        isDotSvn = True
+    Else
+        isDotSvn = False
+    End If
+
+    If CreateObject("Scripting.FileSystemObject").FileExists(strTextBase) Then
+        isTextBase = True
+    Else
+        isTextBase = False
+    End If
+End Function
 
 Sub SVNResetMenu()
     Dim props
@@ -405,8 +419,8 @@ Private Function TSVN(command As String) As Boolean
     strCOM = "/command:" & command & " /notempfile "
     strPATH = "/path:" & """" & ActiveDocument.FullName & """"
     CreateObject("WScript.Shell").Run strTSVN & strCOM & strPATH, , True
-    SVNResetMenu
-    SVNResetToolBar
+'    SVNResetMenu
+'    SVNResetToolBar
     TSVN = True 'Return True
 End Function
 
@@ -505,8 +519,8 @@ Sub TSVNUNLOCK()
 End Sub
 
 Sub TSVNMENU()
-    SVNResetMenu
-    SVNResetToolBar
+'    SVNResetMenu
+'    SVNResetToolBar
 End Sub
 
 Private Sub Document_New()
@@ -543,6 +557,29 @@ Function IsActiveDocFileReadOnly() As Boolean
         IsActiveDocFileReadOnly = True
     Else
         IsActiveDocFileReadOnly = False
+    End If
+End Function
+
+Function IsFolderUnderSVNControl() As Boolean
+    Dim strDotSvn As String
+
+    strDotSvn = ActiveDocument.Path & "\.svn"
+
+    If CreateObject("Scripting.FileSystemObject").FolderExists(strDotSvn) Then
+        IsFolderUnderSVNControl = True 'Return True
+    Else
+        IsFolderUnderSVNControl = False 'Return False
+    End If
+End Function
+
+Function IsFileUnderSVNControl() As Boolean
+    Dim strTextBase As String
+    strTextBase = ActiveDocument.Path & "\.svn\text-base\" & ActiveDocument.Name & ".svn-base"
+
+    If CreateObject("Scripting.FileSystemObject").FileExists(strTextBase) Then
+        IsFileUnderSVNControl = True 'Return True
+    Else
+        IsFileUnderSVNControl = False 'Return False
     End If
 End Function
 
