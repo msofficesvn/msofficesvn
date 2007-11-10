@@ -401,17 +401,6 @@ Private Sub SVNResetToolBar()
 End Sub
 
 Private Function TSVN(command As String) As Boolean
-    
-    ' Test the active document file status
-    Dim msgActiveDocFileNotExist As String
-    msgActiveDocFileNotExist = "アクティブ文書のファイルがありません。文書をファイルに保存してからこの操作を行ってください。"
-    
-    If ActiveDocFileExist = False Then
-        MsgBox (msgActiveDocFileNotExist)
-        TSVN = False 'Return False
-        Exit Function
-    End If
-    
     Dim strTSVN As String
     Dim strCOM As String
     Dim strPATH As String
@@ -425,86 +414,125 @@ Private Function TSVN(command As String) As Boolean
 End Function
 
 Sub TSVNCI()
-    Dim msgActiveDocFileReadOnly As String
-    msgActiveDocFileReadOnly = "コミットできません。アクティブ文書は変更されていますが、ファイル属性が読み取り専用となっています。"
-    
-    Dim ans As Integer
-    Dim FilePath As String
-    
-    FilePath = ActiveDocument.FullName
-    
-    If ActiveDocument.Saved = False Then
-    'Active Document is modified but not saved yet.
-        ' Test the active document file attributes
-        If IsActiveDocFileReadOnly = True Then
-            MsgBox (msgActiveDocFileReadOnly)
-            Exit Sub
-        End If
-        
-        ans = MsgBox("コミット後、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？", vbYesNo)
-        If ans = vbYes Then
-            ActiveDocument.Save
-        End If
+  Dim msgActiveDocFileReadOnly As String
+  msgActiveDocFileReadOnly = "コミットできません。アクティブ文書は変更されていますが、ファイル属性が読み取り専用となっています。"
+  
+  Dim ans As Integer
+  Dim FilePath As String
+  
+  ' Test the active document file status
+  If ActiveDocFileExistWithMsg() = False Then
+    Exit Sub
+  End If
+
+  ' Test the folder is under version control
+  If IsFolderUnderSVNControlWithMsg = False Then
+    Exit Sub
+  End If
+
+  If ActiveDocument.Saved = False Then
+  'Active Document is modified but not saved yet.
+    ' Test the active document file attributes
+    If IsActiveDocFileReadOnly = True Then
+        MsgBox (msgActiveDocFileReadOnly)
+        Exit Sub
     End If
     
-    If TSVN("commit") = True Then
-        ActiveDocument.Close
-        Documents.Open FileName:=FilePath
+    ans = MsgBox("コミット後、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？", vbYesNo)
+    If ans = vbYes Then
+      ActiveDocument.Save
     End If
+  End If
+
+  FilePath = ActiveDocument.FullName
+
+  If TSVN("commit") = True Then
+    ActiveDocument.Close
+    Documents.Open FileName:=FilePath
+  End If
 End Sub
 
 Sub TSVNDIFF()
-    TSVN ("diff")
+  ' Test the active document file status
+  If ActiveDocFileExistWithMsg() = False Then
+    Exit Sub
+  End If
+
+  ' Test the file is under version control
+  If IsFileUnderSVNControlWithMsg = False Then
+    Exit Sub
+  End If
+
+  TSVN ("diff")
 End Sub
 
 Sub TSVNRB()
-    TSVN ("repobrowser")
+  TSVN ("repobrowser")
 End Sub
 
 Sub TSVNADD()
-    Dim ans As Integer
-    Dim FilePath As String
-    
-    If TSVN("add") = True Then
-        ans = MsgBox("追加をリポジトリへ反映しますか?", vbYesNo)
-        If ans = vbYes Then
-            TSVNCI
-        End If
-    End If
+  Dim ans As Integer
+  Dim FilePath As String
+  
+  If TSVN("add") = True Then
+      ans = MsgBox("追加をリポジトリへ反映しますか?", vbYesNo)
+      If ans = vbYes Then
+          TSVNCI
+      End If
+  End If
 End Sub
 
 Sub TSVNLOG()
-    TSVN ("log")
+  ' Test the active document file status
+  If ActiveDocFileExistWithMsg() = False Then
+    Exit Sub
+  End If
+
+ ' Test the file is under version control
+  If IsFileUnderSVNControlWithMsg = False Then
+    Exit Sub
+  End If
+
+  TSVN ("log")
 End Sub
 
 Sub TSVNLOCK()
-    Dim ans As Integer
-    Dim FilePath As String
-    
+  Dim ans As Integer     'Return value of MessageBox
+  Dim FilePath As String 'Backup of the active document file path name
+
+  Dim msgActiveDocFileReadOnly As String 'Message
+  msgActiveDocFileReadOnly = "ロックを取得できません。アクティブ文書は変更されていますが、ファイル属性が読み取り専用となっています。"
+
+  ' Test the active document file status
+  If ActiveDocFileExistWithMsg() = False Then
+    Exit Sub
+  End If
+
+  ' Test the file is under version control
+  If IsFileUnderSVNControlWithMsg = False Then
+    Exit Sub
+  End If
+  
+  If ActiveDocument.Saved = False Then
+  'Active Document is modified but not saved yet.
     ' Test the active document file attributes
-    Dim msgActiveDocFileReadOnly As String
-    msgActiveDocFileReadOnly = "ロックを取得できません。アクティブ文書は変更されていますが、ファイル属性が読み取り専用となっています。"
-    
-    FilePath = ActiveDocument.FullName
-    
-    If ActiveDocument.Saved = False Then
-    'Active Document is modified but not saved yet.
-        ' Test the active document file attributes
-        If IsActiveDocFileReadOnly = True Then
-            MsgBox (msgActiveDocFileReadOnly)
-            Exit Sub
-        End If
-        
-        ans = MsgBox("ロックを取得後、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？", vbYesNo)
-        If ans = vbYes Then
-            ActiveDocument.Save
-        End If
+    If IsActiveDocFileReadOnly = True Then
+      MsgBox (msgActiveDocFileReadOnly)
+      Exit Sub
     End If
     
-    If TSVN("lock") = True Then
-        ActiveDocument.Close
-        Documents.Open FileName:=FilePath
+    ans = MsgBox("ロックを取得後、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？", vbYesNo)
+    If ans = vbYes Then
+      ActiveDocument.Save
     End If
+  End If
+
+  FilePath = ActiveDocument.FullName
+
+  If TSVN("lock") = True Then
+    ActiveDocument.Close
+    Documents.Open FileName:=FilePath
+  End If
 End Sub
 
 Sub TSVNUNLOCK()
@@ -525,63 +553,109 @@ End Sub
 
 Private Sub Document_New()
 '   MsgBox "Document_New"
-    SVNDeleteMenu
-    SVNWakeUp
+  SVNDeleteMenu
+  SVNWakeUp
 End Sub
 
 Private Sub Document_Open()
 '   MsgBox "Document_Open"
-    SVNDeleteMenu
-    SVNWakeUp
+  SVNDeleteMenu
+  SVNWakeUp
 End Sub
 
 ':Function:Test whether the active document is saved as a file or not.
 ':Return value:True=The file exists., False=No file exists.
 Function ActiveDocFileExist() As Boolean
-    If ActiveDocument.Path = "" Then
-        'Judge that no file exists when no path exists.
-        ActiveDocFileExist = False
-    Else
-        ActiveDocFileExist = True
-    End If
+  If ActiveDocument.Path = "" Then
+    'Judge that no file exists when no path exists.
+    ActiveDocFileExist = False
+  Else
+    ActiveDocFileExist = True
+  End If
 End Function
+
+':Function:Test whether the active document is saved as a file or not.
+'          And this displays error message if the file does't exist.
+':Return value:True=The file exists., False=No file exists.
+Function ActiveDocFileExistWithMsg() As Boolean
+
+  Dim msgActiveDocFileNotExist As String
+  msgActiveDocFileNotExist = "アクティブ文書のファイルがありません。文書をファイルに保存してからこの操作を行ってください。"
+
+  If ActiveDocFileExist Then
+    ActiveDocFileExistWithMsg = True
+  Else
+    MsgBox (msgActiveDocFileNotExist)
+    ActiveDocFileExistWithMsg = False
+  End If
+End Function
+
 
 ':Function: Test whether the active document file is read only or not.
 ':Retrun value: True = Read Only, False = Not Read Only
 Function IsActiveDocFileReadOnly() As Boolean
-    Dim glFSO As Object  'File System Object
-    
-    Set glFSO = CreateObject("Scripting.FileSystemObject")
-    
-    If glFSO.GetFile(ActiveDocument.FullName).Attributes And 1 Then
-        IsActiveDocFileReadOnly = True
-    Else
-        IsActiveDocFileReadOnly = False
-    End If
+  Dim glFSO As Object  'File System Object
+  Set glFSO = CreateObject("Scripting.FileSystemObject")
+
+  If glFSO.GetFile(ActiveDocument.FullName).Attributes And 1 Then
+    IsActiveDocFileReadOnly = True 'Return True
+  Else
+    IsActiveDocFileReadOnly = False 'Return False
+  End If
 End Function
 
+':Function: Test whether the file exist in the file under SVN version control.
+':Return value: True=Under version control, False=Not under version control
 Function IsFolderUnderSVNControl() As Boolean
-    Dim strDotSvn As String
+  Dim strDotSvn As String
+  strDotSvn = ActiveDocument.Path & "\.svn"
 
-    strDotSvn = ActiveDocument.Path & "\.svn"
+  If CreateObject("Scripting.FileSystemObject").FolderExists(strDotSvn) Then
+    IsFolderUnderSVNControl = True 'Return True
+  Else
+    IsFolderUnderSVNControl = False 'Return False
+  End If
+End Function
 
-    If CreateObject("Scripting.FileSystemObject").FolderExists(strDotSvn) Then
-        IsFolderUnderSVNControl = True 'Return True
-    Else
-        IsFolderUnderSVNControl = False 'Return False
-    End If
+
+':Function: Test whether the file exist in the folder under SVN version control.
+'           And this displays error message if the folder isn't under version control.
+':Return value: True=Under version control, False=Not under version control
+Function IsFolderUnderSVNControlWithMsg() As Boolean
+  Dim msgNotUnderCtrl As String 'Message
+  msgNotUnderCtrl = "この文書ファイルはバージョンコントロール下のフォルダにありません。"
+  
+  If IsFolderUnderSVNControl Then
+    IsFolderUnderSVNControlWithMsg = True 'Return True
+  Else
+    MsgBox(msgNotUnderCtrl)
+    IsFolderUnderSVNControlWithMsg = False 'Return False
+  End If
 End Function
 
 Function IsFileUnderSVNControl() As Boolean
-    Dim strTextBase As String
-    strTextBase = ActiveDocument.Path & "\.svn\text-base\" & ActiveDocument.Name & ".svn-base"
+  Dim strNotUnderCtrl As String
+  strTextBase = ActiveDocument.Path & "\.svn\text-base\" & ActiveDocument.Name & ".svn-base"
 
-    If CreateObject("Scripting.FileSystemObject").FileExists(strTextBase) Then
-        IsFileUnderSVNControl = True 'Return True
-    Else
-        IsFileUnderSVNControl = False 'Return False
-    End If
+  If CreateObject("Scripting.FileSystemObject").FileExists(strTextBase) Then
+    IsFileUnderSVNControl = True 'Return True
+  Else
+    IsFileUnderSVNControl = False 'Return False
+  End If
 End Function
+
+Function IsFileUnderSVNControlWithMsg() As Boolean
+  Dim msgNotUnderCtrl As String
+  msgNotUnderCtrl = "この文書ファイルはバージョンコントロールされていません。"
+
+  If IsFileUnderSVNControl Then
+    IsFileUnderSVNControlWithMsg = True 'Return True
+  Else
+    MsgBox(msgNotUnderCtrl)
+    IsFileUnderSVNControlWithMsg = False 'Return False
+  End If
+End Function
+
 
 Sub TSVNTEST()
     Dim FilePath As String
