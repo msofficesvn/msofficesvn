@@ -98,10 +98,6 @@ Private Sub SVNMenuInstall()
     Set SubMenu7 = Menu.Controls.Add
     SubMenu7.Caption = "ロックを開放(&U)"
     SubMenu7.OnAction = "TSVNUNLOCK"
-
-    Set SubMenu8 = Menu.Controls.Add
-    SubMenu8.Caption = "メニュー更新(&M)"
-    SubMenu8.OnAction = "TSVNMENU"
     
     Err.Clear
 
@@ -168,17 +164,7 @@ Sub SVNToolBarInstall()
             .FaceId = 277
             .OnAction = "TSVNUNLOCK"
         End With
-        With .Controls.Add(Type:=msoControlButton)
-            .Caption = "メニュー更新"
-            .FaceId = 598
-            .OnAction = "TSVNMENU"
-        End With
        
-        With .Controls.Add(Type:=msoControlButton)
-            .Caption = "TEST"
-            .FaceId = 100
-            .OnAction = "TSVNTEST"
-        End With
        .Enabled = True
        .Visible = True
     End With
@@ -221,31 +207,10 @@ Sub AutoExec()
 '  MsgBox "AutoExec End"
 End Sub
 
-Sub AutoNew()
-'  MsgBox "AutoNew"
-'  SVNDeleteMenu
-'  SVNWakeUp
-'  SVNResetMenu
-End Sub
-
-Sub AutoOpen()
-'  MsgBox "AutoOpen"
-
-'  SVNDeleteMenu
-'  SVNWakeUp
-'  SVNResetMenu
-End Sub
-
-Sub AutoClose()
-'  MsgBox "AutoClose"
-'  SVNDeleteMenu
-End Sub
-
 Sub AutoExit()
 '  MsgBox "AutoExit"
   SVNDeleteMenu
   SVNDeleteCommandBar
-'  SVNDeleteMenu
 End Sub
 
 Function GetSVNControlStatus(ByRef isDotSvn As Boolean, ByRef isTextBase As Boolean)
@@ -268,138 +233,6 @@ Function GetSVNControlStatus(ByRef isDotSvn As Boolean, ByRef isTextBase As Bool
     End If
 End Function
 
-Sub SVNResetMenu()
-    Dim props
-    Dim propBase
-    Dim dotSvn
-    Dim isProps
-    Dim isPropBase
-    Dim isDotSvn
-    Dim myBar As CommandBar
-    
-'    MsgBox "SVNResetMenu"
-    
-    props = ActiveDocument.Path & "\.svn\props\" & ActiveDocument.Name & ".svn-work"
-    propBase = ActiveDocument.Path & "\.svn\prop-base\" & ActiveDocument.Name & ".svn-base"
-    dotSvn = ActiveDocument.Path & "\.svn"
-    
-    If CreateObject("Scripting.FileSystemObject").FileExists(props) Then
-        isProps = True
-    Else
-        isProps = False
-    End If
-    If CreateObject("Scripting.FileSystemObject").FileExists(propBase) Then
-        isPropBase = True
-    Else
-        isPropBase = False
-    End If
-    If CreateObject("Scripting.FileSystemObject").FolderExists(dotSvn) Then
-        isDotSvn = True
-    Else
-        isDotSvn = False
-    End If
-
-'   メニューの表示状態を更新
-    With Application.CommandBars("Menu Bar").Controls("Subversion(&S)")
-        If isDotSvn = False Then
-            .Controls("ログ表示(&L)").Enabled = False
-            .Controls("差分(&D)").Enabled = False
-            .Controls("コミット(&C)").Enabled = False
-            .Controls("追加(&A)").Enabled = False
-            .Controls("ロックを取得(&O)").Enabled = False
-            .Controls("ロックを開放(&U)").Enabled = False
-        Else
-             '"Commit" can add unregistered files to repository
-            .Controls("コミット(&C)").Enabled = True
-            
-            If isProps Or isPropBase Then
-'                .Controls("コミット(&C)").Enabled = True
-                .Controls("追加(&A)").Enabled = False
-                .Controls("ロックを取得(&O)").Enabled = True
-                .Controls("ロックを開放(&U)").Enabled = True
-            Else
-'                .Controls("コミット(&C)").Enabled = False
-                .Controls("追加(&A)").Enabled = True
-                .Controls("ロックを取得(&O)").Enabled = False
-                .Controls("ロックを開放(&U)").Enabled = False
-            End If
-            If isPropBase Then
-                .Controls("ログ表示(&L)").Enabled = True
-                .Controls("差分(&D)").Enabled = True
-            Else
-                .Controls("ログ表示(&L)").Enabled = False
-                .Controls("差分(&D)").Enabled = False
-            End If
-        End If
-   End With
-End Sub
-
-Private Sub SVNResetToolBar()
-    Dim props As String
-    Dim propBase As String
-    Dim dotSvn As String
-    Dim isProps As Boolean
-    Dim isPropBase As Boolean
-    Dim isDotSvn As Boolean
-    Dim myBar As CommandBar
-    
-'    MsgBox "SVNResetToolBar"
-    
-    props = ActiveDocument.Path & "\.svn\props\" & ActiveDocument.Name & ".svn-work"
-    propBase = ActiveDocument.Path & "\.svn\prop-base\" & ActiveDocument.Name & ".svn-base"
-    dotSvn = ActiveDocument.Path & "\.svn"
-    
-    If CreateObject("Scripting.FileSystemObject").FileExists(props) Then
-        isProps = True
-    Else
-        isProps = False
-    End If
-    If CreateObject("Scripting.FileSystemObject").FileExists(propBase) Then
-        isPropBase = True
-    Else
-        isPropBase = False
-    End If
-    If CreateObject("Scripting.FileSystemObject").FolderExists(dotSvn) Then
-        isDotSvn = True
-    Else
-        isDotSvn = False
-    End If
-    
-    '   ツールバーの表示状態を更新
-    With Application.CommandBars("Subversion")
-        If isDotSvn = False Then
-            .Controls("ログ表示").Enabled = False
-            .Controls("差分").Enabled = False
-            .Controls("コミット").Enabled = False
-            .Controls("追加").Enabled = False
-            .Controls("ロックを取得").Enabled = False
-            .Controls("ロックを開放").Enabled = False
-        Else
-            '"Commit" can add unregistered files to repository
-            .Controls("コミット").Enabled = True
-            
-            If isProps Or isPropBase Then
-'                .Controls("コミット").Enabled = True
-                .Controls("追加").Enabled = False
-                .Controls("ロックを取得").Enabled = True
-                .Controls("ロックを開放").Enabled = True
-            Else
-'                .Controls("コミット").Enabled = False
-                .Controls("追加").Enabled = True
-                .Controls("ロックを取得").Enabled = False
-                .Controls("ロックを開放").Enabled = False
-            End If
-            If isPropBase Then
-                .Controls("ログ表示").Enabled = True
-                .Controls("差分").Enabled = True
-            Else
-                .Controls("ログ表示").Enabled = False
-                .Controls("差分").Enabled = False
-            End If
-        End If
-   End With
-End Sub
-
 Private Function TSVN(ByVal command As String, ByVal DocFileFullName As String) As Boolean
     Dim strTSVN As String
     Dim strCOM As String
@@ -414,8 +247,6 @@ Private Function TSVN(ByVal command As String, ByVal DocFileFullName As String) 
     End If
 
     CreateObject("WScript.Shell").Run strTSVN & strCOM & strPATH, , True
-'    SVNResetMenu
-'    SVNResetToolBar
     TSVN = True 'Return True
 End Function
 
@@ -459,9 +290,6 @@ Sub TSVNCI()
 End Sub
 
 Sub TSVNDIFF()
-  Dim strDummy As String
-  strDummy = ""
-  
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
     Exit Sub
@@ -471,19 +299,16 @@ Sub TSVNDIFF()
   If IsFileUnderSVNControlWithMsg = False Then
     Exit Sub
   End If
-  
+
   TSVN "diff", ""
-  
-  End Sub
+
+End Sub
 
 Sub TSVNRB()
   TSVN "repobrowser", ""
 End Sub
 
 Sub TSVNADD()
-  Dim ans As Integer
-  Dim FilePath As String
-  
   If TSVN("add", "") = True Then
       ans = MsgBox("追加をリポジトリへ反映しますか?", vbYesNo)
       If ans = vbYes Then
@@ -556,23 +381,6 @@ Sub TSVNUNLOCK()
     If TSVN("unlock", FilePath) = True Then
         Documents.Open FileName:=FilePath
     End If
-End Sub
-
-Sub TSVNMENU()
-'    SVNResetMenu
-'    SVNResetToolBar
-End Sub
-
-Private Sub Document_New()
-'   MsgBox "Document_New"
-  SVNDeleteMenu
-  SVNWakeUp
-End Sub
-
-Private Sub Document_Open()
-'   MsgBox "Document_Open"
-  SVNDeleteMenu
-  SVNWakeUp
 End Sub
 
 ':Function:Test whether the active document is saved as a file or not.
@@ -667,25 +475,4 @@ Function IsFileUnderSVNControlWithMsg() As Boolean
     IsFileUnderSVNControlWithMsg = False 'Return False
   End If
 End Function
-
-
-Sub TSVNTEST()
-    Dim FilePath As String
-    
-    MsgBox ("FullNam -- " & ActiveDocument.FullName)
-    MsgBox ("Path -- " & ActiveDocument.Path)
-    MsgBox ("Nam -- " & ActiveDocument.Name)
-    
-    If ActiveDocument.Path = "" Then
-     MsgBox ("ファイルないからプロシージャ抜けるで")
-     Exit Sub
-    End If
-    
-    If ActiveDocument.Path = "" Then
-     MsgBox ("ファイルなし")
-    Else
-     MsgBox ("ファイルあり")
-    End If
-     
-End Sub
 
