@@ -248,7 +248,7 @@ Sub AutoExit()
 '  SVNDeleteMenu
 End Sub
 
-Function GetSVNControlStatus(ByRef isDotSVN As Boolean, ByRef isTextBase As Boolean)
+Function GetSVNControlStatus(ByRef isDotSvn As Boolean, ByRef isTextBase As Boolean)
     Dim strDotSvn As String
     Dim strTextBase As String
 
@@ -400,13 +400,19 @@ Private Sub SVNResetToolBar()
    End With
 End Sub
 
-Private Function TSVN(command As String) As Boolean
+Private Function TSVN(ByVal command As String, ByVal DocFileFullName As String) As Boolean
     Dim strTSVN As String
     Dim strCOM As String
     Dim strPATH As String
     strTSVN = """" & CreateObject("WScript.Shell").RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath") & """"
     strCOM = "/command:" & command & " /notempfile "
-    strPATH = "/path:" & """" & ActiveDocument.FullName & """"
+
+    If Len(DocFileFullName) = 0 Then
+      strPATH = "/path:" & """" & ActiveDocument.FullName & """"
+    Else
+      strPATH = "/path:" & """" & DocFileFullName & """"
+    End If
+
     CreateObject("WScript.Shell").Run strTSVN & strCOM & strPATH, , True
 '    SVNResetMenu
 '    SVNResetToolBar
@@ -445,14 +451,17 @@ Sub TSVNCI()
   End If
 
   FilePath = ActiveDocument.FullName
+  ActiveDocument.Close
 
-  If TSVN("commit") = True Then
-    ActiveDocument.Close
+  If TSVN("commit", FilePath) = True Then
     Documents.Open FileName:=FilePath
   End If
 End Sub
 
 Sub TSVNDIFF()
+  Dim strDummy As String
+  strDummy = ""
+  
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
     Exit Sub
@@ -462,19 +471,20 @@ Sub TSVNDIFF()
   If IsFileUnderSVNControlWithMsg = False Then
     Exit Sub
   End If
-
-  TSVN ("diff")
-End Sub
+  
+  TSVN "diff", ""
+  
+  End Sub
 
 Sub TSVNRB()
-  TSVN ("repobrowser")
+  TSVN "repobrowser", ""
 End Sub
 
 Sub TSVNADD()
   Dim ans As Integer
   Dim FilePath As String
   
-  If TSVN("add") = True Then
+  If TSVN("add", "") = True Then
       ans = MsgBox("追加をリポジトリへ反映しますか?", vbYesNo)
       If ans = vbYes Then
           TSVNCI
@@ -493,7 +503,7 @@ Sub TSVNLOG()
     Exit Sub
   End If
 
-  TSVN ("log")
+  TSVN "log", ""
 End Sub
 
 Sub TSVNLOCK()
@@ -528,9 +538,11 @@ Sub TSVNLOCK()
   End If
 
   FilePath = ActiveDocument.FullName
-
-  If TSVN("lock") = True Then
-    ActiveDocument.Close
+  'リポジトリのファイルが新しければ作業コピーを更新できるので、いったんファイルを閉じておく。
+  'そうしておかないと、ロックエラーとなりクリーンアップが必要な状態となる。
+  ActiveDocument.Close
+  
+  If TSVN("lock", FilePath) = True Then
     Documents.Open FileName:=FilePath
   End If
 End Sub
@@ -539,9 +551,9 @@ Sub TSVNUNLOCK()
     Dim FilePath As String
     
     FilePath = ActiveDocument.FullName
+    ActiveDocument.Close
     
-    If TSVN("unlock") = True Then
-        ActiveDocument.Close
+    If TSVN("unlock", FilePath) = True Then
         Documents.Open FileName:=FilePath
     End If
 End Sub
@@ -628,7 +640,7 @@ Function IsFolderUnderSVNControlWithMsg() As Boolean
   If IsFolderUnderSVNControl Then
     IsFolderUnderSVNControlWithMsg = True 'Return True
   Else
-    MsgBox(msgNotUnderCtrl)
+    MsgBox (msgNotUnderCtrl)
     IsFolderUnderSVNControlWithMsg = False 'Return False
   End If
 End Function
@@ -651,7 +663,7 @@ Function IsFileUnderSVNControlWithMsg() As Boolean
   If IsFileUnderSVNControl Then
     IsFileUnderSVNControlWithMsg = True 'Return True
   Else
-    MsgBox(msgNotUnderCtrl)
+    MsgBox (msgNotUnderCtrl)
     IsFileUnderSVNControlWithMsg = False 'Return False
   End If
 End Function
@@ -676,3 +688,4 @@ Sub TSVNTEST()
     End If
      
 End Sub
+
