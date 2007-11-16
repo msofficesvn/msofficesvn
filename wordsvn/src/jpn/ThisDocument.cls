@@ -68,28 +68,19 @@ Private Sub SVNMenuInstall()
     Set SubMenu1 = Menu.Controls.Add
     SubMenu1.Caption = "ログ表示(&L)"
     SubMenu1.OnAction = "TSVNLOG"
-'    SubMenu1.Picture = LoadPicture(ThisDocument.Path & "\ico\menulog.bmp")
     SubMenu1.FaceId = 44
     
     Set SubMenu2 = Menu.Controls.Add
     SubMenu2.Caption = "差分(&D)"
     SubMenu2.OnAction = "TSVNDIFF"
-'    SubMenu2.Picture = LoadPicture(ThisDocument.Path & "\ico\menucompare.bmp")
 
     Set SubMenu3 = Menu.Controls.Add
     SubMenu3.Caption = "コミット(&C)"
     SubMenu3.OnAction = "TSVNCI"
-'    SubMenu3.Picture = LoadPicture(ThisDocument.Path & "\ico\menucommit.bmp")
-
-    Set SubMenu4 = Menu.Controls.Add
-    SubMenu4.Caption = "追加(&A)"
-    SubMenu4.OnAction = "TSVNADD"
-'    SubMenu4.Picture = LoadPicture(ThisDocument.Path & "\ico\menuadd.bmp")
 
     Set SubMenu5 = Menu.Controls.Add
     SubMenu5.Caption = "レポジトリブラウザ(&R)"
     SubMenu5.OnAction = "TSVNRB"
-'    SubMenu5.Picture = LoadPicture(ThisDocument.Path & "\ico\menurepobrowse.bmp")
 
     Set SubMenu6 = Menu.Controls.Add
     SubMenu6.Caption = "ロックを取得(&O)"
@@ -141,12 +132,6 @@ Sub SVNToolBarInstall()
             .FaceId = 359
             .OnAction = "TSVNCI"
  '           '.Picture = LoadPicture(ThisDocument.Path & "\ico\menucommit.bmp")
-        End With
-        With .Controls.Add(Type:=msoControlButton)
-            .Caption = "追加"
-            .FaceId = 316
-            .OnAction = "TSVNADD"
- '           '.Picture = LoadPicture(ThisDocument.Path & "\ico\menuadd.bmp")
         End With
         With .Controls.Add(Type:=msoControlButton)
             .Caption = "レポジトリブラウザ"
@@ -308,14 +293,6 @@ Sub TSVNRB()
   TSVN "repobrowser", ""
 End Sub
 
-Sub TSVNADD()
-  If TSVN("add", "") = True Then
-      ans = MsgBox("追加をリポジトリへ反映しますか?", vbYesNo)
-      If ans = vbYes Then
-          TSVNCI
-      End If
-  End If
-End Sub
 
 Sub TSVNLOG()
   ' Test the active document file status
@@ -347,7 +324,10 @@ Sub TSVNLOCK()
   If IsFileUnderSVNControlWithMsg = False Then
     Exit Sub
   End If
-  
+
+  'Backup file name before save the active document
+  FilePath = ActiveDocument.FullName
+
   If ActiveDocument.Saved = False Then
   'Active Document is modified but not saved yet.
     ' Test the active document file attributes
@@ -362,7 +342,6 @@ Sub TSVNLOCK()
     End If
   End If
 
-  FilePath = ActiveDocument.FullName
   'リポジトリのファイルが新しければ作業コピーを更新できるので、いったんファイルを閉じておく。
   'そうしておかないと、ロックエラーとなりクリーンアップが必要な状態となる。
   ActiveDocument.Close
@@ -373,14 +352,33 @@ Sub TSVNLOCK()
 End Sub
 
 Sub TSVNUNLOCK()
-    Dim FilePath As String
-    
-    FilePath = ActiveDocument.FullName
-    ActiveDocument.Close
-    
-    If TSVN("unlock", FilePath) = True Then
-        Documents.Open FileName:=FilePath
+  Dim FilePath As String
+
+  ' Test the active document file status
+  If ActiveDocFileExistWithMsg() = False Then
+    Exit Sub
+  End If
+
+  ' Test the file is under version control
+  If IsFileUnderSVNControlWithMsg = False Then
+    Exit Sub
+  End If
+
+  'Backup file name before save the active document
+  FilePath = ActiveDocument.FullName
+
+  If ActiveDocument.Saved = False Then
+    'Active Document is modified but not saved yet.
+    ans = MsgBox("'" & ActiveDocument.Name & "'" & "は変更されています。ロックの開放では変更内容をリポジトリへ反映することはできません。続行しますか?", vbYesNo)
+
+  If ans = vbNo Then
+      End Sub 'ロックを開放しないで処理を抜ける
+    Else
+      ActiveDocument.Save
     End If
+  End If
+
+  TSVN "unlock", FilePath
 End Sub
 
 ':Function:Test whether the active document is saved as a file or not.
