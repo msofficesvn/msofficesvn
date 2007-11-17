@@ -24,7 +24,8 @@ Attribute VB_Exposed = True
 ' the GNU General Public License version 2.
 '
 ' Copyright (C) 2007 Koki Yamamoto
-'
+'     All rights of modified contents from original one are reserved
+'     This is free software with ABSOLUTELY NO WARRANTY.
 
 
 Private Sub SVNWakeUp()
@@ -33,7 +34,6 @@ Private Sub SVNWakeUp()
     
     isMenu = False
     
-'    MsgBox "SVNWakeUp"
     
     For Each myCon In Application.CommandBars("Menu Bar").Controls
         If myCon.Caption = "Subversion(&S)" Then
@@ -61,45 +61,47 @@ Private Sub SVNMenuInstall()
     Dim SubMenu7 As CommandBarButton
     Dim SubMenu8 As CommandBarButton
 
-'    MsgBox "SVNMenuInstall"
-
     Set Menu = Application.CommandBars("Menu Bar").Controls.Add(Type:=msoControlPopup)
     Menu.Caption = "Subversion(&S)"
-    Set SubMenu1 = Menu.Controls.Add
-    SubMenu1.Caption = "ログ表示(&L)"
-    SubMenu1.OnAction = "TSVNLOG"
-    SubMenu1.FaceId = 44
-    
+
     Set SubMenu2 = Menu.Controls.Add
-    SubMenu2.Caption = "差分(&D)"
-    SubMenu2.OnAction = "TSVNDIFF"
+    SubMenu2.Caption = "ロックを取得(&O)"
+    SubMenu2.OnAction = "TSVNLOCK"
+    SubMenu2.FaceId = 225
 
     Set SubMenu3 = Menu.Controls.Add
     SubMenu3.Caption = "コミット(&C)"
     SubMenu3.OnAction = "TSVNCI"
+    SubMenu3.FaceId = 359
+
+    Set SubMenu4 = Menu.Controls.Add
+    SubMenu4.Caption = "差分(&D)"
+    SubMenu4.OnAction = "TSVNDIFF"
+    SubMenu4.FaceId = 195
 
     Set SubMenu5 = Menu.Controls.Add
-    SubMenu5.Caption = "レポジトリブラウザ(&R)"
-    SubMenu5.OnAction = "TSVNRB"
-
+    SubMenu5.Caption = "ログ表示(&L)"
+    SubMenu5.OnAction = "TSVNLOG"
+    SubMenu5.FaceId = 44
+    
     Set SubMenu6 = Menu.Controls.Add
-    SubMenu6.Caption = "ロックを取得(&O)"
-    SubMenu6.OnAction = "TSVNLOCK"
+    SubMenu6.Caption = "リポジトリブラウザ(&R)"
+    SubMenu6.OnAction = "TSVNRB"
+    SubMenu6.FaceId = 25
 
     Set SubMenu7 = Menu.Controls.Add
     SubMenu7.Caption = "ロックを開放(&U)"
     SubMenu7.OnAction = "TSVNUNLOCK"
+    SubMenu7.FaceId = 277
     
     Err.Clear
 
 End Sub
 
 Sub SVNToolBarInstall()
-    
-'    MsgBox "SVNToolBarInstall"
-    
+
     Dim SVNCmdBar As CommandBar
-    
+
     'Test whether the subversion tool bar exits or not
     Dim CmdBarIdx As Long
     Dim SVNCmdBartExist
@@ -116,36 +118,32 @@ Sub SVNToolBarInstall()
             
     With SVNCmdBar
         With .Controls.Add(Type:=msoControlButton)
-            .Caption = "ログ表示"
-            .FaceId = 44
-            .OnAction = "TSVNLOG"
- '           '.Picture = LoadPicture(ThisDocument.Path & "\ico\menulog.bmp")
-        End With
-        With .Controls.Add(Type:=msoControlButton)
-            .Caption = "差分"
-            .FaceId = 195
-            .OnAction = "TSVNDIFF"
- '           '.Picture = LoadPicture(ThisDocument.Path & "\ico\menucompare.bmp")
-        End With
-        With .Controls.Add(Type:=msoControlButton)
-            .Caption = "コミット"
-            .FaceId = 359
-            .OnAction = "TSVNCI"
- '           '.Picture = LoadPicture(ThisDocument.Path & "\ico\menucommit.bmp")
-        End With
-        With .Controls.Add(Type:=msoControlButton)
-            .Caption = "レポジトリブラウザ"
-            .FaceId = 25
-            .OnAction = "TSVNRB"
- '           '.Picture = LoadPicture(ThisDocument.Path & "\ico\menurepobrowse.bmp")
-        End With
-        With .Controls.Add(Type:=msoControlButton)
             .Caption = "ロックを取得"
             .FaceId = 225
             .OnAction = "TSVNLOCK"
         End With
         With .Controls.Add(Type:=msoControlButton)
-            .Caption = "ロックを開放"
+            .Caption = "コミット"
+            .FaceId = 359
+            .OnAction = "TSVNCI"
+        End With
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "差分"
+            .FaceId = 195
+            .OnAction = "TSVNDIFF"
+        End With
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "ログ表示"
+            .FaceId = 44
+            .OnAction = "TSVNLOG"
+        End With
+        With .Controls.Add(Type:=msoControlButton)
+            .Caption = "リポジトリブラウザ"
+            .FaceId = 25
+            .OnAction = "TSVNRB"
+        End With
+        With .Controls.Add(Type:=msoControlButton)
+           .Caption = "ロックを開放"
             .FaceId = 277
             .OnAction = "TSVNUNLOCK"
         End With
@@ -159,8 +157,6 @@ End Sub
 Private Sub SVNDeleteMenu()
     Dim myCon As CommandBarPopup
     
-'    MsgBox "SVNDeleteMenu"
-
     'If Subversion menu exists, delete it.
     For Each myCon In Application.CommandBars("Menu Bar").Controls
         If myCon.Caption = "Subversion(&S)" Then
@@ -184,16 +180,13 @@ Private Sub SVNDeleteCommandBar()
 End Sub
 
 Sub AutoExec()
-'  MsgBox "AutoExec Begin"
   SVNDeleteMenu
   SVNWakeUp
   SVNDeleteCommandBar
   SVNToolBarInstall
-'  MsgBox "AutoExec End"
 End Sub
 
 Sub AutoExit()
-'  MsgBox "AutoExit"
   SVNDeleteMenu
   SVNDeleteCommandBar
 End Sub
@@ -260,7 +253,7 @@ Sub TSVNCI()
         Exit Sub
     End If
     
-    ans = MsgBox("コミット後、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？", vbYesNo)
+    ans = MsgBox("コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？", vbYesNo)
     If ans = vbYes Then
       ActiveDocument.Save
     End If
@@ -336,14 +329,16 @@ Sub TSVNLOCK()
       Exit Sub
     End If
     
-    ans = MsgBox("ロックを取得後、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？", vbYesNo)
+    ans = MsgBox("ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？", vbYesNo)
     If ans = vbYes Then
       ActiveDocument.Save
     End If
   End If
 
-  'リポジトリのファイルが新しければ作業コピーを更新できるので、いったんファイルを閉じておく。
-  'そうしておかないと、ロックエラーとなりクリーンアップが必要な状態となる。
+  'Close the file and reopen after lock it, because the following reasons
+  ' * The file attribute of read only / read write is changed after lock the file.
+  ' * The file can be updated when the file in repository is newer than the working copy.
+  ' * If the word open the file and svn failes to update working copy, svn require clean-up.
   ActiveDocument.Close
   
   If TSVN("lock", FilePath) = True Then
@@ -381,13 +376,14 @@ Sub TSVNUNLOCK()
     ans = MsgBox("'" & ActiveDocument.Name & "'" & "は変更されています。ロックの開放では変更内容をリポジトリへ反映することはできません。続行しますか?", vbYesNo)
 
     If ans = vbNo Then
-      Exit Sub 'ロックを開放しないで処理を抜ける
+      Exit Sub 'Exit subroutine without locking
     Else
       ActiveDocument.Save
     End If
   End If 'If ActiveDocument.Saved = False Then
 
-  'unlockするとファイル属性がRead OnlyからRWとなるのでいったんファイルを閉じてunlock後開く
+  'Close the file and reopen after unlock it, because the following reason
+  ' * The file attribute of read only / read write is changed after unlock the file.
   ActiveDocument.Close
   
   If TSVN("unlock", FilePath) = True Then
