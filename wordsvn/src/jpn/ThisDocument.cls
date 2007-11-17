@@ -8,7 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 
-
+' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
 '     All rights reserved.
 '     This is free software with ABSOLUTELY NO WARRANTY.
@@ -354,6 +354,9 @@ End Sub
 Sub TSVNUNLOCK()
   Dim FilePath As String
 
+  Dim msgActiveDocFileReadOnly As String 'Message
+  msgActiveDocFileReadOnly = "ロックを開放できません。アクティブ文書は変更されていますが、ファイル属性が読み取り専用となっています。"
+
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
     Exit Sub
@@ -368,17 +371,29 @@ Sub TSVNUNLOCK()
   FilePath = ActiveDocument.FullName
 
   If ActiveDocument.Saved = False Then
-    'Active Document is modified but not saved yet.
+  'Active Document is modified but not saved yet.
+    If IsActiveDocFileReadOnly = True Then
+    ' Test the active document file attributes
+      MsgBox (msgActiveDocFileReadOnly)
+      Exit Sub
+    End If
+
     ans = MsgBox("'" & ActiveDocument.Name & "'" & "は変更されています。ロックの開放では変更内容をリポジトリへ反映することはできません。続行しますか?", vbYesNo)
 
-  If ans = vbNo Then
-      End Sub 'ロックを開放しないで処理を抜ける
+    If ans = vbNo Then
+      Exit Sub 'ロックを開放しないで処理を抜ける
     Else
       ActiveDocument.Save
     End If
+  End If 'If ActiveDocument.Saved = False Then
+
+  'unlockするとファイル属性がRead OnlyからRWとなるのでいったんファイルを閉じてunlock後開く
+  ActiveDocument.Close
+  
+  If TSVN("unlock", FilePath) = True Then
+    Documents.Open FileName:=FilePath
   End If
 
-  TSVN "unlock", FilePath
 End Sub
 
 ':Function:Test whether the active document is saved as a file or not.
