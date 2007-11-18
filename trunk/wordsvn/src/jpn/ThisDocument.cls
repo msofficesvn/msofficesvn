@@ -64,6 +64,11 @@ Private Sub SVNMenuInstall()
     Set Menu = Application.CommandBars("Menu Bar").Controls.Add(Type:=msoControlPopup)
     Menu.Caption = "Subversion(&S)"
 
+    Set SubMenu1 = Menu.Controls.Add
+    SubMenu1.Caption = "更新(&U)"
+    SubMenu1.OnAction = "TSVNUPDATE"
+    SubMenu1.FaceId = 100
+
     Set SubMenu2 = Menu.Controls.Add
     SubMenu2.Caption = "ロックを取得(&O)"
     SubMenu2.OnAction = "TSVNLOCK"
@@ -90,7 +95,7 @@ Private Sub SVNMenuInstall()
     SubMenu6.FaceId = 25
 
     Set SubMenu7 = Menu.Controls.Add
-    SubMenu7.Caption = "ロックを開放(&U)"
+    SubMenu7.Caption = "ロックを開放(&C)"
     SubMenu7.OnAction = "TSVNUNLOCK"
     SubMenu7.FaceId = 277
     
@@ -117,7 +122,12 @@ Sub SVNToolBarInstall()
     Set SVNCmdBar = Application.CommandBars.Add(Name:="Subversion")
             
     With SVNCmdBar
-        With .Controls.Add(Type:=msoControlButton)
+      With .Controls.Add(Type:=msoControlButton)
+          .Caption = "更新"
+          .FaceId = 100
+          .OnAction = "TSVNUPDATE"
+      End With
+      With .Controls.Add(Type:=msoControlButton)
             .Caption = "ロックを取得"
             .FaceId = 225
             .OnAction = "TSVNLOCK"
@@ -227,6 +237,37 @@ Private Function TSVN(ByVal command As String, ByVal DocFileFullName As String) 
     CreateObject("WScript.Shell").Run strTSVN & strCOM & strPATH, , True
     TSVN = True 'Return True
 End Function
+
+Sub TSVNUPDATE()
+  Dim msgActiveDocMod As String
+  msgActiveDocMod = "更新できません。アクティブ文書は変更されています。"
+
+  Dim FilePath As String
+  
+  ' Test the active document file status
+  If ActiveDocFileExistWithMsg() = False Then
+    Exit Sub
+  End If
+
+  ' Test the folder is under version control
+  If IsFolderUnderSVNControlWithMsg = False Then
+    Exit Sub
+  End If
+
+  If ActiveDocument.Saved = False Then
+  'Active Document is modified but not saved yet.
+  MsgBox(msgActiveDocMod)
+    Exit Sub
+  End If
+
+  FilePath = ActiveDocument.FullName
+  ActiveDocument.Close
+
+  If TSVN("update", FilePath) = True Then
+    Documents.Open FileName:=FilePath
+  End If
+
+End Sub
 
 Sub TSVNCI()
   Dim msgActiveDocFileReadOnly As String
