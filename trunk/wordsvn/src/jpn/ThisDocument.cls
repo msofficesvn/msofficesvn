@@ -250,13 +250,13 @@ Sub TSVNUPDATE()
   End If
 
   ' Test the folder is under version control
-  If IsFolderUnderSVNControlWithMsg = False Then
+  If IsFileUnderSVNControlWithMsg = False Then
     Exit Sub
   End If
 
   If ActiveDocument.Saved = False Then
   'Active Document is modified but not saved yet.
-  MsgBox(msgActiveDocMod)
+    MsgBox(msgActiveDocMod)
     Exit Sub
   End If
 
