@@ -26,167 +26,167 @@ Attribute VB_Exposed = True
 ' Copyright (C) 2007 Koki Yamamoto
 '     All rights of modified contents from original one are reserved
 '     This is free software with ABSOLUTELY NO WARRANTY.
-
+'
+' You can redistribute it and/or modify it under the terms of
+' the GNU General Public License version 2.
+'
 
 Private Sub SVNWakeUp()
-    Dim isMenu
-    Dim myCon As CommandBarPopup
-    
-    isMenu = False
-    
-    
-    For Each myCon In Application.CommandBars("Menu Bar").Controls
-        If myCon.Caption = "Subversion(&S)" Then
-            isMenu = True
-            Exit For
-        End If
-    Next
-    
-    If isMenu = False Then
-        SVNMenuInstall
-    End If
+  Dim isMenu As Boolean        ' Flag to detect the existence of SVN menu
+  Dim myCon As CommandBarPopup ' Menu control object
 
+  isMenu = False
+
+  For Each myCon In Application.CommandBars("Menu Bar").Controls
+    If myCon.Caption = "Subversion(&S)" Then
+      isMenu = True
+      Exit For
+    End If
+  Next
+
+  If isMenu = False Then
+    SVNMenuInstall
+  End If
 End Sub
 
 Private Sub SVNMenuInstall()
-    Dim myBar As CommandBar
-    On Error Resume Next
-    Dim Menu As CommandBarControl
-    Dim SubMenu1 As CommandBarButton
-    Dim SubMenu2 As CommandBarButton
-    Dim SubMenu3 As CommandBarButton
-    Dim SubMenu4 As CommandBarButton
-    Dim SubMenu5 As CommandBarButton
-    Dim SubMenu6 As CommandBarButton
-    Dim SubMenu7 As CommandBarButton
-    Dim SubMenu8 As CommandBarButton
+  Dim myBar As CommandBar
+  On Error Resume Next
+  Dim Menu As CommandBarControl
+  Dim SubMenu1 As CommandBarButton
+  Dim SubMenu2 As CommandBarButton
+  Dim SubMenu3 As CommandBarButton
+  Dim SubMenu4 As CommandBarButton
+  Dim SubMenu5 As CommandBarButton
+  Dim SubMenu6 As CommandBarButton
+  Dim SubMenu7 As CommandBarButton
+  Dim SubMenu8 As CommandBarButton
 
-    Set Menu = Application.CommandBars("Menu Bar").Controls.Add(Type:=msoControlPopup)
-    Menu.Caption = "Subversion(&S)"
+  Set Menu = Application.CommandBars("Menu Bar").Controls.Add(Type:=msoControlPopup)
+  Menu.Caption = "Subversion(&S)"
 
-    Set SubMenu1 = Menu.Controls.Add
-    SubMenu1.Caption = "更新(&U)"
-    SubMenu1.OnAction = "TSVNUPDATE"
-    SubMenu1.FaceId = 100
+  Set SubMenu1 = Menu.Controls.Add
+  SubMenu1.Caption = "更新(&U)"
+  SubMenu1.OnAction = "TSVNUPDATE"
+  SubMenu1.FaceId = 360
 
-    Set SubMenu2 = Menu.Controls.Add
-    SubMenu2.Caption = "ロックを取得(&O)"
-    SubMenu2.OnAction = "TSVNLOCK"
-    SubMenu2.FaceId = 225
+  Set SubMenu2 = Menu.Controls.Add
+  SubMenu2.Caption = "ロックを取得(&O)"
+  SubMenu2.OnAction = "TSVNLOCK"
+  SubMenu2.FaceId = 225
 
-    Set SubMenu3 = Menu.Controls.Add
-    SubMenu3.Caption = "コミット(&C)"
-    SubMenu3.OnAction = "TSVNCI"
-    SubMenu3.FaceId = 359
+  Set SubMenu3 = Menu.Controls.Add
+  SubMenu3.Caption = "コミット(&C)"
+  SubMenu3.OnAction = "TSVNCI"
+  SubMenu3.FaceId = 359
 
-    Set SubMenu4 = Menu.Controls.Add
-    SubMenu4.Caption = "差分(&D)"
-    SubMenu4.OnAction = "TSVNDIFF"
-    SubMenu4.FaceId = 195
+  Set SubMenu4 = Menu.Controls.Add
+  SubMenu4.Caption = "差分(&D)"
+  SubMenu4.OnAction = "TSVNDIFF"
+  SubMenu4.FaceId = 195
 
-    Set SubMenu5 = Menu.Controls.Add
-    SubMenu5.Caption = "ログ表示(&L)"
-    SubMenu5.OnAction = "TSVNLOG"
-    SubMenu5.FaceId = 44
-    
-    Set SubMenu6 = Menu.Controls.Add
-    SubMenu6.Caption = "リポジトリブラウザ(&R)"
-    SubMenu6.OnAction = "TSVNRB"
-    SubMenu6.FaceId = 25
+  Set SubMenu5 = Menu.Controls.Add
+  SubMenu5.Caption = "ログ表示(&L)"
+  SubMenu5.OnAction = "TSVNLOG"
+  SubMenu5.FaceId = 44
+  
+  Set SubMenu6 = Menu.Controls.Add
+  SubMenu6.Caption = "リポジトリブラウザ(&R)"
+  SubMenu6.OnAction = "TSVNRB"
+  SubMenu6.FaceId = 25
 
-    Set SubMenu7 = Menu.Controls.Add
-    SubMenu7.Caption = "ロックを開放(&C)"
-    SubMenu7.OnAction = "TSVNUNLOCK"
-    SubMenu7.FaceId = 277
-    
-    Err.Clear
-
+  Set SubMenu7 = Menu.Controls.Add
+  SubMenu7.Caption = "ロックを開放(&C)"
+  SubMenu7.OnAction = "TSVNUNLOCK"
+  SubMenu7.FaceId = 277
+  
+  Err.Clear
 End Sub
 
 Sub SVNToolBarInstall()
 
-    Dim SVNCmdBar As CommandBar
+  Dim SVNCmdBar As CommandBar
 
-    'Test whether the subversion tool bar exits or not
-    Dim CmdBarIdx As Long
-    Dim SVNCmdBartExist
-    
-    'If Subversion command bar already exists, exit subroutine.
-    For CmdBarIdx = 1 To Application.CommandBars.Count
-        If Application.CommandBars.Item(CmdBarIdx).Name = "Subversion" Then
-           SVNCmdBartExist = True
-           Exit Sub
-        End If
-    Next CmdBarIdx
-    
-    Set SVNCmdBar = Application.CommandBars.Add(Name:="Subversion")
-            
-    With SVNCmdBar
-      With .Controls.Add(Type:=msoControlButton)
-          .Caption = "更新"
-          .FaceId = 100
-          .OnAction = "TSVNUPDATE"
-      End With
-      With .Controls.Add(Type:=msoControlButton)
-            .Caption = "ロックを取得"
-            .FaceId = 225
-            .OnAction = "TSVNLOCK"
-        End With
-        With .Controls.Add(Type:=msoControlButton)
-            .Caption = "コミット"
-            .FaceId = 359
-            .OnAction = "TSVNCI"
-        End With
-        With .Controls.Add(Type:=msoControlButton)
-            .Caption = "差分"
-            .FaceId = 195
-            .OnAction = "TSVNDIFF"
-        End With
-        With .Controls.Add(Type:=msoControlButton)
-            .Caption = "ログ表示"
-            .FaceId = 44
-            .OnAction = "TSVNLOG"
-        End With
-        With .Controls.Add(Type:=msoControlButton)
-            .Caption = "リポジトリブラウザ"
-            .FaceId = 25
-            .OnAction = "TSVNRB"
-        End With
-        With .Controls.Add(Type:=msoControlButton)
-           .Caption = "ロックを開放"
-            .FaceId = 277
-            .OnAction = "TSVNUNLOCK"
-        End With
-       
-       .Enabled = True
-       .Visible = True
+  ' Test whether the subversion tool bar exits or not
+  Dim CmdBarIdx As Long
+  Dim SVNCmdBartExist As boolean
+
+  ' If Subversion command bar already exists, exit subroutine.
+  For CmdBarIdx = 1 To Application.CommandBars.Count
+    If Application.CommandBars.Item(CmdBarIdx).Name = "Subversion" Then
+      SVNCmdBartExist = True
+      Exit Sub
+    End If
+  Next CmdBarIdx
+
+  Set SVNCmdBar = Application.CommandBars.Add(Name:="Subversion")
+
+  With SVNCmdBar
+    With .Controls.Add(Type:=msoControlButton)
+      .Caption = "更新"
+      .FaceId = 360
+      .OnAction = "TSVNUPDATE"
     End With
-    Err.Clear
+    With .Controls.Add(Type:=msoControlButton)
+      .Caption = "ロックを取得"
+      .FaceId = 225
+      .OnAction = "TSVNLOCK"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+      .Caption = "コミット"
+      .FaceId = 359
+      .OnAction = "TSVNCI"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+      .Caption = "差分"
+      .FaceId = 195
+      .OnAction = "TSVNDIFF"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+      .Caption = "ログ表示"
+      .FaceId = 44
+      .OnAction = "TSVNLOG"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+      .Caption = "リポジトリブラウザ"
+      .FaceId = 25
+      .OnAction = "TSVNRB"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+      .Caption = "ロックを開放"
+      .FaceId = 277
+      .OnAction = "TSVNUNLOCK"
+    End With
+
+   .Enabled = True
+   .Visible = True
+  End With
+  Err.Clear
 End Sub
 
 Private Sub SVNDeleteMenu()
-    Dim myCon As CommandBarPopup
-    
-    'If Subversion menu exists, delete it.
-    For Each myCon In Application.CommandBars("Menu Bar").Controls
-        If myCon.Caption = "Subversion(&S)" Then
-            Application.CommandBars("Menu Bar").Controls("Subversion(&S)").Delete
-        Exit For
-    End If
-    Next
+  Dim myCon As CommandBarPopup ' Command bar control object
+
+  ' If Subversion menu exists, delete it.
+  For Each myCon In Application.CommandBars("Menu Bar").Controls
+    If myCon.Caption = "Subversion(&S)" Then
+      Application.CommandBars("Menu Bar").Controls("Subversion(&S)").Delete
+    Exit For
+  End If
+  Next
 End Sub
 
 Private Sub SVNDeleteCommandBar()
-    Dim CmdBarIdx As Long
+  Dim CmdBarIdx As Long ' Index of command bar
 
-    With Application.CommandBars
-        For CmdBarIdx = 1 To .Count
-            If .Item(CmdBarIdx).Name = "Subversion" Then
-               .Item(CmdBarIdx).Delete
-               Exit For
-            End If
-        Next CmdBarIdx
-    End With
+  With Application.CommandBars
+    For CmdBarIdx = 1 To .Count
+      If .Item(CmdBarIdx).Name = "Subversion" Then
+        .Item(CmdBarIdx).Delete
+        Exit For
+      End If
+    Next CmdBarIdx
+  End With
 End Sub
 
 Sub AutoExec()
@@ -202,48 +202,48 @@ Sub AutoExit()
 End Sub
 
 Function GetSVNControlStatus(ByRef isDotSvn As Boolean, ByRef isTextBase As Boolean)
-    Dim strDotSvn As String
-    Dim strTextBase As String
+  Dim strDotSvn As String   ' SVN control folder ".svn"
+  Dim strTextBase As String ' Base file full path name
 
-    strDotSvn = ActiveDocument.Path & "\.svn"
-    strTextBase = ActiveDocument.Path & "\.svn\text-base\" & ActiveDocument.Name & ".svn-base"
+  strDotSvn = ActiveDocument.Path & "\.svn"
+  strTextBase = ActiveDocument.Path & "\.svn\text-base\" & ActiveDocument.Name & ".svn-base"
 
-    If CreateObject("Scripting.FileSystemObject").FolderExists(strDotSvn) Then
-        isDotSvn = True
-    Else
-        isDotSvn = False
-    End If
+  If CreateObject("Scripting.FileSystemObject").FolderExists(strDotSvn) Then
+    isDotSvn = True
+  Else
+    isDotSvn = False
+  End If
 
-    If CreateObject("Scripting.FileSystemObject").FileExists(strTextBase) Then
-        isTextBase = True
-    Else
-        isTextBase = False
-    End If
+  If CreateObject("Scripting.FileSystemObject").FileExists(strTextBase) Then
+    isTextBase = True
+  Else
+    isTextBase = False
+  End If
 End Function
 
 Private Function TSVN(ByVal command As String, ByVal DocFileFullName As String) As Boolean
-    Dim strTSVN As String
-    Dim strCOM As String
-    Dim strPATH As String
-    strTSVN = """" & CreateObject("WScript.Shell").RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath") & """"
-    strCOM = "/command:" & command & " /notempfile "
+  Dim strTSVN As String
+  Dim strCOM As String
+  Dim strPATH As String
+  strTSVN = """" & CreateObject("WScript.Shell").RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath") & """"
+  strCOM = "/command:" & command & " /notempfile "
 
-    If Len(DocFileFullName) = 0 Then
-      strPATH = "/path:" & """" & ActiveDocument.FullName & """"
-    Else
-      strPATH = "/path:" & """" & DocFileFullName & """"
-    End If
+  If Len(DocFileFullName) = 0 Then
+    strPATH = "/path:" & """" & ActiveDocument.FullName & """"
+  Else
+    strPATH = "/path:" & """" & DocFileFullName & """"
+  End If
 
-    CreateObject("WScript.Shell").Run strTSVN & strCOM & strPATH, , True
-    TSVN = True 'Return True
+  CreateObject("WScript.Shell").Run strTSVN & strCOM & strPATH, , True
+  TSVN = True ' Return True
 End Function
 
 Sub TSVNUPDATE()
-  Dim msgActiveDocMod As String
-  msgActiveDocMod = "更新できません。アクティブ文書は変更されています。"
+  Dim msgActiveDocMod As String ' Message
+  Dim FilePath As String ' Backup of active document full path name
 
-  Dim FilePath As String
-  
+  msgActiveDocMod = "更新できません。" & "'" & ActiveDocument.Name & "'" & "は変更されています。"
+
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
     Exit Sub
@@ -255,7 +255,7 @@ Sub TSVNUPDATE()
   End If
 
   If ActiveDocument.Saved = False Then
-  'Active Document is modified but not saved yet.
+  ' Active Document is modified but not saved yet.
     MsgBox(msgActiveDocMod)
     Exit Sub
   End If
@@ -270,12 +270,14 @@ Sub TSVNUPDATE()
 End Sub
 
 Sub TSVNCI()
-  Dim msgActiveDocFileReadOnly As String
-  msgActiveDocFileReadOnly = "コミットできません。アクティブ文書は変更されていますが、ファイル属性が読み取り専用となっています。"
-  
-  Dim ans As Integer
-  Dim FilePath As String
-  
+  Dim msgActiveDocFileReadOnly As String ' Message
+  Dim msgSaveModDoc As String            ' Message
+  Dim ans As Integer     ' Return value of message box
+  Dim FilePath As String ' Backup of active document full path name
+
+  msgActiveDocFileReadOnly = "コミットできません。" & "'" & ActiveDocument.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
+  msgSaveModDoc = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？"
+
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
     Exit Sub
@@ -287,14 +289,14 @@ Sub TSVNCI()
   End If
 
   If ActiveDocument.Saved = False Then
-  'Active Document is modified but not saved yet.
+  ' Active Document is modified but not saved yet.
     ' Test the active document file attributes
     If IsActiveDocFileReadOnly = True Then
         MsgBox (msgActiveDocFileReadOnly)
         Exit Sub
     End If
     
-    ans = MsgBox("コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？", vbYesNo)
+    ans = MsgBox(msgSaveModDoc, vbYesNo)
     If ans = vbYes Then
       ActiveDocument.Save
     End If
@@ -343,11 +345,13 @@ Sub TSVNLOG()
 End Sub
 
 Sub TSVNLOCK()
-  Dim ans As Integer     'Return value of MessageBox
-  Dim FilePath As String 'Backup of the active document file path name
-
-  Dim msgActiveDocFileReadOnly As String 'Message
-  msgActiveDocFileReadOnly = "ロックを取得できません。アクティブ文書は変更されていますが、ファイル属性が読み取り専用となっています。"
+  Dim ans As Integer     ' Return value of MessageBox
+  Dim FilePath As String ' Backup of active document full path name
+  Dim msgActiveDocFileReadOnly As String ' Message
+  Dim msgSaveModDoc As String            ' Message
+  
+  msgActiveDocFileReadOnly = "ロックを取得できません。" & "'" & ActiveDocument.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
+  msgSaveModDoc = "ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？"
 
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
@@ -359,27 +363,27 @@ Sub TSVNLOCK()
     Exit Sub
   End If
 
-  'Backup file name before save the active document
+  ' Backup file name before save the active document
   FilePath = ActiveDocument.FullName
 
   If ActiveDocument.Saved = False Then
-  'Active Document is modified but not saved yet.
+  ' Active Document is modified but not saved yet.
     ' Test the active document file attributes
     If IsActiveDocFileReadOnly = True Then
       MsgBox (msgActiveDocFileReadOnly)
       Exit Sub
     End If
     
-    ans = MsgBox("ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？", vbYesNo)
+    ans = MsgBox(msgSaveModDoc, vbYesNo)
     If ans = vbYes Then
       ActiveDocument.Save
     End If
   End If
 
-  'Close the file and reopen after lock it, because the following reasons
-  ' * The file attribute of read only / read write is changed after lock the file.
-  ' * The file can be updated when the file in repository is newer than the working copy.
-  ' * If the word open the file and svn failes to update working copy, svn require clean-up.
+  ' Close the file and reopen after lock it, because the following reasons
+  '  * The file attribute of read only / read write is changed after lock the file.
+  '  * The file can be updated when the file in repository is newer than the working copy.
+  '  * If the word open the file and svn failes to update working copy, svn require clean-up.
   ActiveDocument.Close
   
   If TSVN("lock", FilePath) = True Then
@@ -388,10 +392,12 @@ Sub TSVNLOCK()
 End Sub
 
 Sub TSVNUNLOCK()
-  Dim FilePath As String
+  Dim FilePath As String ' Backup of active document full path name
+  Dim msgActiveDocFileReadOnly As String ' Message
+  Dim msgActiveDocMod As String          ' Message
 
-  Dim msgActiveDocFileReadOnly As String 'Message
-  msgActiveDocFileReadOnly = "ロックを開放できません。アクティブ文書は変更されていますが、ファイル属性が読み取り専用となっています。"
+  msgActiveDocFileReadOnly = "ロックを開放できません。"  & "'" & ActiveDocument.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
+  msgActiveDocMod = "'" & ActiveDocument.Name & "'" & "は変更されています。ロックの開放では変更内容をリポジトリへ反映することはできません。続行しますか?"
 
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
@@ -403,54 +409,53 @@ Sub TSVNUNLOCK()
     Exit Sub
   End If
 
-  'Backup file name before save the active document
+  ' Backup file name before save the active document
   FilePath = ActiveDocument.FullName
 
   If ActiveDocument.Saved = False Then
-  'Active Document is modified but not saved yet.
+  ' Active Document is modified but not saved yet.
     If IsActiveDocFileReadOnly = True Then
     ' Test the active document file attributes
       MsgBox (msgActiveDocFileReadOnly)
       Exit Sub
     End If
 
-    ans = MsgBox("'" & ActiveDocument.Name & "'" & "は変更されています。ロックの開放では変更内容をリポジトリへ反映することはできません。続行しますか?", vbYesNo)
+    ans = MsgBox(msgActiveDocMod, vbYesNo)
 
     If ans = vbNo Then
-      Exit Sub 'Exit subroutine without locking
+      Exit Sub ' Exit subroutine without locking
     Else
       ActiveDocument.Save
     End If
-  End If 'If ActiveDocument.Saved = False Then
+  End If ' If ActiveDocument.Saved = False Then
 
-  'Close the file and reopen after unlock it, because the following reason
-  ' * The file attribute of read only / read write is changed after unlock the file.
+  ' Close the file and reopen after unlock it, because the following reason
+  '  * The file attribute of read only / read write is changed after unlock the file.
   ActiveDocument.Close
-  
+
   If TSVN("unlock", FilePath) = True Then
     Documents.Open FileName:=FilePath
   End If
 
 End Sub
 
-':Function:Test whether the active document is saved as a file or not.
-':Return value:True=The file exists., False=No file exists.
+' :Function:Test whether the active document is saved as a file or not.
+' :Return value:True=The file exists., False=No file exists.
 Function ActiveDocFileExist() As Boolean
   If ActiveDocument.Path = "" Then
-    'Judge that no file exists when no path exists.
+    ' Judge that no file exists when no path exists.
     ActiveDocFileExist = False
   Else
     ActiveDocFileExist = True
   End If
 End Function
 
-':Function:Test whether the active document is saved as a file or not.
-'          And this displays error message if the file does't exist.
-':Return value:True=The file exists., False=No file exists.
+' :Function:Test whether the active document is saved as a file or not.
+'           And this displays error message if the file does't exist.
+' :Return value:True=The file exists., False=No file exists.
 Function ActiveDocFileExistWithMsg() As Boolean
-
   Dim msgActiveDocFileNotExist As String
-  msgActiveDocFileNotExist = "アクティブ文書のファイルがありません。文書をファイルに保存してからこの操作を行ってください。"
+  msgActiveDocFileNotExist = "'" & ActiveDocument.Name & "'" & "のファイルがありません。文書をファイルに保存してからこの操作を行ってください。"
 
   If ActiveDocFileExist Then
     ActiveDocFileExistWithMsg = True
@@ -460,40 +465,38 @@ Function ActiveDocFileExistWithMsg() As Boolean
   End If
 End Function
 
-
-':Function: Test whether the active document file is read only or not.
-':Retrun value: True = Read Only, False = Not Read Only
+' :Function: Test whether the active document file is read only or not.
+' :Retrun value: True = Read Only, False = Not Read Only
 Function IsActiveDocFileReadOnly() As Boolean
-  Dim glFSO As Object  'File System Object
+  Dim glFSO As Object  ' File System Object
   Set glFSO = CreateObject("Scripting.FileSystemObject")
 
   If glFSO.GetFile(ActiveDocument.FullName).Attributes And 1 Then
-    IsActiveDocFileReadOnly = True 'Return True
+    IsActiveDocFileReadOnly = True  ' Return True
   Else
-    IsActiveDocFileReadOnly = False 'Return False
+    IsActiveDocFileReadOnly = False ' Return False
   End If
 End Function
 
-':Function: Test whether the file exist in the file under SVN version control.
-':Return value: True=Under version control, False=Not under version control
+' :Function: Test whether the file exist in the file under SVN version control.
+' :Return value: True=Under version control, False=Not under version control
 Function IsFolderUnderSVNControl() As Boolean
-  Dim strDotSvn As String
+  Dim strDotSvn As String ' SVN control folder ".svn"
   strDotSvn = ActiveDocument.Path & "\.svn"
 
   If CreateObject("Scripting.FileSystemObject").FolderExists(strDotSvn) Then
-    IsFolderUnderSVNControl = True 'Return True
+    IsFolderUnderSVNControl = True  ' Return True
   Else
-    IsFolderUnderSVNControl = False 'Return False
+    IsFolderUnderSVNControl = False ' Return False
   End If
 End Function
 
-
-':Function: Test whether the file exist in the folder under SVN version control.
-'           And this displays error message if the folder isn't under version control.
-':Return value: True=Under version control, False=Not under version control
+' :Function: Test whether the file exist in the folder under SVN version control.
+'            And this displays error message if the folder isn't under version control.
+' :Return value: True=Under version control, False=Not under version control
 Function IsFolderUnderSVNControlWithMsg() As Boolean
-  Dim msgNotUnderCtrl As String 'Message
-  msgNotUnderCtrl = "この文書ファイルはバージョンコントロール下のフォルダにありません。"
+  Dim msgNotUnderCtrl As String ' Message
+  msgNotUnderCtrl = "'" & ActiveDocument.Name & "'" & "はバージョンコントロール下のフォルダにありません。"
   
   If IsFolderUnderSVNControl Then
     IsFolderUnderSVNControlWithMsg = True 'Return True
@@ -504,25 +507,25 @@ Function IsFolderUnderSVNControlWithMsg() As Boolean
 End Function
 
 Function IsFileUnderSVNControl() As Boolean
-  Dim strNotUnderCtrl As String
+  Dim strTextBase As String ' Base file full path name
   strTextBase = ActiveDocument.Path & "\.svn\text-base\" & ActiveDocument.Name & ".svn-base"
 
   If CreateObject("Scripting.FileSystemObject").FileExists(strTextBase) Then
-    IsFileUnderSVNControl = True 'Return True
+    IsFileUnderSVNControl = True  ' Return True
   Else
-    IsFileUnderSVNControl = False 'Return False
+    IsFileUnderSVNControl = False ' Return False
   End If
 End Function
 
 Function IsFileUnderSVNControlWithMsg() As Boolean
-  Dim msgNotUnderCtrl As String
-  msgNotUnderCtrl = "この文書ファイルはバージョンコントロールされていません。"
+  Dim msgNotUnderCtrl As String ' Message
+  msgNotUnderCtrl = "'" & ActiveDocument.Name & "'" & "はバージョンコントロールされていません。"
 
   If IsFileUnderSVNControl Then
-    IsFileUnderSVNControlWithMsg = True 'Return True
+    IsFileUnderSVNControlWithMsg = True  ' Return True
   Else
     MsgBox (msgNotUnderCtrl)
-    IsFileUnderSVNControlWithMsg = False 'Return False
+    IsFileUnderSVNControlWithMsg = False ' Return False
   End If
 End Function
 
