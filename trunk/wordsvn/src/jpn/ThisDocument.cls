@@ -392,6 +392,7 @@ Sub TSVNLOCK()
 End Sub
 
 Sub TSVNUNLOCK()
+  Dim ans As Integer     ' Return value of MessageBox
   Dim FilePath As String ' Backup of active document full path name
   Dim msgActiveDocFileReadOnly As String ' Message
   Dim msgActiveDocMod As String          ' Message

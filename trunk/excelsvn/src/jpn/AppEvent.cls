@@ -19,16 +19,17 @@ Public WithEvents App As Application
 Attribute App.VB_VarHelpID = -1
 
 Private Sub App_SheetActivate(ByVal Sh As Object)
-    reloadMenu
+'    reloadMenu
 End Sub
 
 Private Sub App_WindowActivate(ByVal Wb As Excel.Workbook, ByVal Wn As Excel.Window)
-    reloadMenu
+'    reloadMenu
 End Sub
 
 Private Sub App_WorkbookActivate(ByVal Wb As Workbook)
 '    reloadMenu
 End Sub
+
 
 
 
