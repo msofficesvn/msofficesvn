@@ -88,7 +88,17 @@ End Sub
 
 
 Private Sub InstallMenu()
-    ' Build the SVN Menu
+
+  Dim Menu     As CommandBarControl
+  Dim SubMenu1 As CommandBarButton
+  Dim SubMenu2 As CommandBarButton
+  Dim SubMenu3 As CommandBarButton
+  Dim SubMenu4 As CommandBarButton
+  Dim SubMenu5 As CommandBarButton
+  Dim SubMenu6 As CommandBarButton
+  Dim SubMenu7 As CommandBarButton
+
+  ' Build the SVN Menu
     Set Menu = Application.CommandBars("Worksheet Menu Bar").Controls.Add(Type:=msoControlPopup)
     Menu.Caption = "Subversion(&S)"
 
