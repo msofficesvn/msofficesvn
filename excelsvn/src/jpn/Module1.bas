@@ -6,7 +6,7 @@ Attribute VB_Name = "Module1"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' Copyright (C) 2007 Koki Yamamoto
+' Copyright (C) 2007 Koki Yamamoto <kokiya@gmail.com>
 '     All rights of modified contents from original one are reserved
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '
@@ -15,31 +15,32 @@ Attribute VB_Name = "Module1"
 
 Option Explicit
 
-Private Function TSVN(ByVal command As String, ByVal DocFileFullName As String) As Boolean
+Function TSVN(ByVal command As String, ByVal WbkFileFullName As String) As Boolean
   Dim strTSVN As String
-  Dim strCOM As String
+  Dim strCOM  As String
   Dim strPATH As String
   strTSVN = """" & CreateObject("WScript.Shell").RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath") & """"
   strCOM = "/command:" & command & " /notempfile "
 
-  If Len(DocFileFullName) = 0 Then
+  If Len(WbkFileFullName) = 0 Then
     strPATH = "/path:" & """" & ActiveWorkbook.FullName & """"
   Else
-    strPATH = "/path:" & """" & DocFileFullName & """"
+    strPATH = "/path:" & """" & WbkFileFullName & """"
   End If
 
   CreateObject("WScript.Shell").Run strTSVN & strCOM & strPATH, , True
   TSVN = True ' Return True
 End Function
 
+
 Sub TSVNUPDATE()
-  Dim msgActiveDocMod As String ' Message
-  Dim FilePath As String ' Backup of active document full path name
+  Dim msgActiveWbkMod As String ' Message
+  Dim FilePath As String ' Backup of active workbook full path name
 
-  msgActiveDocMod = "更新できません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されています。"
+  msgActiveWbkMod = "更新できません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されています。"
 
-  ' Test the active document file status
-  If ActiveDocFileExistWithMsg() = False Then
+  ' Test the active workbook file status
+  If ActiveWbkFileExistWithMsg() = False Then
     Exit Sub
   End If
 
@@ -50,7 +51,7 @@ Sub TSVNUPDATE()
 
   If ActiveWorkbook.Saved = False Then
   ' Active Workbook is modified but not saved yet.
-    MsgBox (msgActiveDocMod)
+    MsgBox (msgActiveWbkMod)
     Exit Sub
   End If
 
@@ -63,17 +64,18 @@ Sub TSVNUPDATE()
 
 End Sub
 
+
 Sub TSVNCI()
-  Dim msgActiveDocFileReadOnly As String ' Message
-  Dim msgSaveModDoc As String            ' Message
+  Dim msgActiveWbkFileReadOnly As String ' Message
+  Dim msgSaveModWbk As String            ' Message
   Dim ans As Integer     ' Return value of message box
-  Dim FilePath As String ' Backup of active document full path name
+  Dim FilePath As String ' Backup of active workbook full path name
 
-  msgActiveDocFileReadOnly = "コミットできません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
-  msgSaveModDoc = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "への変更を保存しますか？"
+  msgActiveWbkFileReadOnly = "コミットできません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
+  msgSaveModWbk = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "への変更を保存しますか？"
 
-  ' Test the active document file status
-  If ActiveDocFileExistWithMsg() = False Then
+  ' Test the active workbook file status
+  If ActiveWbkFileExistWithMsg() = False Then
     Exit Sub
   End If
 
@@ -84,13 +86,13 @@ Sub TSVNCI()
 
   If ActiveWorkbook.Saved = False Then
   ' Active Workbook is modified but not saved yet.
-    ' Test the active document file attributes
-    If IsActiveDocFileReadOnly = True Then
-        MsgBox (msgActiveDocFileReadOnly)
+    ' Test the active workbook file attributes
+    If IsActiveWbkFileReadOnly = True Then
+        MsgBox (msgActiveWbkFileReadOnly)
         Exit Sub
     End If
     
-    ans = MsgBox(msgSaveModDoc, vbYesNo)
+    ans = MsgBox(msgSaveModWbk, vbYesNo)
     If ans = vbYes Then
       ActiveWorkbook.Save
     End If
@@ -104,9 +106,10 @@ Sub TSVNCI()
   End If
 End Sub
 
+
 Sub TSVNDIFF()
-  ' Test the active document file status
-  If ActiveDocFileExistWithMsg() = False Then
+  ' Test the active workbook file status
+  If ActiveWbkFileExistWithMsg() = False Then
     Exit Sub
   End If
 
@@ -119,14 +122,15 @@ Sub TSVNDIFF()
 
 End Sub
 
+
 Sub TSVNRB()
   TSVN "repobrowser", ""
 End Sub
 
 
 Sub TSVNLOG()
-  ' Test the active document file status
-  If ActiveDocFileExistWithMsg() = False Then
+  ' Test the active workbook file status
+  If ActiveWbkFileExistWithMsg() = False Then
     Exit Sub
   End If
 
@@ -138,17 +142,18 @@ Sub TSVNLOG()
   TSVN "log", ""
 End Sub
 
+
 Sub TSVNLOCK()
   Dim ans As Integer     ' Return value of MessageBox
-  Dim FilePath As String ' Backup of active document full path name
-  Dim msgActiveDocFileReadOnly As String ' Message
-  Dim msgSaveModDoc As String            ' Message
+  Dim FilePath As String ' Backup of active workbook full path name
+  Dim msgActiveWbkFileReadOnly As String ' Message
+  Dim msgSaveModWbk As String            ' Message
   
-  msgActiveDocFileReadOnly = "ロックを取得できません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
-  msgSaveModDoc = "ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "への変更を保存しますか？"
+  msgActiveWbkFileReadOnly = "ロックを取得できません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
+  msgSaveModWbk = "ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "への変更を保存しますか？"
 
-  ' Test the active document file status
-  If ActiveDocFileExistWithMsg() = False Then
+  ' Test the active workbook file status
+  If ActiveWbkFileExistWithMsg() = False Then
     Exit Sub
   End If
 
@@ -157,18 +162,18 @@ Sub TSVNLOCK()
     Exit Sub
   End If
 
-  ' Backup file name before save the active document
+  ' Backup file name before save the active workbook
   FilePath = ActiveWorkbook.FullName
 
   If ActiveWorkbook.Saved = False Then
   ' Active Workbook is modified but not saved yet.
-    ' Test the active document file attributes
-    If IsActiveDocFileReadOnly = True Then
-      MsgBox (msgActiveDocFileReadOnly)
+    ' Test the active workbook file attributes
+    If IsActiveWbkFileReadOnly = True Then
+      MsgBox (msgActiveWbkFileReadOnly)
       Exit Sub
     End If
     
-    ans = MsgBox(msgSaveModDoc, vbYesNo)
+    ans = MsgBox(msgSaveModWbk, vbYesNo)
     If ans = vbYes Then
       ActiveWorkbook.Save
     End If
@@ -185,17 +190,18 @@ Sub TSVNLOCK()
   End If
 End Sub
 
+
 Sub TSVNUNLOCK()
   Dim ans As Integer     ' Return value of MessageBox
-  Dim FilePath As String ' Backup of active document full path name
-  Dim msgActiveDocFileReadOnly As String ' Message
-  Dim msgActiveDocMod As String          ' Message
+  Dim FilePath As String ' Backup of active workbook full path name
+  Dim msgActiveWbkFileReadOnly As String ' Message
+  Dim msgActiveWbkMod As String          ' Message
 
-  msgActiveDocFileReadOnly = "ロックを開放できません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
-  msgActiveDocMod = "'" & ActiveWorkbook.Name & "'" & "は変更されています。ロックの開放では変更内容をリポジトリへ反映することはできません。続行しますか?"
+  msgActiveWbkFileReadOnly = "ロックを開放できません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
+  msgActiveWbkMod = "'" & ActiveWorkbook.Name & "'" & "は変更されています。ロックの開放では変更内容をリポジトリへ反映することはできません。続行しますか?"
 
-  ' Test the active document file status
-  If ActiveDocFileExistWithMsg() = False Then
+  ' Test the active workbook file status
+  If ActiveWbkFileExistWithMsg() = False Then
     Exit Sub
   End If
 
@@ -204,18 +210,18 @@ Sub TSVNUNLOCK()
     Exit Sub
   End If
 
-  ' Backup file name before save the active document
+  ' Backup file name before save the active workbook
   FilePath = ActiveWorkbook.FullName
 
   If ActiveWorkbook.Saved = False Then
   ' Active Workbook is modified but not saved yet.
-    If IsActiveDocFileReadOnly = True Then
-    ' Test the active document file attributes
-      MsgBox (msgActiveDocFileReadOnly)
+    If IsActiveWbkFileReadOnly = True Then
+    ' Test the active workbook file attributes
+      MsgBox (msgActiveWbkFileReadOnly)
       Exit Sub
     End If
 
-    ans = MsgBox(msgActiveDocMod, vbYesNo)
+    ans = MsgBox(msgActiveWbkMod, vbYesNo)
 
     If ans = vbNo Then
       Exit Sub ' Exit subroutine without locking
@@ -234,44 +240,48 @@ Sub TSVNUNLOCK()
 
 End Sub
 
-' :Function:Test whether the active document is saved as a file or not.
+
+' :Function:Test whether the active workbook is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
-Function ActiveDocFileExist() As Boolean
+Function ActiveWbkFileExist() As Boolean
   If ActiveWorkbook.Path = "" Then
     ' Judge that no file exists when no path exists.
-    ActiveDocFileExist = False
+    ActiveWbkFileExist = False
   Else
-    ActiveDocFileExist = True
+    ActiveWbkFileExist = True
   End If
 End Function
 
-' :Function:Test whether the active document is saved as a file or not.
+
+' :Function:Test whether the active workbook is saved as a file or not.
 '           And this displays error message if the file does't exist.
 ' :Return value:True=The file exists., False=No file exists.
-Function ActiveDocFileExistWithMsg() As Boolean
-  Dim msgActiveDocFileNotExist As String
-  msgActiveDocFileNotExist = "'" & ActiveWorkbook.Name & "'" & "のファイルがありません。文書をファイルに保存してからこの操作を行ってください。"
+Function ActiveWbkFileExistWithMsg() As Boolean
+  Dim msgActiveWbkFileNotExist As String
+  msgActiveWbkFileNotExist = "'" & ActiveWorkbook.Name & "'" & "のファイルがありません。ブックをファイルに保存してからこの操作を行ってください。"
 
-  If ActiveDocFileExist Then
-    ActiveDocFileExistWithMsg = True
+  If ActiveWbkFileExist Then
+    ActiveWbkFileExistWithMsg = True
   Else
-    MsgBox (msgActiveDocFileNotExist)
-    ActiveDocFileExistWithMsg = False
+    MsgBox (msgActiveWbkFileNotExist)
+    ActiveWbkFileExistWithMsg = False
   End If
 End Function
 
-' :Function: Test whether the active document file is read only or not.
+
+' :Function: Test whether the active workbook file is read only or not.
 ' :Retrun value: True = Read Only, False = Not Read Only
-Function IsActiveDocFileReadOnly() As Boolean
+Function IsActiveWbkFileReadOnly() As Boolean
   Dim glFSO As Object  ' File System Object
   Set glFSO = CreateObject("Scripting.FileSystemObject")
 
   If glFSO.GetFile(ActiveWorkbook.FullName).Attributes And 1 Then
-    IsActiveDocFileReadOnly = True  ' Return True
+    IsActiveWbkFileReadOnly = True  ' Return True
   Else
-    IsActiveDocFileReadOnly = False ' Return False
+    IsActiveWbkFileReadOnly = False ' Return False
   End If
 End Function
+
 
 ' :Function: Test whether the file exist in the file under SVN version control.
 ' :Return value: True=Under version control, False=Not under version control
@@ -285,6 +295,7 @@ Function IsFolderUnderSVNControl() As Boolean
     IsFolderUnderSVNControl = False ' Return False
   End If
 End Function
+
 
 ' :Function: Test whether the file exist in the folder under SVN version control.
 '            And this displays error message if the folder isn't under version control.
@@ -301,6 +312,7 @@ Function IsFolderUnderSVNControlWithMsg() As Boolean
   End If
 End Function
 
+
 Function IsFileUnderSVNControl() As Boolean
   Dim strTextBase As String ' Base file full path name
   strTextBase = ActiveWorkbook.Path & "\.svn\text-base\" & ActiveWorkbook.Name & ".svn-base"
@@ -311,6 +323,7 @@ Function IsFileUnderSVNControl() As Boolean
     IsFileUnderSVNControl = False ' Return False
   End If
 End Function
+
 
 Function IsFileUnderSVNControlWithMsg() As Boolean
   Dim msgNotUnderCtrl As String ' Message
@@ -323,6 +336,5 @@ Function IsFileUnderSVNControlWithMsg() As Boolean
     IsFileUnderSVNControlWithMsg = False ' Return False
   End If
 End Function
-
 
 

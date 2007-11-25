@@ -31,28 +31,13 @@ Attribute VB_Exposed = True
 ' the GNU General Public License version 2.
 '
 
-Private Sub SVNWakeUp()
-  Dim isMenu As Boolean        ' Flag to detect the existence of SVN menu
-  Dim myCon As CommandBarPopup ' Menu control object
-
-  isMenu = False
-
-  For Each myCon In Application.CommandBars("Menu Bar").Controls
-    If myCon.Caption = "Subversion(&S)" Then
-      isMenu = True
-      Exit For
-    End If
-  Next
-
-  If isMenu = False Then
-    SVNMenuInstall
-  End If
-End Sub
+Option Explicit
 
 Private Sub SVNMenuInstall()
-  Dim myBar As CommandBar
-  On Error Resume Next
-  Dim Menu As CommandBarControl
+
+  Dim myCon As CommandBarPopup ' Menu control object
+  Dim myBar    As CommandBar
+  Dim Menu     As CommandBarControl
   Dim SubMenu1 As CommandBarButton
   Dim SubMenu2 As CommandBarButton
   Dim SubMenu3 As CommandBarButton
@@ -61,6 +46,12 @@ Private Sub SVNMenuInstall()
   Dim SubMenu6 As CommandBarButton
   Dim SubMenu7 As CommandBarButton
   Dim SubMenu8 As CommandBarButton
+
+  For Each myCon In Application.CommandBars("Menu Bar").Controls
+    If myCon.Caption = "Subversion(&S)" Then
+      Exit Sub
+    End If
+  Next
 
   Set Menu = Application.CommandBars("Menu Bar").Controls.Add(Type:=msoControlPopup)
   Menu.Caption = "Subversion(&S)"
@@ -100,10 +91,10 @@ Private Sub SVNMenuInstall()
   SubMenu7.OnAction = "TSVNUNLOCK"
   SubMenu7.FaceId = 277
   
-  Err.Clear
 End Sub
 
-Sub SVNToolBarInstall()
+
+Private Sub SVNToolBarInstall()
 
   Dim SVNCmdBar As CommandBar
 
@@ -119,9 +110,13 @@ Sub SVNToolBarInstall()
     End If
   Next CmdBarIdx
 
-  Set SVNCmdBar = Application.CommandBars.Add(Name:="Subversion")
-
+  Set SVNCmdBar = Application.CommandBars.Add
+  
   With SVNCmdBar
+    .Enabled = True
+    .Visible = True
+    .NameLocal = "Subversion"
+
     With .Controls.Add(Type:=msoControlButton)
       .Caption = "çXêV"
       .FaceId = 360
@@ -157,12 +152,10 @@ Sub SVNToolBarInstall()
       .FaceId = 277
       .OnAction = "TSVNUNLOCK"
     End With
-
-   .Enabled = True
-   .Visible = True
   End With
   Err.Clear
 End Sub
+
 
 Private Sub SVNDeleteMenu()
   Dim myCon As CommandBarPopup ' Command bar control object
@@ -175,6 +168,7 @@ Private Sub SVNDeleteMenu()
   End If
   Next
 End Sub
+
 
 Private Sub SVNDeleteCommandBar()
   Dim CmdBarIdx As Long ' Index of command bar
@@ -189,39 +183,22 @@ Private Sub SVNDeleteCommandBar()
   End With
 End Sub
 
+
 Sub AutoExec()
   SVNDeleteMenu
-  SVNWakeUp
+  SVNMenuInstall
   SVNDeleteCommandBar
   SVNToolBarInstall
 End Sub
+
 
 Sub AutoExit()
   SVNDeleteMenu
   SVNDeleteCommandBar
 End Sub
 
-Function GetSVNControlStatus(ByRef isDotSvn As Boolean, ByRef isTextBase As Boolean)
-  Dim strDotSvn As String   ' SVN control folder ".svn"
-  Dim strTextBase As String ' Base file full path name
 
-  strDotSvn = ActiveDocument.Path & "\.svn"
-  strTextBase = ActiveDocument.Path & "\.svn\text-base\" & ActiveDocument.Name & ".svn-base"
-
-  If CreateObject("Scripting.FileSystemObject").FolderExists(strDotSvn) Then
-    isDotSvn = True
-  Else
-    isDotSvn = False
-  End If
-
-  If CreateObject("Scripting.FileSystemObject").FileExists(strTextBase) Then
-    isTextBase = True
-  Else
-    isTextBase = False
-  End If
-End Function
-
-Private Function TSVN(ByVal command As String, ByVal DocFileFullName As String) As Boolean
+Function TSVN(ByVal command As String, ByVal DocFileFullName As String) As Boolean
   Dim strTSVN As String
   Dim strCOM As String
   Dim strPATH As String
@@ -237,6 +214,7 @@ Private Function TSVN(ByVal command As String, ByVal DocFileFullName As String) 
   CreateObject("WScript.Shell").Run strTSVN & strCOM & strPATH, , True
   TSVN = True ' Return True
 End Function
+
 
 Sub TSVNUPDATE()
   Dim msgActiveDocMod As String ' Message
@@ -268,6 +246,7 @@ Sub TSVNUPDATE()
   End If
 
 End Sub
+
 
 Sub TSVNCI()
   Dim msgActiveDocFileReadOnly As String ' Message
@@ -310,6 +289,7 @@ Sub TSVNCI()
   End If
 End Sub
 
+
 Sub TSVNDIFF()
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
@@ -324,6 +304,7 @@ Sub TSVNDIFF()
   TSVN "diff", ""
 
 End Sub
+
 
 Sub TSVNRB()
   TSVN "repobrowser", ""
@@ -343,6 +324,7 @@ Sub TSVNLOG()
 
   TSVN "log", ""
 End Sub
+
 
 Sub TSVNLOCK()
   Dim ans As Integer     ' Return value of MessageBox
@@ -390,6 +372,7 @@ Sub TSVNLOCK()
     Documents.Open FileName:=FilePath
   End If
 End Sub
+
 
 Sub TSVNUNLOCK()
   Dim ans As Integer     ' Return value of MessageBox
@@ -440,6 +423,7 @@ Sub TSVNUNLOCK()
 
 End Sub
 
+
 ' :Function:Test whether the active document is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
 Function ActiveDocFileExist() As Boolean
@@ -450,6 +434,7 @@ Function ActiveDocFileExist() As Boolean
     ActiveDocFileExist = True
   End If
 End Function
+
 
 ' :Function:Test whether the active document is saved as a file or not.
 '           And this displays error message if the file does't exist.
@@ -466,6 +451,7 @@ Function ActiveDocFileExistWithMsg() As Boolean
   End If
 End Function
 
+
 ' :Function: Test whether the active document file is read only or not.
 ' :Retrun value: True = Read Only, False = Not Read Only
 Function IsActiveDocFileReadOnly() As Boolean
@@ -479,6 +465,7 @@ Function IsActiveDocFileReadOnly() As Boolean
   End If
 End Function
 
+
 ' :Function: Test whether the file exist in the file under SVN version control.
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFolderUnderSVNControl() As Boolean
@@ -491,6 +478,7 @@ Function IsFolderUnderSVNControl() As Boolean
     IsFolderUnderSVNControl = False ' Return False
   End If
 End Function
+
 
 ' :Function: Test whether the file exist in the folder under SVN version control.
 '            And this displays error message if the folder isn't under version control.
@@ -507,6 +495,7 @@ Function IsFolderUnderSVNControlWithMsg() As Boolean
   End If
 End Function
 
+
 Function IsFileUnderSVNControl() As Boolean
   Dim strTextBase As String ' Base file full path name
   strTextBase = ActiveDocument.Path & "\.svn\text-base\" & ActiveDocument.Name & ".svn-base"
@@ -517,6 +506,7 @@ Function IsFileUnderSVNControl() As Boolean
     IsFileUnderSVNControl = False ' Return False
   End If
 End Function
+
 
 Function IsFileUnderSVNControlWithMsg() As Boolean
   Dim msgNotUnderCtrl As String ' Message

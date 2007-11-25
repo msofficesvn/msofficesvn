@@ -14,19 +14,80 @@ Attribute VB_Exposed = True
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' Copyright (C) 2007 Koki Yamamoto
+' Copyright (C) 2007 Koki Yamamoto <kokiya@gmail.com>
 '     All rights of modified contents from original one are reserved
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 
-Dim myApp As New AppEvent
-
+Option Explicit
 
 Private Sub Workbook_AddinInstall()
-    On Error Resume Next
 
+    ' Build the SVN Menu
+    InstallMenu
+    ' Build the SVN CommandBar
+    InstallCmdBar
+
+End Sub
+
+
+Private Sub Workbook_AddinUninstall()
+    Application.CommandBars("Worksheet Menu Bar").Controls("Subversion(&S)").Delete
+    Application.CommandBars("Subversion").Delete
+End Sub
+
+
+Private Sub InstallCmdBar()
+    ' Build the SVN CommandBar
+    Dim SVNCmdBar As CommandBar
+    Set SVNCmdBar = Application.CommandBars.Add
+
+    With SVNCmdBar
+      .NameLocal = "Subversion"
+      .Enabled = True
+      .Visible = True
+      With .Controls.Add(Type:=msoControlButton)
+          .Caption = "更新"
+          .FaceId = 360
+          .OnAction = "TSVNUPDATE"
+      End With
+      With .Controls.Add(Type:=msoControlButton)
+            .Caption = "ロックを取得"
+            .FaceId = 225
+            .OnAction = "TSVNLOCK"
+      End With
+      With .Controls.Add(Type:=msoControlButton)
+            .Caption = "コミット"
+            .FaceId = 359
+            .OnAction = "TSVNCI"
+      End With
+      With .Controls.Add(Type:=msoControlButton)
+            .Caption = "差分"
+            .FaceId = 195
+            .OnAction = "TSVNDIFF"
+      End With
+      With .Controls.Add(Type:=msoControlButton)
+            .Caption = "ログ表示"
+            .FaceId = 44
+            .OnAction = "TSVNLOG"
+      End With
+      With .Controls.Add(Type:=msoControlButton)
+            .Caption = "リポジトリブラウザ"
+            .FaceId = 25
+            .OnAction = "TSVNRB"
+      End With
+      With .Controls.Add(Type:=msoControlButton)
+           .Caption = "ロックを開放"
+            .FaceId = 277
+            .OnAction = "TSVNUNLOCK"
+      End With
+    End With
+End Sub
+
+
+Private Sub InstallMenu()
     ' Build the SVN Menu
     Set Menu = Application.CommandBars("Worksheet Menu Bar").Controls.Add(Type:=msoControlPopup)
     Menu.Caption = "Subversion(&S)"
@@ -65,63 +126,5 @@ Private Sub Workbook_AddinInstall()
     SubMenu7.Caption = "ロックを開放(&C)"
     SubMenu7.OnAction = "TSVNUNLOCK"
     SubMenu7.FaceId = 277
-
-    ' Build the SVN CommandBar
-    Dim SVNCmdBar As CommandBar
-    ' Application.CommandBars.Add(Name:="Subversion")とするとなぜかエラーとなるので、コマンドバーの名称設定はAddとは別途行う。
-    Set SVNCmdBar = Application.CommandBars.Add
-    SVNCmdBar.Name = "Subversion"
-
-    With SVNCmdBar
-      With .Controls.Add(Type:=msoControlButton)
-          .Caption = "更新"
-          .FaceId = 360
-          .OnAction = "TSVNUPDATE"
-      End With
-      With .Controls.Add(Type:=msoControlButton)
-            .Caption = "ロックを取得"
-            .FaceId = 225
-            .OnAction = "TSVNLOCK"
-      End With
-      With .Controls.Add(Type:=msoControlButton)
-            .Caption = "コミット"
-            .FaceId = 359
-            .OnAction = "TSVNCI"
-      End With
-      With .Controls.Add(Type:=msoControlButton)
-            .Caption = "差分"
-            .FaceId = 195
-            .OnAction = "TSVNDIFF"
-      End With
-      With .Controls.Add(Type:=msoControlButton)
-            .Caption = "ログ表示"
-            .FaceId = 44
-            .OnAction = "TSVNLOG"
-      End With
-      With .Controls.Add(Type:=msoControlButton)
-            .Caption = "リポジトリブラウザ"
-            .FaceId = 25
-            .OnAction = "TSVNRB"
-      End With
-      With .Controls.Add(Type:=msoControlButton)
-           .Caption = "ロックを開放"
-            .FaceId = 277
-            .OnAction = "TSVNUNLOCK"
-      End With
-      .Enabled = True
-      .Visible = True
-    End With
-    Err.Clear
 End Sub
-
-Private Sub Workbook_AddinUninstall()
-    Application.CommandBars("Worksheet Menu Bar").Controls("Subversion(&S)").Delete
-    Application.CommandBars("Subversion").Delete
-End Sub
-
-Private Sub Workbook_Open()
-   Set myApp.App = Application
-End Sub
-
-
 
