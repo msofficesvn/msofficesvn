@@ -49,6 +49,11 @@ Sub TSVNUPDATE()
   Dim msgActiveWbkMod As String ' Message
   Dim FilePath As String ' Backup of active workbook full path name
 
+  ' Exit when no workbook is open
+  If Workbooks.Count = 0 Then
+    Exit Sub
+  End If
+  
   msgActiveWbkMod = "更新できません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されています。"
 
   ' Test the active workbook file status
@@ -84,6 +89,11 @@ Sub TSVNCI()
   Dim msgSaveModWbk As String            ' Message
   Dim ans As Integer     ' Return value of message box
   Dim FilePath As String ' Backup of active workbook full path name
+
+  ' Exit when no workbook is open
+  If Workbooks.Count = 0 Then
+    Exit Sub
+  End If
 
   msgActiveWbkFileReadOnly = "コミットできません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
   msgSaveModWbk = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "への変更を保存しますか？"
@@ -124,6 +134,12 @@ End Sub
 
 
 Sub TSVNDIFF()
+
+  ' Exit when no workbook is open
+  If Workbooks.Count = 0 Then
+    Exit Sub
+  End If
+
   ' Test the active workbook file status
   If ActiveWbkFileExistWithMsg() = False Then
     Exit Sub
@@ -140,11 +156,23 @@ End Sub
 
 
 Sub TSVNRB()
+
+  ' Exit when no workbook is open
+  If Workbooks.Count = 0 Then
+    Exit Sub
+  End If
+
   TSVN "repobrowser", ""
 End Sub
 
 
 Sub TSVNLOG()
+
+  ' Exit when no workbook is open
+  If Workbooks.Count = 0 Then
+    Exit Sub
+  End If
+
   ' Test the active workbook file status
   If ActiveWbkFileExistWithMsg() = False Then
     Exit Sub
@@ -164,7 +192,12 @@ Sub TSVNLOCK()
   Dim FilePath As String ' Backup of active workbook full path name
   Dim msgActiveWbkFileReadOnly As String ' Message
   Dim msgSaveModWbk As String            ' Message
-  
+
+  ' Exit when no workbook is open
+  If Workbooks.Count = 0 Then
+    Exit Sub
+  End If
+
   msgActiveWbkFileReadOnly = "ロックを取得できません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
   msgSaveModWbk = "ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "への変更を保存しますか？"
 
@@ -214,6 +247,11 @@ Sub TSVNUNLOCK()
   Dim FilePath As String ' Backup of active workbook full path name
   Dim msgActiveWbkFileReadOnly As String ' Message
   Dim msgActiveWbkMod As String          ' Message
+
+  ' Exit when no workbook is open
+  If Workbooks.Count = 0 Then
+    Exit Sub
+  End If
 
   msgActiveWbkFileReadOnly = "ロックを開放できません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
   msgActiveWbkMod = "'" & ActiveWorkbook.Name & "'" & "は変更されています。ロックの開放では変更内容をリポジトリへ反映することはできません。続行しますか?"
