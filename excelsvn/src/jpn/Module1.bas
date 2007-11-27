@@ -32,6 +32,18 @@ Function TSVN(ByVal command As String, ByVal WbkFileFullName As String) As Boole
   TSVN = True ' Return True
 End Function
 
+' Add workbook if no workbook exist before open a file.
+' This subroutine is required to avoid application error in Excel 97 when it opne a file.
+Sub AddWorkbookIfEmpty()
+  If StrComp(Left(Application.Version, 1), "8.") = 0 Then
+    If Workbooks.Count = 0 Then
+      Workbooks.Add
+      Workbooks(1).Activate
+      ActiveWindow.WindowState = xlMinimized
+    End If
+  End If
+End Sub
+
 
 Sub TSVNUPDATE()
   Dim msgActiveWbkMod As String ' Message
@@ -57,9 +69,11 @@ Sub TSVNUPDATE()
 
   FilePath = ActiveWorkbook.FullName
   ActiveWorkbook.Close
+    
+  AddWorkbookIfEmpty
 
   If TSVN("update", FilePath) = True Then
-    Workbooks.Open Filename:=FilePath
+    Application.Workbooks.Open FileName:=FilePath
   End If
 
 End Sub
@@ -101,8 +115,10 @@ Sub TSVNCI()
   FilePath = ActiveWorkbook.FullName
   ActiveWorkbook.Close
 
+  AddWorkbookIfEmpty
+
   If TSVN("commit", FilePath) = True Then
-    Workbooks.Open Filename:=FilePath
+    Workbooks.Open FileName:=FilePath
   End If
 End Sub
 
@@ -184,9 +200,11 @@ Sub TSVNLOCK()
   '  * The file can be updated when the file in repository is newer than the working copy.
   '  * If the word open the file and svn failes to update working copy, svn require clean-up.
   ActiveWorkbook.Close
+
+  AddWorkbookIfEmpty
   
   If TSVN("lock", FilePath) = True Then
-    Workbooks.Open Filename:=FilePath
+    Workbooks.Open FileName:=FilePath
   End If
 End Sub
 
@@ -234,8 +252,10 @@ Sub TSVNUNLOCK()
   '  * The file attribute of read only / read write is changed after unlock the file.
   ActiveWorkbook.Close
 
+  AddWorkbookIfEmpty
+
   If TSVN("unlock", FilePath) = True Then
-    Workbooks.Open Filename:=FilePath
+    Workbooks.Open FileName:=FilePath
   End If
 
 End Sub
@@ -336,5 +356,6 @@ Function IsFileUnderSVNControlWithMsg() As Boolean
     IsFileUnderSVNControlWithMsg = False ' Return False
   End If
 End Function
+
 
 
