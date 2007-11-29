@@ -23,8 +23,7 @@ Attribute VB_Exposed = True
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' Copyright (C) 2007 Koki Yamamoto
-'     All rights of modified contents from original one are reserved
+' Copyright (C) 2007 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '
 ' You can redistribute it and/or modify it under the terms of
@@ -220,6 +219,11 @@ Sub TSVNUPDATE()
   Dim msgActiveDocMod As String ' Message
   Dim FilePath As String ' Backup of active document full path name
 
+  ' Exit when no document is open
+  If Documents.Count = 0 Then
+    Exit Sub
+  End If
+
   msgActiveDocMod = "更新できません。" & "'" & ActiveDocument.Name & "'" & "は変更されています。"
 
   ' Test the active document file status
@@ -253,6 +257,11 @@ Sub TSVNCI()
   Dim msgSaveModDoc As String            ' Message
   Dim ans As Integer     ' Return value of message box
   Dim FilePath As String ' Backup of active document full path name
+
+  ' Exit when no document is open
+  If Documents.Count = 0 Then
+    Exit Sub
+  End If
 
   msgActiveDocFileReadOnly = "コミットできません。" & "'" & ActiveDocument.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
   msgSaveModDoc = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？"
@@ -291,6 +300,11 @@ End Sub
 
 
 Sub TSVNDIFF()
+  ' Exit when no document is open
+  If Documents.Count = 0 Then
+    Exit Sub
+  End If
+
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
     Exit Sub
@@ -307,11 +321,21 @@ End Sub
 
 
 Sub TSVNRB()
+  ' Exit when no document is open
+  If Documents.Count = 0 Then
+    Exit Sub
+  End If
+
   TSVN "repobrowser", ""
 End Sub
 
 
 Sub TSVNLOG()
+  ' Exit when no document is open
+  If Documents.Count = 0 Then
+    Exit Sub
+  End If
+
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
     Exit Sub
@@ -331,7 +355,12 @@ Sub TSVNLOCK()
   Dim FilePath As String ' Backup of active document full path name
   Dim msgActiveDocFileReadOnly As String ' Message
   Dim msgSaveModDoc As String            ' Message
-  
+
+  ' Exit when no document is open
+  If Documents.Count = 0 Then
+    Exit Sub
+  End If
+
   msgActiveDocFileReadOnly = "ロックを取得できません。" & "'" & ActiveDocument.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
   msgSaveModDoc = "ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？"
 
@@ -379,6 +408,11 @@ Sub TSVNUNLOCK()
   Dim FilePath As String ' Backup of active document full path name
   Dim msgActiveDocFileReadOnly As String ' Message
   Dim msgActiveDocMod As String          ' Message
+
+  ' Exit when no document is open
+  If Documents.Count = 0 Then
+    Exit Sub
+  End If
 
   msgActiveDocFileReadOnly = "ロックを開放できません。"  & "'" & ActiveDocument.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
   msgActiveDocMod = "'" & ActiveDocument.Name & "'" & "は変更されています。ロックの開放では変更内容をリポジトリへ反映することはできません。続行しますか?"
