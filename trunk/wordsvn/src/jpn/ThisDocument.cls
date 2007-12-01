@@ -274,7 +274,7 @@ Sub TSVNCI()
   End If
 
   msgActiveDocFileReadOnly = "コミットできません。" & "'" & ActiveDocument.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
-  msgSaveModDoc = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？"
+  msgSaveModDoc = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "には変更があります。上書き保存しますか？"
 
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
@@ -296,7 +296,9 @@ Sub TSVNCI()
     
     ans = MsgBox(msgSaveModDoc, vbYesNo)
     If ans = vbYes Then
-      ActiveDocument.Save
+      If SaveActiveDocument = False Then
+        Exit Sub
+      End If
     End If
   End If
 
@@ -372,7 +374,7 @@ Sub TSVNLOCK()
   End If
 
   msgActiveDocFileReadOnly = "ロックを取得できません。" & "'" & ActiveDocument.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
-  msgSaveModDoc = "ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？"
+  msgSaveModDoc = "ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "には変更があります。上書き保存しますか？"
 
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
@@ -397,7 +399,9 @@ Sub TSVNLOCK()
     
     ans = MsgBox(msgSaveModDoc, vbYesNo)
     If ans = vbYes Then
-      ActiveDocument.Save
+      If SaveActiveDocument = False Then
+        Exit Sub
+      End If
     End If
   End If
 
@@ -453,7 +457,9 @@ Sub TSVNUNLOCK()
     If ans = vbNo Then
       Exit Sub ' Exit subroutine without locking
     Else
-      ActiveDocument.Save
+      If SaveActiveDocument = False Then
+        Exit Sub
+      End If
     End If
   End If ' If ActiveDocument.Saved = False Then
 
@@ -480,7 +486,7 @@ Sub TSVNADD()
   End If
 
   msgActiveDocFileReadOnly = "コミットできません。" & "'" & ActiveDocument.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
-  msgSaveModDoc = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？"
+  msgSaveModDoc = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "には変更があります。上書き保存しますか？"
 
   ' Test the active document file status
   If ActiveDocFileExistWithMsg() = False Then
@@ -502,7 +508,9 @@ Sub TSVNADD()
     
     ans = MsgBox(msgSaveModDoc, vbYesNo)
     If ans = vbYes Then
-      ActiveDocument.Save
+      If SaveActiveDocument = False Then
+        Exit Sub
+      End If
     End If
   End If
 
@@ -513,6 +521,20 @@ Sub TSVNADD()
       End If
   End If
 End Sub
+
+
+' :Function: Save active document.
+' :Retrun value: True = success, False = fail
+Function SaveActiveDocument()
+    On Error Resume Next
+    ActiveDocument.Save
+    If Err = 0 Then
+      SaveActiveDocument = True  ' Return true
+    Else
+      SaveActiveDocument = False ' Return false
+      MsgBox ("ファイルを保存することはできませんでした。" & "vbCrLf" & Err.Number & ":" & Err.Description)
+    End If
+End Function
 
 
 ' :Function:Test whether the active document is saved as a file or not.
