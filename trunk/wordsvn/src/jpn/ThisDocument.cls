@@ -89,7 +89,12 @@ Private Sub SVNMenuInstall()
   SubMenu7.Caption = "ロックを開放(&C)"
   SubMenu7.OnAction = "TSVNUNLOCK"
   SubMenu7.FaceId = 277
-  
+
+  Set SubMenu8 = Menu.Controls.Add
+  SubMenu8.Caption = "追加(&A)"
+  SubMenu8.OnAction = "TSVNADD"
+  SubMenu8.FaceId = 316
+
 End Sub
 
 
@@ -150,6 +155,11 @@ Private Sub SVNToolBarInstall()
       .Caption = "ロックを開放"
       .FaceId = 277
       .OnAction = "TSVNUNLOCK"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+      .Caption = "追加"
+      .FaceId = 316
+      .OnAction = "TSVNADD"
     End With
   End With
   Err.Clear
@@ -455,6 +465,53 @@ Sub TSVNUNLOCK()
     Documents.Open FileName:=FilePath
   End If
 
+End Sub
+
+
+Sub TSVNADD()
+  Dim msgActiveDocFileReadOnly As String ' Message
+  Dim msgSaveModDoc As String            ' Message
+  Dim ans As Integer     ' Return value of message box
+  Dim FilePath As String ' Backup of active document full path name
+
+  ' Exit when no document is open
+  If Documents.Count = 0 Then
+    Exit Sub
+  End If
+
+  msgActiveDocFileReadOnly = "コミットできません。" & "'" & ActiveDocument.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
+  msgSaveModDoc = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveDocument.Name & "'" & "への変更を保存しますか？"
+
+  ' Test the active document file status
+  If ActiveDocFileExistWithMsg() = False Then
+    Exit Sub
+  End If
+
+  ' Test the folder is under version control
+  If IsFolderUnderSVNControlWithMsg = False Then
+    Exit Sub
+  End If
+
+  If ActiveDocument.Saved = False Then
+  ' Active Document is modified but not saved yet.
+    ' Test the active document file attributes
+    If IsActiveDocFileReadOnly = True Then
+        MsgBox (msgActiveDocFileReadOnly)
+        Exit Sub
+    End If
+    
+    ans = MsgBox(msgSaveModDoc, vbYesNo)
+    If ans = vbYes Then
+      ActiveDocument.Save
+    End If
+  End If
+
+   If TSVN("add", "") = True Then
+      ans = MsgBox("追加をリポジトリへ反映しますか?", vbYesNo)
+      If ans = vbYes Then
+          TSVNCI
+      End If
+  End If
 End Sub
 
 
