@@ -19,6 +19,8 @@ Function TSVN(ByVal command As String, ByVal WbkFileFullName As String) As Boole
   Dim strTSVN As String
   Dim strCOM  As String
   Dim strPATH As String
+  Dim ret As Integer
+  
   strTSVN = """" & CreateObject("WScript.Shell").RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath") & """"
   strCOM = "/command:" & command & " /notempfile "
 
@@ -28,8 +30,10 @@ Function TSVN(ByVal command As String, ByVal WbkFileFullName As String) As Boole
     strPATH = "/path:" & """" & WbkFileFullName & """"
   End If
 
-  CreateObject("WScript.Shell").Run strTSVN & strCOM & strPATH, , True
-  TSVN = True ' Return True
+  ret = CreateObject("WScript.Shell").Run(strTSVN & strCOM & strPATH, , True)
+  ' MsgBox (ret & "," & Err.Number & "," & Err.Description)
+  ' Unfortunately TSVN commands always return 0 even if it fail.
+  TSVN = True ' Always return True
 End Function
 
 
@@ -318,6 +322,56 @@ Sub TSVNUNLOCK()
     Workbooks.Open FileName:=FilePath
   End If
 
+End Sub
+
+
+Sub TSVNADD()
+  Dim msgActiveWbkFileReadOnly As String ' Message
+  Dim msgSaveModWbk As String            ' Message
+  Dim ans As Integer     ' Return value of message box
+  Dim FilePath As String ' Backup of active document full path name
+
+  ' Exit when no workbook is open
+  If Workbooks.Count = 0 Then
+    Exit Sub
+  End If
+
+  msgActiveWbkFileReadOnly = "コミットできません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
+  msgSaveModWbk = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "には変更があります。上書き保存しますか？"
+
+  ' Test the active workbook file status
+  If ActiveWbkFileExistWithMsg() = False Then
+    Exit Sub
+  End If
+
+  ' Test the folder is under version control
+  If IsFolderUnderSVNControlWithMsg = False Then
+    Exit Sub
+  End If
+
+  TSVN "add", ""
+  
+  ans = MsgBox("追加が成功しても、リポジトリにはまだ反映されていません。コミットをしてリポジトリへ反映しますか?", vbYesNo)
+  If ans = vbYes Then
+    If ActiveWorkbook.Saved = False Then
+    ' Active workbook is modified but not saved yet.
+      ' Test the active workbook file attributes
+      If IsActiveWbkFileReadOnly = True Then
+        MsgBox (msgActiveWbkFileReadOnly)
+        Exit Sub
+      End If
+      
+      ans = MsgBox(msgSaveModWbk, vbYesNo)
+      If ans = vbYes Then
+        If SaveActiveWorkbook = False Then
+          Exit Sub
+        End If
+      End If
+    End If
+    
+    TSVNCI
+  
+  End If
 End Sub
 
 
