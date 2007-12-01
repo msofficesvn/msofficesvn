@@ -498,42 +498,44 @@ Sub TSVNADD()
     Exit Sub
   End If
 
-  If ActiveDocument.Saved = False Then
-  ' Active Document is modified but not saved yet.
-    ' Test the active document file attributes
-    If IsActiveDocFileReadOnly = True Then
-        MsgBox (msgActiveDocFileReadOnly)
-        Exit Sub
-    End If
-    
-    ans = MsgBox(msgSaveModDoc, vbYesNo)
-    If ans = vbYes Then
-      If SaveActiveDocument = False Then
-        Exit Sub
+  TSVN　"add", ""
+
+  ans = MsgBox("追加が成功しても、リポジトリにはまだ反映されていません。コミットをしてリポジトリへ反映しますか?", vbYesNo)
+  If ans = vbYes Then
+    If ActiveDocument.Saved = False Then
+      ' Active Document is modified but not saved yet.
+      ' Test the active document file attributes
+      If IsActiveDocFileReadOnly = True Then
+	MsgBox (msgActiveDocFileReadOnly)
+	Exit Sub
+      End If
+
+      ans = MsgBox(msgSaveModDoc, vbYesNo)
+      If ans = vbYes Then
+	If SaveActiveDocument = False Then
+	  Exit Sub
+	End If
       End If
     End If
+
+    TSVNCI
+
   End If
 
-   If TSVN("add", "") = True Then
-      ans = MsgBox("追加をリポジトリへ反映しますか?", vbYesNo)
-      If ans = vbYes Then
-          TSVNCI
-      End If
-  End If
 End Sub
 
 
 ' :Function: Save active document.
 ' :Retrun value: True = success, False = fail
 Function SaveActiveDocument()
-    On Error Resume Next
-    ActiveDocument.Save
-    If Err = 0 Then
-      SaveActiveDocument = True  ' Return true
-    Else
-      SaveActiveDocument = False ' Return false
-      MsgBox ("ファイルを保存することはできませんでした。" & "vbCrLf" & Err.Number & ":" & Err.Description)
-    End If
+  On Error Resume Next
+  ActiveDocument.Save
+  If Err = 0 Then
+    SaveActiveDocument = True  ' Return true
+  Else
+    SaveActiveDocument = False ' Return false
+    MsgBox ("ファイルを保存することはできませんでした。" & "vbCrLf" & Err.Number & ":" & Err.Description)
+  End If
 End Function
 
 
