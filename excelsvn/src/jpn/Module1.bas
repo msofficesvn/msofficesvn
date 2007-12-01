@@ -7,13 +7,13 @@ Attribute VB_Name = "Module1"
 ' the GNU General Public License version 2.
 '
 ' Copyright (C) 2007 Koki Yamamoto <kokiya@gmail.com>
-'     All rights of modified contents from original one are reserved
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 
 Option Explicit
+
 
 Function TSVN(ByVal command As String, ByVal WbkFileFullName As String) As Boolean
   Dim strTSVN As String
@@ -32,6 +32,7 @@ Function TSVN(ByVal command As String, ByVal WbkFileFullName As String) As Boole
   TSVN = True ' Return True
 End Function
 
+
 ' Add workbook if no workbook exist before open a file.
 ' This subroutine is required to avoid application error in Excel 97 when it opne a file.
 Sub AddWorkbookIfEmpty()
@@ -43,6 +44,20 @@ Sub AddWorkbookIfEmpty()
     End If
   End If
 End Sub
+
+
+' :Function: Save active workbook.
+' :Retrun value: True = success, False = fail
+Function SaveActiveWorkbook()
+    On Error Resume Next
+    ActiveWorkbook.Save
+    If Err = 0 Then
+      SaveActiveWorkbook = True  ' Return true
+    Else
+      SaveActiveWorkbook = False ' Return false
+      MsgBox (Err.Number & ":" & Err.Description)
+    End If
+End Function
 
 
 Sub TSVNUPDATE()
@@ -89,6 +104,7 @@ Sub TSVNCI()
   Dim msgSaveModWbk As String            ' Message
   Dim ans As Integer     ' Return value of message box
   Dim FilePath As String ' Backup of active workbook full path name
+  Dim ret As Integer
 
   ' Exit when no workbook is open
   If Workbooks.Count = 0 Then
@@ -96,7 +112,7 @@ Sub TSVNCI()
   End If
 
   msgActiveWbkFileReadOnly = "コミットできません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
-  msgSaveModWbk = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "への変更を保存しますか？"
+  msgSaveModWbk = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "には変更があります。上書き保存しますか？"
 
   ' Test the active workbook file status
   If ActiveWbkFileExistWithMsg() = False Then
@@ -118,7 +134,9 @@ Sub TSVNCI()
     
     ans = MsgBox(msgSaveModWbk, vbYesNo)
     If ans = vbYes Then
-      ActiveWorkbook.Save
+      If SaveActiveWorkbook = False Then
+        Exit Sub
+      End If
     End If
   End If
 
@@ -199,7 +217,7 @@ Sub TSVNLOCK()
   End If
 
   msgActiveWbkFileReadOnly = "ロックを取得できません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されていますが、ファイル属性が読み取り専用となっています。"
-  msgSaveModWbk = "ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "への変更を保存しますか？"
+  msgSaveModWbk = "ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "には変更があります。上書き保存しますか？"
 
   ' Test the active workbook file status
   If ActiveWbkFileExistWithMsg() = False Then
@@ -224,7 +242,9 @@ Sub TSVNLOCK()
     
     ans = MsgBox(msgSaveModWbk, vbYesNo)
     If ans = vbYes Then
-      ActiveWorkbook.Save
+      If SaveActiveWorkbook = False Then
+        Exit Sub
+      End If
     End If
   End If
 
@@ -282,7 +302,9 @@ Sub TSVNUNLOCK()
     If ans = vbNo Then
       Exit Sub ' Exit subroutine without locking
     Else
-      ActiveWorkbook.Save
+      If SaveActiveWorkbook = False Then
+        Exit Sub
+      End If
     End If
   End If ' If ActiveWorkbook.Saved = False Then
 
@@ -360,7 +382,7 @@ End Function
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFolderUnderSVNControlWithMsg() As Boolean
   Dim msgNotUnderCtrl As String ' Message
-  msgNotUnderCtrl = "'" & ActiveWorkbook.Name & "'" & "はバージョンコントロール下のフォルダにありません。"
+  msgNotUnderCtrl = "'" & ActiveWorkbook.FullName & "'" & "はバージョンコントロール下のフォルダにありません。"
   
   If IsFolderUnderSVNControl Then
     IsFolderUnderSVNControlWithMsg = True 'Return True
@@ -394,6 +416,7 @@ Function IsFileUnderSVNControlWithMsg() As Boolean
     IsFileUnderSVNControlWithMsg = False ' Return False
   End If
 End Function
+
 
 
 
