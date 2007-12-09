@@ -31,7 +31,7 @@ Function TSVN(ByVal command As String, ByVal WbkFileFullName As String) As Boole
   End If
 
   ret = CreateObject("WScript.Shell").Run(strTSVN & strCOM & strPATH, , True)
-  ' MsgBox (ret & "," & Err.Number & "," & Err.Description)
+  ' MsgBox ret & "," & Err.Number & "," & Err.Description
   ' Unfortunately TSVN commands always return 0 even if it fail.
   TSVN = True ' Always return True
 End Function
