@@ -249,11 +249,11 @@ End Sub
 ' :Return value:
 Function TSVN(ByVal command As String, ByVal DocFileFullName As String) As Boolean
   Dim strTSVN As String
-  Dim strCOM As String
+  Dim strCOM  As String
   Dim strPATH As String
 
   strTSVN = """" & CreateObject("WScript.Shell").RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath") & """"
-  strCOM = "/command:" & command & " /notempfile "
+  strCOM  = "/command:" & command & " /notempfile "
 
   If Len(DocFileFullName) = 0 Then
     strPATH = "/path:" & """" & ActiveDocument.FullName & """"
