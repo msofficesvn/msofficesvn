@@ -100,6 +100,8 @@ End Function
 Sub TSVNUPDATE()
   Dim msgErr As String ' Message
   Dim FilePath As String ' Backup of active document full path name
+  Dim absCurPageNum As Long
+  Dim absCurLinePos As Long
 
   ' Exit when no document is open
   If Documents.Count = 0 Then
@@ -124,9 +126,11 @@ Sub TSVNUPDATE()
   End If
 
   FilePath = ActiveDocument.FullName
+  GetCurCursorPos absCurPageNum, absCurLinePos
   ActiveDocument.Close
   TSVN "update", FilePath
   Documents.Open FileName:=FilePath
+  JumpTo absCurPageNum, absCurLinePos
 End Sub
 
 ' :Function:
@@ -235,6 +239,8 @@ Sub TSVNLOCK()
   Dim FilePath As String ' Backup of active document full path name
   Dim msgErrFileReadOnly As String ' Message
   Dim msgAskSaveModDoc As String   ' Message
+  Dim ActiveContent As New ActiveContent ' ActiveContent Class Object
+  
 
   ' Exit when no document is open
   If Documents.Count = 0 Then
@@ -252,7 +258,8 @@ Sub TSVNLOCK()
   End If
 
   ' Backup file name before save the active document
-  FilePath = ActiveDocument.FullName
+  'FilePath = ActiveDocument.FullName
+  ActiveContent.StoreFullName
 
   If ActiveDocument.Saved = False Then
   ' Active Document is modified but not saved yet.
@@ -276,9 +283,12 @@ Sub TSVNLOCK()
   '  * The file attribute of read only / read write is changed after lock the file.
   '  * The file can be updated when the file in repository is newer than the working copy.
   '  * If the word open the file and svn failes to update working copy, svn require clean-up.
-  ActiveDocument.Close
-  TSVN "lock", FilePath
-  Documents.Open FileName:=FilePath
+  'ActiveDocument.Close
+  ActiveContent.CloseFile
+  TSVN "lock", ActiveContent.GetFullName
+  'Documents.Open FileName:=FilePath
+  ActiveContent.ReOpenFile
+  
 End Sub
 
 ' :Function:
@@ -499,6 +509,17 @@ Function AddActiveDocNameToMsg(ByVal msgTrunk As String, ByVal bDispFullPath As 
   Else
     AddActiveDocNameToMsg = msgTrunk & vbCrLf & vbCrLf & msgFN & ActiveDocument.Name
   End If
+End Function
+
+Function GetCurCursorPos(ByRef absPageNum As Long, ByRef absLinePos As Long) As Long
+  absPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
+  absLinePos = Selection.Information(wdFirstCharacterLineNumber)
+  MsgBox absPageNum & ", " & absLinePos
+End Function
+
+Function JumpTo(ByVal absPageNum As Long, ByVal absLinePos As Long) As Boolean
+  Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=absPageNum, Name:=""
+  Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=(absLinePos - 1), Name:=""
 End Function
 
 
