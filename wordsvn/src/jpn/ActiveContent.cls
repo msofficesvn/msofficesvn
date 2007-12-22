@@ -7,15 +7,18 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-Public ActiveContentFullName As String
+Private FullName As String
+
+Private absPageNum As Long
+Private absLinePos As Long
 
 Function StoreFullName() As String
-  ActiveContentFullName = ActiveDocument.FullName
+  FullName = ActiveDocument.FullName
   StoreFullName = ActiveDocument.FullName
 End Function
 
 Function GetFullName() As String
-  GetFullName = ActiveContentFullName
+  GetFullName = FullName
 End Function
 
 Function CloseFile() As Boolean
@@ -30,10 +33,22 @@ End Function
 
 Function ReOpenFile() As Boolean
   On Error Resume Next
-  Documents.Open FileName:=ActiveContentFullName
+  Documents.Open FileName:=FullName
   If Err = 0 Then
     ReOpenFile = True
   Else
     ReOpenFile = False
   End If
 End Function
+
+Sub StoreCurCursorPos()
+  absPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
+  absLinePos = Selection.Information(wdFirstCharacterLineNumber)
+  MsgBox "Page:" & absPageNum & "," & "Line:" & absLinePos
+
+End Sub
+
+Sub JumpToStoredPos()
+  Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=absPageNum, Name:=""
+  Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=(absLinePos - 1), Name:=""
+End Sub

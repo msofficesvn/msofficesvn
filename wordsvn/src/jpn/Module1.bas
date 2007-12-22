@@ -260,7 +260,7 @@ Sub TSVNLOCK()
   ' Backup file name before save the active document
   'FilePath = ActiveDocument.FullName
   ActiveContent.StoreFullName
-
+  
   If ActiveDocument.Saved = False Then
   ' Active Document is modified but not saved yet.
     ' Test the active document file attributes
@@ -279,6 +279,8 @@ Sub TSVNLOCK()
     End If
   End If
 
+  ActiveContent.StoreCurCursorPos
+  
   ' Close the file and reopen after lock it, because the following reasons
   '  * The file attribute of read only / read write is changed after lock the file.
   '  * The file can be updated when the file in repository is newer than the working copy.
@@ -288,7 +290,7 @@ Sub TSVNLOCK()
   TSVN "lock", ActiveContent.GetFullName
   'Documents.Open FileName:=FilePath
   ActiveContent.ReOpenFile
-  
+  ActiveContent.JumpToStoredPos
 End Sub
 
 ' :Function:
