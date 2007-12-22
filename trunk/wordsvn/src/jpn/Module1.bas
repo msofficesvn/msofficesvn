@@ -1,5 +1,5 @@
 Attribute VB_Name = "Module1"
-'------------------- Copy & paste from here to a dot file --------------------
+'------------------- Copy & paste from here to a Module1 ofdot file --------------------
 ' $Rev: 30 $
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
 '     All rights reserved.

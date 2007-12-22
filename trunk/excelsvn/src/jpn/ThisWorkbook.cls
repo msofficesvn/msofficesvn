@@ -82,38 +82,38 @@ Private Sub InstallSVNToolBar()
     .Enabled = True
     .Visible = True
     With .Controls.Add(Type:=msoControlButton)
-          .Caption  = "更新"
-          .FaceId   = 360
+          .Caption = "更新"
+          .FaceId = 360
           .OnAction = "TSVNUPDATE"
     End With
     With .Controls.Add(Type:=msoControlButton)
-          .Caption  = "ロックを取得"
-          .FaceId   = 225
+          .Caption = "ロックを取得"
+          .FaceId = 225
           .OnAction = "TSVNLOCK"
     End With
     With .Controls.Add(Type:=msoControlButton)
-          .Caption  = "コミット"
-          .FaceId   = 359
+          .Caption = "コミット"
+          .FaceId = 359
           .OnAction = "TSVNCI"
     End With
     With .Controls.Add(Type:=msoControlButton)
-          .Caption  = "差分"
-          .FaceId   = 195
+          .Caption = "差分"
+          .FaceId = 195
           .OnAction = "TSVNDIFF"
     End With
     With .Controls.Add(Type:=msoControlButton)
-          .Caption  = "ログ表示"
-          .FaceId   = 44
+          .Caption = "ログ表示"
+          .FaceId = 44
           .OnAction = "TSVNLOG"
     End With
     With .Controls.Add(Type:=msoControlButton)
-          .Caption  = "リポジトリブラウザ"
-          .FaceId   = 25
+          .Caption = "リポジトリブラウザ"
+          .FaceId = 25
           .OnAction = "TSVNRB"
     End With
     With .Controls.Add(Type:=msoControlButton)
-          .Caption  = "ロックを開放"
-          .FaceId   = 277
+          .Caption = "ロックを開放"
+          .FaceId = 277
           .OnAction = "TSVNUNLOCK"
     End With
   End With
@@ -142,37 +142,38 @@ Private Sub InstallSVNMenu()
   Menu.Caption = capSVNMenuBar
 
   Set SubMenu1 = Menu.Controls.Add
-  SubMenu1.Caption  = "更新(&U)"
+  SubMenu1.Caption = "更新(&U)"
   SubMenu1.OnAction = "TSVNUPDATE"
-  SubMenu1.FaceId   = 360
+  SubMenu1.FaceId = 360
 
   Set SubMenu2 = Menu.Controls.Add
-  SubMenu2.Caption  = "ロックを取得(&O)"
+  SubMenu2.Caption = "ロックを取得(&O)"
   SubMenu2.OnAction = "TSVNLOCK"
-  SubMenu2.FaceId   = 225
+  SubMenu2.FaceId = 225
 
   Set SubMenu3 = Menu.Controls.Add
-  SubMenu3.Caption  = "コミット(&C)"
+  SubMenu3.Caption = "コミット(&C)"
   SubMenu3.OnAction = "TSVNCI"
-  SubMenu3.FaceId   = 359
+  SubMenu3.FaceId = 359
 
   Set SubMenu4 = Menu.Controls.Add
-  SubMenu4.Caption  = "差分(&D)"
+  SubMenu4.Caption = "差分(&D)"
   SubMenu4.OnAction = "TSVNDIFF"
-  SubMenu4.FaceId   = 195
+  SubMenu4.FaceId = 195
 
   Set SubMenu5 = Menu.Controls.Add
-  SubMenu5.Caption  = "ログ表示(&L)"
+  SubMenu5.Caption = "ログ表示(&L)"
   SubMenu5.OnAction = "TSVNLOG"
-  SubMenu5.FaceId   = 44
+  SubMenu5.FaceId = 44
   
   Set SubMenu6 = Menu.Controls.Add
-  SubMenu6.Caption  = "リポジトリブラウザ(&R)"
+  SubMenu6.Caption = "リポジトリブラウザ(&R)"
   SubMenu6.OnAction = "TSVNRB"
-  SubMenu6.FaceId   = 25
+  SubMenu6.FaceId = 25
 
   Set SubMenu7 = Menu.Controls.Add
-  SubMenu7.Caption  = "ロックを開放(&C)"
+  SubMenu7.Caption = "ロックを開放(&C)"
   SubMenu7.OnAction = "TSVNUNLOCK"
-  SubMenu7.FaceId   = 277
+  SubMenu7.FaceId = 277
 End Sub
+
