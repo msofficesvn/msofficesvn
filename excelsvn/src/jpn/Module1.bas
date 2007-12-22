@@ -68,6 +68,11 @@ Sub TSVNUPDATE()
   Dim msgActiveWbkMod As String ' Message
   Dim FilePath As String ' Backup of active workbook full path name
 
+ Dim ActiveSheetName As String
+ Dim absRow As Long
+ Dim absCol As Long
+ Dim actRange As Range
+
   ' Exit when no workbook is open
   If Workbooks.Count = 0 Then
     Exit Sub
@@ -92,6 +97,7 @@ Sub TSVNUPDATE()
   End If
 
   FilePath = ActiveWorkbook.FullName
+  GetCurCursorPos ActiveSheetName, absRow, absCol, actRange
   ActiveWorkbook.Close
     
   AddWorkbookIfEmpty
@@ -100,6 +106,7 @@ Sub TSVNUPDATE()
     Application.Workbooks.Open FileName:=FilePath
   End If
 
+  JumpTo ActiveSheetName, absRow, absCol, actRange
 End Sub
 
 
@@ -214,6 +221,7 @@ Sub TSVNLOCK()
   Dim FilePath As String ' Backup of active workbook full path name
   Dim msgActiveWbkFileReadOnly As String ' Message
   Dim msgSaveModWbk As String            ' Message
+  Dim ActiveContent As New ActiveContent ' ActiveContent Class Object
 
   ' Exit when no workbook is open
   If Workbooks.Count = 0 Then
@@ -234,7 +242,8 @@ Sub TSVNLOCK()
   End If
 
   ' Backup file name before save the active workbook
-  FilePath = ActiveWorkbook.FullName
+  'FilePath = ActiveWorkbook.FullName
+  ActiveContent.StoreFullName
 
   If ActiveWorkbook.Saved = False Then
   ' Active Workbook is modified but not saved yet.
@@ -252,17 +261,21 @@ Sub TSVNLOCK()
     End If
   End If
 
+  ActiveContent.StoreCurCursorPos
+
   ' Close the file and reopen after lock it, because the following reasons
   '  * The file attribute of read only / read write is changed after lock the file.
   '  * The file can be updated when the file in repository is newer than the working copy.
   '  * If the word open the file and svn failes to update working copy, svn require clean-up.
-  ActiveWorkbook.Close
+  'ActiveWorkbook.Close
+  ActiveContent.CloseFile
 
   AddWorkbookIfEmpty
   
-  If TSVN("lock", FilePath) = True Then
-    Workbooks.Open FileName:=FilePath
-  End If
+  TSVN "lock", ActiveContent.GetFullName
+  'Workbooks.Open FileName:=FilePath
+  ActiveContent.ReOpenFile
+  ActiveContent.JumpToStoredPos
 End Sub
 
 
@@ -469,6 +482,23 @@ Function IsFileUnderSVNControlWithMsg() As Boolean
     MsgBox (msgNotUnderCtrl)
     IsFileUnderSVNControlWithMsg = False ' Return False
   End If
+End Function
+
+Function GetCurCursorPos(ByRef ActiveSheetName As String, ByRef absRow As Long, ByRef absCol As Long, ByRef actRange As Range) As Long
+  ActiveSheetName = ActiveWorkbook.ActiveSheet.Name
+  absRow = ActiveCell.Row
+  absCol = ActiveCell.Column
+  Set actRange = Cells(absRow, absCol)
+  
+  MsgBox ActiveSheetName & ", " & absRow & ", " & absCol & ", " & actRange
+End Function
+
+Function JumpTo(ByVal ActiveSheetName As String, ByVal absRow As Long, ByVal absCol As Long, ByVal actRange As Range) As Boolean
+  Dim ActiveRange As Range
+  Set ActiveRange = Cells(absRow, absCol)
+  'Application.Goto Reference:=Worksheets(ActiveSheetName).Range(ActiveRange.Address), scroll:=False
+  Worksheets(ActiveSheetName).Activate
+  Range(ActiveRange.Address).Activate
 End Function
 
 

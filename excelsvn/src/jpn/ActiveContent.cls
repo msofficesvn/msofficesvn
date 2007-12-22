@@ -8,7 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 
-'------------------- Copy & paste from here to the ActiveContent class module of dot file --------------------
+'------------------- Copy & paste from here to a Module1 ofdot file --------------------
 ' $Rev: 30 $
 ' Copyright (C) 2007 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
@@ -24,12 +24,13 @@ Option Explicit
 
 Private FullName As String ' Full path name of the active content.
 
-Private absPageNum As Long ' The page number of the cursor position.
-Private absLinePos As Long ' The line number of the top of the page of the cursor position.
+Private ActiveSheetName As String
+Private absRow As Long
+Private absCol As Long
 
 'Function: Store full path name of the active content
 Function StoreFullName() As String
-  FullName = ActiveDocument.FullName
+  FullName = ActiveWorkbook.FullName
 End Function
 
 'Function: Return full path name of the active content
@@ -41,7 +42,7 @@ End Function
 'Function: Close the active content
 Function CloseFile() As Boolean
   On Error Resume Next
-  ActiveDocument.Close
+  ActiveWorkbook.Close
   If Err = 0 Then
     CloseFile = True
   Else
@@ -52,7 +53,7 @@ End Function
 'Function: ReOpent the active content. StoreFullName function must be called before.
 Function ReOpenFile() As Boolean
   On Error Resume Next
-  Documents.Open FileName:=FullName
+  Workbooks.Open FileName:=FullName
   If Err = 0 Then
     ReOpenFile = True
   Else
@@ -62,13 +63,18 @@ End Function
 
 'Function: Store current cursor position as page number and line number of the page.
 Sub StoreCurCursorPos()
-  absPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
-  absLinePos = Selection.Information(wdFirstCharacterLineNumber)
-  MsgBox "Page:" & absPageNum & "," & "Line:" & absLinePos
+  ActiveSheetName = ActiveWorkbook.ActiveSheet.Name
+  absRow = ActiveCell.Row
+  absCol = ActiveCell.Column
+  
+  MsgBox "Sheet:" & ActiveSheetName & ", " & "Row:" & absRow & ", " & "Col:" & absCol
 End Sub
 
 'Function: Jump the cursor to the position that is sotred previously by StoreCurCursorPos function.
 Sub JumpToStoredPos()
-  Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=absPageNum, Name:=""
-  Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=(absLinePos - 1), Name:=""
+  Dim ActiveRange As Range
+  Set ActiveRange = Cells(absRow, absCol)
+  Worksheets(ActiveSheetName).Activate
+  Range(ActiveRange.Address).Activate
 End Sub
+
