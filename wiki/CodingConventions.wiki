@@ -1,3 +1,24 @@
+コーディング規約
+
+各ファイルの冒頭には、必ず
+Option Explicit
+を記述し、変数宣言を明示的に行うようにすること。
+
+変数名は小文字始まりのキャメルケースとする。例: prefixName
+
+  よく使うプレフィックス:
+
+    ans = メッセージボックスなどに対するユーザーの選択結果を保存する変数。
+    b   = Boolean
+    str = 文字列
+
+  よく使う名前/サフィックス:
+
+    Min, Max = 最小値と最大値
+    Prev, Next, Curr = 前の値、次の値、現在値
+    Tmp = 一時的な値
+    Src, Dest = コピー元とコピー先
+
 --------------------------------------------------------------------------
 参考資料
 http://local.joelonsoftware.com/mediawiki/index.php/Project_Aardvark_Functional_Specification_(Jp)
