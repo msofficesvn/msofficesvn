@@ -1,4 +1,7 @@
 Attribute VB_Name = "Module1"
+
+'------------------- Copy & paste from here to the Module1 of excelsvn.xla --------------------
+' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
 '     All rights reserved.
 '     This is free software with ABSOLUTELY NO WARRANTY.
@@ -14,64 +17,39 @@ Attribute VB_Name = "Module1"
 
 Option Explicit
 
+Dim mContents As New Contents ' Contents class object
+Dim mActiveContent As New ActiveContent ' ActiveContent class object
 
-Function TSVN(ByVal command As String, ByVal WbkFileFullName As String) As Boolean
-  Dim strTSVN As String
-  Dim strCOM  As String
-  Dim strPATH As String
-  Dim ret As Integer
-  
-  strTSVN = """" & CreateObject("WScript.Shell").RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath") & """"
-  strCOM = "/command:" & command & " /notempfile "
 
-  If Len(WbkFileFullName) = 0 Then
-    strPATH = "/path:" & """" & ActiveWorkbook.FullName & """"
+Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) As Boolean
+  Dim TsvnProc      As String  ' TortoiseProc.exe path
+  Dim TsvnCmdParam  As String  ' Tsvn Command Parameter
+  Dim TsvnPathParam As String  ' Tsvn Path Parameter
+  Dim ret           As Integer ' Return value
+
+  TsvnProc = """" & CreateObject("WScript.Shell").RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath") & """"
+  TsvnCmdParam = "/command:" & TsvnCmd & " /notempfile "
+
+  If Len(ContFileFullName) = 0 Then
+    TsvnPathParam = "/path:" & """" & mActiveContent.GetCurFullName & """"
   Else
-    strPATH = "/path:" & """" & WbkFileFullName & """"
+    TsvnPathParam = "/path:" & """" & ContFileFullName & """"
   End If
 
-  ret = CreateObject("WScript.Shell").Run(strTSVN & strCOM & strPATH, , True)
-  ' MsgBox ret & "," & Err.Number & "," & Err.Description
-  ' Unfortunately TSVN commands always return 0 even if it fail.
-  TSVN = True ' Always return True
+  ret = CreateObject("WScript.Shell").Run(TsvnProc & TsvnCmdParam & TsvnPathParam, , True)
+  ' MsgBox Ret & "," & Err.Number & "," & Err.Description
+  ' Unfortunately TSVN commands always return 0 even if they fail.
+  ' So, this function returns True always.
+  ExecTsvnCmd = True
 End Function
 
-
-' Add workbook if no workbook exist before open a file.
-' This subroutine is required to avoid application error in Excel 97 when it opne a file.
-Sub AddWorkbookIfEmpty()
-  If StrComp(Left(Application.Version, 1), "8.") = 0 Then
-    If Workbooks.Count = 0 Then
-      Workbooks.Add
-      Workbooks(1).Activate
-      ActiveWindow.WindowState = xlMinimized
-    End If
-  End If
-End Sub
-
-
-' :Function: Save active workbook.
-' :Retrun value: True = success, False = fail
-Function SaveActiveWorkbook()
-    On Error Resume Next
-    ActiveWorkbook.Save
-    If Err = 0 Then
-      SaveActiveWorkbook = True  ' Return true
-    Else
-      SaveActiveWorkbook = False ' Return false
-      MsgBox (Err.Number & ":" & Err.Description)
-    End If
-End Function
-
-
-Sub TSVNUPDATE()
+' :Function: Update
+Sub TsvnUpdate()
   Dim msgActiveWbkMod As String ' Message
-  Dim FilePath As String ' Backup of active workbook full path name
-
- Dim ActiveSheetName As String
- Dim absRow As Long
- Dim absCol As Long
- Dim actRange As Range
+  Dim ActiveSheetName As String
+  Dim absRow As Long
+  Dim absCol As Long
+  Dim actRange As Range
 
   ' Exit when no workbook is open
   If Workbooks.Count = 0 Then
@@ -81,36 +59,33 @@ Sub TSVNUPDATE()
   msgActiveWbkMod = "更新できません。" & "'" & ActiveWorkbook.Name & "'" & "は変更されています。"
 
   ' Test the active workbook file status
-  If ActiveWbkFileExistWithMsg() = False Then
+  If ActiveContentFileExistWithMsg() = False Then
     Exit Sub
   End If
 
   ' Test the folder is under version control
-  If IsFileUnderSVNControlWithMsg = False Then
+  If IsFileUnderSvnControlWithMsg = False Then
     Exit Sub
   End If
 
-  If ActiveWorkbook.Saved = False Then
-  ' Active Workbook is modified but not saved yet.
+  If mActiveContent.IsSaved = False Then
+  ' Active content is modified but not saved yet.
     MsgBox (msgActiveWbkMod)
     Exit Sub
   End If
 
-  FilePath = ActiveWorkbook.FullName
-  GetCurCursorPos ActiveSheetName, absRow, absCol, actRange
-  ActiveWorkbook.Close
-    
-  AddWorkbookIfEmpty
-
-  If TSVN("update", FilePath) = True Then
-    Application.Workbooks.Open FileName:=FilePath
-  End If
-
-  JumpTo ActiveSheetName, absRow, absCol, actRange
+  mActiveContent.StoreFullName
+  mActiveContent.StoreCurCursorPos
+  mActiveContent.CloseFile
+  
+  ExecTsvnCmd "update", mActiveContent.GetStoredFullName
+  
+  mActiveContent.ReOpenFile
+  mActiveContent.JumpToStoredPos
 End Sub
 
 
-Sub TSVNCI()
+Sub TsvnCi()
   Dim msgActiveWbkFileReadOnly As String ' Message
   Dim msgSaveModWbk As String            ' Message
   Dim ans As Integer     ' Return value of message box
@@ -126,43 +101,43 @@ Sub TSVNCI()
   msgSaveModWbk = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "には変更があります。上書き保存しますか？"
 
   ' Test the active workbook file status
-  If ActiveWbkFileExistWithMsg() = False Then
+  If ActiveContentFileExistWithMsg() = False Then
     Exit Sub
   End If
 
   ' Test the folder is under version control
-  If IsFolderUnderSVNControlWithMsg = False Then
+  If IsFolderUnderSvnControlWithMsg = False Then
     Exit Sub
   End If
 
   If ActiveWorkbook.Saved = False Then
   ' Active Workbook is modified but not saved yet.
     ' Test the active workbook file attributes
-    If IsActiveWbkFileReadOnly = True Then
+    If IsActiveContentFileReadOnly = True Then
         MsgBox (msgActiveWbkFileReadOnly)
         Exit Sub
     End If
     
     ans = MsgBox(msgSaveModWbk, vbYesNo)
     If ans = vbYes Then
-      If SaveActiveWorkbook = False Then
+      If mActiveContent.SaveFile = False Then
         Exit Sub
       End If
     End If
   End If
 
   FilePath = ActiveWorkbook.FullName
-  ActiveWorkbook.Close
+  mActiveContent.CloseFile
 
-  AddWorkbookIfEmpty
+  
 
-  If TSVN("commit", FilePath) = True Then
-    Workbooks.Open FileName:=FilePath
-  End If
+  ExecTsvnCmd "commit", FilePath
+  Workbooks.Open FileName:=FilePath
+
 End Sub
 
 
-Sub TSVNDIFF()
+Sub TsvnDiff()
 
   ' Exit when no workbook is open
   If Workbooks.Count = 0 Then
@@ -170,32 +145,32 @@ Sub TSVNDIFF()
   End If
 
   ' Test the active workbook file status
-  If ActiveWbkFileExistWithMsg() = False Then
+  If ActiveContentFileExistWithMsg() = False Then
     Exit Sub
   End If
 
   ' Test the file is under version control
-  If IsFileUnderSVNControlWithMsg = False Then
+  If IsFileUnderSvnControlWithMsg = False Then
     Exit Sub
   End If
 
-  TSVN "diff", ""
+  ExecTsvnCmd "diff", ""
 
 End Sub
 
 
-Sub TSVNRB()
+Sub TsvnRepoBrowser()
 
   ' Exit when no workbook is open
   If Workbooks.Count = 0 Then
     Exit Sub
   End If
 
-  TSVN "repobrowser", ""
+  ExecTsvnCmd "repobrowser", ""
 End Sub
 
 
-Sub TSVNLOG()
+Sub TsvnLog()
 
   ' Exit when no workbook is open
   If Workbooks.Count = 0 Then
@@ -203,25 +178,24 @@ Sub TSVNLOG()
   End If
 
   ' Test the active workbook file status
-  If ActiveWbkFileExistWithMsg() = False Then
+  If ActiveContentFileExistWithMsg() = False Then
     Exit Sub
   End If
 
  ' Test the file is under version control
-  If IsFileUnderSVNControlWithMsg = False Then
+  If IsFileUnderSvnControlWithMsg = False Then
     Exit Sub
   End If
 
-  TSVN "log", ""
+  ExecTsvnCmd "log", ""
 End Sub
 
 
-Sub TSVNLOCK()
+Sub TsvnLock()
   Dim ans As Integer     ' Return value of MessageBox
   Dim FilePath As String ' Backup of active workbook full path name
   Dim msgActiveWbkFileReadOnly As String ' Message
   Dim msgSaveModWbk As String            ' Message
-  Dim ActiveContent As New ActiveContent ' ActiveContent Class Object
 
   ' Exit when no workbook is open
   If Workbooks.Count = 0 Then
@@ -232,54 +206,51 @@ Sub TSVNLOCK()
   msgSaveModWbk = "ロックを取得時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "には変更があります。上書き保存しますか？"
 
   ' Test the active workbook file status
-  If ActiveWbkFileExistWithMsg() = False Then
+  If ActiveContentFileExistWithMsg() = False Then
     Exit Sub
   End If
 
   ' Test the file is under version control
-  If IsFileUnderSVNControlWithMsg = False Then
+  If IsFileUnderSvnControlWithMsg = False Then
     Exit Sub
   End If
 
   ' Backup file name before save the active workbook
-  'FilePath = ActiveWorkbook.FullName
-  ActiveContent.StoreFullName
+  mActiveContent.StoreFullName
 
   If ActiveWorkbook.Saved = False Then
   ' Active Workbook is modified but not saved yet.
     ' Test the active workbook file attributes
-    If IsActiveWbkFileReadOnly = True Then
+    If IsActiveContentFileReadOnly = True Then
       MsgBox (msgActiveWbkFileReadOnly)
       Exit Sub
     End If
     
     ans = MsgBox(msgSaveModWbk, vbYesNo)
     If ans = vbYes Then
-      If SaveActiveWorkbook = False Then
+      If mActiveContent.SaveFile = False Then
         Exit Sub
       End If
     End If
   End If
 
-  ActiveContent.StoreCurCursorPos
+  mActiveContent.StoreCurCursorPos
 
   ' Close the file and reopen after lock it, because the following reasons
   '  * The file attribute of read only / read write is changed after lock the file.
   '  * The file can be updated when the file in repository is newer than the working copy.
   '  * If the word open the file and svn failes to update working copy, svn require clean-up.
-  'ActiveWorkbook.Close
-  ActiveContent.CloseFile
+  mActiveContent.CloseFile
 
-  AddWorkbookIfEmpty
   
-  TSVN "lock", ActiveContent.GetFullName
-  'Workbooks.Open FileName:=FilePath
-  ActiveContent.ReOpenFile
-  ActiveContent.JumpToStoredPos
+  
+  ExecTsvnCmd "lock", mActiveContent.GetStoredFullName
+  mActiveContent.ReOpenFile
+  mActiveContent.JumpToStoredPos
 End Sub
 
 
-Sub TSVNUNLOCK()
+Sub TsvnUnlock()
   Dim ans As Integer     ' Return value of MessageBox
   Dim FilePath As String ' Backup of active workbook full path name
   Dim msgActiveWbkFileReadOnly As String ' Message
@@ -294,12 +265,12 @@ Sub TSVNUNLOCK()
   msgActiveWbkMod = "'" & ActiveWorkbook.Name & "'" & "は変更されています。ロックの開放では変更内容をリポジトリへ反映することはできません。続行しますか?"
 
   ' Test the active workbook file status
-  If ActiveWbkFileExistWithMsg() = False Then
+  If ActiveContentFileExistWithMsg() = False Then
     Exit Sub
   End If
 
   ' Test the file is under version control
-  If IsFileUnderSVNControlWithMsg = False Then
+  If IsFileUnderSvnControlWithMsg = False Then
     Exit Sub
   End If
 
@@ -308,7 +279,7 @@ Sub TSVNUNLOCK()
 
   If ActiveWorkbook.Saved = False Then
   ' Active Workbook is modified but not saved yet.
-    If IsActiveWbkFileReadOnly = True Then
+    If IsActiveContentFileReadOnly = True Then
     ' Test the active workbook file attributes
       MsgBox (msgActiveWbkFileReadOnly)
       Exit Sub
@@ -319,7 +290,7 @@ Sub TSVNUNLOCK()
     If ans = vbNo Then
       Exit Sub ' Exit subroutine without locking
     Else
-      If SaveActiveWorkbook = False Then
+      If mActiveContent.SaveFile = False Then
         Exit Sub
       End If
     End If
@@ -327,18 +298,14 @@ Sub TSVNUNLOCK()
 
   ' Close the file and reopen after unlock it, because the following reason
   '  * The file attribute of read only / read write is changed after unlock the file.
-  ActiveWorkbook.Close
-
-  AddWorkbookIfEmpty
-
-  If TSVN("unlock", FilePath) = True Then
-    Workbooks.Open FileName:=FilePath
-  End If
+  mActiveContent.CloseFile
+  ExecTsvnCmd "unlock", FilePath
+  Workbooks.Open FileName:=FilePath
 
 End Sub
 
 
-Sub TSVNADD()
+Sub TsvnAdd()
   Dim msgActiveWbkFileReadOnly As String ' Message
   Dim msgSaveModWbk As String            ' Message
   Dim ans As Integer     ' Return value of message box
@@ -353,36 +320,36 @@ Sub TSVNADD()
   msgSaveModWbk = "コミット時に、ファイルをいったん閉じて再度開きます。" & "'" & ActiveWorkbook.Name & "'" & "には変更があります。上書き保存しますか？"
 
   ' Test the active workbook file status
-  If ActiveWbkFileExistWithMsg() = False Then
+  If ActiveContentFileExistWithMsg() = False Then
     Exit Sub
   End If
 
   ' Test the folder is under version control
-  If IsFolderUnderSVNControlWithMsg = False Then
+  If IsFolderUnderSvnControlWithMsg = False Then
     Exit Sub
   End If
 
-  TSVN "add", ""
+  ExecTsvnCmd "add", ""
   
   ans = MsgBox("追加が成功しても、リポジトリにはまだ反映されていません。コミットをしてリポジトリへ反映しますか?", vbYesNo)
   If ans = vbYes Then
     If ActiveWorkbook.Saved = False Then
     ' Active workbook is modified but not saved yet.
       ' Test the active workbook file attributes
-      If IsActiveWbkFileReadOnly = True Then
+      If IsActiveContentFileReadOnly = True Then
         MsgBox (msgActiveWbkFileReadOnly)
         Exit Sub
       End If
       
       ans = MsgBox(msgSaveModWbk, vbYesNo)
       If ans = vbYes Then
-        If SaveActiveWorkbook = False Then
+        If mActiveContent.SaveFile = False Then
           Exit Sub
         End If
       End If
     End If
     
-    TSVNCI
+    TsvnCi
   
   End If
 End Sub
@@ -403,104 +370,253 @@ End Function
 ' :Function:Test whether the active workbook is saved as a file or not.
 '           And this displays error message if the file does't exist.
 ' :Return value:True=The file exists., False=No file exists.
-Function ActiveWbkFileExistWithMsg() As Boolean
+Function ActiveContentFileExistWithMsg() As Boolean
   Dim msgActiveWbkFileNotExist As String
   msgActiveWbkFileNotExist = "'" & ActiveWorkbook.Name & "'" & "のファイルがありません。ブックをファイルに保存してからこの操作を行ってください。"
 
   If ActiveWbkFileExist Then
-    ActiveWbkFileExistWithMsg = True
+    ActiveContentFileExistWithMsg = True
   Else
     MsgBox (msgActiveWbkFileNotExist)
-    ActiveWbkFileExistWithMsg = False
+    ActiveContentFileExistWithMsg = False
   End If
 End Function
 
 
 ' :Function: Test whether the active workbook file is read only or not.
 ' :Retrun value: True = Read Only, False = Not Read Only
-Function IsActiveWbkFileReadOnly() As Boolean
-  Dim glFSO As Object  ' File System Object
-  Set glFSO = CreateObject("Scripting.FileSystemObject")
+Function IsActiveContentFileReadOnly() As Boolean
+  Dim FileSysObj As Object ' File System Object
+  
+  Set FileSysObj = CreateObject("Scripting.FileSystemObject")
 
-  If glFSO.GetFile(ActiveWorkbook.FullName).Attributes And 1 Then
-    IsActiveWbkFileReadOnly = True  ' Return True
+  If FileSysObj.GetFile(ActiveWorkbook.FullName).Attributes And 1 Then
+    IsActiveContentFileReadOnly = True
   Else
-    IsActiveWbkFileReadOnly = False ' Return False
+    IsActiveContentFileReadOnly = False
   End If
 End Function
 
 
-' :Function: Test whether the file exist in the file under SVN version control.
+' :Function: Test whether the file exist in the file under version control.
 ' :Return value: True=Under version control, False=Not under version control
-Function IsFolderUnderSVNControl() As Boolean
-  Dim strDotSvn As String ' SVN control folder ".svn"
+Function IsFolderUnderSvnControl() As Boolean
+  Dim strDotSvn As String ' Subversion control folder ".svn"
+  Dim FileSysObj As Object ' File System Object
+  
+  Set FileSysObj = CreateObject("Scripting.FileSystemObject")
+  
   strDotSvn = ActiveWorkbook.Path & "\.svn"
 
-  If CreateObject("Scripting.FileSystemObject").FolderExists(strDotSvn) Then
-    IsFolderUnderSVNControl = True  ' Return True
+  If FileSysObj.FolderExists(strDotSvn) Then
+    IsFolderUnderSvnControl = True
   Else
-    IsFolderUnderSVNControl = False ' Return False
+    IsFolderUnderSvnControl = False
   End If
 End Function
 
 
-' :Function: Test whether the file exist in the folder under SVN version control.
+' :Function: Test whether the file exist in the folder under version control.
 '            And this displays error message if the folder isn't under version control.
 ' :Return value: True=Under version control, False=Not under version control
-Function IsFolderUnderSVNControlWithMsg() As Boolean
+Function IsFolderUnderSvnControlWithMsg() As Boolean
   Dim msgNotUnderCtrl As String ' Message
   msgNotUnderCtrl = "'" & ActiveWorkbook.FullName & "'" & "はバージョンコントロール下のフォルダにありません。"
   
-  If IsFolderUnderSVNControl Then
-    IsFolderUnderSVNControlWithMsg = True 'Return True
+  If IsFolderUnderSvnControl Then
+    IsFolderUnderSvnControlWithMsg = True
   Else
     MsgBox (msgNotUnderCtrl)
-    IsFolderUnderSVNControlWithMsg = False 'Return False
+    IsFolderUnderSvnControlWithMsg = False
   End If
 End Function
 
 
-Function IsFileUnderSVNControl() As Boolean
+Function IsFileUnderSvnControl() As Boolean
   Dim strTextBase As String ' Base file full path name
+  Dim FileSysObj As Object ' File System Object
+  
+  Set FileSysObj = CreateObject("Scripting.FileSystemObject")
+  
   strTextBase = ActiveWorkbook.Path & "\.svn\text-base\" & ActiveWorkbook.Name & ".svn-base"
 
-  If CreateObject("Scripting.FileSystemObject").FileExists(strTextBase) Then
-    IsFileUnderSVNControl = True  ' Return True
+  If FileSysObj.FileExists(strTextBase) Then
+    IsFileUnderSvnControl = True
   Else
-    IsFileUnderSVNControl = False ' Return False
+    IsFileUnderSvnControl = False
   End If
 End Function
 
 
-Function IsFileUnderSVNControlWithMsg() As Boolean
+Function IsFileUnderSvnControlWithMsg() As Boolean
   Dim msgNotUnderCtrl As String ' Message
   msgNotUnderCtrl = "'" & ActiveWorkbook.Name & "'" & "はバージョンコントロールされていません。"
 
-  If IsFileUnderSVNControl Then
-    IsFileUnderSVNControlWithMsg = True  ' Return True
+  If IsFileUnderSvnControl Then
+    IsFileUnderSvnControlWithMsg = True
   Else
     MsgBox (msgNotUnderCtrl)
-    IsFileUnderSVNControlWithMsg = False ' Return False
+    IsFileUnderSvnControlWithMsg = False
   End If
 End Function
 
-Function GetCurCursorPos(ByRef ActiveSheetName As String, ByRef absRow As Long, ByRef absCol As Long, ByRef actRange As Range) As Long
-  ActiveSheetName = ActiveWorkbook.ActiveSheet.Name
-  absRow = ActiveCell.Row
-  absCol = ActiveCell.Column
-  Set actRange = Cells(absRow, absCol)
-  
-  MsgBox ActiveSheetName & ", " & absRow & ", " & absCol & ", " & actRange
+' :Function: Add active content file name to the message.
+' :Arguments:
+' :Return value:
+Function AddActiveContentNameToMsg(ByVal msgTrunk As String, ByVal bDispFullPath As Boolean) As String
+
+ If bDispFullPath Then
+    AddActiveContentNameToMsg = msgTrunk & vbCrLf & vbCrLf & gmsgFileNameCap & mActiveContent.GetCurFullName
+  Else
+    AddActiveContentNameToMsg = msgTrunk & vbCrLf & vbCrLf & gmsgFileNameCap & mActiveContent.GetCurName
+  End If
 End Function
 
-Function JumpTo(ByVal ActiveSheetName As String, ByVal absRow As Long, ByVal absCol As Long, ByVal actRange As Range) As Boolean
-  Dim ActiveRange As Range
-  Set ActiveRange = Cells(absRow, absCol)
-  'Application.Goto Reference:=Worksheets(ActiveSheetName).Range(ActiveRange.Address), scroll:=False
-  Worksheets(ActiveSheetName).Activate
-  Range(ActiveRange.Address).Activate
-End Function
+'******************* Menu and Command bar Functions ******************************************
 
+' :Function: Delete Subversion menu control
+Sub DeleteSvnMenu()
+  Dim ctlMainMenu As CommandBarPopup ' Command bar control object
 
+  ' If Subversion menu exists, delete it.
+  For Each ctlMainMenu In Application.CommandBars(gMainMenuName).Controls
+    If ctlMainMenu.Caption = gcapSvnMenuBar Then
+      Application.CommandBars(gMainMenuName).Controls(gcapSvnMenuBar).Delete
+    End If
+  Next
+End Sub
 
+' :Function: Delete Subversion tool bar
+Sub DeleteSvnToolBar()
+  Dim cmbCmdBar As CommandBar ' Command tool bar
+
+  ' If Subversion menu exists, delete it.
+  For Each cmbCmdBar In Application.CommandBars
+    If cmbCmdBar.NameLocal = gcapSvnCmdBar Then
+      Application.CommandBars(gcapSvnCmdBar).Delete
+    End If
+  Next
+End Sub
+
+' :Function: Install Subversion tool bar
+Sub InstallSvnToolBar()
+  ' Build the Subversion CommandBar
+  Dim cmbCmdBar As CommandBar ' Command tool bar
+  Dim cmbSvn    As CommandBar ' Subversion command tool bar
+
+  ' If Subversion command bar already exists, exit subroutine.
+  For Each cmbCmdBar In Application.CommandBars
+    If cmbCmdBar.NameLocal = gcapSvnCmdBar Then
+      Exit Sub
+    End If
+  Next
+
+  Set cmbSvn = Application.CommandBars.Add
+
+  With cmbSvn
+    .NameLocal = gcapSvnCmdBar
+    .Enabled = True
+    .Visible = True
+    With .Controls.Add(Type:=msoControlButton)
+          .Caption = gcapUpdate
+          .FaceId = gfidUpdate
+          .OnAction = "TsvnUpdate"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+          .Caption = gcapLock
+          .FaceId = gfidLock
+          .OnAction = "TsvnLock"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+          .Caption = gcapCommit
+          .FaceId = gfidCommit
+          .OnAction = "TsvnCi"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+          .Caption = gcapDiff
+          .FaceId = gfidDiff
+          .OnAction = "TsvnDiff"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+          .Caption = gcapLog
+          .FaceId = gfidLog
+          .OnAction = "TsvnLog"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+          .Caption = gcapRepoBrowser
+          .FaceId = gfidRepoBrowser
+          .OnAction = "TsvnRepoBrowser"
+    End With
+    With .Controls.Add(Type:=msoControlButton)
+          .Caption = gcapUnlock
+          .FaceId = gfidUnlock
+          .OnAction = "TsvnUnlock"
+    End With
+  End With
+End Sub
+
+' :Function: Install Subversion menu control
+Sub InstallSvnMenu()
+  Dim ctlMainMenu As CommandBarPopup ' Menu control object
+  Dim mnuSvn      As CommandBarControl
+  Dim mnuSub1     As CommandBarButton
+  Dim mnuSub2     As CommandBarButton
+  Dim mnuSub3     As CommandBarButton
+  Dim mnuSub4     As CommandBarButton
+  Dim mnuSub5     As CommandBarButton
+  Dim mnuSub6     As CommandBarButton
+  Dim mnuSub7     As CommandBarButton
+  Dim mnuSub8     As CommandBarButton
+
+  ' If Subversion menu control already exists, exit subroutine.
+  For Each ctlMainMenu In Application.CommandBars(gMainMenuName).Controls
+    If ctlMainMenu.Caption = gcapSvnMenuBar Then
+      Exit Sub
+    End If
+  Next
+
+  ' Build the Subversion Menu
+  Set mnuSvn = Application.CommandBars(gMainMenuName).Controls.Add(Type:=msoControlPopup)
+  mnuSvn.Caption = gcapSvnMenuBar
+
+  Set mnuSub1 = mnuSvn.Controls.Add
+  mnuSub1.Caption = gcapUpdate & gakyUpdate
+  mnuSub1.OnAction = "TsvnUpdate"
+  mnuSub1.FaceId = gfidUpdate
+
+  Set mnuSub2 = mnuSvn.Controls.Add
+  mnuSub2.Caption = gcapLock & gakyLock
+  mnuSub2.OnAction = "TsvnLock"
+  mnuSub2.FaceId = gfidLock
+
+  Set mnuSub3 = mnuSvn.Controls.Add
+  mnuSub3.Caption = gcapCommit & gakyCommit
+  mnuSub3.OnAction = "TsvnCi"
+  mnuSub3.FaceId = gfidCommit
+
+  Set mnuSub4 = mnuSvn.Controls.Add
+  mnuSub4.Caption = gcapDiff & gakyDiff
+  mnuSub4.OnAction = "TsvnDiff"
+  mnuSub4.FaceId = gfidDiff
+
+  Set mnuSub5 = mnuSvn.Controls.Add
+  mnuSub5.Caption = gcapLog & gakyLog
+  mnuSub5.OnAction = "TsvnLog"
+  mnuSub5.FaceId = gfidLog
+
+  Set mnuSub6 = mnuSvn.Controls.Add
+  mnuSub6.Caption = gcapRepoBrowser & gakyRepoBrowser
+  mnuSub6.OnAction = "TsvnRepoBrowser"
+  mnuSub6.FaceId = gfidRepoBrowser
+
+  Set mnuSub7 = mnuSvn.Controls.Add
+  mnuSub7.Caption = gcapUnlock & gakyUnlock
+  mnuSub7.OnAction = "TsvnUnlock"
+  mnuSub7.FaceId = gfidUnlock
+
+  Set mnuSub8 = mnuSvn.Controls.Add
+  mnuSub8.Caption = gcapAdd & gakyAdd
+  mnuSub8.OnAction = "TsvnAdd"
+  mnuSub8.FaceId = gfidAdd
+End Sub
 
