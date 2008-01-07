@@ -21,11 +21,12 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Function IsContent() As Boolean
+Function ContentExist() As Boolean
   If Workbooks.Count = 0 Then
-    IsContent = False
+    ContentExist = False
   Else
-    IsContent = True
+    ContentExist = True
   End If
 End Function
+
 

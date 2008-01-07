@@ -1,4 +1,4 @@
-Attribute VB_Name = "Module2"
+Attribute VB_Name = "Resource"
 '------------------- Copy & paste from here to the Resource module of excelsvn.xla --------------------
 ' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
@@ -51,6 +51,7 @@ Public Const gfidAdd         As Integer = 316
 
 ' Message Strings
 Public Const gmsgFileNameCap As String = "ファイル名 : "
+Public Const gmsgContentNameCap As String = "ブック名 : "
 Public Const gmsgUpdateErrActiveContentMod As String = "更新できません。アクティブブックは変更されています。"
 Public Const gmsgCommitErrActiveContentFileReadOnly As String = "コミットできません。アクティブブックは変更されていますが、ファイル属性が読み取り専用となっています。"
 Public Const gmsgCommitAskSaveModContent As String = "コミット時に、ファイルをいったん閉じて再度開きます。アクティブブックには変更があります。上書き保存しますか？"
@@ -65,4 +66,5 @@ Public Const gmsgErrFolderNotUnderCtrl As String = "アクティブブックはバージョン
 Public Const gmsgErrFileNotUnderCtrl As String = "アクティブブックはバージョンコントロールされていません。"
 
 ' Global constant values <-
+
 
