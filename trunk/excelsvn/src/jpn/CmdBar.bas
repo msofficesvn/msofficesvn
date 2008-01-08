@@ -1,4 +1,3 @@
-Attribute VB_Name = "CmdBar"
 '------------------- Copy & paste from here to the CmdBar module of excelsvn.xla --------------------
 ' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
@@ -168,5 +167,4 @@ Sub InstallSvnMenu()
   mnuSub8.OnAction = "TsvnAdd"
   mnuSub8.FaceId = gfidAdd
 End Sub
-
 
