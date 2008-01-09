@@ -347,10 +347,10 @@ End Sub
 ' :Function:Test whether the active content is saved as a file or not.
 '           And this displays error message if the file does't exist.
 ' :Return value:True=The file exists., False=No file exists.
-Function ActiveContentFileExistWithMsg() As Boolean
+Function ActiveContentFileExistWithMsg(ByVal ActCont As Object) As Boolean
   Dim msgErrFileNotExist As String
 
-  If mActiveContent.FileExist Then
+  If ActCont.FileExist Then
     ActiveContentFileExistWithMsg = True
   Else
     msgErrFileNotExist = AddActiveDocNameToMsg(gmsgErrActiveContentFileNotExist, False)
@@ -362,10 +362,10 @@ End Function
 ' :Function: Test whether the file exist in the folder under version control.
 '            And this displays error message if the folder isn't under version control.
 ' :Return value: True=Under version control, False=Not under version control
-Function IsFolderUnderSvnControlWithMsg() As Boolean
+Function IsFolderUnderSvnControlWithMsg(ByVal ActCont As Object) As Boolean
   Dim msgErrNotUnderCtrl As String ' Message
 
-  If mActiveContent.IsFolderUnderSvnControl Then
+  If ActCont.IsFolderUnderSvnControl Then
     IsFolderUnderSvnControlWithMsg = True
   Else
     msgErrNotUnderCtrl = AddActiveDocNameToMsg(gmsgErrFolderNotUnderCtrl, True)
@@ -376,10 +376,10 @@ End Function
 
 ' :Function: Test whether the file is under subversion control.
 ' :Return value: True=Under version control, False=Not under version control
-Function IsFileUnderSvnControlWithMsg() As Boolean
+Function IsFileUnderSvnControlWithMsg(ByVal ActCont As Object) As Boolean
   Dim msgErrNotUnderCtrl As String ' Message
 
-  If mActiveContent.IsFileUnderSvnControl Then
+  If ActCont.IsFileUnderSvnControl Then
     IsFileUnderSvnControlWithMsg = True
   Else
     msgErrNotUnderCtrl = AddActiveDocNameToMsg(gmsgErrFileNotUnderCtrl, True)
@@ -391,11 +391,11 @@ End Function
 ' :Function: Add active content file name to the message.
 ' :Arguments:
 ' :Return value:
-Function AddActiveContentNameToMsg(ByVal msgTrunk As String, ByVal bDispFullPath As Boolean) As String
+Function AddActiveContentNameToMsg(ByVal msgTrunk As String, ByVal bDispFullPath As Boolean, ByVal ActCont As Object) As String
  If bDispFullPath Then
-    AddActiveContentNameToMsg = msgTrunk & vbCrLf & vbCrLf & gmsgFileNameCap & mActiveContent.GetCurFullName
+    AddActiveContentNameToMsg = msgTrunk & vbCrLf & vbCrLf & gmsgFileNameCap & ActCont.GetCurFullName
   Else
-    AddActiveContentNameToMsg = msgTrunk & vbCrLf & vbCrLf & gmsgFileNameCap & mActiveContent.GetCurName
+    AddActiveContentNameToMsg = msgTrunk & vbCrLf & vbCrLf & gmsgFileNameCap & ActCont.GetCurName
   End If
 End Function
 
