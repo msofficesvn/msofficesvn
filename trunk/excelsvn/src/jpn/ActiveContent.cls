@@ -9,15 +9,15 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 '------------------- Copy & paste from here to the ActiveContent class module of excelsvn.xla --------------------
 ' $Rev$
-' Copyright (C) 2007 Koki Yamamoto <kokiya@gmail.com>
+' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' Class Name: ActiveContent
-' This class is to manipulate active content(documnet, workbook, etc.) of MS-Office application.
-' This class hide difference among Office applications.
+' Class Module Name: ActiveContent
+'   This class is to manipulate active content(documnet, workbook, etc.) of MS-Office application.
+'   This class hide difference among Office applications.
 
 Option Explicit
 
@@ -26,6 +26,16 @@ Private mActiveContentName As String
 Private mabsRow As Long
 Private mabsCol As Long
 Private mFileSysObj As Object ' File System Object
+
+' :Function: Initialize class module
+Private Sub Class_Initialize()
+  Set mFileSysObj = CreateObject("Scripting.FileSystemObject")
+End Sub
+
+' :Function: Terminate class module
+Private Sub Class_Terminate()
+  Set mFileSysObj = Nothing
+End Sub
 
 'Function: Store full path name of the active content
 Sub StoreFullName()
@@ -71,6 +81,9 @@ Function ReOpenFile() As Boolean
   Workbooks.Open FileName:=mFullName
   If Err = 0 Then
     ReOpenFile = True
+  ElseIf Err = 1004 Then
+    ' User select No to the message that ask discard the current content and open the file.
+    ReOpenFile = False
   Else
     ReOpenFile = False
     MsgBox (Err.Number & ":" & Err.Description)
@@ -171,13 +184,4 @@ Sub AddWorkbookIfEmpty()
       ActiveWindow.WindowState = xlMinimized
     End If
   End If
-End Sub
-
-
-Private Sub Class_Initialize()
-  Set mFileSysObj = CreateObject("Scripting.FileSystemObject")
-End Sub
-
-Private Sub Class_Terminate()
-  Set mFileSysObj = Nothing
 End Sub

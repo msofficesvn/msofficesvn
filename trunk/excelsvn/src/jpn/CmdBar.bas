@@ -1,3 +1,4 @@
+Attribute VB_Name = "CmdBar"
 '------------------- Copy & paste from here to the CmdBar module of excelsvn.xla --------------------
 ' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
@@ -7,39 +8,12 @@
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' Copyright (C) 2007 Koki Yamamoto <kokiya@gmail.com>
-'     This is free software with ABSOLUTELY NO WARRANTY.
+' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '
-' You can redistribute it and/or modify it under the terms of
-' the GNU General Public License version 2.
-
-'******************* Menu and Command bar Functions ******************************************
+' Module Name: CmdBar
+'   Menu and Command bar Functions
 
 Option Explicit
-
-' :Function: Delete Subversion menu control
-Sub DeleteSvnMenu()
-  Dim ctlMainMenu As CommandBarPopup ' Command bar control object
-
-  ' If Subversion menu exists, delete it.
-  For Each ctlMainMenu In Application.CommandBars(gMainMenuName).Controls
-    If ctlMainMenu.Caption = gcapSvnMenuBar Then
-      Application.CommandBars(gMainMenuName).Controls(gcapSvnMenuBar).Delete
-    End If
-  Next
-End Sub
-
-' :Function: Delete Subversion tool bar
-Sub DeleteSvnToolBar()
-  Dim cmbCmdBar As CommandBar ' Command tool bar
-
-  ' If Subversion menu exists, delete it.
-  For Each cmbCmdBar In Application.CommandBars
-    If cmbCmdBar.NameLocal = gcapSvnCmdBar Then
-      Application.CommandBars(gcapSvnCmdBar).Delete
-    End If
-  Next
-End Sub
 
 ' :Function: Install Subversion tool bar
 Sub InstallSvnToolBar()
@@ -166,5 +140,29 @@ Sub InstallSvnMenu()
   mnuSub8.Caption = gcapAdd & gakyAdd
   mnuSub8.OnAction = "TsvnAdd"
   mnuSub8.FaceId = gfidAdd
+End Sub
+
+' :Function: Delete Subversion menu control
+Sub DeleteSvnMenu()
+  Dim ctlMainMenu As CommandBarPopup ' Command bar control object
+
+  ' If Subversion menu exists, delete it.
+  For Each ctlMainMenu In Application.CommandBars(gMainMenuName).Controls
+    If ctlMainMenu.Caption = gcapSvnMenuBar Then
+      Application.CommandBars(gMainMenuName).Controls(gcapSvnMenuBar).Delete
+    End If
+  Next
+End Sub
+
+' :Function: Delete Subversion tool bar
+Sub DeleteSvnToolBar()
+  Dim cmbCmdBar As CommandBar ' Command tool bar
+
+  ' If Subversion menu exists, delete it.
+  For Each cmbCmdBar In Application.CommandBars
+    If cmbCmdBar.NameLocal = gcapSvnCmdBar Then
+      Application.CommandBars(gcapSvnCmdBar).Delete
+    End If
+  Next
 End Sub
 
