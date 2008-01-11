@@ -16,14 +16,14 @@ Attribute VB_Exposed = True
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' Copyright (C) 2007 Koki Yamamoto <kokiya@gmail.com>
-'     This is free software with ABSOLUTELY NO WARRANTY.
+' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '
-' You can redistribute it and/or modify it under the terms of
-' the GNU General Public License version 2.
+' Module Name: ThisWorkbook
+'   Office application software specific module
 
 Option Explicit
 
+' :Function: Install Subversion menu and command bar
 Private Sub Workbook_AddinInstall()
     ' Build the SVN Menu
     InstallSvnMenu
@@ -31,10 +31,8 @@ Private Sub Workbook_AddinInstall()
     InstallSvnToolBar
 End Sub
 
+' :Function: Uninstall Subversion menu and command bar
 Private Sub Workbook_AddinUninstall()
   DeleteSvnMenu
   DeleteSvnToolBar
 End Sub
-
-
-

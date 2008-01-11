@@ -1,22 +1,17 @@
-Attribute VB_Name = "Module2"
+Attribute VB_Name = "Resource"
 '------------------- Copy & paste from here to the Resource module of excelsvn.xla --------------------
 ' $Rev$
-' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
-'     All rights reserved.
+' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' Copyright (C) 2007 Koki Yamamoto <kokiya@gmail.com>
-'     This is free software with ABSOLUTELY NO WARRANTY.
-'
-' You can redistribute it and/or modify it under the terms of
-' the GNU General Public License version 2.
+' Module Name: Resource
+'   This module contains global resource data.
 
 Option Explicit
 
-' Global constant values ->
 ' Strings for Menu and Command bar
 Public Const gMainMenuName   As String = "Worksheet Menu Bar"
 Public Const gcapSvnMenuBar  As String = "&Subversion"
@@ -51,6 +46,7 @@ Public Const gfidAdd         As Integer = 316
 
 ' Message Strings
 Public Const gmsgFileNameCap As String = "ƒtƒ@ƒCƒ‹–¼ : "
+Public Const gmsgContentNameCap As String = "ƒuƒbƒN–¼ : "
 Public Const gmsgUpdateErrActiveContentMod As String = "XV‚Å‚«‚Ü‚¹‚ñBƒAƒNƒeƒBƒuƒuƒbƒN‚Í•ÏX‚³‚ê‚Ä‚¢‚Ü‚·B"
 Public Const gmsgCommitErrActiveContentFileReadOnly As String = "ƒRƒ~ƒbƒg‚Å‚«‚Ü‚¹‚ñBƒAƒNƒeƒBƒuƒuƒbƒN‚Í•ÏX‚³‚ê‚Ä‚¢‚Ü‚·‚ªAƒtƒ@ƒCƒ‹‘®«‚ª“Ç‚İæ‚èê—p‚Æ‚È‚Á‚Ä‚¢‚Ü‚·B"
 Public Const gmsgCommitAskSaveModContent As String = "ƒRƒ~ƒbƒg‚ÉAƒtƒ@ƒCƒ‹‚ğ‚¢‚Á‚½‚ñ•Â‚¶‚ÄÄ“xŠJ‚«‚Ü‚·BƒAƒNƒeƒBƒuƒuƒbƒN‚É‚Í•ÏX‚ª‚ ‚è‚Ü‚·Bã‘‚«•Û‘¶‚µ‚Ü‚·‚©H"
@@ -64,5 +60,4 @@ Public Const gmsgErrActiveContentFileNotExist As String = "ƒAƒNƒeƒBƒuƒuƒbƒN‚Ìƒtƒ
 Public Const gmsgErrFolderNotUnderCtrl As String = "ƒAƒNƒeƒBƒuƒuƒbƒN‚Íƒo[ƒWƒ‡ƒ“ƒRƒ“ƒgƒ[ƒ‹‰º‚ÌƒtƒHƒ‹ƒ_‚É‚ ‚è‚Ü‚¹‚ñB"
 Public Const gmsgErrFileNotUnderCtrl As String = "ƒAƒNƒeƒBƒuƒuƒbƒN‚Íƒo[ƒWƒ‡ƒ“ƒRƒ“ƒgƒ[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB"
 
-' Global constant values <-
 
