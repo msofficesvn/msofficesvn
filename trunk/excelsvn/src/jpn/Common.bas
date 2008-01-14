@@ -30,7 +30,7 @@ Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) 
   TsvnCmdParam = "/command:" & TsvnCmd & " /notempfile "
 
   If Len(ContFileFullName) = 0 Then
-    TsvnPathParam = "/path:" & """" & ActiveContent.GetCurFullName & """"
+    TsvnPathParam = "/path:" & """" & ActiveContent.GetFullName & """"
   Else
     TsvnPathParam = "/path:" & """" & ContFileFullName & """"
   End If
@@ -75,11 +75,10 @@ Sub TsvnUpdate()
     Exit Sub
   End If
 
-  ActiveContent.StoreFullName
   ActiveContent.StoreCurCursorPos
   ActiveContent.CloseFile
   
-  ExecTsvnCmd "update", ActiveContent.GetStoredFullName
+  ExecTsvnCmd "update", ActiveContent.GetFullName
   
   ActiveContent.ReOpenFile
   ActiveContent.JumpToStoredPos
@@ -130,7 +129,6 @@ Sub TsvnCi()
     End If
   End If
 
-  ActiveContent.StoreFullName
   ActiveContent.StoreCurCursorPos
   
 '  If ansSaveMod = vbNo Then
@@ -139,7 +137,7 @@ Sub TsvnCi()
   
   ActiveContent.CloseFile
 
-  ExecTsvnCmd "commit", ActiveContent.GetStoredFullName
+  ExecTsvnCmd "commit", ActiveContent.GetFullName
 
   ActiveContent.ReOpenFile
   
@@ -224,6 +222,9 @@ Sub TsvnLock()
   Dim msgErrReadOnly As String ' Message
   Dim msgAskSaveMod As String  ' Message
   Dim ActiveContent As New ActiveContent ' ActiveContent class object
+  Dim bDiscardChangeAndLock As Boolean   ' Discard change and lock the file
+
+  bDiscardChangeAndLock = False
 
   ' Exit when no content exist
   If mContents.ContentExist = False Then
@@ -245,23 +246,26 @@ Sub TsvnLock()
     Exit Sub
   End If
 
-  ' Backup file name before save the active content
-  ActiveContent.StoreFullName
-
   If ActiveContent.IsSaved = False Then
   ' Active content is modified but not saved yet.
     ' Test the active content file attributes
     If ActiveContent.IsFileReadOnly = True Then
       msgErrReadOnly = AddActiveContentNameToMsg(gmsgLockErrActiveContentFileReadOnly, gmsgFileNameCap, True, ActiveContent)
-      MsgBox msgErrReadOnly
-      Exit Sub
+      ans = MsgBox(msgErrReadOnly, vbYesNo)
+      If ans = vbYes Then
+        Exit Sub
+      ElseIf ans = vbNo Then
+        bDiscardChangeAndLock = True
+      End If
     End If
 
-    msgAskSaveMod = AddActiveContentNameToMsg(gmsgLockAskSaveModContent, gmsgFileNameCap, True, ActiveContent)
-    ans = MsgBox(msgAskSaveMod, vbYesNo)
-    If ans = vbYes Then
-      If ActiveContent.SaveFile = False Then
-        Exit Sub
+    If bDiscardChangeAndLock = False Then
+      msgAskSaveMod = AddActiveContentNameToMsg(gmsgLockAskSaveModContent, gmsgFileNameCap, True, ActiveContent)
+      ans = MsgBox(msgAskSaveMod, vbYesNo)
+      If ans = vbYes Then
+        If ActiveContent.SaveFile = False Then
+          Exit Sub
+        End If
       End If
     End If
   End If
@@ -274,7 +278,7 @@ Sub TsvnLock()
   '  * If the word open the file and svn failes to update working copy, svn require clean-up.
   ActiveContent.CloseFile
 
-  ExecTsvnCmd "lock", ActiveContent.GetStoredFullName
+  ExecTsvnCmd "lock", ActiveContent.GetFullName
 
   ActiveContent.ReOpenFile
   ActiveContent.JumpToStoredPos
@@ -307,9 +311,6 @@ Sub TsvnUnlock()
     Exit Sub
   End If
 
-  ' Backup file name before save the active content
-  ActiveContent.StoreFullName
-
   If ActiveContent.IsSaved = False Then
   ' Active content is modified but not saved yet.
     If ActiveContent.IsFileReadOnly = True Then
@@ -336,7 +337,7 @@ Sub TsvnUnlock()
   ActiveContent.StoreCurCursorPos
   ActiveContent.CloseFile
 
-  ExecTsvnCmd "unlock", ActiveContent.GetStoredFullName
+  ExecTsvnCmd "unlock", ActiveContent.GetFullName
 
   ActiveContent.ReOpenFile
   ActiveContent.JumpToStoredPos
@@ -440,9 +441,9 @@ End Function
 ' :Return value:
 Function AddActiveContentNameToMsg(ByVal msgTrunk As String, ByVal FileNameCap As String, ByVal bDispFullPath As Boolean, ByVal ActCont As ActiveContent) As String
  If bDispFullPath Then
-    AddActiveContentNameToMsg = msgTrunk & vbCrLf & vbCrLf & FileNameCap & ActCont.GetCurFullName
+    AddActiveContentNameToMsg = msgTrunk & vbCrLf & vbCrLf & FileNameCap & ActCont.GetFullName
   Else
-    AddActiveContentNameToMsg = msgTrunk & vbCrLf & vbCrLf & FileNameCap & ActCont.GetCurName
+    AddActiveContentNameToMsg = msgTrunk & vbCrLf & vbCrLf & FileNameCap & ActCont.GetName
   End If
 End Function
 
