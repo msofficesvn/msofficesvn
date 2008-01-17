@@ -33,6 +33,8 @@ Public Const gcapUnlock      As String = "ロックを開放"
 Public Const gakyUnlock      As String = "(&C)"
 Public Const gcapAdd         As String = "追加"
 Public Const gakyAdd         As String = "(&A)"
+Public Const gcapExplorer    As String = "エクスプローラを開く"
+Public Const gakyExplorer    As String = "(&E)"
 
 ' FaceId of built-in button images
 Public Const gfidUpdate      As Integer = 360
@@ -43,11 +45,12 @@ Public Const gfidLog         As Integer = 44
 Public Const gfidRepoBrowser As Integer = 25
 Public Const gfidUnlock      As Integer = 277
 Public Const gfidAdd         As Integer = 316
+Public Const gfidExplorer    As Integer = 23
 
 ' Message Strings
 Public Const gmsgFileNameCap As String = "ファイル名 : "
 Public Const gmsgContentNameCap As String = "ブック名 : "
-Public Const gmsgUpdateErrActiveContentMod As String = "更新できません。アクティブブックは変更されています。"
+Public Const gmsgUpdateErrActiveContentMod As String = "アクティブブックは変更されています。更新を中止しますか？「いいえ」を選択すると変更は破棄され、更新を継続して行います。"
 Public Const gmsgCommitErrActiveContentFileReadOnly As String = "コミットできません。アクティブブックは変更されていますが、ファイル属性が読み取り専用となっています。"
 Public Const gmsgCommitAskSaveModContent As String = "コミット時に、ファイルをいったん閉じて再度開きます。アクティブブックには変更があります。上書き保存しますか？"
 Public Const gmsgLockErrActiveContentFileReadOnly As String = "アクティブブックは変更されていますが、ファイル属性が読み取り専用となっています。ロック取得を中止しますか？「いいえ」を選択すると変更は破棄され、ロック取得を継続して行います。"

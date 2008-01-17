@@ -47,6 +47,7 @@ End Function
 Sub TsvnUpdate()
   Dim msgErrMod As String ' Message
   Dim ActiveContent As New ActiveContent ' ActiveContent class object
+  Dim ansAskAbort As Integer ' Ask user to abort update procedure
 
   ' Exit when no content exist
   If mContents.ContentExist = False Then
@@ -71,8 +72,10 @@ Sub TsvnUpdate()
   If ActiveContent.IsSaved = False Then
   ' Active content is modified but not saved yet.
     msgErrMod = AddActiveContentNameToMsg(gmsgUpdateErrActiveContentMod, gmsgFileNameCap, True, ActiveContent)
-    MsgBox msgErrMod
-    Exit Sub
+    ansAskAbort = MsgBox(msgErrMod, vbYesNo)
+    If ansAskAbort = vbYes Then
+      Exit Sub
+    End If
   End If
 
   ActiveContent.StoreCurCursorPos
@@ -392,6 +395,22 @@ Sub TsvnAdd()
   End If ' If ans = vbYes Then
 End Sub
 
+' :Function: Open explorer and focus on the active content file.
+Sub OpenExplorer()
+  Dim ActiveContent As New ActiveContent ' ActiveContent class object
+  
+  ' Exit when no content exist
+  If mContents.ContentExist = False Then
+    Exit Sub
+  End If
+
+  ' Test the active content file status
+  If ActiveContentFileExistWithMsg(ActiveContent) = False Then
+    Exit Sub
+  End If
+  
+  CreateObject("WScript.Shell").Run "%SystemRoot%\explorer.exe /e, /select, " & ActiveContent.GetFullName, , True
+End Sub
 ' :Function:Test whether the active content is saved as a file or not.
 '           And this displays error message if the file does't exist.
 ' :Return value:True=The file exists., False=No file exists.
