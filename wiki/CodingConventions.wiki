@@ -1,12 +1,18 @@
-コーディング規約
+=msofficesvn コーディング規約=
 
-各ファイルの冒頭には、必ず
+ * 変数宣言を明示的に行なうこと。
+
+  各ファイルの冒頭には、必ず
+{{{
 Option Explicit
-を記述し、変数宣言を明示的に行うようにすること。
+}}}
+  を記述し、変数宣言を明示的に行うようにすること。
 
-変数名は小文字始まりのキャメルケースとする。例: prefixName
+ * インデントは半角スペース2文字
 
-  よく使うプレフィックス:
+ * 変数名は小文字始まりのキャメルケースとする。例: prefixName
+
+  - よく使うプレフィックス:
 
     ans = メッセージボックスなどに対するユーザーの選択結果を保存する変数。
 
@@ -30,7 +36,7 @@ Option Explicit
 
       m = モジュールスコープ変数
 
-  よく使う名前/サフィックス:
+  - よく使う名前/サフィックス:
 
     Min, Max = 最小値と最大値
 
@@ -42,6 +48,7 @@ Option Explicit
 
 --------------------------------------------------------------------------
 参考資料
+
 http://msdn.microsoft.com/library/ja/default.asp?url=/library/ja/odeopg/html/deconnamingvariablesconstants.asp
 
 http://local.joelonsoftware.com/mediawiki/index.php/Project_Aardvark_Functional_Specification_(Jp)
