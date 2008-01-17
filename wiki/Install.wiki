@@ -1,0 +1,17 @@
+#Installation of msoffice add-ins.
+
+= Excel =
+
+ # Download excelsvn.xla
+ # Copy the file to the following folders.
+
+  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
+
+ # Check Excelsvn check box in Tool/Addin... of Excel main menu.
+
+= Word =
+
+ # Download wordlsvn.xla
+ # Copy the file to the following folders.
+
+  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
