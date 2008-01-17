@@ -3,10 +3,10 @@ BEGIN
   MultiUse = -1  'True
 END
 Attribute VB_Name = "Contents"
-Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+
 '------------------- Copy & paste from here to the Contents class module of excelsvn.xla --------------------
 ' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
