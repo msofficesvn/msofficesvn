@@ -1,17 +1,23 @@
 #Installation of msoffice add-ins.
 
+= Preparation =
+
+First, Install TortoiseSVN.
+
 = Excel =
 
- # Download excelsvn.xla
+ # Download excelsvn.xla.
  # Copy the file to the following folders.
 
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
 
- # Check Excelsvn check box in Tool/Addin... of Excel main menu.
+ # Start Excel and check Excelsvn check box in [Tool/Addin...] of main menu.
+ # [Subversion] menu and the command bar appear.
 
 = Word =
 
- # Download wordlsvn.xla
+ # Download wordlsvn.dot.
  # Copy the file to the following folders.
 
-  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
+  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
+ # Start Word and [Subversion] menu and the command bar appear.
