@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 
 '------------------- Copy & paste from here to the ActiveContent class module of dot file --------------------
-' $Rev: 30 $
+' $Rev$
 ' Copyright (C) 2007 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '
