@@ -1,6 +1,6 @@
 Attribute VB_Name = "Module1"
 '------------------- Copy & paste from here to a Module1 ofdot file --------------------
-' $Rev: 30 $
+' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
 '     All rights reserved.
 '     This is free software with ABSOLUTELY NO WARRANTY.

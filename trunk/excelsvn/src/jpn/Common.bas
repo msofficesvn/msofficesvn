@@ -71,7 +71,7 @@ Sub TsvnUpdate()
 
   If ActiveContent.IsSaved = False Then
   ' Active content is modified but not saved yet.
-    msgErrMod = AddActiveContentNameToMsg(gmsgUpdateErrActiveContentMod, gmsgFileNameCap, True, ActiveContent)
+    msgErrMod = AddActiveContentNameToMsg(gmsgUpdateAskActiveContentMod, gmsgFileNameCap, True, ActiveContent)
     ansAskAbort = MsgBox(msgErrMod, vbYesNo)
     If ansAskAbort = vbYes Then
       Exit Sub
@@ -253,7 +253,7 @@ Sub TsvnLock()
   ' Active content is modified but not saved yet.
     ' Test the active content file attributes
     If ActiveContent.IsFileReadOnly = True Then
-      msgErrReadOnly = AddActiveContentNameToMsg(gmsgLockErrActiveContentFileReadOnly, gmsgFileNameCap, True, ActiveContent)
+      msgErrReadOnly = AddActiveContentNameToMsg(gmsgLockAskActiveContentFileReadOnly, gmsgFileNameCap, True, ActiveContent)
       ans = MsgBox(msgErrReadOnly, vbYesNo)
       If ans = vbYes Then
         Exit Sub
