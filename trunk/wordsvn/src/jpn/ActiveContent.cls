@@ -24,16 +24,15 @@ Option Explicit
 Private mFullName As String ' Full path name of the active content.
 Private mName As String ' File name of the active content
 Private mPath As String ' Path of the active content
-Private mActiveContentName As String
-Private mabsRow As Long
-Private mabsCol As Long
+Private absPageNum As Long ' The page number of the cursor position.
+Private absLinePos As Long ' The line number of the top of the page of the cursor position.
 Private mFileSysObj As Object ' File System Object
 
 ' :Function: Initialize class module
 Private Sub Class_Initialize()
-  mFullName = ActiveWorkbook.FullName
-  mName = ActiveWorkbook.Name
-  mPath = ActiveWorkbook.Path
+  mFullName = ActiveDocument.FullName
+  mName = ActiveDocument.Name
+  mPath = ActiveDocument.Path
   Set mFileSysObj = CreateObject("Scripting.FileSystemObject")
 End Sub
 
@@ -57,21 +56,19 @@ End Function
 'Function: Close the active content
 Function CloseFile() As Boolean
   On Error Resume Next
-  Workbooks.Item(mName).Close
+  Documents(mName).Close
   If Err.Number = 0 Then
     CloseFile = True
   Else
     CloseFile = False
     MsgBox (Err.Number & ":" & Err.Description)
   End If
-
-  AddWorkbookIfEmpty
 End Function
 
 'Function: ReOpen the active content. StoreFullName function must be called before.
 Function ReOpenFile() As Boolean
   On Error Resume Next
-  Workbooks.Open Filename:=mFullName
+  Documents.Open Filename:=mFullName
   If Err.Number = 0 Then
     ReOpenFile = True
   ElseIf Err.Number = 1004 Then
@@ -87,7 +84,7 @@ End Function
 ' :Retrun value: True = success, False = fail
 Function SaveFile() As Boolean
   On Error Resume Next
-  Workbooks.Item(mName).Save
+  Documents(mName).Save
   If Err.Number = 0 Then
     SaveFile = True
   ElseIf Err.Number = 1004 Then
@@ -102,29 +99,26 @@ End Function
 ' :Function: Get active content file save status
 ' :Return value: True = saved, False = not saved
 Function IsSaved() As Boolean
- IsSaved = Workbooks.Item(mName).Saved
+ IsSaved = Documents(mName).Saved
 End Function
 
 'Function: Store current cursor position as page number and line number of the page.
 Sub StoreCurCursorPos()
-  mActiveContentName = Workbooks.Item(mName).ActiveSheet.Name
-  mabsRow = ActiveCell.Row
-  mabsCol = ActiveCell.Column
-  ' MsgBox "Sheet:" & mActiveContentName & ", " & "Row:" & mabsRow & ", " & "Col:" & mabsCol
+  absPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
+  absLinePos = Selection.Information(wdFirstCharacterLineNumber)
+  'MsgBox "Page:" & absPageNum & "," & "Line:" & absLinePos
 End Sub
 
 'Function: Jump the cursor to the position that is sotred previously by StoreCurCursorPos function.
 Sub JumpToStoredPos()
-  Dim ActiveRange As Range
-  Set ActiveRange = Cells(mabsRow, mabsCol)
-  Worksheets(mActiveContentName).Activate
-  Range(ActiveRange.Address).Activate
+  Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=absPageNum, Name:=""
+  Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=(absLinePos - 1), Name:=""
 End Sub
 
 ' :Function:Test whether the active content is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
 Function FileExist() As Boolean
-  If Workbooks.Item(mName).Path = "" Then
+  If Documents(mName).Path = "" Then
     ' Judge that no file exists when no path exists.
     FileExist = False
   Else
@@ -170,14 +164,3 @@ Function IsFileUnderSvnControl() As Boolean
   End If
 End Function
 
-' Add workbook if no workbook exist before open a file.
-' This subroutine is required to avoid application error in Excel 97 when it opne a file.
-Sub AddWorkbookIfEmpty()
-  If StrComp(Left(Application.Version, 2), "8.") = 0 Then
-    If Workbooks.Count = 0 Then
-      Workbooks.Add
-      Workbooks(1).Activate
-      ActiveWindow.WindowState = xlMinimized
-    End If
-  End If
-End Sub
