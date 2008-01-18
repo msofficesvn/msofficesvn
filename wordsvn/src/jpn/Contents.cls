@@ -7,7 +7,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 
-'------------------- Copy & paste from here to the Contents class module of excelsvn.xla --------------------
+'------------------- Copy & paste from here to the Contents class module of wordsvn.dot --------------------
 ' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
@@ -23,7 +23,7 @@ Option Explicit
 
 ' :Function: Test whether content exists on the application.
 Function ContentExist() As Boolean
-  If Workbooks.Count = 0 Then
+  If Documents.Count = 0 Then
     ContentExist = False
   Else
     ContentExist = True

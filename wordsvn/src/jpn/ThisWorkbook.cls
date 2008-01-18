@@ -2,12 +2,12 @@ VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
-Attribute VB_Name = "ThisWorkbook"
+Attribute VB_Name = "ThisDocument"
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 
-'------------------- Copy & paste from here to the ThisWorkbook module of excelsvn.xla --------------------
+'------------------- Copy & paste from here to the ThisDocument module of wordsvn.dot --------------------
 ' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
 '     All rights reserved.
@@ -18,21 +18,23 @@ Attribute VB_Exposed = True
 '
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '
-' Module Name: ThisWorkbook
+' Module Name: ThisDocument
 '   Office application software specific module
 
 Option Explicit
 
 ' :Function: Install Subversion menu and command bar
-Private Sub Workbook_AddinInstall()
-    ' Build the SVN Menu
-    InstallSvnMenu
-    ' Build the SVN Tool bar
-    InstallSvnToolBar
+' :Remarks:  This function is called when MS-Word starts
+Sub AutoExec()
+  ' Build the SVN Menu
+  InstallSvnMenu
+  ' Build the SVN Tool bar
+  InstallSvnToolBar
 End Sub
 
 ' :Function: Uninstall Subversion menu and command bar
-Private Sub Workbook_AddinUninstall()
+' :Remarks: This function is called when MS-Word exits
+Sub AutoExit()
   DeleteSvnMenu
   DeleteSvnToolBar
 End Sub
