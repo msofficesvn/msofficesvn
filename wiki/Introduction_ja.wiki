@@ -12,7 +12,7 @@ http://www.nekoconeko.com/~nagamori/wordsvn/
 
 ただし、これらのプログラムは私が使用しているOffice97 SR-2ではエラーとなる部分があり、また、バイナリファイル共有には欠かせないロック機能も無かったので、改修を施した。
 
-メリット/デメリット
+==メリット/デメリット==
 ----------------------------------
 
 メリット
@@ -26,17 +26,17 @@ http://www.nekoconeko.com/~nagamori/wordsvn/
  * 更新、ロック取得、コミットなどのコマンド実行前にファイルをいったん閉じて、コマンド実行後ファイルを開き直すので、ファイルサイズが大きいと時間がかかってうっとうしいかもしれない。
  * アクティブな文書やブックに対してのみコマンドを実行するので、複数ファイルを編集してまとめてコミットするような場合は使えない。
 
-見た目
+==見た目==
 ----------------------------------
 
 こんな感じ。
 各コマンドは、メニューやコマンドバーから実行できる。
 
-  Word97sr2の場合
+  Word97 SR2の場合
 
 http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/wd97menu.jpg
 
-  Excel97sr2の場合
+  Excel97 SR2の場合
 
 http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl97menu.jpg
 
@@ -44,14 +44,24 @@ http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl97menu.j
 
   Excel2007の場合
 
-動作環境
+==動作環境==
 ----------------------------------
 
-インストール
+おそらく以下の環境で動作します。
+
+ * OSにWSHがインストールされていること。
+ * Office97 ～ Office2007
+
+以下の環境で動作することは確認しました。
+
+ * Windows XP Professinal
+ * Office97, Office2007
+
+==インストール==
 ----------------------------------
 
-チュートリアル
+==チュートリアル==
 ----------------------------------
 
-謝辞
+==謝辞==
 ----------------------------------
