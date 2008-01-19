@@ -17,6 +17,13 @@ Attribute VB_Exposed = True
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' Copyright (C) 2005 Kazuyuki NAGAMORI <nagamori@nekoconeko.com>
+'     All rights reserved.
+'     This is free software with ABSOLUTELY NO WARRANTY.
+'
+' You can redistribute it and/or modify it under the terms of
+' the GNU General Public License version 2.
+'
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '
 ' Module Name: ThisDocument
