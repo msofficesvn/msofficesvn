@@ -3,6 +3,7 @@ BEGIN
   MultiUse = -1  'True
 END
 Attribute VB_Name = "ThisDocument"
+Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
@@ -38,3 +39,5 @@ Sub AutoExit()
   DeleteSvnMenu
   DeleteSvnToolBar
 End Sub
+
+
