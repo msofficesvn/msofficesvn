@@ -54,6 +54,8 @@ http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl97menu.j
 ==機能概要==
 ----------------------------------
 
+|| 
+
 ==メリット/デメリット==
 ----------------------------------
 
