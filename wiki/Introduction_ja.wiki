@@ -34,7 +34,12 @@ http://www.nekoconeko.com/~nagamori/wordsvn/
 
   Word97sr2の場合
 
+http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/wd97menu.jpg
+
   Excel97sr2の場合
+
+http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl97menu.jpg
+
   Word2007の場合
 
   Excel2007の場合
