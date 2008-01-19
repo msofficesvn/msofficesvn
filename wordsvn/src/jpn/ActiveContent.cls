@@ -3,6 +3,7 @@ BEGIN
   MultiUse = -1  'True
 END
 Attribute VB_Name = "ActiveContent"
+Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
@@ -59,9 +60,15 @@ Function CloseFile() As Boolean
   Documents(mName).Close
   If Err.Number = 0 Then
     CloseFile = True
+  ElseIf Err.Number = 4198 Then
+  ' User selected "Cancel" for the save file confirmation message.
+    CloseFile = False
+  ElseIf Err.Number = 5155 Then
+  ' User selected "No" for the save file confirmation message.
+    CloseFile = False
   Else
     CloseFile = False
-    MsgBox (Err.Number & ":" & Err.Description)
+    MsgBox (Err.Number & ":" & Err.Description & "(Document.Close)")
   End If
 End Function
 
@@ -76,7 +83,7 @@ Function ReOpenFile() As Boolean
     ReOpenFile = False
   Else
     ReOpenFile = False
-    MsgBox (Err.Number & ":" & Err.Description)
+    MsgBox (Err.Number & ":" & Err.Description & "(Documents.Open)")
   End If
 End Function
 
@@ -92,7 +99,7 @@ Function SaveFile() As Boolean
     SaveFile = False
   Else
     SaveFile = False
-    MsgBox (Err.Number & ":" & Err.Description)
+    MsgBox (Err.Number & ":" & Err.Description & "(Document.Save)")
   End If
 End Function
 
