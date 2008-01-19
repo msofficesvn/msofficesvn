@@ -17,7 +17,7 @@ http://www.nekoconeko.com/~nagamori/wordsvn/
 ----------------------------------
 
 こんな感じ。
-各コマンドは、メニューやコマンドバーから実行できる。
+各コマンドは、メニューやコマンドバーから実行できます。
 
   Word97 SR2の場合
 
@@ -41,7 +41,7 @@ http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl97menu.j
 
 以下の環境で動作することは確認しました。
 
- * Windows XP Professinal
+ * Windows XP Professional
  * Office97, Office2007
 
 ==インストール==
