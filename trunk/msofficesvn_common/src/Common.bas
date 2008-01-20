@@ -15,7 +15,7 @@ Attribute VB_Name = "Common"
 Option Explicit
 
 ' Release Version Number of msofficesvn
-Public Const gVersion As String = "1.00"
+Public Const gVersion As String = "1.0.0"
 Dim mContents As New Contents ' Contents class object
 
 Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) As Boolean
