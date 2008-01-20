@@ -1,5 +1,5 @@
 Attribute VB_Name = "Common"
-'------------------- Copy & paste from here to the Common object of excelsvn.xla --------------------
+'------------------- Copy & paste from here to the Common object of add-in file --------------------
 ' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
 '     All rights reserved.
@@ -8,13 +8,14 @@ Attribute VB_Name = "Common"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
-'
-' Module Name:
+' :Author: Koki Yamamoto <kokiya@gmail.com>
+' :Module Name: Common
 '   Common module through office application software.
 
 Option Explicit
 
+' Release Version Number of msofficesvn
+Public Const gVersion As String = "1.00"
 Dim mContents As New Contents ' Contents class object
 
 Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) As Boolean

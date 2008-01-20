@@ -16,7 +16,9 @@ Attribute VB_Exposed = False
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' Class Module Name: Contents
+' :Author: Koki Yamamoto <kokiya@gmail.com>
+' :Module Name: Contents
+'   Class module.
 '   This class is to manipulate contents(documnet, workbook, etc.) of MS-Office application.
 '   This class hide difference among Office applications.
 

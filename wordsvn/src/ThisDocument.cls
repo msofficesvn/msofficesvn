@@ -24,9 +24,8 @@ Attribute VB_Exposed = True
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
-'
-' Module Name: ThisDocument
+' :Author: Koki Yamamoto <kokiya@gmail.com>
+' :Module Name: ThisDocument
 '   Office application software specific module
 
 Option Explicit

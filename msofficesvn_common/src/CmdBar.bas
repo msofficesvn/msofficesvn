@@ -1,5 +1,5 @@
 Attribute VB_Name = "CmdBar"
-'------------------- Copy & paste from here to the CmdBar module of excelsvn.xla --------------------
+'------------------- Copy & paste from here to the CmdBar module of add-in --------------------
 ' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
 '     All rights reserved.
@@ -8,9 +8,8 @@ Attribute VB_Name = "CmdBar"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
-'
-' Module Name: CmdBar
+' :Author: Koki Yamamoto <kokiya@gmail.com>
+' :Module Name: CmdBar
 '   Menu and Command bar Functions
 
 Option Explicit
