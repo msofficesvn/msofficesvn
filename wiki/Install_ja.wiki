@@ -11,6 +11,9 @@
 
  # excelsvn.xlaを以下のフォルダへコピーしてください。
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
+  || Office2000 || ? ||
+  || OfficeXP || ? ||
+  || Office2003 || ? ||
  # Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンとしてください。
  # [Subversion]メニューとコマンドバーが表示されます。
 
@@ -18,6 +21,9 @@
 
  # wordsvn.dot以下のフォルダへコピーしてください。
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
+  || Office2000 || ? ||
+  || OfficeXP || ? ||
+  || Office2003 || ? ||
  # Wordを起動してください。 
  # [Subversion]メニューとコマンドバーが表示されます。
 
