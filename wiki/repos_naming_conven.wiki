@@ -1,3 +1,5 @@
+=Repository Naming Convention=
+
 || Object || Naming Format || Example ||
 || Release branch || rb-<Release No.> || rb-1.0.0 ||
 || Release || rel-<Release No.> || rel-1.0.0 ||
