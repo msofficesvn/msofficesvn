@@ -2,22 +2,21 @@
 
 ==準備==
 
-まず、TortoiseSVNをインストールしてください。
+ # まず、TortoiseSVNをインストールしてください。
+ # Downloadsページより、最新バージョンのmsofficesvn_<version>_ja.zipファイルをダウンロードし、解凍してください。wordsvn.dot,excelsvn.xlaが得られます。
 
 ==Office97～Office2003の場合==
 
 ===Excel===
 
- # Downloadsページより、excelsvn.xlaをダウンロードしてください。
- # 以下のフォルダへコピーしてください。
+ # excelsvn.xlaを以下のフォルダへコピーしてください。
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
  # Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンとしてください。
  # [Subversion]メニューとコマンドバーが表示されます。
 
 ===Word===
 
- # Downloadsページより、wordsvn.dotをダウンロードしてください。
- # 以下のフォルダへコピーしてください。
+ # wordsvn.dot以下のフォルダへコピーしてください。
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
  # Wordを起動してください。 
  # [Subversion]メニューとコマンドバーが表示されます。
@@ -26,8 +25,7 @@
 
 ===Excel===
 
- # Downloadsページより、excelsvn.xlaをダウンロードしてください。
- # 以下のフォルダへコピーしてください。
+ # excelsvn.xlaを以下のフォルダへコピーしてください。
   C:\Documents and Settings\koki\Application Data\Microsoft\AddIns\
  # Excelを起動し、[Officeボタン]/[Excelのオプション]/[アドイン]/[管理]で"Excelアドイン"を選択して、[設定]ボタンをクリックしてください。アドイン画面が表示されます。
  # アドイン画面で、Excelsvnチェックボックスが表示されますので、オンにしてください。
@@ -35,8 +33,7 @@
 
 ===Word===
 
- # Downloadsページより、wordsvn.dotをダウンロードしてください。
- # 以下のフォルダへコピーしてください。
+ # wordsvn.dotを以下のフォルダへコピーしてください。
   C:\Documents and Settings\koki\Application Data\Microsoft\Word\STARTUP\
  # Wordを起動してください。 
  # [Subversion]メニューとコマンドバーが表示されます。
