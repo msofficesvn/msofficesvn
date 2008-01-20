@@ -5,15 +5,15 @@
  # まず、TortoiseSVNをインストールしてください。
  # 本サイトのDownloadsページより、最新バージョンの msofficesvn_<version>_ja.zip ファイルをダウンロードし、解凍してください。wordsvn.dot,excelsvn.xlaが得られます。
 
-==Office97～Office2003の場合==
+==Office97SR2～Office2003の場合==
 
 ===Excel===
 
  # excelsvn.xlaを以下のフォルダへコピーしてください。
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
-  || Office2000 || ? ||
-  || OfficeXP || ? ||
-  || Office2003 || ? ||
+  || Office2000   || ? ||
+  || OfficeXP     || ? ||
+  || Office2003   || ? ||
  # Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンとしてください。
  # [Subversion]メニューとコマンドバーが表示されます。
 
@@ -47,7 +47,7 @@
 
 =アンインストール方法=
 
-==Office97～Office2003の場合==
+==Office97SR2～Office2003の場合==
 
 ===Excel===
 
