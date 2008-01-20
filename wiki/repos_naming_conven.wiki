@@ -6,4 +6,4 @@
 || Bug fix branch || bug-<Issue ID> || bug-1 ||
 || Before fix the bug || pre-<Issue ID> || pre-1 ||
 || After fix the bug || post-<Issue ID> || post-1 ||
-|| Experimental Code || try-<Experiment Name> || try-autolock ||
+|| Experimental code branch || try-<Experiment Name> || try-autolock ||
