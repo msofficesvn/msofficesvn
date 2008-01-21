@@ -18,7 +18,7 @@ Option Explicit
 
    プレフィックスが無い場合
 
-     大文字始まりのキャメルケースとする。例: SpecificName
+     大文字始まりのキャメルケースとする。例: NoPrefixName
 
   - よく使うプレフィックス:
 
