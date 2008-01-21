@@ -40,13 +40,15 @@ http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl2007menu
 
 おそらく以下の環境で動作します。
 
- * OSにWSHがインストールされていること。
+ * WSHがインストールされているWindowsOS
  * Office97 ～ Office2007
+ * TortoiseSVNがインストールされていること。
 
 以下の環境で動作することは確認しました。
 
  * Windows XP Professional
  * Office97 SR2, Office2007
+ * TortoiseSVN 1.4.7
 
 ==インストール/アンインストール==
 ----------------------------------
@@ -88,13 +90,23 @@ http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl2007menu
  * 更新、ロック取得、コミットなどのコマンド実行前にファイルをいったん閉じて、コマンド実行後ファイルを開き直すので、ファイルサイズが大きいと時間がかかってうっとうしいかもしれない。
  * アクティブな文書やブックに対してのみコマンドを実行するので、複数ファイルを編集してまとめてコミットするような場合は使えない。
 
-==ライセンス==
-コピー・配布は、GNU General Public License v2 にしたがって行ってください。
-
 ==チュートリアル==
 ----------------------------------
+
+未作成
+
+==ライセンス==
+----------------------------------
+
+GNU General Public License v2 にしたがってご利用ください。
 
 ==謝辞==
 ----------------------------------
 
 元のプログラムを作成、公開してくださった、Osamu OKANOさん、Kazuyuki NAGAMORIさんに感謝します。
+
+==連絡先==
+
+何かご意見がございましたら、メールでご連絡ください。
+
+Koki Yamamoto <kokiya@gmail.com>
