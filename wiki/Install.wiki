@@ -1,20 +1,31 @@
+NOTE: `msofficesvn_<version>_en.zip` is not available now.
 
-= Preparation =
+= Installation =
 
-First, Install TortoiseSVN.
+== Preparation ==
+
+ # First, Install TortoiseSVN.
+ # Download latest `msofficesvn_<version>_en.zip` file from Downloads page of this site.
+ # Unzip the file and you get wordsvn.dot and excelsvn.xla.
+
+==Office97SR2 to Office2003==
 
 = Excel =
 
- # Download excelsvn.xla.
- # Copy the file to the following folders.
+ # Copy excelsvn.xla to the following folders.
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
+  || Office2000   || ? ||
+  || OfficeXP     || ? ||
+  || Office2003   || ? ||
  # Start Excel and check Excelsvn check box in [Tool/Addin...] of main menu.
  # [Subversion] menu and the command bar appear.
 
 = Word =
 
- # Download wordlsvn.dot.
- # Copy the file to the following folders.
+ # Copy wordsvn.dot to the following folders.
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
+  || Office2000   || ? ||
+  || OfficeXP     || ? ||
+  || Office2003   || ? ||
  # Start Word. 
  # [Subversion] menu and the command bar appear.
