@@ -41,4 +41,6 @@ http://support.microsoft.com/?scid=kb%3Ben-us%3B293215&x=9&y=10
 
 PowerPoint97
 
+ * PowerPointには、Excel,Wordのような、データファイルを作成するとデフォルトで生成される、ThisWorkbookクラスやThisDocumentクラスに相当するものは無いようである。アドインのインストール／アンインストールも標準モジュールを作成して、Auto_Open, Auto_Closeサブルーチンを追加するだけ。とりあえず、分かりやすいようにアドインをインストール／アンインストールする標準モジュール名をThisPresentationとした。
+
  * Presentation.Name はタイトルバーに表示される名前を返してくるようである。このタイトルバーに表示される名前は、ファイルの開き方(メニューから、ドラッグ＆ドロップで、エクスプローラ上でファイルをダブルクリックで、等）でなぜか拡張子が付いたり、付かなかったりする。したがって、Presentation.Nameを使ってファイルの有無をチェックするのは避けるべき。
