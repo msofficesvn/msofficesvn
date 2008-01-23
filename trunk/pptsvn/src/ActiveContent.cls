@@ -3,10 +3,10 @@ BEGIN
   MultiUse = -1  'True
 END
 Attribute VB_Name = "ActiveContent"
-Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+
 
 '------------------- Copy & paste from here to the ActiveContent class module of excelsvn.xla --------------------
 ' $Rev$
@@ -28,14 +28,19 @@ Private mFullName As String ' Full path name of the active content.
 Private mName As String ' File name of the active content
 Private mPath As String ' Path of the active content
 Private absPageNum As Long ' The page number of the cursor position.
-Private absLinePos As Long ' The line number of the top of the page of the cursor position.
+'Private absLinePos As Long ' The line number of the top of the page of the cursor position.
 Private mFileSysObj As Object ' File System Object
 
 ' :Function: Initialize class module
 Private Sub Class_Initialize()
-  mFullName = ActiveDocument.FullName
-  mName = ActiveDocument.Name
-  mPath = ActiveDocument.Path
+  mFullName = ActivePresentation.FullName
+  ' mName = ActivePresentation.Name
+  mPath = ActivePresentation.Path
+  If mPath = "" Then
+    mName = ActivePresentation.FullName
+  Else
+    mName = Mid(ActivePresentation.FullName, Len(mPath) + 2)
+  End If
   Set mFileSysObj = CreateObject("Scripting.FileSystemObject")
 End Sub
 
@@ -59,7 +64,7 @@ End Function
 'Function: Close the active content
 Function CloseFile() As Boolean
   On Error Resume Next
-  Documents(mName).Close
+  Presentations(mName).Close
   If Err.Number = 0 Then
     CloseFile = True
   ElseIf Err.Number = 4198 Then
@@ -70,14 +75,14 @@ Function CloseFile() As Boolean
     CloseFile = False
   Else
     CloseFile = False
-    MsgBox (Err.Number & ":" & Err.Description & "(Document.Close)")
+    MsgBox (Err.Number & ":" & Err.Description & "(Presentation.Close)")
   End If
 End Function
 
 'Function: ReOpen the active content. StoreFullName function must be called before.
 Function ReOpenFile() As Boolean
   On Error Resume Next
-  Documents.Open Filename:=mFullName
+  Presentations.Open Filename:=mFullName
   If Err.Number = 0 Then
     ReOpenFile = True
   ElseIf Err.Number = 1004 Then
@@ -85,7 +90,7 @@ Function ReOpenFile() As Boolean
     ReOpenFile = False
   Else
     ReOpenFile = False
-    MsgBox (Err.Number & ":" & Err.Description & "(Documents.Open)")
+    MsgBox (Err.Number & ":" & Err.Description & "(Presentations.Open)")
   End If
 End Function
 
@@ -93,7 +98,7 @@ End Function
 ' :Retrun value: True = success, False = fail
 Function SaveFile() As Boolean
   On Error Resume Next
-  Documents(mName).Save
+  Presentations(mName).Save
   If Err.Number = 0 Then
     SaveFile = True
   ElseIf Err.Number = 1004 Then
@@ -101,33 +106,35 @@ Function SaveFile() As Boolean
     SaveFile = False
   Else
     SaveFile = False
-    MsgBox (Err.Number & ":" & Err.Description & "(Document.Save)")
+    MsgBox (Err.Number & ":" & Err.Description & "(Presentation.Save)")
   End If
 End Function
 
 ' :Function: Get active content file save status
 ' :Return value: True = saved, False = not saved
 Function IsSaved() As Boolean
- IsSaved = Documents(mName).Saved
+ IsSaved = Presentations(mName).Saved
 End Function
 
 'Function: Store current cursor position as page number and line number of the page.
-Sub StoreCurCursorPos()
-  absPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
-  absLinePos = Selection.Information(wdFirstCharacterLineNumber)
+Public Sub StoreCurCursorPos()
+'  absPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
+'  absLinePos = Selection.Information(wdFirstCharacterLineNumber)
   'MsgBox "Page:" & absPageNum & "," & "Line:" & absLinePos
+  absPageNum = ActiveWindow.Selection.SlideRange.SlideIndex
 End Sub
 
 'Function: Jump the cursor to the position that is sotred previously by StoreCurCursorPos function.
 Sub JumpToStoredPos()
-  Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=absPageNum, Name:=""
-  Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=(absLinePos - 1), Name:=""
+'  Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=absPageNum, Name:=""
+'  Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=(absLinePos - 1), Name:=""
+   ActiveWindow.View.GotoSlide Index:=absPageNum
 End Sub
 
 ' :Function:Test whether the active content is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
 Function FileExist() As Boolean
-  If Documents(mName).Path = "" Then
+  If Presentations(mName).Path = "" Then
     ' Judge that no file exists when no path exists.
     FileExist = False
   Else
@@ -165,6 +172,7 @@ Function IsFileUnderSvnControl() As Boolean
   Dim TextBaseFile As String ' Base file full path name
 
   TextBaseFile = mPath & "\.svn\text-base\" & mName & ".svn-base"
+  ' MsgBox TextBaseFile
 
   If mFileSysObj.FileExists(TextBaseFile) Then
     IsFileUnderSvnControl = True

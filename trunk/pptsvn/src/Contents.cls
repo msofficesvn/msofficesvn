@@ -3,10 +3,10 @@ BEGIN
   MultiUse = -1  'True
 END
 Attribute VB_Name = "Contents"
-Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+
 
 '------------------- Copy & paste from here to the Contents class module of wordsvn.dot --------------------
 ' $Rev$
@@ -26,7 +26,7 @@ Option Explicit
 
 ' :Function: Test whether content exists on the application.
 Function ContentExist() As Boolean
-  If Documents.Count = 0 Then
+  If Presentations.Count = 0 Then
     ContentExist = False
   Else
     ContentExist = True
