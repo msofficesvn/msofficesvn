@@ -11,7 +11,7 @@
 
 =How to use=
 
-c.f. Subversion repository
+cf. Subversion repository
 
 http://svn.collab.net/repos/svn/README
 
