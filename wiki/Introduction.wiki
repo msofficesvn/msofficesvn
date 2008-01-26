@@ -1,0 +1,63 @@
+=Microsoft Office VBA Add-In that invokes TortoiseSVN commands=
+
+I thought that it was convenient if I could control the version of Word and Excel data files while I edit them. So, I had been looking for such programs and had found the followings.
+
+Excel
+
+http://dkiroku.com/2005-07-01-11.html
+
+Word
+
+http://www.nekoconeko.com/~nagamori/wordsvn/
+
+But, these programs work not well on MS-Office97 SR2 that I use and they don't support lock functions. Lock functions are required when you share and edit binary data files in cooperation with others. So, I modified them.
+
+==Look==
+
+It looks like followings.
+Each commands can be invoked from the menu and the command bar.
+
+  Word97 SR2
+<NO IMAGE>
+
+  Excel97 SR2
+<NO IMAGE>
+
+  Word2007
+<NO IMAGE>
+
+  Excel2007
+<NO IMAGE>
+
+==Operating Environment==
+
+I guess that the add-ins work on the following environment.
+
+ * Windows OS where WSH is installed.
+ * Microsoft Office97 to Office2007
+ * TortoiseSVN must be installed.
+
+I tested on the following environment.
+
+ * Windows XP Professional
+ * Office97 SR2, Office2007
+ * TortoiseSVN 1.4.7
+
+==Installation/Uninstallation==
+
+Please refer to [Install Installation/Uninstallation Page].
+
+==Functional Overview==
+
+The add-ins can apply the following commands to the active workbook and document.
+
+ * SVN Update
+ * SVN Get lock
+ * SVN Commit
+ * SVN Diff
+ * SVN Show log
+ * SVN Repo-browser
+ * SVN Release lock
+ * SVN Add
+ * Open Explorer
+
