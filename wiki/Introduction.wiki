@@ -24,10 +24,10 @@ Each commands can be invoked from the menu and the command bar.
 <NO IMAGE>
 
   Word2007
-<NO IMAGE>
+http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/en/wd2007menu.jpg
 
   Excel2007
-<NO IMAGE>
+http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/en/xl2007menu.jpg
 
 ==Operating Environment==
 
@@ -69,5 +69,29 @@ In the case of [SVN Update], [SVN Get lock], [SVN Commit], once the active docum
 
 Merit
 
- * It's take some time that you open and change the active application to Explorer and find and select the editing file and apply the TortoiseSVN command to it. This add-in helps that operation.
+ * It's take some time especially in narrow screen that you open Explorer and select the editing file and apply the TortoiseSVN command to it. This add-in helps that operation. For example, when you make documents by try and error, you may wish to see the difference between original document and current one frequently. You can see it by just clicking [Diff] button when you edit the document.
+ * You can avoid committing or getting lock without saving and closing during editing the file.
+
+Demerit
+
+ * The add-ins close and reopen the file when SVN Update, SVN Get lock, SVN Commit are executed. If the file is large, it might be frustrating because it takes time.
+ * The add-ins apply the commands to only the active document or book, so you can't use it when you wish to edit multiple files and commit them at the same time to make a "change set".
+
+==Tutorial==
+
+<NOT CREATED YET>
+
+==License==
+
+Please use these programs under GNU General Public License v2.
+
+==Acknowledgment==
+
+I appreciate Mr. Osamu OKANO and Kazuyuki NAGAMORI who created original programs and open their source code to public.
+
+==Contact==
+
+If you have some comments about these programs, e-mail me.
+
+Koki Yamamoto <kokiya@gmail.com> 
 
