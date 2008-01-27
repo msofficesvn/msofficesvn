@@ -20,20 +20,19 @@ http://www.nekoconeko.com/~nagamori/wordsvn/
 各コマンドは、メニューやコマンドバーから実行できます。
 
   Word97 SR2の場合
-
-http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/wd97menu.jpg
+http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/ja/wd97menu.jpg
 
   Excel97 SR2の場合
 
-http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl97menu.jpg
+http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/ja/xl97menu.jpg
 
   Word2007の場合
 
-http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/wd2007menu.jpg
+http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/ja/wd2007menu.jpg
 
   Excel2007の場合
 
-http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl2007menu.jpg
+http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/ja/xl2007menu.jpg
 
 ==動作環境==
 ----------------------------------
