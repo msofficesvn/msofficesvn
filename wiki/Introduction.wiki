@@ -43,7 +43,7 @@ I tested on the following environment.
  * Office97 SR2, Office2007
  * TortoiseSVN 1.4.7
 
-==Installation/Uninstallation==
+==Installation and Uninstallation==
 
 Please refer to [Install Installation/Uninstallation Page].
 
@@ -60,4 +60,14 @@ The add-ins can apply the following commands to the active workbook and document
  * SVN Release lock
  * SVN Add
  * Open Explorer
+
+In the case of [SVN Update], [SVN Get lock], [SVN Commit], once the active document or book is closed, and the TortoiseSVN command is applied to it, and reopen it after.
+
+[Open Explorer] command open Explorer with selecting the active document or book, so you can use the other commands quickly that can't be invoked from the add-ins.
+
+==Merit and Demerit==
+
+Merit
+
+ * It's take some time that you open and change the active application to Explorer and find and select the editing file and apply the TortoiseSVN command to it. This add-in helps that operation.
 
