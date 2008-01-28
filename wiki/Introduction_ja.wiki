@@ -1,3 +1,5 @@
+[Introduction English Page]
+
 =Microsoft OfficeからTortoiseSVNコマンドを呼び出すVBAアドインプログラム=
 
 Word, Excelといったアプリケーションソフトで、編集中のファイルに対して、バージョン管理が行なえると便利なことが多いです。
