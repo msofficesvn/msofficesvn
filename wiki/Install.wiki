@@ -1,6 +1,6 @@
-= Installation =
+=Installation=
 
-== Preparation ==
+==Preparation==
 
  # First, Install TortoiseSVN.
  # Download latest `msofficesvn_<version>_en.zip` file from Downloads page of this site.
@@ -8,7 +8,7 @@
 
 ==Office97SR2 to Office2003==
 
-= Excel =
+===Excel===
 
  # Copy excelsvn.xla to the following folders.
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
@@ -18,7 +18,7 @@
  # Start Excel and check Excelsvn check box in [Tool]/[Add-Ins...] of main menu.
  # [Subversion] menu and the command bar appear.
 
-= Word =
+===Word===
 
  # Copy wordsvn.dot to the following folders.
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
@@ -30,7 +30,7 @@
 
 ==Office2007==
 
-= Excel =
+===Excel===
 
  # Copy excelsvn.xla to the following folders.
   C:\Documents and Settings\koki\Application Data\Microsoft\AddIns\
@@ -38,7 +38,7 @@
  # Check the "Excelsvn" check box in [Add-Ins available] list box.
  # [Subversion] menu and the command bar appear.
 
-= Word =
+===Word===
 
  # Copy wordsvn.dot to the following folders.
   C:\Documents and Settings\koki\Application Data\Microsoft\Word\STARTUP\
@@ -79,4 +79,3 @@
  # Clear the "wordsvn.dot" check box in [Add-Ins available] list box.
  # [Subversion] menu and the command bar disappear.
  # Delete wordsvn.dot that you copied in installation.
-
