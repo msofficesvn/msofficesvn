@@ -87,11 +87,10 @@ Please use these programs under GNU General Public License v2.
 
 ==Acknowledgment==
 
-I appreciate Mr. Osamu OKANO and Kazuyuki NAGAMORI who created original programs and open their source code to public.
+I appreciate Mr. Osamu OKANO and Mr. Kazuyuki NAGAMORI who created original programs and open their source code to public.
 
 ==Contact==
 
 If you have some comments about these programs, e-mail me.
 
 Koki Yamamoto <kokiya@gmail.com> 
-
