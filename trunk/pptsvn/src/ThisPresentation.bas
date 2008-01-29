@@ -29,6 +29,7 @@ Sub Auto_Open()
   InstallSvnMenu
   ' Build the SVN Tool bar
   InstallSvnToolBar
+  RegisterAddinInHKCU
 End Sub
 
 ' :Function: Uninstall Subversion menu and command bar
@@ -38,5 +39,20 @@ Sub Auto_Close()
   DeleteSvnToolBar
 End Sub
 
-
-
+' :Function: Register this add-in in HKEY_CURRENT_USER
+'            so that it will load automatically when Powerpoint starts next time.
+' :Remarks: Actually this code is not necessary to load automatically
+'           in Office 97 Japanese version at least.
+'           But Microsoft's information seems like that it is necessary.
+'           http://support.microsoft.com/kb/222685/
+Sub RegisterAddinInHKCU()
+  ' Get a reference to your add-in.
+  With Addins(Addins.Count)
+   ' Create the registry key in HKEY_CURRENT_USER.
+   .Registered = msoTrue
+   ' Set the AutoLoad value in the registry.
+   .AutoLoad = msoTrue
+   ' Makes sure that the add-in is loaded.
+   .Loaded = msoTrue
+  End With
+End Sub
