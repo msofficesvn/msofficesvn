@@ -48,6 +48,9 @@ Public Const gfidUnlock      As Integer = 277
 Public Const gfidAdd         As Integer = 316
 Public Const gfidExplorer    As Integer = 23
 
+'Ini File Name
+Public Const IniFileName As String = "wordsvn.ini"
+
 ' Message Strings
 Public Const gmsgFileNameCap As String = "ÉtÉ@ÉCÉãñº : "
 Public Const gmsgContentNameCap As String = "ï∂èëñº : "
