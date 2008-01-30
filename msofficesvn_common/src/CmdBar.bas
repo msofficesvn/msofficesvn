@@ -14,6 +14,28 @@ Attribute VB_Name = "CmdBar"
 
 Option Explicit
 
+Const IniSectionName As String = "ToolBar"
+Const IniKeyNameToolBarPos As String = "Position"
+Const IniKeyNameToolBarTop As String = "Top"
+Const IniKeyNameToolBarLeft As String = "Left"
+
+' INIファイル数値情報取得関数(API)の定義
+Public Declare Function GetPrivateProfileInt Lib "kernel32" _
+                         Alias "GetPrivateProfileIntA" _
+                         (ByVal lpApplicationName As String, _
+                          ByVal lpKeyName As String, _
+                          ByVal nDefault As Long, _
+                          ByVal lpFileName As String) As Long
+
+' INIに文字列情報を設定する関数(API)の定義
+Public Declare Function WritePrivateProfileString Lib "kernel32" _
+                         Alias "WritePrivateProfileStringA" _
+                         (ByVal lpApplicationName As String, _
+                          ByVal lpKeyName As Any, _
+                          ByVal lpString As Any, _
+                          ByVal lpFileName As String) As Long
+
+
 ' :Function: Install Subversion tool bar
 Sub InstallSvnToolBar()
   ' Build the Subversion CommandBar
@@ -28,7 +50,9 @@ Sub InstallSvnToolBar()
   Next
 
   Set cmbSvn = Application.CommandBars.Add
-
+  cmbSvn.Enabled = False
+  RestorePrevToolBarPosition cmbSvn
+  
   With cmbSvn
     .NameLocal = gcapSvnCmdBar
     .Enabled = True
@@ -171,8 +195,58 @@ Sub DeleteSvnToolBar()
   ' If Subversion menu exists, delete it.
   For Each cmbCmdBar In Application.CommandBars
     If cmbCmdBar.NameLocal = gcapSvnCmdBar Then
+      SaveCurToolBarPosition cmbCmdBar
+      'MsgBox "Begin Application.CommandBars(gcapSvnCmdBar).Delete"
       Application.CommandBars(gcapSvnCmdBar).Delete
     End If
   Next
 End Sub
+
+
+Function SaveCurToolBarPosition(ByRef CmdBar As CommandBar) As Boolean
+  Dim StrBuf As String
+
+  SaveCurToolBarPosition = False
+  StrBuf = CStr(CmdBar.Position)
+
+  'MsgBox "Begin WritePrivateProfileString"
+  If WritePrivateProfileString(IniSectionName, IniKeyNameToolBarPos, StrBuf, IniFileName) <> 0 Then
+    StrBuf = CStr(CmdBar.Top)
+    If WritePrivateProfileString(IniSectionName, IniKeyNameToolBarTop, StrBuf, IniFileName) <> 0 Then
+      StrBuf = CStr(CmdBar.Left)
+      If WritePrivateProfileString(IniSectionName, IniKeyNameToolBarLeft, StrBuf, IniFileName) <> 0 Then
+        SaveCurToolBarPosition = True
+        'MsgBox "Saved " & CmdBar.Position & ", " & CmdBar.Top & ", " & CmdBar.Left
+      End If
+    End If
+  End If
+End Function
+
+Sub RestorePrevToolBarPosition(ByRef CmdBar As CommandBar)
+  CmdBar.Position = GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarPos, msoBarFloating, IniFileName)
+  CmdBar.Top = GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarTop, 100, IniFileName)
+  CmdBar.Left = GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarLeft, 100, IniFileName)
+  'MsgBox "Restored " & CmdBar.Position & ", " & CmdBar.Top & ", " & CmdBar.Left
+End Sub
+
+Sub ChangeToolBarPos()
+  ' Build the Subversion CommandBar
+  Dim cmbCmdBar As CommandBar ' Command tool bar
+  Dim cmbSvn    As CommandBar ' Subversion command tool bar
+
+  ' If Subversion command bar already exists, exit subroutine.
+  For Each cmbCmdBar In Application.CommandBars
+    If cmbCmdBar.NameLocal = gcapSvnCmdBar Then
+      cmbCmdBar.Position = msoBarFloating
+      MsgBox cmbCmdBar.Top & "," & cmbCmdBar.Left & "," & cmbCmdBar.Position
+      cmbCmdBar.Position = msoBarTop
+      MsgBox cmbCmdBar.Top & "," & cmbCmdBar.Left & "," & cmbCmdBar.Position
+    End If
+  Next
+
+End Sub
+
+  
+
+
 
