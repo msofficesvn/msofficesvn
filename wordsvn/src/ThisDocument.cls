@@ -36,14 +36,16 @@ Sub AutoExec()
   ' Build the SVN Menu
   InstallSvnMenu
   ' Build the SVN Tool bar
-  InstallSvnToolBar
+  If GetIniToolBarInstStat = ToolBarNotInstalled Then
+    InstallSvnToolBar
+  End If
 End Sub
 
 ' :Function: Uninstall Subversion menu and command bar
 ' :Remarks: This function is called when MS-Word exits
 Sub AutoExit()
   DeleteSvnMenu
-  DeleteSvnToolBar
+  'Don't delete the tool bar to keep the tool bar position
 End Sub
 
 
