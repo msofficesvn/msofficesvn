@@ -18,6 +18,9 @@ Const IniSectionName As String = "ToolBar"
 Const IniKeyNameToolBarPos As String = "Position"
 Const IniKeyNameToolBarTop As String = "Top"
 Const IniKeyNameToolBarLeft As String = "Left"
+Const IniKeyNameToolBarInstalled As String ="Installed"
+Const ToolBarNotInstalled As Long = 0
+Const ToolBarInstalled As Long = 1
 
 ' INIファイル数値情報取得関数(API)の定義
 Public Declare Function GetPrivateProfileInt Lib "kernel32" _
@@ -50,9 +53,7 @@ Sub InstallSvnToolBar()
   Next
 
   Set cmbSvn = Application.CommandBars.Add
-  cmbSvn.Enabled = False
-  RestorePrevToolBarPosition cmbSvn
-  
+
   With cmbSvn
     .NameLocal = gcapSvnCmdBar
     .Enabled = True
@@ -103,6 +104,7 @@ Sub InstallSvnToolBar()
           .OnAction = "OpenExplorer"
     End With
   End With
+  WriteIniToolBarInstStat ToolBarInstalled
 End Sub
 
 ' :Function: Install Subversion menu control
@@ -195,26 +197,29 @@ Sub DeleteSvnToolBar()
   ' If Subversion menu exists, delete it.
   For Each cmbCmdBar In Application.CommandBars
     If cmbCmdBar.NameLocal = gcapSvnCmdBar Then
-      SaveCurToolBarPosition cmbCmdBar
       'MsgBox "Begin Application.CommandBars(gcapSvnCmdBar).Delete"
       Application.CommandBars(gcapSvnCmdBar).Delete
     End If
   Next
+  WriteIniToolBarInstStat ToolBarNotInstalled
 End Sub
 
 
 Function SaveCurToolBarPosition(ByRef CmdBar As CommandBar) As Boolean
   Dim StrBuf As String
+  Dim IniFileFullPath As String
+
+  IniFileFullPath = IniFileName & GetAddinFolderName
 
   SaveCurToolBarPosition = False
   StrBuf = CStr(CmdBar.Position)
 
   'MsgBox "Begin WritePrivateProfileString"
-  If WritePrivateProfileString(IniSectionName, IniKeyNameToolBarPos, StrBuf, IniFileName) <> 0 Then
+  If WritePrivateProfileString(IniSectionName, IniKeyNameToolBarPos, StrBuf, IniFileFullPath) <> 0 Then
     StrBuf = CStr(CmdBar.Top)
-    If WritePrivateProfileString(IniSectionName, IniKeyNameToolBarTop, StrBuf, IniFileName) <> 0 Then
+    If WritePrivateProfileString(IniSectionName, IniKeyNameToolBarTop, StrBuf, IniFileFullPath) <> 0 Then
       StrBuf = CStr(CmdBar.Left)
-      If WritePrivateProfileString(IniSectionName, IniKeyNameToolBarLeft, StrBuf, IniFileName) <> 0 Then
+      If WritePrivateProfileString(IniSectionName, IniKeyNameToolBarLeft, StrBuf, IniFileFullPath) <> 0 Then
         SaveCurToolBarPosition = True
         'MsgBox "Saved " & CmdBar.Position & ", " & CmdBar.Top & ", " & CmdBar.Left
       End If
@@ -223,9 +228,12 @@ Function SaveCurToolBarPosition(ByRef CmdBar As CommandBar) As Boolean
 End Function
 
 Sub RestorePrevToolBarPosition(ByRef CmdBar As CommandBar)
-  CmdBar.Position = GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarPos, msoBarFloating, IniFileName)
-  CmdBar.Top = GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarTop, 100, IniFileName)
-  CmdBar.Left = GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarLeft, 100, IniFileName)
+  Dim IniFileFullPath As String
+
+  IniFileFullPath = IniFileName & GetAddinFolderName
+  CmdBar.Position = GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarPos, msoBarFloating, IniFileFullPath)
+  CmdBar.Top = GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarTop, 100, IniFileFullPath)
+  CmdBar.Left = GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarLeft, 100, IniFileFullPath)
   'MsgBox "Restored " & CmdBar.Position & ", " & CmdBar.Top & ", " & CmdBar.Left
 End Sub
 
@@ -246,7 +254,21 @@ Sub ChangeToolBarPos()
 
 End Sub
 
-  
+Function WriteIniToolBarInstStat(ByVal InstStat As Integer) As Long
+  Dim IniFileFullPath As String
+  Dim StrBuf As String
 
+  IniFileFullPath = IniFileName & GetAddinFolderName
+  StrBuf = CStr(InstStat)
+  WriteIniToolBarInstStat = _
+  WritePrivateProfileString(IniSectionName, IniKeyNameToolBarInstalled, StrBuf, IniFileFullPath)
+End Function
 
+Function GetIniToolBarInstStat() As Long
+  Dim IniFileFullPath As String
+
+  IniFileFullPath = IniFileName & GetAddinFolderName
+  GetIniToolBarInstStat = _
+  GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarPos, ToolBarNotInstalled, IniFileFullPath)
+End Function
 
