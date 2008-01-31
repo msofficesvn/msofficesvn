@@ -13,7 +13,7 @@
  # Copy excelsvn.xla to the following folders.
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
   || Office2000   || ? ||
-  || OfficeXP     || ? ||
+  || Office XP     || ? ||
   || Office2003   || ? ||
  # Start Excel and check Excelsvn check box in [Tool]/[Add-Ins...] of main menu.
  # [Subversion] menu and the command bar appear.
@@ -23,7 +23,7 @@
  # Copy wordsvn.dot to the following folders.
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
   || Office2000   || ? ||
-  || OfficeXP     || ? ||
+  || Office XP     || ? ||
   || Office2003   || ? ||
  # Start Word. 
  # [Subversion] menu and the command bar appear.
