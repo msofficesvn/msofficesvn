@@ -1,3 +1,13 @@
 Links
 
 http://newgeeks.blogspot.com/2006/08/word-document-management-using-svn.html
+
+http://svn.haxx.se/tsvn/archive-2006-11/0199.shtml
+
+http://ask.slashdot.org/article.pl?sid=06/06/05/1922209
+
+http://articles.techrepublic.com.com/5100-3513_11-6167205.html
+
+http://lifehacker.com/tag/document-management/
+
+http://joseph.randomnetworks.com/archives/2007/01/03/subversion-success-story/
