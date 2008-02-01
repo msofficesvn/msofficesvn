@@ -44,6 +44,15 @@ Sub InstallSvnToolBar()
   ' Build the Subversion CommandBar
   Dim cmbCmdBar As CommandBar ' Command tool bar
   Dim cmbSvn    As CommandBar ' Subversion command tool bar
+  Dim btnCmd1   As CommandBarButton
+  Dim btnCmd2   As CommandBarButton
+  Dim btnCmd3   As CommandBarButton
+  Dim btnCmd4   As CommandBarButton
+  Dim btnCmd5   As CommandBarButton
+  Dim btnCmd6   As CommandBarButton
+  Dim btnCmd7   As CommandBarButton
+  Dim btnCmd8   As CommandBarButton
+  Dim btnCmd9   As CommandBarButton
 
   ' If Subversion command bar already exists, exit subroutine.
   For Each cmbCmdBar In Application.CommandBars
@@ -54,56 +63,73 @@ Sub InstallSvnToolBar()
 
   Set cmbSvn = Application.CommandBars.Add
 
-  With cmbSvn
-    .NameLocal = gcapSvnCmdBar
-    .Enabled = True
-    .Visible = True
-    With .Controls.Add(Type:=msoControlButton)
-          .Caption = gcapUpdate
-          .FaceId = gfidUpdate
-          .OnAction = "TsvnUpdate"
-    End With
-    With .Controls.Add(Type:=msoControlButton)
-          .Caption = gcapLock
-          .FaceId = gfidLock
-          .OnAction = "TsvnLock"
-    End With
-    With .Controls.Add(Type:=msoControlButton)
-          .Caption = gcapCommit
-          .FaceId = gfidCommit
-          .OnAction = "TsvnCi"
-    End With
-    With .Controls.Add(Type:=msoControlButton)
-          .Caption = gcapDiff
-          .FaceId = gfidDiff
-          .OnAction = "TsvnDiff"
-    End With
-    With .Controls.Add(Type:=msoControlButton)
-          .Caption = gcapLog
-          .FaceId = gfidLog
-          .OnAction = "TsvnLog"
-    End With
-    With .Controls.Add(Type:=msoControlButton)
-          .Caption = gcapRepoBrowser
-          .FaceId = gfidRepoBrowser
-          .OnAction = "TsvnRepoBrowser"
-    End With
-    With .Controls.Add(Type:=msoControlButton)
-          .Caption = gcapUnlock
-          .FaceId = gfidUnlock
-          .OnAction = "TsvnUnlock"
-    End With
-    With .Controls.Add(Type:=msoControlButton)
-          .Caption = gcapAdd
-          .FaceId = gfidAdd
-          .OnAction = "TsvnAdd"
-    End With
-    With .Controls.Add(Type:=msoControlButton)
-          .Caption = gcapExplorer
-          .FaceId = gfidExplorer
-          .OnAction = "OpenExplorer"
-    End With
+  cmbSvn.NameLocal = gcapSvnCmdBar
+  cmbSvn.Enabled = True
+  cmbSvn.Visible = True
+  
+  Set btnCmd1 = cmbSvn.Controls.Add(Type:=msoControlButton)
+  With btnCmd1
+    .Caption = gcapUpdate
+    .FaceId = gfidUpdate
+    .OnAction = "TsvnUpdate"
   End With
+  
+  Set btnCmd2 = cmbSvn.Controls.Add(Type:=msoControlButton)
+  With btnCmd2
+    .Caption = gcapLock
+    .FaceId = gfidLock
+    .OnAction = "TsvnLock"
+  End With
+  
+  Set btnCmd3 = cmbSvn.Controls.Add(Type:=msoControlButton)
+  With btnCmd3
+    .Caption = gcapCommit
+    .FaceId = gfidCommit
+    .OnAction = "TsvnCi"
+  End With
+  
+  Set btnCmd4 = cmbSvn.Controls.Add(Type:=msoControlButton)
+  With btnCmd4
+    .Caption = gcapDiff
+    .FaceId = gfidDiff
+    .OnAction = "TsvnDiff"
+  End With
+  
+  Set btnCmd5 = cmbSvn.Controls.Add(Type:=msoControlButton)
+  With btnCmd5
+    .Caption = gcapLog
+    .FaceId = gfidLog
+    .OnAction = "TsvnLog"
+  End With
+  
+  Set btnCmd6 = cmbSvn.Controls.Add(Type:=msoControlButton)
+  With btnCmd6
+    .Caption = gcapRepoBrowser
+    .FaceId = gfidRepoBrowser
+    .OnAction = "TsvnRepoBrowser"
+  End With
+  
+  Set btnCmd7 = cmbSvn.Controls.Add(Type:=msoControlButton)
+  With btnCmd7
+    .Caption = gcapUnlock
+    .FaceId = gfidUnlock
+    .OnAction = "TsvnUnlock"
+  End With
+  
+  Set btnCmd8 = cmbSvn.Controls.Add(Type:=msoControlButton)
+  With btnCmd8
+    .Caption = gcapAdd
+    .FaceId = gfidAdd
+    .OnAction = "TsvnAdd"
+  End With
+  
+  Set btnCmd9 = cmbSvn.Controls.Add(Type:=msoControlButton)
+  With btnCmd9
+    .Caption = gcapExplorer
+    .FaceId = gfidExplorer
+    .OnAction = "OpenExplorer"
+  End With
+
   WriteIniToolBarInstStat ToolBarInstalled
 End Sub
 
