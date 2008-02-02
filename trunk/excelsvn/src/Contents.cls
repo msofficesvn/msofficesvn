@@ -17,9 +17,9 @@ Attribute VB_Exposed = False
 '
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: Contents
-'   Class module.
-'   This class is to manipulate contents(documnet, workbook, etc.) of MS-Office application.
-'   This class hide difference among Office applications.
+' :Description: Class module.
+'               This class is to manipulate contents(documnet, workbook, etc.) of MS-Office application.
+'               This class hide difference among Office applications.
 
 Option Explicit
 

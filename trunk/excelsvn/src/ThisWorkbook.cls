@@ -18,7 +18,7 @@ Attribute VB_Exposed = True
 '
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: ThisWorkbook
-'   Office application software specific module
+' :Description: Office application software specific module
 
 Option Explicit
 
@@ -35,3 +35,4 @@ Private Sub Workbook_AddinUninstall()
   DeleteSvnMenu
   DeleteSvnToolBar
 End Sub
+
