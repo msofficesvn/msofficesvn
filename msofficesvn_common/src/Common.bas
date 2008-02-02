@@ -10,13 +10,27 @@ Attribute VB_Name = "Common"
 '
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: Common
-'   Common module through office application software.
+' :Description: Common module through office application software.
 
 Option Explicit
 
 ' Release Version Number of msofficesvn
 Public Const gVersion As String = "1.0.0"
 Dim mContents As New Contents ' Contents class object
+'Ini File Full Path
+Public gIniFileFullPath As String
+
+' MS-Office application major version number
+Public Const gOffice97MajorVer = 8
+Public Const gOffice2000MajorVer = 9
+Public Const gOfficeXPMajorVer = 10
+Public Const gOffice2003MajorVer = 11
+Public Const gOffice2007MajorVer = 12
+
+' :Function: Get MS-Office major version number
+Function GetAppMajorVersionNum() As Integer
+  GetAppMajorVersionNum = Val(Application.Version)
+End Function
 
 Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) As Boolean
   Dim TsvnProc      As String  ' TortoiseProc.exe path

@@ -9,7 +9,7 @@ Attribute VB_Name = "Resource"
 '
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: Resource
-'   This module contains global resource data.
+' :Description: This module contains global resource data.
 
 Option Explicit
 

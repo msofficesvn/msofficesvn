@@ -17,9 +17,9 @@ Attribute VB_Exposed = False
 '
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: ActiveContent
-'   Class module.
-'   This class is to manipulate active content(documnet, workbook, etc.) of MS-Office application.
-'   This class hide difference among Office applications.
+' :Description: Class module.
+'               This class is to manipulate active content(documnet, workbook, etc.) of MS-Office application.
+'               This class hide difference among Office applications.
 
 Option Explicit
 
@@ -175,7 +175,7 @@ End Function
 ' Add workbook if no workbook exist before open a file.
 ' This subroutine is required to avoid application error in Excel 97 when it opne a file.
 Sub AddWorkbookIfEmpty()
-  If StrComp(Left(Application.Version, 2), "8.") = 0 Then
+  If GetAppMajorVersionNum < gOffice2000MajorVer Then
     If Workbooks.Count = 0 Then
       Workbooks.Add
       Workbooks(1).Activate
