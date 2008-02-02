@@ -9,7 +9,7 @@ Attribute VB_Name = "Resource"
 '
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: Resource
-'   This module contains global resource data.
+' :Description: This module contains global resource data.
 
 Option Explicit
 
@@ -47,9 +47,6 @@ Public Const gfidRepoBrowser As Integer = 25
 Public Const gfidUnlock      As Integer = 277
 Public Const gfidAdd         As Integer = 316
 Public Const gfidExplorer    As Integer = 23
-
-'Ini File Name
-Public Const IniFileName As String = "pptsvn.ini"
 
 ' Message Strings
 Public Const gmsgFileNameCap As String = "ƒtƒ@ƒCƒ‹–¼ : "
