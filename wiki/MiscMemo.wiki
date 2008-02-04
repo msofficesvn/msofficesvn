@@ -75,7 +75,14 @@ Word 97でアプリケーションエラー
 
 Wordでテキストファイルを開いたときTortoiseMergeでDiffを取ろうとすると、「プロセスはファイルにアクセスできません。別のプロセスが使用中です。」とメッセージが表示され、Diffを見ることはできない。Winmergeであれば、問題なく見れる。
 
+* add-inのパス
 
+cf.
+
+http://209.85.175.104/search?q=cache:s6Zt51u-GzsJ:www2.moug.net/bbs/exvba/20070919000008.htm+PowerPoint+%E3%82%A2%E3%83%89%E3%82%A4%E3%83%B3+%E3%83%91%E3%82%B9&hl=ja&ct=clnk&cd=11&gl=jp&lr=lang_ja&client=firefox
+
+
+=============================================================
 
 検討が必要な新規仕様
 
