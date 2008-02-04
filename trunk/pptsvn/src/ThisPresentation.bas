@@ -25,9 +25,14 @@ Option Explicit
 'Ini File Name
 Const gIniFileName As String = "pptsvn.ini"
 
+Function Path() As String
+  '<TODO>How can I get the this add-in path?
+  Path = "C:\Tool\pptaddins"
+End Function
+
 ' :Function: Get ini file full path name
-Function GetIniFullPath() As String
-  GetIniFullPath = ThisDocument.Path & "\" & gIniFileName
+Public Function GetIniFullPath() As String
+  GetIniFullPath = ThisPresentation.Path & "\" & gIniFileName
 End Function
 
 ' :Function: Install Subversion menu and command bar
@@ -43,10 +48,10 @@ Sub Auto_Open()
   ' Build the SVN Menu
   InstallSvnMenu
 
-  ' Install tool bar once when this add-in is loaded in Office 97 first time.
+  ' Install tool bar once when this add-in is loaded in Office 97 - Office 2003 first time.
   ' Because tool bar's position is not saved if reinstall it.
   ' NOTE: I'm not sure wether it happens to only Office 97 or not.
-  If GetAppMajorVersionNum < gOffice2000MajorVer Then
+  If GetAppMajorVersionNum < gOffice2007MajorVer Then
     If GetIniToolBarInstStat = ToolBarInstalled Then
       bNeedInstToolBar = False
     End If
@@ -65,7 +70,10 @@ End Sub
 ' :Remarks: This function is called when MS-Word exits
 Sub Auto_Close()
   DeleteSvnMenu
-  DeleteSvnToolBar
+  ' Don't delete the tool bar to keep the tool bar position in the case of Office 97 - Office 2003
+  If gOffice2007MajorVer <= GetAppMajorVersionNum Then
+    DeleteSvnToolBar
+  End If
 End Sub
 
 ' :Function: Register this add-in in HKEY_CURRENT_USER
