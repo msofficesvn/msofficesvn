@@ -101,5 +101,6 @@ http://support.microsoft.com/?scid=kb%3Ben-us%3B280157&x=7&y=15
  * AutoAdd機能。特定の作業コピーフォルダへ保存すると、追加+コミットするかどうかを聞いてくれる機能(Visual Studio + Visual Source Safeのように)。
 
  * ロックモニタ。他人にロックされていたら、リポジトリのロック状況を監視してロックが開放されたら知らせて欲しい。Commit Monitorというソフトはあるが、ロックの状況までは監視してくれないみたい。作者に要望を出したら作ってくれるかな?
+(追記) [http://code.google.com/p/svnnotifier/ SVN Notifier]
 
  * インストーラも欲しい。
