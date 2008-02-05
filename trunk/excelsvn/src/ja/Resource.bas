@@ -63,5 +63,5 @@ Public Const gmsgErrNotSaveFile As String = "ƒtƒ@ƒCƒ‹‚ğ•Û‘¶‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñ‚
 Public Const gmsgErrActiveContentFileNotExist As String = "ƒAƒNƒeƒBƒuƒuƒbƒN‚Ìƒtƒ@ƒCƒ‹‚ª‚ ‚è‚Ü‚¹‚ñBƒuƒbƒN‚ğƒtƒ@ƒCƒ‹‚É•Û‘¶‚µ‚Ä‚©‚ç‚±‚Ì‘€ì‚ğs‚Á‚Ä‚­‚¾‚³‚¢B"
 Public Const gmsgErrFolderNotUnderCtrl As String = "ƒAƒNƒeƒBƒuƒuƒbƒN‚Íƒo[ƒWƒ‡ƒ“ƒRƒ“ƒgƒ[ƒ‹‰º‚ÌƒtƒHƒ‹ƒ_‚É‚ ‚è‚Ü‚¹‚ñB"
 Public Const gmsgErrFileNotUnderCtrl As String = "ƒAƒNƒeƒBƒuƒuƒbƒN‚Íƒo[ƒWƒ‡ƒ“ƒRƒ“ƒgƒ[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB"
-
+Public Const gmsgAskSaveMod As String = "ƒAƒNƒeƒBƒuƒuƒbƒN‚É‚Í•ÏX‚ª‚ ‚è‚Ü‚·Bã‘‚«•Û‘¶‚µ‚Ü‚·‚©H"
 

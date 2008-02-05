@@ -170,7 +170,9 @@ End Sub
 ' :Function: Diff
 Sub TsvnDiff()
   Dim ActiveContent As New ActiveContent ' ActiveContent class object
-
+  Dim ansSaveMod As Integer              ' Return value of message box
+  Dim msgAskSaveMod As String            ' Message String
+  
   ' Exit when no content exist
   If mContents.ContentExist = False Then
     Exit Sub
@@ -189,6 +191,19 @@ Sub TsvnDiff()
   ' Test the file is under version control
   If IsFileUnderSvnControlWithMsg(ActiveContent) = False Then
     Exit Sub
+  End If
+
+  If ActiveContent.IsSaved = False Then
+  ' Active content is modified but not saved yet.
+    ' Test the active content file attributes
+    If ActiveContent.IsFileReadOnly = False Then
+      'Save the file
+       msgAskSaveMod = AddActiveContentNameToMsg(gmsgAskSaveMod, gmsgFileNameCap, True, ActiveContent)
+       ansSaveMod = MsgBox(msgAskSaveMod, vbYesNo)
+       If ansSaveMod = vbYes Then
+         ActiveContent.SaveFile
+       End If
+    End If
   End If
 
   ExecTsvnCmd "diff", ""
