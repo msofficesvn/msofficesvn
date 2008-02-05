@@ -143,6 +143,7 @@ Sub InstallSvnMenu()
   Dim mnuSub7     As CommandBarButton
   Dim mnuSub8     As CommandBarButton
   Dim mnuSub9     As CommandBarButton
+  Dim mnuSub10    As CommandBarButton
 
   ' If Subversion menu control already exists, exit subroutine.
   For Each ctlMainMenu In Application.CommandBars(gMainMenuName).Controls
@@ -196,9 +197,14 @@ Sub InstallSvnMenu()
   mnuSub8.FaceId = gfidAdd
   
   Set mnuSub9 = mnuSvn.Controls.Add
-  mnuSub9.Caption = gcapExplorer & gakyExplorer
-  mnuSub9.OnAction = "OpenExplorer"
-  mnuSub9.FaceId = gfidExplorer
+  mnuSub9.Caption = gcapDelete & gakyDelete
+  mnuSub9.OnAction = "TsvnDelete"
+
+
+  Set mnuSub10 = mnuSvn.Controls.Add
+  mnuSub10.Caption = gcapExplorer & gakyExplorer
+  mnuSub10.OnAction = "OpenExplorer"
+  mnuSub10.FaceId = gfidExplorer
 End Sub
 
 ' :Function: Delete Subversion menu control

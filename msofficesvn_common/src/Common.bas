@@ -425,6 +425,42 @@ Sub TsvnAdd()
   End If ' If ans = vbYes Then
 End Sub
 
+' :Function: Delete
+Sub TsvnDelete()
+  Dim msgErrReadOnly As String  ' Message
+  Dim msgAskSaveMod  As String  ' Message
+  Dim ansAskDelete   As Integer ' Return value of message box that confirm to delete the file
+  Dim ansAskCommit   As Integer ' Return value of message box that confirm to commit the deletion
+  Dim ActiveContent  As New ActiveContent ' ActiveContent class object
+
+  ' Exit when no content exist
+  If mContents.ContentExist = False Then
+    Exit Sub
+  End If
+
+  ' Test the active content file status
+  If ActiveContentFileExistWithMsg(ActiveContent) = False Then
+    Exit Sub
+  End If
+
+  ' Test the folder is under version control
+  If IsFolderUnderSvnControlWithMsg(ActiveContent) = False Then
+    Exit Sub
+  End If
+
+  ansAskDelete = MsgBox(gmsgDeleteAskDelete, vbYesNo + vbDefaultButton2)
+  If ansAskDelete = vbNo Then
+    Exit Sub
+  End If
+
+  ExecTsvnCmd "remove", ""
+
+  ansAskCommit = MsgBox(gmsgDeleteAskCommit, vbYesNo)
+  If ansAskCommit = vbYes Then
+    TsvnCi
+  End If ' If ans = vbYes Then
+End Sub
+
 ' :Function: Open explorer and focus on the active content file.
 Sub OpenExplorer()
   Dim ActiveContent As New ActiveContent ' ActiveContent class object
