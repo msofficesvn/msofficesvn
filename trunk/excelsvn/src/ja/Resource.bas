@@ -34,6 +34,8 @@ Public Const gcapUnlock      As String = "ƒƒbƒN‚ğŠJ•ú"
 Public Const gakyUnlock      As String = "(&C)"
 Public Const gcapAdd         As String = "’Ç‰Á"
 Public Const gakyAdd         As String = "(&A)"
+Public Const gcapDelete      As String = "íœ"
+Public Const gakyAdd         As String = "(&L)"
 Public Const gcapExplorer    As String = "ƒGƒNƒXƒvƒ[ƒ‰‚ğŠJ‚­"
 Public Const gakyExplorer    As String = "(&E)"
 
@@ -47,6 +49,7 @@ Public Const gfidRepoBrowser As Integer = 25
 Public Const gfidUnlock      As Integer = 277
 Public Const gfidAdd         As Integer = 316
 Public Const gfidExplorer    As Integer = 23
+Public Const gfidDelete      As Integer = 1786
 
 ' Message Strings
 Public Const gmsgFileNameCap As String = "ƒtƒ@ƒCƒ‹–¼ : "
@@ -63,5 +66,7 @@ Public Const gmsgErrNotSaveFile As String = "ƒtƒ@ƒCƒ‹‚ğ•Û‘¶‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñ‚
 Public Const gmsgErrActiveContentFileNotExist As String = "ƒAƒNƒeƒBƒuƒuƒbƒN‚Ìƒtƒ@ƒCƒ‹‚ª‚ ‚è‚Ü‚¹‚ñBƒuƒbƒN‚ğƒtƒ@ƒCƒ‹‚É•Û‘¶‚µ‚Ä‚©‚ç‚±‚Ì‘€ì‚ğs‚Á‚Ä‚­‚¾‚³‚¢B"
 Public Const gmsgErrFolderNotUnderCtrl As String = "ƒAƒNƒeƒBƒuƒuƒbƒN‚Íƒo[ƒWƒ‡ƒ“ƒRƒ“ƒgƒ[ƒ‹‰º‚ÌƒtƒHƒ‹ƒ_‚É‚ ‚è‚Ü‚¹‚ñB"
 Public Const gmsgErrFileNotUnderCtrl As String = "ƒAƒNƒeƒBƒuƒuƒbƒN‚Íƒo[ƒWƒ‡ƒ“ƒRƒ“ƒgƒ[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB"
+Public Const gmsgDeleteAskDelete As String = "ƒtƒ@ƒCƒ‹‚ğíœ‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚Ü‚·B‚æ‚ë‚µ‚¢‚Å‚·‚©H"
+Public Const gmsgDeleteAskCommit As String = "‘±‚¯‚ÄƒRƒ~ƒbƒg‚ğÀs‚µ‚Ü‚·‚©?"
 Public Const gmsgAskSaveMod As String = "ƒAƒNƒeƒBƒuƒuƒbƒN‚É‚Í•ÏX‚ª‚ ‚è‚Ü‚·Bã‘‚«•Û‘¶‚µ‚Ü‚·‚©H"
 
