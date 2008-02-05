@@ -1,5 +1,8 @@
 Links
 
+English
+===============
+
 http://newgeeks.blogspot.com/2006/08/word-document-management-using-svn.html
 
 http://svn.haxx.se/tsvn/archive-2006-11/0199.shtml
@@ -15,3 +18,11 @@ http://joseph.randomnetworks.com/archives/2007/01/03/subversion-success-story/
 http://search.zdnet.com/index.php?q=document+management
 
 http://www.google.com/Top/Computers/Software/Document_Management/
+
+
+Japanese
+===============
+
+設計書を Subversion で管理したい
+
+http://www.machu.jp/diary/20070713.html#p02
