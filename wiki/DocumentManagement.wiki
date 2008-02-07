@@ -27,7 +27,6 @@ http://www.google.com/Top/Computers/Software/Document_Management/
 
 http://www.machu.jp/diary/20070713.html#p02
 
-
 ==ここギコ！==
 
 ここギコ！: ソーシャルブックマークソフトで社内ドキュメント管理 <http://kokogiko.net/m/archives/001422.html>
@@ -50,3 +49,9 @@ http://www.atmarkit.co.jp/bbs/phpBB/viewtopic.php?topic=27992&forum=33&7
 イロイロ文書に要注意！「文書管理ツール」
 
 http://www.keyman.or.jp/3w/prd/43/30002343/
+
+==Through==
+
+Word/Excel無間地獄
+
+http://www.mars.dti.ne.jp/~hirok/xp/col/012.html
