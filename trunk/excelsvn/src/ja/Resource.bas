@@ -35,7 +35,7 @@ Public Const gakyUnlock      As String = "(&C)"
 Public Const gcapAdd         As String = "追加"
 Public Const gakyAdd         As String = "(&A)"
 Public Const gcapDelete      As String = "削除"
-Public Const gakyAdd         As String = "(&L)"
+Public Const gakyDelete      As String = "(&L)"
 Public Const gcapExplorer    As String = "エクスプローラを開く"
 Public Const gakyExplorer    As String = "(&E)"
 
