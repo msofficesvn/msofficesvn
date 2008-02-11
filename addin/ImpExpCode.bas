@@ -52,17 +52,18 @@ Sub ImportCode()
   Count = 1
   ImportFile = Space(260)
   IniFullPath = GetIniFullPath
-  
+  Long Ret = 0;
+
   Do
     ImportFile = Space(260)
     IniKeyImpFile = "ImportFile" & Count
-    GetPrivateProfileString "ExcelImportFiles", IniKeyImpFile, "", ImportFile, 260, IniFullPath
+    Ret = GetPrivateProfileString "ExcelImportFiles", IniKeyImpFile, "", ImportFile, 260, IniFullPath
     Count = Count + 1
-    If Len(Trim(ImportFile)) <> 1 Then
+    If Ret <> 0 Then
       Content.VBProject.VBComponents.Import ImportFile
     End If
-    MsgBox Len(Trim(ImportFile)) & ",  " & ImportFile
-  Loop While Len(Trim(ImportFile)) <> 1
+    Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
+  Loop While Ret <> 0
 
   ' This VBComponent is imported
   ' as a Class module. You will need
