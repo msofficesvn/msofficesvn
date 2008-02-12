@@ -39,6 +39,7 @@ Sub ImportCode()
   Dim Count As Integer
   Dim IniKeyImpFile As String
   Dim IniFullPath As String
+  Dim Ret As Long
 
   'Set Content = AddContent
   Set Content = Workbooks.Add
@@ -52,12 +53,12 @@ Sub ImportCode()
   Count = 1
   ImportFile = Space(260)
   IniFullPath = GetIniFullPath
-  Long Ret = 0;
+  Ret = 0
 
   Do
     ImportFile = Space(260)
     IniKeyImpFile = "ImportFile" & Count
-    Ret = GetPrivateProfileString "ExcelImportFiles", IniKeyImpFile, "", ImportFile, 260, IniFullPath
+    Ret = GetPrivateProfileString("ExcelImportFiles", IniKeyImpFile, "", ImportFile, 260, IniFullPath)
     Count = Count + 1
     If Ret <> 0 Then
       Content.VBProject.VBComponents.Import ImportFile
@@ -78,8 +79,87 @@ Sub ImportCode()
 
 End Sub
 
-
 Sub ExportCode()
+
+  Dim n As VBComponent
+  Dim Proj As VBProject
+  Dim ExpFolder As String
+  Dim CodeFileName As String
+  Dim ImportFile As String
+  Dim IniKeyImpFile As String
+  Dim Count As Integer
+  Dim IniFullPath As String
+  Dim Ret As Long
+
+  ' Search the target content file (xla, dot, ppa, etc.).
+  For Each Proj In Application.VBE.VBProjects
+    Debug.Print Proj.Name & vbCrLf
+    Debug.Print Proj.Filename & vbCrLf
+    Debug.Print Proj.Description & vbCrLf
+    Debug.Print Proj.Protection & vbCrLf
+    
+    Dim FoundPos As Integer
+    FoundPos = InStr(Proj.Filename, gTargetContentFile)
+    If FoundPos <> 0 Then
+      ' The target content file is found and it is stored in Proj variable.
+      Exit For
+    End If
+  Next
+  
+  ' Export all source code of the target content file
+  For Each n In Proj.VBComponents
+  
+    ' The vbext_ct_StdModule type is
+    ' only one of several VBComponent
+    ' clause for each component type:
+    ' (for example: module, form, class, etc)
+    Select Case n.Type
+      Case vbext_ct_StdModule
+         Debug.Print "exporting " & n.Name
+         CodeFileName = n.Name & ".bas"
+      
+      Case vbext_ct_ClassModule
+         Debug.Print "exporting " & n.Name
+         CodeFileName = n.Name & ".cls"
+      
+      Case vbext_ct_ActiveXDesigner
+         Debug.Print "exporting " & n.Name
+         CodeFileName = n.Name & ".dsr"
+      
+      Case vbext_ct_MSForm
+         Debug.Print "exporting " & n.Name
+         CodeFileName = n.Name & ".frm"
+      
+      Case vbext_ct_Document
+         ' This type of VBComponent will
+         ' always re-import as a Class module.
+         ' The original object association is
+         ' removed when importing/exporting.
+         Debug.Print "exporting " & n.Name
+         CodeFileName = n.Name & ".cld"
+    End Select
+  
+    Do
+      ImportFile = Space(260)
+      IniKeyImpFile = "ImportFile" & Count
+      Ret = GetPrivateProfileString("ExcelImportFiles", IniKeyImpFile, "", ImportFile, 260, IniFullPath)
+      Count = Count + 1
+      If Ret <> 0 Then
+        FoundPos = InStr(ImportFile, CodeFileName)
+        If FoundPos <> 0 Then
+          n.Export ImportFile
+        End If
+      End If
+      Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
+    Loop While Ret <> 0
+  
+  
+  Next
+
+End Sub
+
+
+Sub ExportCode2()
 
   Dim n As VBComponent
   Dim Proj As VBProject
