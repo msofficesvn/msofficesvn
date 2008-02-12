@@ -227,7 +227,7 @@ Sub ExportCode2()
          ' The original object association is
          ' removed when importing/exporting.
          Debug.Print "exporting " & n.Name
-         n.Export ExpFolder & n.Name & ".cld"
+         n.Export ExpFolder & n.Name & ".cls"
     End Select
   
   Next
