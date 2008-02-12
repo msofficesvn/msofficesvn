@@ -64,3 +64,11 @@ http://www.mars.dti.ne.jp/~hirok/xp/col/012.html
 http://stcforum.org/viewtopic.php?pid=4645
 
 http://groups.google.com/group/office2007/browse_thread/thread/5e180553bf951977
+
+http://japan.zdnet.com/sp/feature/shinder/story/0,2000087897,20348737-3,00.htm
+
+{{{
+Version Extraction Tool
+
+　「Office Migration Planning Manager（OMPM）」に含まれているツールである。このツールを使用することで、Officeの旧バージョンで作成されたドキュメントの異なる版を複数のファイルに保存できるようになる（Office 2007は版の管理機能をサポートしていない）。
+}}}
