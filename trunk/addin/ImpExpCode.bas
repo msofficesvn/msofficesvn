@@ -91,6 +91,8 @@ Sub ExportCode()
   Dim IniFullPath As String
   Dim Ret As Long
 
+  IniFullPath = GetIniFullPath
+
   ' Search the target content file (xla, dot, ppa, etc.).
   For Each Proj In Application.VBE.VBProjects
     Debug.Print Proj.Name & vbCrLf
@@ -136,9 +138,12 @@ Sub ExportCode()
          ' The original object association is
          ' removed when importing/exporting.
          Debug.Print "exporting " & n.Name
-         CodeFileName = n.Name & ".cld"
+         CodeFileName = n.Name & ".cls"
     End Select
   
+    Count = 1
+    FoundPos = 0
+    
     Do
       ImportFile = Space(260)
       IniKeyImpFile = "ImportFile" & Count
