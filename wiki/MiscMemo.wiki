@@ -106,5 +106,6 @@ http://support.microsoft.com/?scid=kb%3Ben-us%3B280157&x=7&y=15
 同様なソフト
 
  [http://svnnotifier.tigris.org/]
+ [http://code.google.com/p/svnnotifier/ Mirror]
 
  * インストーラも欲しい。
