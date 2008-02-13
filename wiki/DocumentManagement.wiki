@@ -21,6 +21,10 @@ http://www.google.com/Top/Computers/Software/Document_Management/
 
 =Japanese=
 
+JBMIA ビジネス機械・情報システム産業協会
+
+http://www.jbmia.or.jp/DocMS/index.htm
+
 ==まちゅダイアリ==
 
 設計書を Subversion で管理したい
