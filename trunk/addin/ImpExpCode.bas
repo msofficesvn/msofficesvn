@@ -40,7 +40,7 @@ Sub ImportCode()
   Dim IniKeyImpFile As String
   Dim IniFullPath As String
   Dim Ret As Long
-
+  Dim AddedComponent As VBComponent
   'Set Content = AddContent
   Set Content = Workbooks.Add
 
@@ -61,7 +61,15 @@ Sub ImportCode()
     Ret = GetPrivateProfileString("ExcelImportFiles", IniKeyImpFile, "", ImportFile, 260, IniFullPath)
     Count = Count + 1
     If Ret <> 0 Then
-      Content.VBProject.VBComponents.Import ImportFile
+      If InStr(ImportFile, "ThisWorkbook.cls") <> 0 Then
+        ' This code causes excel crash.
+        'Content.VBProject.VBComponents("ThisWorkbook").CodeModule.AddFromFile ImportFile
+        ' This code work well
+        'Content.VBProject.VBComponents.Add(vbext_ct_ClassModule).CodeModule.AddFromFile ImportFile
+        CreateObject("WScript.Shell").Run "Notepad.exe " & ImportFile, , False
+      Else
+        Content.VBProject.VBComponents.Import (ImportFile)
+      End If
     End If
     Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
   Loop While Ret <> 0
@@ -90,9 +98,11 @@ Sub ExportCode()
   Dim Count As Integer
   Dim IniFullPath As String
   Dim Ret As Long
+  Dim bTargetContentFileExist As Boolean
 
   IniFullPath = GetIniFullPath
-
+  bTargetContentFileExist = False
+  
   ' Search the target content file (xla, dot, ppa, etc.).
   For Each Proj In Application.VBE.VBProjects
     Debug.Print Proj.Name & vbCrLf
@@ -104,9 +114,15 @@ Sub ExportCode()
     FoundPos = InStr(Proj.Filename, gTargetContentFile)
     If FoundPos <> 0 Then
       ' The target content file is found and it is stored in Proj variable.
+      bTargetContentFileExist = True
       Exit For
     End If
   Next
+  
+  If bTargetContentFileExist = False Then
+    MsgBox "Can't find target content file! Export is aborted."
+    Exit Sub
+  End If
   
   ' Export all source code of the target content file
   For Each n In Proj.VBComponents
