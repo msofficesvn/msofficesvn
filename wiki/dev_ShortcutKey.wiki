@@ -1,4 +1,3 @@
-
 Able/Unable to register by user.
 
 Excel
@@ -14,3 +13,14 @@ Excel
 || Alt + t || NG ||
 || Alt + e || NG ||
 
+
+|| Ctrl + Alt + u || OK ||
+|| Ctrl + Alt + i || NG ||
+|| Ctrl + Alt + d || NG ||
+|| Ctrl + Alt + w || NG ||
+|| Ctrl + Alt + l || NG ||
+|| Ctrl + Alt + k || OK ||
+|| Ctrl + Alt + n || NG ||
+|| Ctrl + Alt + a || NG ||
+|| Ctrl + Alt + t || NG ||
+|| Ctrl + Alt + e || NG ||
