@@ -532,5 +532,55 @@ Function AddActiveContentNameToMsg(ByVal msgTrunk As String, ByVal FileNameCap A
   End If
 End Function
 
+Sub RegisterShortcutAlt()
+  Application.OnKey "%{u}", "TsvnUpdate"
+  Application.OnKey "%{i}", "TsvnCi"
+  Application.OnKey "%{d}", "TsvnDiff"
+  Application.OnKey "%{w}", "TsvnRepoBrowser"
+  Application.OnKey "%{l}", "TsvnLog"
+  Application.OnKey "%{k}", "TsvnLock"
+  Application.OnKey "%{n}", "TsvnUnlock"
+  Application.OnKey "%{a}", "TsvnAdd"
+  Application.OnKey "%{t}", "TsvnDelete"
+  Application.OnKey "%{e}", "OpenExplorer"
+End Sub
 
+Sub RegisterShortcutShiftAlt()
+  Application.OnKey "+%{u}", "TsvnUpdate"
+  Application.OnKey "+%{i}", "TsvnCi"
+  Application.OnKey "+%{d}", "TsvnDiff"
+  Application.OnKey "+%{w}", "TsvnRepoBrowser"
+  Application.OnKey "+%{l}", "TsvnLog"
+  Application.OnKey "+%{k}", "TsvnLock"
+  Application.OnKey "+%{n}", "TsvnUnlock"
+  Application.OnKey "+%{a}", "TsvnAdd"
+  Application.OnKey "+%{t}", "TsvnDelete"
+  Application.OnKey "+%{e}", "OpenExplorer"
+End Sub
+
+Sub RegisterShortcutShiftCtrl()
+  Application.OnKey "+^{u}", "TsvnUpdate"
+  Application.OnKey "+^{i}", "TsvnCi"
+  Application.OnKey "+^{d}", "TsvnDiff"
+  Application.OnKey "+^{w}", "TsvnRepoBrowser"
+  Application.OnKey "+^{l}", "TsvnLog"
+  Application.OnKey "+^{k}", "TsvnLock"
+  Application.OnKey "+^{n}", "TsvnUnlock"
+  Application.OnKey "+^{a}", "TsvnAdd"
+  Application.OnKey "+^{t}", "TsvnDelete"
+  Application.OnKey "+^{e}", "OpenExplorer"
+End Sub
+
+Sub RegisterShortcutCtrlAlt()
+  Application.OnKey "^%{u}", "TsvnUpdate"
+  Application.OnKey "^%{i}", "TsvnCi"
+  Application.OnKey "^%{d}", "TsvnDiff"
+  Application.OnKey "^%{w}", "TsvnRepoBrowser"
+  Application.OnKey "^%{l}", "TsvnLog"
+  Application.OnKey "^%{k}", "TsvnLock"
+  Application.OnKey "^%{n}", "TsvnUnlock"
+  Application.OnKey "^%{a}", "TsvnAdd"
+  Application.OnKey "^%{t}", "TsvnDelete"
+  Application.OnKey "^%{e}", "OpenExplorer"
+End Sub
 
