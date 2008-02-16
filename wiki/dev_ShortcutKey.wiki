@@ -14,13 +14,13 @@ Excel
 || Alt + e || NG ||
 
 
-|| Ctrl + Alt + u || OK ||
-|| Ctrl + Alt + i || NG ||
-|| Ctrl + Alt + d || NG ||
-|| Ctrl + Alt + w || NG ||
-|| Ctrl + Alt + l || NG ||
-|| Ctrl + Alt + k || OK ||
-|| Ctrl + Alt + n || NG ||
-|| Ctrl + Alt + a || NG ||
-|| Ctrl + Alt + t || NG ||
-|| Ctrl + Alt + e || NG ||
+|| Ctrl + Alt + u ||  ||
+|| Ctrl + Alt + i ||  ||
+|| Ctrl + Alt + d ||  ||
+|| Ctrl + Alt + w ||  ||
+|| Ctrl + Alt + l ||  ||
+|| Ctrl + Alt + k ||  ||
+|| Ctrl + Alt + n ||  ||
+|| Ctrl + Alt + a ||  ||
+|| Ctrl + Alt + t ||  ||
+|| Ctrl + Alt + e ||  ||
