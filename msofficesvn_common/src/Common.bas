@@ -17,8 +17,6 @@ Option Explicit
 ' Release Version Number of msofficesvn
 Public Const gVersion As String = "1.0.0"
 Dim mContents As New Contents ' Contents class object
-'Ini File Full Path
-Public gIniFileFullPath As String
 
 ' MS-Office application major version number
 Public Const gOffice97MajorVer = 8
@@ -531,56 +529,4 @@ Function AddActiveContentNameToMsg(ByVal msgTrunk As String, ByVal FileNameCap A
     AddActiveContentNameToMsg = msgTrunk & vbCrLf & vbCrLf & FileNameCap & ActCont.GetName
   End If
 End Function
-
-Sub RegisterShortcutAlt()
-  Application.OnKey "%{u}", "TsvnUpdate"
-  Application.OnKey "%{i}", "TsvnCi"
-  Application.OnKey "%{d}", "TsvnDiff"
-  Application.OnKey "%{w}", "TsvnRepoBrowser"
-  Application.OnKey "%{l}", "TsvnLog"
-  Application.OnKey "%{k}", "TsvnLock"
-  Application.OnKey "%{n}", "TsvnUnlock"
-  Application.OnKey "%{a}", "TsvnAdd"
-  Application.OnKey "%{t}", "TsvnDelete"
-  Application.OnKey "%{e}", "OpenExplorer"
-End Sub
-
-Sub RegisterShortcutShiftAlt()
-  Application.OnKey "+%{u}", "TsvnUpdate"
-  Application.OnKey "+%{i}", "TsvnCi"
-  Application.OnKey "+%{d}", "TsvnDiff"
-  Application.OnKey "+%{w}", "TsvnRepoBrowser"
-  Application.OnKey "+%{l}", "TsvnLog"
-  Application.OnKey "+%{k}", "TsvnLock"
-  Application.OnKey "+%{n}", "TsvnUnlock"
-  Application.OnKey "+%{a}", "TsvnAdd"
-  Application.OnKey "+%{t}", "TsvnDelete"
-  Application.OnKey "+%{e}", "OpenExplorer"
-End Sub
-
-Sub RegisterShortcutShiftCtrl()
-  Application.OnKey "+^{u}", "TsvnUpdate"
-  Application.OnKey "+^{i}", "TsvnCi"
-  Application.OnKey "+^{d}", "TsvnDiff"
-  Application.OnKey "+^{w}", "TsvnRepoBrowser"
-  Application.OnKey "+^{l}", "TsvnLog"
-  Application.OnKey "+^{k}", "TsvnLock"
-  Application.OnKey "+^{n}", "TsvnUnlock"
-  Application.OnKey "+^{a}", "TsvnAdd"
-  Application.OnKey "+^{t}", "TsvnDelete"
-  Application.OnKey "+^{e}", "OpenExplorer"
-End Sub
-
-Sub RegisterShortcutCtrlAlt()
-  Application.OnKey "^%{u}", "TsvnUpdate"
-  Application.OnKey "^%{i}", "TsvnCi"
-  Application.OnKey "^%{d}", "TsvnDiff"
-  Application.OnKey "^%{w}", "TsvnRepoBrowser"
-  Application.OnKey "^%{l}", "TsvnLog"
-  Application.OnKey "^%{k}", "TsvnLock"
-  Application.OnKey "^%{n}", "TsvnUnlock"
-  Application.OnKey "^%{a}", "TsvnAdd"
-  Application.OnKey "^%{t}", "TsvnDelete"
-  Application.OnKey "^%{e}", "OpenExplorer"
-End Sub
 
