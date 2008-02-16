@@ -86,6 +86,12 @@ VBAコードのエクスポート
 
 http://support.microsoft.com/?scid=kb%3Ben-us%3B280157&x=7&y=15
 
+* Excel起動時にadd-in中の関数を自動実行させる方法
+
+ # 標準モジュールに Auto_Open を実装する。
+ # ThisWorkbookに Workbook_Open を実装する
+
+
 =============================================================
 
 検討が必要な新規仕様
