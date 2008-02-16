@@ -36,5 +36,10 @@ Private Sub Workbook_AddinUninstall()
   DeleteSvnToolBar
 End Sub
 
-
-
+'Private Sub Workbook_Open()
+'  MsgBox "Workbook_Open"
+  ' Ini file full path name must be aquired when add-in is loaded.
+'  gIniFileFullPath = GetIniFullPath
+  ' Register shortcut key
+'  RegisterShortcutKey
+'End Sub
