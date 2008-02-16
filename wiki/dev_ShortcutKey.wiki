@@ -1,7 +1,8 @@
 Able/Unable to register by user.
 
-Excel
+Office 2007
 
+|| Excel || ||
 || Alt + u || OK ||
 || Alt + i || NG ||
 || Alt + d || NG ||
@@ -12,15 +13,14 @@ Excel
 || Alt + a || NG ||
 || Alt + t || NG ||
 || Alt + e || NG ||
-
-
-|| Ctrl + Alt + u ||  ||
-|| Ctrl + Alt + i ||  ||
-|| Ctrl + Alt + d ||  ||
-|| Ctrl + Alt + w ||  ||
-|| Ctrl + Alt + l ||  ||
-|| Ctrl + Alt + k ||  ||
-|| Ctrl + Alt + n ||  ||
-|| Ctrl + Alt + a ||  ||
-|| Ctrl + Alt + t ||  ||
-|| Ctrl + Alt + e ||  ||
+|| || ||
+|| Ctrl + Alt + u || OK ||
+|| Ctrl + Alt + i || OK ||
+|| Ctrl + Alt + d || OK ||
+|| Ctrl + Alt + w || OK ||
+|| Ctrl + Alt + l || OK ||
+|| Ctrl + Alt + k || OK ||
+|| Ctrl + Alt + n || OK ||
+|| Ctrl + Alt + a || OK ||
+|| Ctrl + Alt + t || OK ||
+|| Ctrl + Alt + e || OK ||
