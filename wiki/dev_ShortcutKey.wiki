@@ -1,0 +1,16 @@
+
+Able/Unable to register by user.
+
+Excel
+
+|| Alt + u || OK ||
+|| Alt + i || NG ||
+|| Alt + d || NG ||
+|| Alt + w || NG ||
+|| Alt + l || NG ||
+|| Alt + k || OK ||
+|| Alt + n || NG ||
+|| Alt + a || NG ||
+|| Alt + t || NG ||
+|| Alt + e || NG ||
+
