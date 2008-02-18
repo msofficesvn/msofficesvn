@@ -2,6 +2,11 @@ Links
 
 =English=
 
+http://www.52novels.com/archives/the-version-suicides-part-1/
+
+http://www.52novels.com/archives/the-version-suicides-part-2/
+
+
 http://newgeeks.blogspot.com/2006/08/word-document-management-using-svn.html
 
 http://svn.haxx.se/tsvn/archive-2006-11/0199.shtml
