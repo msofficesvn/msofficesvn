@@ -1,12 +1,16 @@
-
 = Search in entries file =
 
  * Is the entries file utf-8? 
 
 == RegEx ==
 
- * Unable to search pattern over multi lines
+ * Unable to search pattern over multi lines.
+
+   What I wish to do is to cut out between active content file name and new page control code 0x12.
+
  * Unable to search Japanese words.
+
+   Do I need to convert character encoding?
 
 {{{
 
