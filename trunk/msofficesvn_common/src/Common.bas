@@ -530,3 +530,11 @@ Function AddActiveContentNameToMsg(ByVal msgTrunk As String, ByVal FileNameCap A
   End If
 End Function
 
+Sub CheckSvnEntriesFile()
+  Dim ActiveContent As New ActiveContent ' ActiveContent class object
+
+  'ActiveContent.IsLockNeeded
+  'ActiveContent.ConvEntriesFileToSjis ' Ç±ÇÍÇÕÇ¢ÇØÇÈÅB
+  'ActiveContent.IsLockNeeded2
+  ActiveContent.IsLockNeeded3
+End Sub
