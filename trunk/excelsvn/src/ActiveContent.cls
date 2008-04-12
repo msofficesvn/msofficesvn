@@ -31,6 +31,9 @@ Private mActiveContentName As String
 Private mabsRow As Long
 Private mabsCol As Long
 Private mFileSysObj As Object ' File System Object
+' File attribute dictionary object
+Private mFileAttribDic As Object
+
 
 ' :Function: Initialize class module
 Private Sub Class_Initialize()
@@ -38,6 +41,7 @@ Private Sub Class_Initialize()
   mName = ActiveWorkbook.Name
   mPath = ActiveWorkbook.Path
   Set mFileSysObj = CreateObject("Scripting.FileSystemObject")
+  Set mFileAttribDic = CreateObject("Scripting.Dictionary")
 End Sub
 
 ' :Function: Terminate class module
@@ -59,7 +63,7 @@ End Function
 
 'Function: Close the active content
 Function CloseFile() As Boolean
-  On Error Resume Next
+  'On Error Resume Next
   Workbooks.Item(mName).Close
   If Err.Number = 0 Then
     CloseFile = True
@@ -74,7 +78,7 @@ End Function
 'Function: ReOpen the active content. StoreFullName function must be called before.
 Function ReOpenFile() As Boolean
   On Error Resume Next
-  Workbooks.Open Filename:=mFullName
+  Workbooks.Open FileName:=mFullName
   If Err.Number = 0 Then
     ReOpenFile = True
   ElseIf Err.Number = 1004 Then
@@ -285,7 +289,7 @@ Private Function ConvEncoding(ByVal OrgText As String, ByVal OrgCharset As Strin
 
 End Function
 
-Public Sub ShiftJis_to_utf8(Filename As String)
+Public Sub ShiftJis_to_utf8(FileName As String)
 
     Dim FirstObj As Object
     Dim SecondObj As Object
@@ -296,7 +300,7 @@ Public Sub ShiftJis_to_utf8(Filename As String)
         .Type = 2
         .Charset = "shift-jis"
         .Open
-        .LoadFromFile Filename
+        .LoadFromFile FileName
         .Position = 0
     End With
     
@@ -463,4 +467,14 @@ Function IsLockNeeded3() As Boolean
   Close #1
   
 End Function
+
+Sub CheckNeedsLockAttrib()
+  Dim ActiveContent As New ActiveContent ' ActiveContent class object
+  
+  If ActiveContent.IsLockNeeded3 Then
+    mFileAttribDic.Add ActiveContent.GetFullName
+  End If
+
+End Sub
+
 

@@ -8,15 +8,18 @@ Attribute VB_Name = "Common"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :Author: Koki Yamamoto <kokiya@gmail.com>
-' :Module Name: Common
-' :Description: Common module through office application software.
+' :$Date::       $
+' :Author:        Koki Yamamoto <kokiya@gmail.com>
+' :Module Name:   Common
+' :Description:   Common module through office application software.
 
 Option Explicit
 
 ' Release Version Number of msofficesvn
 Public Const gVersion As String = "1.0.0"
 Dim mContents As New Contents ' Contents class object
+
+Public gNeedsLockPropDic As Object
 
 ' MS-Office application major version number
 Public Const gOffice97MajorVer = 8
@@ -145,23 +148,28 @@ Sub TsvnCi()
     End If
   End If
 
-  ActiveContent.StoreCurCursorPos
+  If gNeedsLockPropDic.Exists(ActiveContent.GetFullName) Then
+    ActiveContent.StoreCurCursorPos
+    
+  '  If ansSaveMod = vbNo Then
+  '    Application.DisplayAlerts = False
+  '  End If
+    
+    ActiveContent.CloseFile
   
-'  If ansSaveMod = vbNo Then
-'    Application.DisplayAlerts = False
-'  End If
+    ExecTsvnCmd "commit", ActiveContent.GetFullName
   
-  ActiveContent.CloseFile
-
-  ExecTsvnCmd "commit", ActiveContent.GetFullName
-
-  ActiveContent.ReOpenFile
+    ActiveContent.ReOpenFile
+    
+  '  If ansSaveMod = vbNo Then
+  '    Application.DisplayAlerts = True
+  '  End If
+    
+    ActiveContent.JumpToStoredPos
+  Else
+    ExecTsvnCmd "commit", ActiveContent.GetFullName
+  End If
   
-'  If ansSaveMod = vbNo Then
-'    Application.DisplayAlerts = True
-'  End If
-  
-  ActiveContent.JumpToStoredPos
 End Sub
 
 
@@ -538,3 +546,116 @@ Sub CheckSvnEntriesFile()
   'ActiveContent.IsLockNeeded2
   ActiveContent.IsLockNeeded3
 End Sub
+
+' :Function: Test whether the file is under subversion control.
+' :Return value: True=Under version control, False=Not under version control
+Function IsFileUnderSvnControl(ByVal FullPathName As String) As Boolean
+  Dim TextBaseFile As String ' Base file full path name
+  Dim FileSysObj As Object
+  Dim FileName As String
+  Dim ParentFolderName As String
+  
+  Set FileSysObj = CreateObject("Scripting.FileSystemObject")
+  
+  FileName = FileSysObj.GetFileName(FullPathName)
+  ParentFolderName = FileSysObj.GetParentFolderName(FullPathName)
+
+  TextBaseFile = ParentFolderName & "\.svn\text-base\" & FileName & ".svn-base"
+
+  If FileSysObj.FileExists(TextBaseFile) Then
+    IsFileUnderSvnControl = True
+  Else
+    IsFileUnderSvnControl = False
+  End If
+End Function
+
+
+Public Sub ConvertCharacterEncoding(ByVal SrcEncoding As String, ByVal DesEncoding As String, ByVal InputFilePath As String, ByRef OutputFilePath As String)
+
+    Dim FirstObj As Object
+    Dim SecondObj As Object
+    
+    Set FirstObj = CreateObject("ADODB.Stream")
+    
+    With FirstObj
+        .Type = 2
+        .Charset = SrcEncoding ' "utf-8"
+        .Open
+        .LoadFromFile InputFilePath
+        .Position = 0
+    End With
+    
+    Set SecondObj = CreateObject("ADODB.Stream")
+
+    With SecondObj
+        .Type = 2
+        .Charset = DesEncoding ' "shift-jis"
+        .Open
+    End With
+
+    FirstObj.CopyTo SecondObj
+
+    SecondObj.Position = 0
+    
+    SecondObj.SaveToFile OutputFilePath, 2
+
+End Sub
+
+Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
+  Dim EntriesFile As String
+  Dim ConvertedEntriesFile As String
+  Dim EntriesContent As String
+  
+  Dim FileNamePos As Long
+  Dim NewPageCtrlCodePos As Long
+  Dim NeedLockPos As Long
+  
+  Dim FileSysObj As Object
+  Dim FileName As String
+  Dim ParentFolderName As String
+  
+  Set FileSysObj = CreateObject("Scripting.FileSystemObject")
+  
+  FileName = FileSysObj.GetFileName(FullPathName)
+  ParentFolderName = FileSysObj.GetParentFolderName(FullPathName)
+  
+  EntriesFile = ParentFolderName & "\" & ".svn\entries"
+  ConvertedEntriesFile = ThisWorkbook.Path & "\" & "ExcelEntries.txt"
+  ConvertCharacterEncoding "utf-8", "shift-jis", EntriesFile, ConvertedEntriesFile
+  
+  Open ConvertedEntriesFile For Binary Shared As #1
+  Debug.Print LOF(1)
+  EntriesContent = Input(LOF(1), 1)
+  
+  ' Find out target file name in svn entries file and check the existence of svn:needs-lock property.
+  FileNamePos = InStr(1, EntriesContent, FileName, vbBinaryCompare)
+  NewPageCtrlCodePos = InStr(FileNamePos, EntriesContent, Chr(12), vbBinaryCompare)
+  NeedLockPos = InStr(FileNamePos, EntriesContent, "svn:needs-lock", vbBinaryCompare)
+  
+  If NeedLockPos < NewPageCtrlCodePos Then
+    CheckNeedsLockProperty = True
+  Else
+    CheckNeedsLockProperty = False
+  End If
+
+  Close #1
+  
+End Function
+
+Sub PrintNeedsLockPropDic()
+
+  Dim i As Integer
+  Dim Dic As Object
+  Dim bIsObjNothing As Boolean
+  
+  bIsObjNothing = gNeedsLockPropDic Is Nothing
+  'Set Dic = gNeedsLockPropDic.Keys
+  If bIsObjNothing = False Then
+    For i = 0 To gNeedsLockPropDic.Count - 1
+  '    Debug.Print gNeedsLockPropDic.Items(i)
+      Debug.Print gNeedsLockPropDic.Items(gNeedsLockPropDic.Keys(i))
+    Next
+  End If
+End Sub
+
+

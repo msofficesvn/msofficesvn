@@ -22,6 +22,8 @@ Attribute VB_Exposed = True
 
 Option Explicit
 
+Dim MsOfficeSvnApp As New AppEvent
+
 ' :Function: Install Subversion menu and command bar
 Private Sub Workbook_AddinInstall()
     ' Build the SVN Menu
@@ -35,6 +37,11 @@ Private Sub Workbook_AddinUninstall()
   DeleteSvnMenu
   DeleteSvnToolBar
 End Sub
+
+Private Sub Workbook_Open()
+   Set MsOfficeSvnApp.App = Application
+End Sub
+
 
 'Private Sub Workbook_Open()
 '  MsgBox "Workbook_Open"
