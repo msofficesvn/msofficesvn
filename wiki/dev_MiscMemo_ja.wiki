@@ -91,6 +91,9 @@ http://support.microsoft.com/?scid=kb%3Ben-us%3B280157&x=7&y=15
  # 標準モジュールに Auto_Open を実装する。
  # ThisWorkbookに Workbook_Open を実装する
 
+* In place編集のチェック必要?
+Workbook.IsInplace プロパティを使って、In place編集であるかどうかの判断をする必要があるか?
+
 
 =============================================================
 
