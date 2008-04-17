@@ -19,14 +19,50 @@ Option Explicit
 Public Const gVersion As String = "1.0.0"
 Dim mContents As New Contents ' Contents class object
 
-Public gNeedsLockPropDic As Object
-
 ' MS-Office application major version number
 Public Const gOffice97MajorVer = 8
 Public Const gOffice2000MajorVer = 9
 Public Const gOfficeXPMajorVer = 10
 Public Const gOffice2003MajorVer = 11
 Public Const gOffice2007MajorVer = 12
+
+' Dictionary Object to memorize the file name that have svn:needs-lock property.
+Public gNeedsLockPropDic As Object
+
+' File Open Mode that is set by the user
+Public gCommitFileOpenMode As Integer
+
+' Character Encoding Scheme for file name
+Public gFileNameCharEncoding As String
+
+' :Function: Get numeric value from INI file
+' :Remarks:  Declaration of Windows API
+Public Declare Function GetPrivateProfileInt Lib "kernel32" _
+                         Alias "GetPrivateProfileIntA" _
+                         (ByVal lpApplicationName As String, _
+                          ByVal lpKeyName As String, _
+                          ByVal nDefault As Long, _
+                          ByVal lpFileName As String) As Long
+
+' :Function: Get string from INI file
+' :Remarks:  Declaration of Windows API
+Public Declare Function GetPrivateProfileString Lib "kernel32" _
+                         Alias "GetPrivateProfileStringA" _
+                         (ByVal lpApplicationName As String, _
+                          ByVal lpKeyName As Any, _
+                          ByVal lpDefault As String, _
+                          ByVal lpReturnedString As String, _
+                          ByVal nSize As Long, _
+                          ByVal lpFileName As String) As Long
+
+' :Function: Write string to INI file
+' :Remarks:  Declaration of Windows API
+Public Declare Function WritePrivateProfileString Lib "kernel32" _
+                         Alias "WritePrivateProfileStringA" _
+                         (ByVal lpApplicationName As String, _
+                          ByVal lpKeyName As Any, _
+                          ByVal lpString As Any, _
+                          ByVal lpFileName As String) As Long
 
 ' :Function: Get MS-Office major version number
 Function GetAppMajorVersionNum() As Integer
@@ -103,6 +139,24 @@ Sub TsvnUpdate()
   ActiveContent.JumpToStoredPos
 End Sub
 
+' :Function: Check to need to close, commit and reopen the file.
+Function NeedsCloseAndReopenFileInCommit(ByVal FileFullName As String) As Boolean
+  Select Case gCommitFileOpenMode
+    Case 1 ' Close the file before commit and reopen it
+      NeedsCloseAndReopenFileInCommit = True
+    Case 2 ' Not Close the file
+      NeedsCloseAndReopenFileInCommit = False
+    Case 3
+      If gNeedsLockPropDic.Exists(FileFullName) Then
+        NeedsCloseAndReopenFileInCommit = True
+      Else
+        NeedsCloseAndReopenFileInCommit = False
+      End If
+    Case Else
+      NeedsCloseAndReopenFileInCommit = True
+  End Select
+End Function
+
 ' :Function: Commit
 Sub TsvnCi()
   Dim msgErrReadOnly As String ' Message
@@ -148,7 +202,8 @@ Sub TsvnCi()
     End If
   End If
 
-  If gNeedsLockPropDic.Exists(ActiveContent.GetFullName) Then
+  'If gNeedsLockPropDic.Exists(ActiveContent.GetFullName) Then
+  If NeedsCloseAndReopenFileInCommit(ActiveContent.GetFullName) Then
     ActiveContent.StoreCurCursorPos
     
   '  If ansSaveMod = vbNo Then
@@ -601,6 +656,73 @@ Public Sub ConvertCharacterEncoding(ByVal SrcEncoding As String, ByVal DesEncodi
 
 End Sub
 
+' :Function: Convert charater encoding
+' :Arguments:
+' :Return value: Converted string
+Public Function ConvFileCharEncoding(ByVal SrcEncoding As String, ByVal DesEncoding As String, ByVal InputFilePath As String) As String
+
+  Dim FirstObj As Object
+  Dim SecondObj As Object
+  
+  Set FirstObj = CreateObject("ADODB.Stream")
+  
+  With FirstObj
+    .Type = adTypeText
+    .Charset = SrcEncoding
+    .Open
+    .LoadFromFile InputFilePath
+    .Position = 0
+  End With
+  
+  Set SecondObj = CreateObject("ADODB.Stream")
+
+  With SecondObj
+    .Type = adTypeText
+    .Charset = DesEncoding
+    .Open
+  End With
+
+  FirstObj.CopyTo SecondObj
+
+  SecondObj.Position = 0
+
+  ConvFileCharEncoding = SecondObj.ReadText()
+  
+  FirstObj.Close
+  SecondObj.Close
+
+End Function
+
+
+Public Function ConvEncoding(ByVal OrgText As String, ByVal OrgCharset As String, ByVal ChangeCharset As String) As String
+
+    Dim Stm As ADODB.Stream
+
+    Set Stm = New ADODB.Stream
+    Stm.Open
+    Stm.Type = adTypeText
+    Stm.Charset = OrgCharset
+
+    'ï∂éöóÒÇäiî[
+    Stm.WriteText OrgText
+
+    Dim s As String
+    Stm.Position = 0
+    Stm.Type = adTypeText
+    Stm.Charset = ChangeCharset
+    s = Stm.ReadText()
+
+    'ÉXÉgÉäÅ[ÉÄÇÃîjä¸
+    Stm.Close
+    Set Stm = Nothing
+
+    'MsgBox ChangeCharset & s
+
+    ConvEncoding = s
+
+End Function
+
+
 Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   Dim EntriesFile As String
   Dim ConvertedEntriesFile As String
@@ -612,6 +734,7 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   
   Dim FileSysObj As Object
   Dim FileName As String
+  Dim FileNameUnicode As String
   Dim ParentFolderName As String
   
   Set FileSysObj = CreateObject("Scripting.FileSystemObject")
@@ -621,14 +744,18 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   
   EntriesFile = ParentFolderName & "\" & ".svn\entries"
   ConvertedEntriesFile = ThisWorkbook.Path & "\" & "ExcelEntries.txt"
-  ConvertCharacterEncoding "utf-8", "shift-jis", EntriesFile, ConvertedEntriesFile
+'  ConvertCharacterEncoding "utf-8", "shift-jis", EntriesFile, ConvertedEntriesFile
+'  Open ConvertedEntriesFile For Binary Shared As #1
+'  Debug.Print LOF(1)
+'  EntriesContent = Input(LOF(1), 1)
   
-  Open ConvertedEntriesFile For Binary Shared As #1
-  Debug.Print LOF(1)
-  EntriesContent = Input(LOF(1), 1)
+  ' Convert the character encoding of svn entires file to the same as OS file name character encoding.
+  EntriesContent = ConvFileCharEncoding("utf-8", gFileNameCharEncoding, EntriesFile)
+  
   
   ' Find out target file name in svn entries file and check the existence of svn:needs-lock property.
   FileNamePos = InStr(1, EntriesContent, FileName, vbBinaryCompare)
+  
   NewPageCtrlCodePos = InStr(FileNamePos, EntriesContent, Chr(12), vbBinaryCompare)
   NeedLockPos = InStr(FileNamePos, EntriesContent, "svn:needs-lock", vbBinaryCompare)
   
@@ -638,7 +765,7 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
     CheckNeedsLockProperty = False
   End If
 
-  Close #1
+'  Close #1
   
 End Function
 
