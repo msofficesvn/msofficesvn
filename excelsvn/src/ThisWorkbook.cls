@@ -38,8 +38,24 @@ Private Sub Workbook_AddinUninstall()
   DeleteSvnToolBar
 End Sub
 
+' :Function: Initialize variables because this function is executed when Excel starts.
 Private Sub Workbook_Open()
-   Set MsOfficeSvnApp.App = Application
+  Dim StrSize As Long
+  Dim StrBuf As String * 128
+
+'  MsgBox "Workbook_Open"
+  Set MsOfficeSvnApp.App = Application
+
+  ' Ini file full path name must be aquired when add-in is loaded.
+  gIniFileFullPath = GetIniFullPath
+  ' Register shortcut key
+  RegisterShortcutKey
+  ' Read commit file open mode setting from ini file
+  gCommitFileOpenMode = GetPrivateProfileInt("CommitAction", "CommitFileOpenMode", 1, gIniFileFullPath)
+  '
+  StrSize = GetPrivateProfileString("InstallOption", "FileNameCharEncoding", "iso-8859-1", StrBuf, Len(StrBuf), gIniFileFullPath)
+  gFileNameCharEncoding = StrBuf
+  
 End Sub
 
 

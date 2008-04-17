@@ -19,24 +19,6 @@ Const IniKeyNameToolBarInstalled As String = "Installed"
 Public Const ToolBarNotInstalled As Long = 0
 Public Const ToolBarInstalled As Long = 1
 
-' :Function: Get numeric value from INI file
-' :Remarks:  Declaration of Windows API
-Public Declare Function GetPrivateProfileInt Lib "kernel32" _
-                         Alias "GetPrivateProfileIntA" _
-                         (ByVal lpApplicationName As String, _
-                          ByVal lpKeyName As String, _
-                          ByVal nDefault As Long, _
-                          ByVal lpFileName As String) As Long
-
-' :Function: Write numeric value to INI file
-' :Remarks:  Declaration of Windows API
-Public Declare Function WritePrivateProfileString Lib "kernel32" _
-                         Alias "WritePrivateProfileStringA" _
-                         (ByVal lpApplicationName As String, _
-                          ByVal lpKeyName As Any, _
-                          ByVal lpString As Any, _
-                          ByVal lpFileName As String) As Long
-
 
 ' :Function: Install Subversion tool bar
 Sub InstallSvnToolBar()
@@ -245,28 +227,29 @@ Function GetIniToolBarInstStat() As Long
   GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarInstalled, ToolBarNotInstalled, gIniFileFullPath)
 End Function
 
-Private Sub Auto_Open()
+' This function is executed when excel starts.
+'Private Sub Auto_Open()
 '  MsgBox "Auto_Open"
-  ' Ini file full path name must be aquired when add-in is loaded.
-  gIniFileFullPath = GetIniFullPath
-  ' Register shortcut key
-  RegisterShortcutKey
-End Sub
+'  ' Ini file full path name must be aquired when add-in is loaded.
+'  gIniFileFullPath = GetIniFullPath
+'  ' Register shortcut key
+'  RegisterShortcutKey
+'End Sub
 
-Private Sub AutoExec()
-  MsgBox "AutoExec"
-  ' Ini file full path name must be aquired when add-in is loaded.
-  gIniFileFullPath = GetIniFullPath
-  ' Register shortcut key
-  RegisterShortcutKey
-End Sub
+'Private Sub AutoExec()
+'  MsgBox "AutoExec"
+'  ' Ini file full path name must be aquired when add-in is loaded.
+'  gIniFileFullPath = GetIniFullPath
+'  ' Register shortcut key
+'  RegisterShortcutKey
+'End Sub
 
 Sub RegisterShortcutKey()
   Dim ShortcutKeyOn As Integer
   
   ShortcutKeyOn = GetPrivateProfileInt("InstallOption", "ShortcutKey", 0, gIniFileFullPath)
   If ShortcutKeyOn = 1 Then
-    RegisterShortcutShiftCtrl
+    RegisterShortcutByUserSetting
   End If
 End Sub
 
@@ -320,6 +303,63 @@ Sub RegisterShortcutCtrlAlt()
   Application.OnKey "^%{a}", "TsvnAdd"
   Application.OnKey "^%{t}", "TsvnDelete"
   Application.OnKey "^%{e}", "OpenExplorer"
+End Sub
+
+' :Function: Register shortcut key by user setting in ini file.
+Sub RegisterShortcutByUserSetting()
+  Dim StrBuf As String * 128
+  Dim StrSize As Long
+  
+  StrSize = GetPrivateProfileString("Shortcut", "Update", "", StrBuf, Len(StrBuf), gIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey StrBuf, "TsvnUpdate"
+  End If
+  
+  StrSize = GetPrivateProfileString("Shortcut", "Commit", "", StrBuf, Len(StrBuf), gIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey "+^{i}", "TsvnCi"
+  End If
+  
+  StrSize = GetPrivateProfileString("Shortcut", "Diff", "", StrBuf, Len(StrBuf), gIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey "+^{d}", "TsvnDiff"
+  End If
+  
+  StrSize = GetPrivateProfileString("Shortcut", "RepoBrowser", "", StrBuf, Len(StrBuf), gIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey "+^{w}", "TsvnRepoBrowser"
+  End If
+  
+  StrSize = GetPrivateProfileString("Shortcut", "Log", "", StrBuf, Len(StrBuf), gIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey "+^{l}", "TsvnLog"
+  End If
+  
+  StrSize = GetPrivateProfileString("Shortcut", "Lock", "", StrBuf, Len(StrBuf), gIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey "+^{k}", "TsvnLock"
+  End If
+  
+  StrSize = GetPrivateProfileString("Shortcut", "Unlock", "", StrBuf, Len(StrBuf), gIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey "+^{n}", "TsvnUnlock"
+  End If
+  
+  StrSize = GetPrivateProfileString("Shortcut", "Add", "", StrBuf, Len(StrBuf), gIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey "+^{a}", "TsvnAdd"
+  End If
+  
+  StrSize = GetPrivateProfileString("Shortcut", "Delete", "", StrBuf, Len(StrBuf), gIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey "+^{t}", "TsvnDelete"
+  End If
+  
+  StrSize = GetPrivateProfileString("Shortcut", "Explorer", "", StrBuf, Len(StrBuf), gIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey "+^{e}", "OpenExplorer"
+  End If
+
 End Sub
 
 
