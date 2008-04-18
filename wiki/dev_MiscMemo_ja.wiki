@@ -95,6 +95,15 @@ http://support.microsoft.com/?scid=kb%3Ben-us%3B280157&x=7&y=15
 
 Workbook.IsInplace プロパティを使って、In place編集であるかどうかの判断をする必要があるか?
 
+* 参照設定が必要なライブラリ
+
+VBEのツール/参照設定メニューでデフォルト状態から追加しなければならないライブラリ。
+設定後、add-inファイルを保存すると、設定が保存される。
+
+ - Microsoft ActiveX Data Objects 2.5 Library
+
+これが無いと、ADODB.Streamの.Type = adTypeTextで「コンパイルエラー:変数が定義されていません。」エラーが発生する。
+
 
 =============================================================
 
