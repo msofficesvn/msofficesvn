@@ -202,7 +202,6 @@ Sub TsvnCi()
     End If
   End If
 
-  'If gNeedsLockPropDic.Exists(ActiveContent.GetFullName) Then
   If NeedsCloseAndReopenFileInCommit(ActiveContent.GetFullName) Then
     ActiveContent.StoreCurCursorPos
     
