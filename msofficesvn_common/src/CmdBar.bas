@@ -248,49 +248,48 @@ Sub RegisterShortcutByUserSetting()
   
   StrSize = GetPrivateProfileString("Shortcut", "Commit", "", StrBuf, Len(StrBuf), gIniFileFullPath)
   If StrSize <> 0 Then
-    Application.OnKey "+^{i}", "TsvnCi"
+    Application.OnKey StrBuf, "TsvnCi"
   End If
   
   StrSize = GetPrivateProfileString("Shortcut", "Diff", "", StrBuf, Len(StrBuf), gIniFileFullPath)
   If StrSize <> 0 Then
-    Application.OnKey "+^{d}", "TsvnDiff"
+    Application.OnKey StrBuf, "TsvnDiff"
   End If
   
   StrSize = GetPrivateProfileString("Shortcut", "RepoBrowser", "", StrBuf, Len(StrBuf), gIniFileFullPath)
   If StrSize <> 0 Then
-    Application.OnKey "+^{w}", "TsvnRepoBrowser"
+    Application.OnKey StrBuf, "TsvnRepoBrowser"
   End If
   
   StrSize = GetPrivateProfileString("Shortcut", "Log", "", StrBuf, Len(StrBuf), gIniFileFullPath)
   If StrSize <> 0 Then
-    Application.OnKey "+^{l}", "TsvnLog"
+    Application.OnKey StrBuf, "TsvnLog"
   End If
   
   StrSize = GetPrivateProfileString("Shortcut", "Lock", "", StrBuf, Len(StrBuf), gIniFileFullPath)
   If StrSize <> 0 Then
-    Application.OnKey "+^{k}", "TsvnLock"
+    Application.OnKey StrBuf, "TsvnLock"
   End If
   
   StrSize = GetPrivateProfileString("Shortcut", "Unlock", "", StrBuf, Len(StrBuf), gIniFileFullPath)
   If StrSize <> 0 Then
-    Application.OnKey "+^{n}", "TsvnUnlock"
+    Application.OnKey StrBuf, "TsvnUnlock"
   End If
   
   StrSize = GetPrivateProfileString("Shortcut", "Add", "", StrBuf, Len(StrBuf), gIniFileFullPath)
   If StrSize <> 0 Then
-    Application.OnKey "+^{a}", "TsvnAdd"
+    Application.OnKey StrBuf, "TsvnAdd"
   End If
   
   StrSize = GetPrivateProfileString("Shortcut", "Delete", "", StrBuf, Len(StrBuf), gIniFileFullPath)
   If StrSize <> 0 Then
-    Application.OnKey "+^{t}", "TsvnDelete"
+    Application.OnKey StrBuf, "TsvnDelete"
   End If
   
   StrSize = GetPrivateProfileString("Shortcut", "Explorer", "", StrBuf, Len(StrBuf), gIniFileFullPath)
   If StrSize <> 0 Then
-    Application.OnKey "+^{e}", "OpenExplorer"
+    Application.OnKey StrBuf, "OpenExplorer"
   End If
 
 End Sub
-
 
