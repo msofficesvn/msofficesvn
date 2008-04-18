@@ -8,7 +8,7 @@ Attribute VB_Name = "Common"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :$Date::       $
+' :$Date$
 ' :Author:        Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name:   Common
 ' :Description:   Common module through office application software.
@@ -16,7 +16,7 @@ Attribute VB_Name = "Common"
 Option Explicit
 
 ' Release Version Number of msofficesvn
-Public Const gVersion As String = "1.0.0"
+Public Const gVersion As String = "1.1.0"
 Dim mContents As New Contents ' Contents class object
 
 ' MS-Office application major version number
@@ -592,15 +592,6 @@ Function AddActiveContentNameToMsg(ByVal msgTrunk As String, ByVal FileNameCap A
   End If
 End Function
 
-Sub CheckSvnEntriesFile()
-  Dim ActiveContent As New ActiveContent ' ActiveContent class object
-
-  'ActiveContent.IsLockNeeded
-  'ActiveContent.ConvEntriesFileToSjis ' Ç±ÇÍÇÕÇ¢ÇØÇÈÅB
-  'ActiveContent.IsLockNeeded2
-  ActiveContent.IsLockNeeded3
-End Sub
-
 ' :Function: Test whether the file is under subversion control.
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFileUnderSvnControl(ByVal FullPathName As String) As Boolean
@@ -622,38 +613,6 @@ Function IsFileUnderSvnControl(ByVal FullPathName As String) As Boolean
     IsFileUnderSvnControl = False
   End If
 End Function
-
-
-Public Sub ConvertCharacterEncoding(ByVal SrcEncoding As String, ByVal DesEncoding As String, ByVal InputFilePath As String, ByRef OutputFilePath As String)
-
-    Dim FirstObj As Object
-    Dim SecondObj As Object
-    
-    Set FirstObj = CreateObject("ADODB.Stream")
-    
-    With FirstObj
-        .Type = 2
-        .Charset = SrcEncoding ' "utf-8"
-        .Open
-        .LoadFromFile InputFilePath
-        .Position = 0
-    End With
-    
-    Set SecondObj = CreateObject("ADODB.Stream")
-
-    With SecondObj
-        .Type = 2
-        .Charset = DesEncoding ' "shift-jis"
-        .Open
-    End With
-
-    FirstObj.CopyTo SecondObj
-
-    SecondObj.Position = 0
-    
-    SecondObj.SaveToFile OutputFilePath, 2
-
-End Sub
 
 ' :Function: Convert charater encoding
 ' :Arguments:
@@ -692,39 +651,9 @@ Public Function ConvFileCharEncoding(ByVal SrcEncoding As String, ByVal DesEncod
 
 End Function
 
-
-Public Function ConvEncoding(ByVal OrgText As String, ByVal OrgCharset As String, ByVal ChangeCharset As String) As String
-
-    Dim Stm As ADODB.Stream
-
-    Set Stm = New ADODB.Stream
-    Stm.Open
-    Stm.Type = adTypeText
-    Stm.Charset = OrgCharset
-
-    'ï∂éöóÒÇäiî[
-    Stm.WriteText OrgText
-
-    Dim s As String
-    Stm.Position = 0
-    Stm.Type = adTypeText
-    Stm.Charset = ChangeCharset
-    s = Stm.ReadText()
-
-    'ÉXÉgÉäÅ[ÉÄÇÃîjä¸
-    Stm.Close
-    Set Stm = Nothing
-
-    'MsgBox ChangeCharset & s
-
-    ConvEncoding = s
-
-End Function
-
-
+' :Function: Check svn:needs-lock property of the file from .entries file under .svn folder.
 Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   Dim EntriesFile As String
-  Dim ConvertedEntriesFile As String
   Dim EntriesContent As String
   
   Dim FileNamePos As Long
@@ -733,7 +662,6 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   
   Dim FileSysObj As Object
   Dim FileName As String
-  Dim FileNameUnicode As String
   Dim ParentFolderName As String
   
   Set FileSysObj = CreateObject("Scripting.FileSystemObject")
@@ -742,15 +670,9 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   ParentFolderName = FileSysObj.GetParentFolderName(FullPathName)
   
   EntriesFile = ParentFolderName & "\" & ".svn\entries"
-  ConvertedEntriesFile = ThisWorkbook.Path & "\" & "ExcelEntries.txt"
-'  ConvertCharacterEncoding "utf-8", "shift-jis", EntriesFile, ConvertedEntriesFile
-'  Open ConvertedEntriesFile For Binary Shared As #1
-'  Debug.Print LOF(1)
-'  EntriesContent = Input(LOF(1), 1)
   
   ' Convert the character encoding of svn entires file to the same as OS file name character encoding.
   EntriesContent = ConvFileCharEncoding("utf-8", gFileNameCharEncoding, EntriesFile)
-  
   
   ' Find out target file name in svn entries file and check the existence of svn:needs-lock property.
   FileNamePos = InStr(1, EntriesContent, FileName, vbBinaryCompare)
@@ -763,25 +685,5 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   Else
     CheckNeedsLockProperty = False
   End If
-
-'  Close #1
-  
 End Function
-
-Sub PrintNeedsLockPropDic()
-
-  Dim i As Integer
-  Dim Dic As Object
-  Dim bIsObjNothing As Boolean
-  
-  bIsObjNothing = gNeedsLockPropDic Is Nothing
-  'Set Dic = gNeedsLockPropDic.Keys
-  If bIsObjNothing = False Then
-    For i = 0 To gNeedsLockPropDic.Count - 1
-  '    Debug.Print gNeedsLockPropDic.Items(i)
-      Debug.Print gNeedsLockPropDic.Items(gNeedsLockPropDic.Keys(i))
-    Next
-  End If
-End Sub
-
 

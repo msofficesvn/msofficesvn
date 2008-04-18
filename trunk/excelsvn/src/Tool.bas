@@ -1,6 +1,6 @@
 Attribute VB_Name = "Tool"
 '------------------- Copy & paste from here to the Tool module of excelsvn.xla --------------------
-' $Rev: $
+' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '

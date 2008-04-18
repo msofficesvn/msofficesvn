@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 
 '------------------- Copy & paste from here to the AppEvent class module of excelsvn.xla --------------------
-' $Rev: $
+' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '
@@ -25,7 +25,8 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Public WithEvents App As Application
-Attribute App.VB_VarHelpID = -1 ' Delete this line when you copy and paste the source code to excelsvn.xla
+ ' Delete "Attribute App.VB_VarHelpID = -1" line when you copy and paste the source code to excelsvn.xla
+Attribute App.VB_VarHelpID = -1
 
 Private Sub App_WorkbookBeforeClose(ByVal Wb As Workbook, Cancel As Boolean)
   'MsgBox "workbook is going to be closed! : " & Wb.FullName
