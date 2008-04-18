@@ -227,23 +227,6 @@ Function GetIniToolBarInstStat() As Long
   GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarInstalled, ToolBarNotInstalled, gIniFileFullPath)
 End Function
 
-' This function is executed when excel starts.
-'Private Sub Auto_Open()
-'  MsgBox "Auto_Open"
-'  ' Ini file full path name must be aquired when add-in is loaded.
-'  gIniFileFullPath = GetIniFullPath
-'  ' Register shortcut key
-'  RegisterShortcutKey
-'End Sub
-
-'Private Sub AutoExec()
-'  MsgBox "AutoExec"
-'  ' Ini file full path name must be aquired when add-in is loaded.
-'  gIniFileFullPath = GetIniFullPath
-'  ' Register shortcut key
-'  RegisterShortcutKey
-'End Sub
-
 Sub RegisterShortcutKey()
   Dim ShortcutKeyOn As Integer
   
@@ -251,58 +234,6 @@ Sub RegisterShortcutKey()
   If ShortcutKeyOn = 1 Then
     RegisterShortcutByUserSetting
   End If
-End Sub
-
-Sub RegisterShortcutAlt()
-  Application.OnKey "%{u}", "TsvnUpdate"
-  Application.OnKey "%{i}", "TsvnCi"
-  Application.OnKey "%{d}", "TsvnDiff"
-  Application.OnKey "%{w}", "TsvnRepoBrowser"
-  Application.OnKey "%{l}", "TsvnLog"
-  Application.OnKey "%{k}", "TsvnLock"
-  Application.OnKey "%{n}", "TsvnUnlock"
-  Application.OnKey "%{a}", "TsvnAdd"
-  Application.OnKey "%{t}", "TsvnDelete"
-  Application.OnKey "%{e}", "OpenExplorer"
-End Sub
-
-Sub RegisterShortcutShiftAlt()
-  Application.OnKey "+%{u}", "TsvnUpdate"
-  Application.OnKey "+%{i}", "TsvnCi"
-  Application.OnKey "+%{d}", "TsvnDiff"
-  Application.OnKey "+%{w}", "TsvnRepoBrowser"
-  Application.OnKey "+%{l}", "TsvnLog"
-  Application.OnKey "+%{k}", "TsvnLock"
-  Application.OnKey "+%{n}", "TsvnUnlock"
-  Application.OnKey "+%{a}", "TsvnAdd"
-  Application.OnKey "+%{t}", "TsvnDelete"
-  Application.OnKey "+%{e}", "OpenExplorer"
-End Sub
-
-Sub RegisterShortcutShiftCtrl()
-  Application.OnKey "+^{u}", "TsvnUpdate"
-  Application.OnKey "+^{i}", "TsvnCi"
-  Application.OnKey "+^{d}", "TsvnDiff"
-  Application.OnKey "+^{w}", "TsvnRepoBrowser"
-  Application.OnKey "+^{l}", "TsvnLog"
-  Application.OnKey "+^{k}", "TsvnLock"
-  Application.OnKey "+^{n}", "TsvnUnlock"
-  Application.OnKey "+^{a}", "TsvnAdd"
-  Application.OnKey "+^{t}", "TsvnDelete"
-  Application.OnKey "+^{e}", "OpenExplorer"
-End Sub
-
-Sub RegisterShortcutCtrlAlt()
-  Application.OnKey "^%{u}", "TsvnUpdate"
-  Application.OnKey "^%{i}", "TsvnCi"
-  Application.OnKey "^%{d}", "TsvnDiff"
-  Application.OnKey "^%{w}", "TsvnRepoBrowser"
-  Application.OnKey "^%{l}", "TsvnLog"
-  Application.OnKey "^%{k}", "TsvnLock"
-  Application.OnKey "^%{n}", "TsvnUnlock"
-  Application.OnKey "^%{a}", "TsvnAdd"
-  Application.OnKey "^%{t}", "TsvnDelete"
-  Application.OnKey "^%{e}", "OpenExplorer"
 End Sub
 
 ' :Function: Register shortcut key by user setting in ini file.
