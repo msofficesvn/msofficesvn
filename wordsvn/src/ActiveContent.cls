@@ -77,7 +77,7 @@ End Function
 'Function: ReOpen the active content. StoreFullName function must be called before.
 Function ReOpenFile() As Boolean
   On Error Resume Next
-  Documents.Open Filename:=mFullName
+  Documents.Open FileName:=mFullName
   If Err.Number = 0 Then
     ReOpenFile = True
   ElseIf Err.Number = 1004 Then

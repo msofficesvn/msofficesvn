@@ -7,7 +7,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-
 '------------------- Copy & paste from here to the ThisDocument module of wordsvn.dot --------------------
 ' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
@@ -77,6 +76,4 @@ Sub AutoExit()
     DeleteSvnToolBar
   End If
 End Sub
-
-
 

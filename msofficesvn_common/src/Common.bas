@@ -18,6 +18,8 @@ Option Explicit
 ' Release Version Number of msofficesvn
 Public Const gVersion As String = "1.1.0"
 Dim mContents As New Contents ' Contents class object
+'Ini File Full Path
+Public gIniFileFullPath As String
 
 ' MS-Office application major version number
 Public Const gOffice97MajorVer = 8
