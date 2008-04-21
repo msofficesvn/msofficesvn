@@ -32,15 +32,14 @@ Option Explicit
 'Ini File Name
 Const gIniFileName As String = "wordsvn.ini"
 
-' :Function: Get ini file full path name
-Function GetIniFullPath() As String
-  GetIniFullPath = ThisDocument.Path & "\" & gIniFileName
-End Function
+Dim MsOfficeSvnApp As New AppEvent
 
 ' :Function: Install Subversion menu and command bar
 ' :Remarks:  This function is called when MS-Word starts
 Sub AutoExec()
   Dim bNeedInstToolBar As Boolean
+  Dim StrSize As Long
+  Dim StrBuf As String * 128
 
   ' Assume that tool bar must be installed.
   bNeedInstToolBar = True
@@ -64,6 +63,17 @@ Sub AutoExec()
     InstallSvnToolBar
     WriteIniToolBarInstStat ToolBarInstalled
   End If
+
+  ' Register shortcut key
+  RegisterShortcutKey
+  ' Read commit file open mode setting from ini file
+  gCommitFileOpenMode = GetPrivateProfileInt("CommitAction", "CommitFileOpenMode", 1, gIniFileFullPath)
+  ' Read file name character encoding setting
+  GetPrivateProfileString "InstallOption", "FileNameCharEncoding", "iso-8859-1", StrBuf, Len(StrBuf), gIniFileFullPath
+  gFileNameCharEncoding = StrBuf
+
+  Register_Event_Handler
+
 End Sub
 
 ' :Function: Uninstall Subversion menu and command bar
@@ -77,3 +87,10 @@ Sub AutoExit()
   End If
 End Sub
 
+Sub AutoOpen()
+  MsgBox "AutoOpen"
+End Sub
+
+Sub Register_Event_Handler()
+    Set MsOfficeSvnApp.App = Word.Application
+End Sub
