@@ -537,8 +537,10 @@ Sub OpenExplorer()
   
   CreateObject("WScript.Shell").Run "%SystemRoot%\explorer.exe /e, /select, " & ActiveContent.GetFullName, , True
 End Sub
+
 ' :Function:Test whether the active content is saved as a file or not.
 '           And this displays error message if the file does't exist.
+' :Arguments:
 ' :Return value:True=The file exists., False=No file exists.
 Function ActiveContentFileExistWithMsg(ByVal ActCont As ActiveContent) As Boolean
   Dim msgErrFileNotExist As String ' Message
@@ -554,6 +556,7 @@ End Function
 
 ' :Function: Test whether the file exist in the folder under version control.
 '            And this displays error message if the folder isn't under version control.
+' :Arguments:
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFolderUnderSvnControlWithMsg(ByVal ActCont As ActiveContent) As Boolean
   Dim msgErrNotUnderCtrl As String ' Message
@@ -568,6 +571,7 @@ Function IsFolderUnderSvnControlWithMsg(ByVal ActCont As ActiveContent) As Boole
 End Function
 
 ' :Function: Test whether the file is under subversion control.
+' :Arguments:
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFileUnderSvnControlWithMsg(ByVal ActCont As ActiveContent) As Boolean
   Dim msgErrNotUnderCtrl As String ' Message
@@ -593,6 +597,7 @@ Function AddActiveContentNameToMsg(ByVal msgTrunk As String, ByVal FileNameCap A
 End Function
 
 ' :Function: Test whether the file is under subversion control.
+' :Arguments:
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFileUnderSvnControl(ByVal FullPathName As String) As Boolean
   Dim TextBaseFile As String ' Base file full path name
@@ -614,8 +619,10 @@ Function IsFileUnderSvnControl(ByVal FullPathName As String) As Boolean
   End If
 End Function
 
-' :Function: Convert charater encoding
-' :Arguments:
+' :Function:     Convert charater encoding of the specified file.
+' :Arguments:    ByVal SrcEncoding As String   [i] Original encoding of the file
+'                ByVal DesEncoding As String   [i] Encoding to convert to
+'                ByVal InputFilePath As String [i] Path of the target file
 ' :Return value: Converted string
 Public Function ConvFileCharEncoding(ByVal SrcEncoding As String, ByVal DesEncoding As String, ByVal InputFilePath As String) As String
 
@@ -652,6 +659,8 @@ Public Function ConvFileCharEncoding(ByVal SrcEncoding As String, ByVal DesEncod
 End Function
 
 ' :Function: Check svn:needs-lock property of the file from .entries file under .svn folder.
+' :Arguments:
+' :Return value:
 Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   Dim EntriesFile As String
   Dim EntriesContent As String
@@ -673,17 +682,31 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   
   ' Convert the character encoding of svn entires file to the same as OS file name character encoding.
   EntriesContent = ConvFileCharEncoding("utf-8", gFileNameCharEncoding, EntriesFile)
-  
+
+  ' Set default return value as False
+  CheckNeedsLockProperty = False
+
   ' Find out target file name in svn entries file and check the existence of svn:needs-lock property.
   FileNamePos = InStr(1, EntriesContent, FileName, vbBinaryCompare)
+  If FileNamePos = 0 Then
+    Exit Sub
+  End If
   
   NewPageCtrlCodePos = InStr(FileNamePos, EntriesContent, Chr(12), vbBinaryCompare)
+  If NewPageCtrlCodePos = 0 Then
+    Exit Sub
+  End If
+
   NeedLockPos = InStr(FileNamePos, EntriesContent, "svn:needs-lock", vbBinaryCompare)
-  
-  If NeedLockPos < NewPageCtrlCodePos Then
-    CheckNeedsLockProperty = True
-  Else
-    CheckNeedsLockProperty = False
+  If NeedLockPos = 0 Then
+    Exit Sub
+  End If
+
+  ' If "svn:needs-lock" exists between file name and new page code, the file has svn:needs-lock property.
+  If FileNamePos < NeedLockPos Then
+    If NeedLockPos < NewPageCtrlCodePos Then
+      CheckNeedsLockProperty = True
+    End If
   End If
 End Function
 
