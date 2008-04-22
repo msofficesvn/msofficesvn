@@ -16,6 +16,7 @@ Attribute VB_Exposed = True
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' :$Date$
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: ThisWorkbook
 ' :Description: Office application software specific module

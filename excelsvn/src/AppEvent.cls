@@ -16,6 +16,7 @@ Attribute VB_Exposed = False
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' :$Date$
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: AppEvent
 ' :Description: Class module.
@@ -28,6 +29,8 @@ Public WithEvents App As Application
  ' Delete "Attribute App.VB_VarHelpID = -1" line when you copy and paste the source code to excelsvn.xla
 Attribute App.VB_VarHelpID = -1
 
+' :Function: 
+' :Arguments:
 Private Sub App_WorkbookBeforeClose(ByVal Wb As Workbook, Cancel As Boolean)
   'MsgBox "workbook is going to be closed! : " & Wb.FullName
   'On Error Resume Next
@@ -42,6 +45,8 @@ Private Sub App_WorkbookBeforeClose(ByVal Wb As Workbook, Cancel As Boolean)
   End If
 End Sub
 
+' :Function: 
+' :Arguments:
 Private Sub App_WorkbookOpen(ByVal Wb As Workbook)
   'MsgBox "workbook opened! : " & Wb.FullName
   If gNeedsLockPropDic Is Nothing Then

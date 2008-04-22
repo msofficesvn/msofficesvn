@@ -16,6 +16,7 @@ Attribute VB_Exposed = False
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' :$Date$
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: ActiveContent
 ' :Description: Class module.
@@ -47,10 +48,11 @@ End Sub
 ' :Function: Terminate class module
 Private Sub Class_Terminate()
   Set mFileSysObj = Nothing
+  Set mFileAttribDic = Nothing
 End Sub
 
-'Function: Return full path name of the current active content.
-'Return: Full path name
+' :Function: Return full path name of the current active content.
+' :Return value: Full path name
 Function GetFullName() As String
   GetFullName = mFullName
 End Function
@@ -61,7 +63,8 @@ Function GetName() As String
   GetName = mName
 End Function
 
-'Function: Close the active content
+' :Function: Close the active content
+' :Retrun value:
 Function CloseFile() As Boolean
   'On Error Resume Next
   Workbooks.Item(mName).Close
@@ -76,6 +79,7 @@ Function CloseFile() As Boolean
 End Function
 
 'Function: ReOpen the active content. StoreFullName function must be called before.
+' :Retrun value:
 Function ReOpenFile() As Boolean
   On Error Resume Next
   Workbooks.Open FileName:=mFullName
@@ -120,7 +124,7 @@ Sub StoreCurCursorPos()
   ' MsgBox "Sheet:" & mActiveContentName & ", " & "Row:" & mabsRow & ", " & "Col:" & mabsCol
 End Sub
 
-'Function: Jump the cursor to the position that is sotred previously by StoreCurCursorPos function.
+' :Function: Jump the cursor to the position that is sotred previously by StoreCurCursorPos function.
 Sub JumpToStoredPos()
   Dim ActiveRange As Range
   Set ActiveRange = Cells(mabsRow, mabsCol)
@@ -177,8 +181,8 @@ Function IsFileUnderSvnControl() As Boolean
   End If
 End Function
 
-' Add workbook if no workbook exist before open a file.
-' This subroutine is required to avoid application error in Excel 97 when it opne a file.
+' :Funtion: Add workbook if no workbook exist before open a file.
+' :Remarks: This subroutine is required to avoid application error in Excel 97 when it opne a file.
 Sub AddWorkbookIfEmpty()
   If GetAppMajorVersionNum < gOffice2000MajorVer Then
     If Workbooks.Count = 0 Then
