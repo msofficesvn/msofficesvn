@@ -8,6 +8,7 @@ Attribute VB_Name = "CmdBar"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' :$Date$
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: CmdBar
 ' :Description: Menu and Command bar Functions
@@ -214,6 +215,7 @@ Sub DeleteSvnToolBar()
   Next
 End Sub
 
+' :Function: Write tool bar install status to ini file
 Function WriteIniToolBarInstStat(ByVal InstStat As Integer) As Long
   Dim StrBuf As String
 
@@ -222,11 +224,13 @@ Function WriteIniToolBarInstStat(ByVal InstStat As Integer) As Long
   WritePrivateProfileString(IniSectionName, IniKeyNameToolBarInstalled, StrBuf, gIniFileFullPath)
 End Function
 
+' :Function: Get tool bar install status from ini file
 Function GetIniToolBarInstStat() As Long
   GetIniToolBarInstStat = _
   GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarInstalled, ToolBarNotInstalled, gIniFileFullPath)
 End Function
 
+' :Function: Register shortcut keys
 Sub RegisterShortcutKey()
   Dim ShortcutKeyOn As Integer
   

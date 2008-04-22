@@ -7,6 +7,7 @@ Attribute VB_Name = "Tool"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' :$Date$
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: Tool
 ' :Description: Tool module for each office application software.
@@ -25,7 +26,7 @@ Public Function GetIniFullPath() As String
 End Function
 
 '*** This code is valid only for excel ***
-' :Function: Register shortcut key by user setting in ini file.
+' :Function: Register shortcut keys by user setting in ini file.
 Sub RegisterShortcutByUserSetting()
   Dim StrBuf As String * 128
   Dim StrSize As Long
