@@ -689,17 +689,17 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   ' Find out target file name in svn entries file and check the existence of svn:needs-lock property.
   FileNamePos = InStr(1, EntriesContent, FileName, vbBinaryCompare)
   If FileNamePos = 0 Then
-    Exit Sub
+    Exit Function
   End If
   
   NewPageCtrlCodePos = InStr(FileNamePos, EntriesContent, Chr(12), vbBinaryCompare)
   If NewPageCtrlCodePos = 0 Then
-    Exit Sub
+    Exit Function
   End If
 
   NeedLockPos = InStr(FileNamePos, EntriesContent, "svn:needs-lock", vbBinaryCompare)
   If NeedLockPos = 0 Then
-    Exit Sub
+    Exit Function
   End If
 
   ' If "svn:needs-lock" exists between file name and new page code, the file has svn:needs-lock property.

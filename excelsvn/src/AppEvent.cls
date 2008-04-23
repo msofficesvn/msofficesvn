@@ -26,10 +26,10 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Public WithEvents App As Application
- ' Delete "Attribute App.VB_VarHelpID = -1" line when you copy and paste the source code to excelsvn.xla
 Attribute App.VB_VarHelpID = -1
+ ' Delete "Attribute App.VB_VarHelpID = -1" line when you copy and paste the source code to excelsvn.xla
 
-' :Function: 
+' :Function:
 ' :Arguments:
 Private Sub App_WorkbookBeforeClose(ByVal Wb As Workbook, Cancel As Boolean)
   'MsgBox "workbook is going to be closed! : " & Wb.FullName
@@ -45,7 +45,7 @@ Private Sub App_WorkbookBeforeClose(ByVal Wb As Workbook, Cancel As Boolean)
   End If
 End Sub
 
-' :Function: 
+' :Function:
 ' :Arguments:
 Private Sub App_WorkbookOpen(ByVal Wb As Workbook)
   'MsgBox "workbook opened! : " & Wb.FullName
