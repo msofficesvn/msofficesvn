@@ -89,7 +89,7 @@
 || wdKeySlash || 191 || / キー ||
 || wdKeySpacebar || 32 || Space キー ||
 || wdKeyT || 84 || T キー ||
-|| wdKeyTab || 9 || Tab キー 
+|| wdKeyTab || 9 || Tab キー ||
 || wdKeyU || 85 || U キー ||
 || wdKeyV || 86 || V キー ||
 || wdKeyW || 87 || W キー ||
@@ -97,5 +97,6 @@
 || wdKeyY || 89 || Y キー ||
 || wdKeyZ || 90 || Z キー ||
 || wdNoKey || 255 || 指定キーなし ||
+
 
 c 2006 Microsoft Corporation. All rights reserved.
