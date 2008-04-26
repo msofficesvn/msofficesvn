@@ -104,6 +104,9 @@ VBEのツール/参照設定メニューでデフォルト状態から追加し�
 
 これが無いと、ADODB.Streamの.Type = adTypeTextで「コンパイルエラー:変数が定義されていません。」エラーが発生する。
 
+ - Microsoft Visual Basic for Applications Extensibility 5.3
+
+  VBComponentで「コンパイルエラー：ユーザ定義型は定義されていません」
 
 =============================================================
 
