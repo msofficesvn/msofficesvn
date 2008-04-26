@@ -1,104 +1,104 @@
-Word ŠJ”­Ò—pƒŠƒtƒ@ƒŒƒ“ƒX 
-WdKey —ñ‹“ 
-ƒL[ƒ{[ƒh‚Ì•¶š‚ğw’è‚µ‚Ü‚·B•¶š‚ÌƒGƒ“ƒR[ƒfƒBƒ“ƒO ƒ}ƒbƒv‚Å‚ÍA‰pš‚Í‘å•¶š‚Æ¬•¶š‚Æ‚ÅˆÙ‚È‚é’l‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚·‚ªA‚±‚Ì—ñ‹“‚Å‚Í“¯‚¶’è”‚ª‹¤—L‚³‚ê‚Ü‚·B
-–¼‘O ’l à–¾ 
-wdKey0 48 0 ƒL[ 
-wdKey1 49 1 ƒL[ 
-wdKey2 50 2 ƒL[ 
-wdKey3 51 3 ƒL[ 
-wdKey4 52 4 ƒL[ 
-wdKey5 53 5 ƒL[ 
-wdKey6 54 6 ƒL[ 
-wdKey7 55 7 ƒL[ 
-wdKey8 56 8 ƒL[ 
-wdKey9 57 9 ƒL[ 
-wdKeyA 65 A ƒL[ 
-wdKeyAlt 1024 Alt ƒL[ 
-wdKeyB 66 B ƒL[ 
-wdKeyBackSingleQuote 192 ` ƒL[ 
-wdKeyBackSlash 220 \ ƒL[ 
-wdKeyBackspace 8 BackSpace ƒL[ 
-wdKeyC 67 C ƒL[ 
-wdKeyCloseSquareBrace 221 ] ƒL[ 
-wdKeyComma 188 , ƒL[ 
-wdKeyCommand 512 Ctrl ƒL[ (Windows) ‚Ü‚½‚ÍƒRƒ}ƒ“ƒh ƒL[ (Macintosh) 
-wdKeyControl 512 Ctrl ƒL[ 
-wdKeyD 68 D ƒL[ 
-wdKeyDelete 46 Del ƒL[ 
-wdKeyE 69 E ƒL[ 
-wdKeyEnd 35 End ƒL[ 
-wdKeyEquals 187 = ƒL[ 
-wdKeyEsc 27 Esc ƒL[ 
-wdKeyF 70 F ƒL[ 
-wdKeyF1 112 F1 ƒL[ 
-wdKeyF10 121 F10 ƒL[ 
-wdKeyF11 122 F11 ƒL[ 
-wdKeyF12 123 F12 ƒL[ 
-wdKeyF13 124 F13 ƒL[ 
-wdKeyF14 125 F14 ƒL[ 
-wdKeyF15 126 F15 ƒL[ 
-wdKeyF16 127 F16 ƒL[ 
-wdKeyF2 113 F2 ƒL[ 
-wdKeyF3 114 F3 ƒL[ 
-wdKeyF4 115 F4 ƒL[ 
-wdKeyF5 116 F5 ƒL[ 
-wdKeyF6 117 F6 ƒL[ 
-wdKeyF7 118 F7 ƒL[ 
-wdKeyF8 119 F8 ƒL[ 
-wdKeyF9 120 F9 ƒL[ 
-wdKeyG 71 G ƒL[ 
-wdKeyH 72 H ƒL[ 
-wdKeyHome 36 Home ƒL[ 
-wdKeyHyphen 189 - ƒL[ 
-wdKeyI 73 I ƒL[ 
-wdKeyInsert 45 Ins ƒL[ 
-wdKeyJ 74 J ƒL[ 
-wdKeyK 75 K ƒL[ 
-wdKeyL 76 L ƒL[ 
-wdKeyM 77 M ƒL[ 
-wdKeyN 78 N ƒL[ 
-wdKeyNumeric0 96 0 ƒL[ 
-wdKeyNumeric1 97 1 ƒL[ 
-wdKeyNumeric2 98 2 ƒL[ 
-wdKeyNumeric3 99 3 ƒL[ 
-wdKeyNumeric4 100 4 ƒL[ 
-wdKeyNumeric5 101 5 ƒL[ 
+Word é–‹ç™ºè€…ç”¨ãƒªãƒ•ã‚¡ãƒ¬ãƒ³ã‚¹ 
+WdKey åˆ—æŒ™ 
+ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®æ–‡å­—ã‚’æŒ‡å®šã—ã¾ã™ã€‚æ–‡å­—ã®ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚° ãƒãƒƒãƒ—ã§ã¯ã€è‹±å­—ã¯å¤§æ–‡å­—ã¨å°æ–‡å­—ã¨ã§ç•°ãªã‚‹å€¤ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã™ãŒã€ã“ã®åˆ—æŒ™ã§ã¯åŒã˜å®šæ•°ãŒå…±æœ‰ã•ã‚Œã¾ã™ã€‚
+åå‰ å€¤ èª¬æ˜ 
+wdKey0 48 0 ã‚­ãƒ¼ 
+wdKey1 49 1 ã‚­ãƒ¼ 
+wdKey2 50 2 ã‚­ãƒ¼ 
+wdKey3 51 3 ã‚­ãƒ¼ 
+wdKey4 52 4 ã‚­ãƒ¼ 
+wdKey5 53 5 ã‚­ãƒ¼ 
+wdKey6 54 6 ã‚­ãƒ¼ 
+wdKey7 55 7 ã‚­ãƒ¼ 
+wdKey8 56 8 ã‚­ãƒ¼ 
+wdKey9 57 9 ã‚­ãƒ¼ 
+wdKeyA 65 A ã‚­ãƒ¼ 
+wdKeyAlt 1024 Alt ã‚­ãƒ¼ 
+wdKeyB 66 B ã‚­ãƒ¼ 
+wdKeyBackSingleQuote 192 ` ã‚­ãƒ¼ 
+wdKeyBackSlash 220 \ ã‚­ãƒ¼ 
+wdKeyBackspace 8 BackSpace ã‚­ãƒ¼ 
+wdKeyC 67 C ã‚­ãƒ¼ 
+wdKeyCloseSquareBrace 221 ] ã‚­ãƒ¼ 
+wdKeyComma 188 , ã‚­ãƒ¼ 
+wdKeyCommand 512 Ctrl ã‚­ãƒ¼ (Windows) ã¾ãŸã¯ã‚³ãƒãƒ³ãƒ‰ ã‚­ãƒ¼ (Macintosh) 
+wdKeyControl 512 Ctrl ã‚­ãƒ¼ 
+wdKeyD 68 D ã‚­ãƒ¼ 
+wdKeyDelete 46 Del ã‚­ãƒ¼ 
+wdKeyE 69 E ã‚­ãƒ¼ 
+wdKeyEnd 35 End ã‚­ãƒ¼ 
+wdKeyEquals 187 = ã‚­ãƒ¼ 
+wdKeyEsc 27 Esc ã‚­ãƒ¼ 
+wdKeyF 70 F ã‚­ãƒ¼ 
+wdKeyF1 112 F1 ã‚­ãƒ¼ 
+wdKeyF10 121 F10 ã‚­ãƒ¼ 
+wdKeyF11 122 F11 ã‚­ãƒ¼ 
+wdKeyF12 123 F12 ã‚­ãƒ¼ 
+wdKeyF13 124 F13 ã‚­ãƒ¼ 
+wdKeyF14 125 F14 ã‚­ãƒ¼ 
+wdKeyF15 126 F15 ã‚­ãƒ¼ 
+wdKeyF16 127 F16 ã‚­ãƒ¼ 
+wdKeyF2 113 F2 ã‚­ãƒ¼ 
+wdKeyF3 114 F3 ã‚­ãƒ¼ 
+wdKeyF4 115 F4 ã‚­ãƒ¼ 
+wdKeyF5 116 F5 ã‚­ãƒ¼ 
+wdKeyF6 117 F6 ã‚­ãƒ¼ 
+wdKeyF7 118 F7 ã‚­ãƒ¼ 
+wdKeyF8 119 F8 ã‚­ãƒ¼ 
+wdKeyF9 120 F9 ã‚­ãƒ¼ 
+wdKeyG 71 G ã‚­ãƒ¼ 
+wdKeyH 72 H ã‚­ãƒ¼ 
+wdKeyHome 36 Home ã‚­ãƒ¼ 
+wdKeyHyphen 189 - ã‚­ãƒ¼ 
+wdKeyI 73 I ã‚­ãƒ¼ 
+wdKeyInsert 45 Ins ã‚­ãƒ¼ 
+wdKeyJ 74 J ã‚­ãƒ¼ 
+wdKeyK 75 K ã‚­ãƒ¼ 
+wdKeyL 76 L ã‚­ãƒ¼ 
+wdKeyM 77 M ã‚­ãƒ¼ 
+wdKeyN 78 N ã‚­ãƒ¼ 
+wdKeyNumeric0 96 0 ã‚­ãƒ¼ 
+wdKeyNumeric1 97 1 ã‚­ãƒ¼ 
+wdKeyNumeric2 98 2 ã‚­ãƒ¼ 
+wdKeyNumeric3 99 3 ã‚­ãƒ¼ 
+wdKeyNumeric4 100 4 ã‚­ãƒ¼ 
+wdKeyNumeric5 101 5 ã‚­ãƒ¼ 
 wdKeyNumeric5Special 12 . 
-wdKeyNumeric6 102 6 ƒL[ 
-wdKeyNumeric7 103 7 ƒL[ 
-wdKeyNumeric8 104 8 ƒL[ 
-wdKeyNumeric9 105 9 ƒL[ 
-wdKeyNumericAdd 107 + ƒL[ (ƒeƒ“ƒL[) 
-wdKeyNumericDecimal 110 . ƒL[ (ƒeƒ“ƒL[) 
-wdKeyNumericDivide 111 / ƒL[ (ƒeƒ“ƒL[) 
-wdKeyNumericMultiply 106 * ƒL[ (ƒeƒ“ƒL[) 
-wdKeyNumericSubtract 109 - ƒL[ (ƒeƒ“ƒL[) 
-wdKeyO 79 O ƒL[ 
-wdKeyOpenSquareBrace 219 [ ƒL[ 
-wdKeyOption 1024 ƒ}ƒEƒX‚ÌƒIƒvƒVƒ‡ƒ“ ƒL[A‚Ü‚½‚Í option ƒL[ (Macintosh) 
-wdKeyP 80 P ƒL[ 
-wdKeyPageDown 34 PageDown ƒL[ 
-wdKeyPageUp 33 PageUp ƒL[ 
-wdKeyPause 19 Pause ƒL[ 
-wdKeyPeriod 190 . ƒL[ 
-wdKeyQ 81 Q ƒL[ 
-wdKeyR 82 R ƒL[ 
-wdKeyReturn 13 Enter ƒL[ 
-wdKeyS 83 S ƒL[ 
-wdKeyScrollLock 145 ScrollLock ƒL[ 
-wdKeySemiColon 186 ; ƒL[ 
-wdKeyShift 256 Shift ƒL[ 
-wdKeySingleQuote 222 ' ƒL[ 
-wdKeySlash 191 / ƒL[ 
-wdKeySpacebar 32 Space ƒL[ 
-wdKeyT 84 T ƒL[ 
-wdKeyTab 9 Tab ƒL[ 
-wdKeyU 85 U ƒL[ 
-wdKeyV 86 V ƒL[ 
-wdKeyW 87 W ƒL[ 
-wdKeyX 88 X ƒL[ 
-wdKeyY 89 Y ƒL[ 
-wdKeyZ 90 Z ƒL[ 
-wdNoKey 255 w’èƒL[‚È‚µ 
+wdKeyNumeric6 102 6 ã‚­ãƒ¼ 
+wdKeyNumeric7 103 7 ã‚­ãƒ¼ 
+wdKeyNumeric8 104 8 ã‚­ãƒ¼ 
+wdKeyNumeric9 105 9 ã‚­ãƒ¼ 
+wdKeyNumericAdd 107 + ã‚­ãƒ¼ (ãƒ†ãƒ³ã‚­ãƒ¼) 
+wdKeyNumericDecimal 110 . ã‚­ãƒ¼ (ãƒ†ãƒ³ã‚­ãƒ¼) 
+wdKeyNumericDivide 111 / ã‚­ãƒ¼ (ãƒ†ãƒ³ã‚­ãƒ¼) 
+wdKeyNumericMultiply 106 * ã‚­ãƒ¼ (ãƒ†ãƒ³ã‚­ãƒ¼) 
+wdKeyNumericSubtract 109 - ã‚­ãƒ¼ (ãƒ†ãƒ³ã‚­ãƒ¼) 
+wdKeyO 79 O ã‚­ãƒ¼ 
+wdKeyOpenSquareBrace 219 [ ã‚­ãƒ¼ 
+wdKeyOption 1024 ãƒã‚¦ã‚¹ã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³ ã‚­ãƒ¼ã€ã¾ãŸã¯ option ã‚­ãƒ¼ (Macintosh) 
+wdKeyP 80 P ã‚­ãƒ¼ 
+wdKeyPageDown 34 PageDown ã‚­ãƒ¼ 
+wdKeyPageUp 33 PageUp ã‚­ãƒ¼ 
+wdKeyPause 19 Pause ã‚­ãƒ¼ 
+wdKeyPeriod 190 . ã‚­ãƒ¼ 
+wdKeyQ 81 Q ã‚­ãƒ¼ 
+wdKeyR 82 R ã‚­ãƒ¼ 
+wdKeyReturn 13 Enter ã‚­ãƒ¼ 
+wdKeyS 83 S ã‚­ãƒ¼ 
+wdKeyScrollLock 145 ScrollLock ã‚­ãƒ¼ 
+wdKeySemiColon 186 ; ã‚­ãƒ¼ 
+wdKeyShift 256 Shift ã‚­ãƒ¼ 
+wdKeySingleQuote 222 ' ã‚­ãƒ¼ 
+wdKeySlash 191 / ã‚­ãƒ¼ 
+wdKeySpacebar 32 Space ã‚­ãƒ¼ 
+wdKeyT 84 T ã‚­ãƒ¼ 
+wdKeyTab 9 Tab ã‚­ãƒ¼ 
+wdKeyU 85 U ã‚­ãƒ¼ 
+wdKeyV 86 V ã‚­ãƒ¼ 
+wdKeyW 87 W ã‚­ãƒ¼ 
+wdKeyX 88 X ã‚­ãƒ¼ 
+wdKeyY 89 Y ã‚­ãƒ¼ 
+wdKeyZ 90 Z ã‚­ãƒ¼ 
+wdNoKey 255 æŒ‡å®šã‚­ãƒ¼ãªã— 
 
 c 2006 Microsoft Corporation. All rights reserved.
