@@ -1,102 +1,102 @@
 || Name || Value || Description ||
-|| wdKey0 || 48 || 0 キー ||
-|| wdKey1 || 49 || 1 キー ||
-|| wdKey2 || 50 || 2 キー ||
-|| wdKey3 || 51 || 3 キー ||
-|| wdKey4 || 52 || 4 キー ||
-|| wdKey5 || 53 || 5 キー ||
-|| wdKey6 || 54 || 6 キー ||
-|| wdKey7 || 55 || 7 キー ||
-|| wdKey8 || 56 || 8 キー ||
-|| wdKey9 || 57 || 9 キー ||
-|| wdKeyA || 65 || A キー ||
-|| wdKeyAlt || 1024 || Alt キー ||
-|| wdKeyB || 66 || B キー ||
-|| wdKeyBackSingleQuote || 192 || ` キー ||
-|| wdKeyBackSlash || 220 || \ キー ||
-|| wdKeyBackspace || 8 || BackSpace キー ||
-|| wdKeyC || 67 || C キー ||
-|| wdKeyCloseSquareBrace || 221 || ] キー ||
-|| wdKeyComma || 188 || , キー ||
-|| wdKeyCommand || 512 || Ctrl キー (Windows) またはコマンド キー (Macintosh) ||
-|| wdKeyControl || 512 || Ctrl キー ||
-|| wdKeyD || 68 || D キー ||
-|| wdKeyDelete || 46 || Del キー ||
-|| wdKeyE || 69 || E キー ||
-|| wdKeyEnd || 35 || End キー ||
-|| wdKeyEquals || 187 || = キー ||
-|| wdKeyEsc || 27 || Esc キー ||
-|| wdKeyF || 70 || F キー ||
-|| wdKeyF1 || 112 || F1 キー ||
-|| wdKeyF10 || 121 || F10 キー ||
-|| wdKeyF11 || 122 || F11 キー ||
-|| wdKeyF12 || 123 || F12 キー ||
-|| wdKeyF13 || 124 || F13 キー ||
-|| wdKeyF14 || 125 || F14 キー ||
-|| wdKeyF15 || 126 || F15 キー ||
-|| wdKeyF16 || 127 || F16 キー ||
-|| wdKeyF2 || 113 || F2 キー ||
-|| wdKeyF3 || 114 || F3 キー ||
-|| wdKeyF4 || 115 || F4 キー ||
-|| wdKeyF5 || 116 || F5 キー ||
-|| wdKeyF6 || 117 || F6 キー ||
-|| wdKeyF7 || 118 || F7 キー ||
-|| wdKeyF8 || 119 || F8 キー ||
-|| wdKeyF9 || 120 || F9 キー ||
-|| wdKeyG || 71 || G キー ||
-|| wdKeyH || 72 || H キー ||
-|| wdKeyHome || 36 || Home キー ||
-|| wdKeyHyphen || 189 || - キー ||
-|| wdKeyI || 73 || I キー ||
-|| wdKeyInsert || 45 || Ins キー ||
-|| wdKeyJ || 74 || J キー ||
-|| wdKeyK || 75 || K キー ||
-|| wdKeyL || 76 || L キー ||
-|| wdKeyM || 77 || M キー ||
-|| wdKeyN || 78 || N キー ||
-|| wdKeyNumeric0 || 96 || 0 キー ||
-|| wdKeyNumeric1 || 97 || 1 キー ||
-|| wdKeyNumeric2 || 98 || 2 キー ||
-|| wdKeyNumeric3 || 99 || 3 キー ||
-|| wdKeyNumeric4 || 100 || 4 キー ||
-|| wdKeyNumeric5 || 101 || 5 キー ||
+|| wdKey0 || 48 || 0 key ||
+|| wdKey1 || 49 || 1 key ||
+|| wdKey2 || 50 || 2 key ||
+|| wdKey3 || 51 || 3 key ||
+|| wdKey4 || 52 || 4 key ||
+|| wdKey5 || 53 || 5 key ||
+|| wdKey6 || 54 || 6 key ||
+|| wdKey7 || 55 || 7 key ||
+|| wdKey8 || 56 || 8 key ||
+|| wdKey9 || 57 || 9 key ||
+|| wdKeyA || 65 || A key ||
+|| wdKeyAlt || 1024 || Alt key ||
+|| wdKeyB || 66 || B key ||
+|| wdKeyBackSingleQuote || 192 || ` key ||
+|| wdKeyBackSlash || 220 || \ key ||
+|| wdKeyBackspace || 8 || BackSpace key ||
+|| wdKeyC || 67 || C key ||
+|| wdKeyCloseSquareBrace || 221 || ] key ||
+|| wdKeyComma || 188 || , key ||
+|| wdKeyCommand || 512 || Ctrl key (Windows) or command key (Macintosh) ||
+|| wdKeyControl || 512 || Ctrl key ||
+|| wdKeyD || 68 || D key ||
+|| wdKeyDelete || 46 || Del key ||
+|| wdKeyE || 69 || E key ||
+|| wdKeyEnd || 35 || End key ||
+|| wdKeyEquals || 187 || = key ||
+|| wdKeyEsc || 27 || Esc key ||
+|| wdKeyF || 70 || F key ||
+|| wdKeyF1 || 112 || F1 key ||
+|| wdKeyF10 || 121 || F10 key ||
+|| wdKeyF11 || 122 || F11 key ||
+|| wdKeyF12 || 123 || F12 key ||
+|| wdKeyF13 || 124 || F13 key ||
+|| wdKeyF14 || 125 || F14 key ||
+|| wdKeyF15 || 126 || F15 key ||
+|| wdKeyF16 || 127 || F16 key ||
+|| wdKeyF2 || 113 || F2 key ||
+|| wdKeyF3 || 114 || F3 key ||
+|| wdKeyF4 || 115 || F4 key ||
+|| wdKeyF5 || 116 || F5 key ||
+|| wdKeyF6 || 117 || F6 key ||
+|| wdKeyF7 || 118 || F7 key ||
+|| wdKeyF8 || 119 || F8 key ||
+|| wdKeyF9 || 120 || F9 key ||
+|| wdKeyG || 71 || G key ||
+|| wdKeyH || 72 || H key ||
+|| wdKeyHome || 36 || Home key ||
+|| wdKeyHyphen || 189 || - key ||
+|| wdKeyI || 73 || I key ||
+|| wdKeyInsert || 45 || Ins key ||
+|| wdKeyJ || 74 || J key ||
+|| wdKeyK || 75 || K key ||
+|| wdKeyL || 76 || L key ||
+|| wdKeyM || 77 || M key ||
+|| wdKeyN || 78 || N key ||
+|| wdKeyNumeric0 || 96 || 0 key ||
+|| wdKeyNumeric1 || 97 || 1 key ||
+|| wdKeyNumeric2 || 98 || 2 key ||
+|| wdKeyNumeric3 || 99 || 3 key ||
+|| wdKeyNumeric4 || 100 || 4 key ||
+|| wdKeyNumeric5 || 101 || 5 key ||
 || wdKeyNumeric5Special || 12 || . ||
-|| wdKeyNumeric6 || 102 || 6 キー ||
-|| wdKeyNumeric7 || 103 || 7 キー ||
-|| wdKeyNumeric8 || 104 || 8 キー ||
-|| wdKeyNumeric9 || 105 || 9 キー ||
-|| wdKeyNumericAdd || 107 || + キー (テンキー) ||
-|| wdKeyNumericDecimal || 110 || . キー (テンキー) ||
-|| wdKeyNumericDivide || 111 || / キー (テンキー) ||
-|| wdKeyNumericMultiply || 106 || * キー (テンキー) ||
-|| wdKeyNumericSubtract || 109 || - キー (テンキー) ||
-|| wdKeyO || 79 || O キー ||
-|| wdKeyOpenSquareBrace || 219 || [ キー ||
-|| wdKeyOption || 1024 || マウスのオプション キー、または option キー (Macintosh) ||
-|| wdKeyP || 80 || P キー ||
-|| wdKeyPageDown || 34 || PageDown キー ||
-|| wdKeyPageUp || 33 || PageUp キー ||
-|| wdKeyPause || 19 || Pause キー ||
-|| wdKeyPeriod || 190 || . キー ||
-|| wdKeyQ || 81 || Q キー ||
-|| wdKeyR || 82 || R キー ||
-|| wdKeyReturn || 13 || Enter キー ||
-|| wdKeyS || 83 || S キー ||
-|| wdKeyScrollLock || 145 || ScrollLock キー ||
-|| wdKeySemiColon || 186 || ; キー ||
-|| wdKeyShift || 256 || Shift キー ||
-|| wdKeySingleQuote || 222 || ' キー ||
-|| wdKeySlash || 191 || / キー ||
-|| wdKeySpacebar || 32 || Space キー ||
-|| wdKeyT || 84 || T キー ||
-|| wdKeyTab || 9 || Tab キー ||
-|| wdKeyU || 85 || U キー ||
-|| wdKeyV || 86 || V キー ||
-|| wdKeyW || 87 || W キー ||
-|| wdKeyX || 88 || X キー ||
-|| wdKeyY || 89 || Y キー ||
-|| wdKeyZ || 90 || Z キー ||
-|| wdNoKey || 255 || 指定キーなし ||
+|| wdKeyNumeric6 || 102 || 6 key ||
+|| wdKeyNumeric7 || 103 || 7 key ||
+|| wdKeyNumeric8 || 104 || 8 key ||
+|| wdKeyNumeric9 || 105 || 9 key ||
+|| wdKeyNumericAdd || 107 || + key (ten key) ||
+|| wdKeyNumericDecimal || 110 || . key (ten key) ||
+|| wdKeyNumericDivide || 111 || / key (ten key) ||
+|| wdKeyNumericMultiply || 106 || * key (ten key) ||
+|| wdKeyNumericSubtract || 109 || - key (ten key) ||
+|| wdKeyO || 79 || O key ||
+|| wdKeyOpenSquareBrace || 219 || [ key ||
+|| wdKeyOption || 1024 || mouse option key、or option key (Macintosh) ||
+|| wdKeyP || 80 || P key ||
+|| wdKeyPageDown || 34 || PageDown key ||
+|| wdKeyPageUp || 33 || PageUp key ||
+|| wdKeyPause || 19 || Pause key ||
+|| wdKeyPeriod || 190 || . key ||
+|| wdKeyQ || 81 || Q key ||
+|| wdKeyR || 82 || R key ||
+|| wdKeyReturn || 13 || Enter key ||
+|| wdKeyS || 83 || S key ||
+|| wdKeyScrollLock || 145 || ScrollLock key ||
+|| wdKeySemiColon || 186 || ; key ||
+|| wdKeyShift || 256 || Shift key ||
+|| wdKeySingleQuote || 222 || ' key ||
+|| wdKeySlash || 191 || / key ||
+|| wdKeySpacebar || 32 || Space key ||
+|| wdKeyT || 84 || T key ||
+|| wdKeyTab || 9 || Tab key ||
+|| wdKeyU || 85 || U key ||
+|| wdKeyV || 86 || V key ||
+|| wdKeyW || 87 || W key ||
+|| wdKeyX || 88 || X key ||
+|| wdKeyY || 89 || Y key ||
+|| wdKeyZ || 90 || Z key ||
+|| wdNoKey || 255 || key not specified ||
 
 
 c 2006 Microsoft Corporation. All rights reserved.
