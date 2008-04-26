@@ -87,10 +87,8 @@ Sub AutoExit()
   End If
 End Sub
 
-Sub AutoOpen()
-  MsgBox "AutoOpen"
-End Sub
-
+' :Function: Register event handler for AppEvent module
 Sub Register_Event_Handler()
     Set MsOfficeSvnApp.App = Word.Application
 End Sub
+
