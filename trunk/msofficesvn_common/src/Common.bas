@@ -12,6 +12,7 @@ Attribute VB_Name = "Common"
 ' :Author:        Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name:   Common
 ' :Description:   Common module through office application software.
+'                 This module needs "Microsoft ActiveX Data Objects 2.5 Library"
 
 Option Explicit
 

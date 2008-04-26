@@ -32,83 +32,85 @@ Sub RegisterShortcutByUserSetting()
 '  CustomizationContext = NormalTemplate
   CustomizationContext = ThisDocument
 
-  StrSize = GetPrivateProfileString("Shortcut", "Update", "", StrBuf, Len(StrBuf), gIniFileFullPath)
-  If StrSize <> 0 Then
-    KeyBindings.Add _
-      KeyCategory:=wdKeyCategoryCommand, _
-      Command:="TsvnUpdate", _
-      KeyCode:=BuildKeyCode(wdKeyShift, wdKeyControl, wdKeyU) 'Shift+Ctrl+U
-  End If
+'  AddKeyBindingAsIni "TsvnUpdate", "Update"
+  AddKeyBindingAsIni "TsvnCi", "Commit"
+'  AddKeyBindingAsIni "TsvnDiff", "Diff"
+'  AddKeyBindingAsIni "TsvnRepoBrowser", "RepoBrowser"
+'  AddKeyBindingAsIni "TsvnLog", "Log"
+'  AddKeyBindingAsIni "TsvnLock", "Lock"
+'  AddKeyBindingAsIni "TsvnUnlock", "Unlock"
+'  AddKeyBindingAsIni "TsvnAdd", "Add"
+'  AddKeyBindingAsIni "TsvnDelete", "Delete"
+'  AddKeyBindingAsIni "OpenExplorer", "Explorer"
 
-  StrSize = GetPrivateProfileString("Shortcut", "Commit", "", StrBuf, Len(StrBuf), gIniFileFullPath)
-  If StrSize <> 0 Then
-    KeyBindings.Add _
-      KeyCategory:=wdKeyCategoryCommand, _
-      Command:="TsvnUpdate", _
-      KeyCode:=BuildKeyCode(wdKeyShift, wdKeyControl, wdKeyI) 'Shift+Ctrl+I
-  End If
-
-  StrSize = GetPrivateProfileString("Shortcut", "Diff", "", StrBuf, Len(StrBuf), gIniFileFullPath)
-  If StrSize <> 0 Then
-    KeyBindings.Add _
-      KeyCategory:=wdKeyCategoryCommand, _
-      Command:="TsvnUpdate", _
-      KeyCode:=BuildKeyCode(wdKeyShift, wdKeyControl, wdKeyD) 'Shift+Ctrl+D
-  End If
-
-  StrSize = GetPrivateProfileString("Shortcut", "RepoBrowser", "", StrBuf, Len(StrBuf), gIniFileFullPath)
-  If StrSize <> 0 Then
-    KeyBindings.Add _
-      KeyCategory:=wdKeyCategoryCommand, _
-      Command:="TsvnUpdate", _
-      KeyCode:=BuildKeyCode(wdKeyShift, wdKeyControl, wdKeyW) 'Shift+Ctrl+W
-  End If
-
-  StrSize = GetPrivateProfileString("Shortcut", "Log", "", StrBuf, Len(StrBuf), gIniFileFullPath)
-  If StrSize <> 0 Then
-    KeyBindings.Add _
-      KeyCategory:=wdKeyCategoryCommand, _
-      Command:="TsvnUpdate", _
-      KeyCode:=BuildKeyCode(wdKeyShift, wdKeyControl, wdKeyL) 'Shift+Ctrl+L
-  End If
-
-  StrSize = GetPrivateProfileString("Shortcut", "Lock", "", StrBuf, Len(StrBuf), gIniFileFullPath)
-  If StrSize <> 0 Then
-    KeyBindings.Add _
-      KeyCategory:=wdKeyCategoryCommand, _
-      Command:="TsvnUpdate", _
-      KeyCode:=BuildKeyCode(wdKeyShift, wdKeyControl, wdKeyK) 'Shift+Ctrl+K
-  End If
-
-  StrSize = GetPrivateProfileString("Shortcut", "Unlock", "", StrBuf, Len(StrBuf), gIniFileFullPath)
-  If StrSize <> 0 Then
-    KeyBindings.Add _
-      KeyCategory:=wdKeyCategoryCommand, _
-      Command:="TsvnUpdate", _
-      KeyCode:=BuildKeyCode(wdKeyShift, wdKeyControl, wdKeyN) 'Shift+Ctrl+N
-  End If
-
-  StrSize = GetPrivateProfileString("Shortcut", "Add", "", StrBuf, Len(StrBuf), gIniFileFullPath)
-  If StrSize <> 0 Then
-    KeyBindings.Add _
-      KeyCategory:=wdKeyCategoryCommand, _
-      Command:="TsvnUpdate", _
-      KeyCode:=BuildKeyCode(wdKeyShift, wdKeyControl, wdKeyA) 'Shift+Ctrl+A
-  End If
-
-  StrSize = GetPrivateProfileString("Shortcut", "Delete", "", StrBuf, Len(StrBuf), gIniFileFullPath)
-  If StrSize <> 0 Then
-    KeyBindings.Add _
-      KeyCategory:=wdKeyCategoryCommand, _
-      Command:="TsvnUpdate", _
-      KeyCode:=BuildKeyCode(wdKeyShift, wdKeyControl, wdKeyT) 'Shift+Ctrl+T
-  End If
-
-  StrSize = GetPrivateProfileString("Shortcut", "Explorer", "", StrBuf, Len(StrBuf), gIniFileFullPath)
-  If StrSize <> 0 Then
-    KeyBindings.Add _
-      KeyCategory:=wdKeyCategoryCommand, _
-      Command:="TsvnUpdate", _
-      KeyCode:=BuildKeyCode(wdKeyShift, wdKeyControl, wdKeyE) 'Shift+Ctrl+E
-  End If
+   ThisDocument.Save
+   
 End Sub
+
+Function AddKeyBindingAsIni(ByVal TsvnCmd As String, ByVal IniKeyBase As String)
+  Dim i As Long
+  Dim StrBuf As String * 128
+  Dim KeyCode As Long
+  
+  Dim IniKey As String
+  Dim Key1 As WdKey
+  Dim Key2 As WdKey
+  Dim Key3 As WdKey
+  Dim Key4 As WdKey
+  Dim KeyNum As Long
+  Dim KeyCodeSetInIni As Long
+  
+  For i = 1 To 4
+    IniKey = IniKeyBase & i
+    KeyCode = GetPrivateProfileInt("Shortcut", IniKey, wdNoKey, gIniFileFullPath)
+      
+    Select Case i
+    Case 1
+      Key1 = KeyCode
+      If Key1 = wdNoKey Then
+        KeyNum = 0
+        Exit For
+      End If
+    Case 2
+      Key2 = KeyCode
+      If Key2 = wdNoKey Then
+        KeyNum = 1
+        Exit For
+      End If
+    Case 3
+      Key3 = KeyCode
+      If Key3 = wdNoKey Then
+        KeyNum = 2
+        Exit For
+      End If
+    Case 4
+      Key4 = KeyCode
+      If Key4 = wdNoKey Then
+        KeyNum = 3
+      Else
+        KeyNum = 4
+      End If
+    Case Else
+    End Select
+  
+  Next i
+
+  Select Case KeyNum
+  Case 1
+    KeyCodeSetInIni = BuildKeyCode(Key1)
+  Case 2
+    KeyCodeSetInIni = BuildKeyCode(Key1, Key2)
+  Case 3
+    KeyCodeSetInIni = BuildKeyCode(Key1, Key2, Key3)
+  Case 4
+    KeyCodeSetInIni = BuildKeyCode(Key1, Key2, Key3, Key4)
+  Case Else
+  End Select
+  
+  KeyBindings.Add _
+    KeyCategory:=wdKeyCategoryCommand, _
+    Command:=TsvnCmd, _
+    KeyCode:=KeyCodeSetInIni
+End Function
+
+
