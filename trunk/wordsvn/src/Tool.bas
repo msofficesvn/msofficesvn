@@ -32,21 +32,23 @@ Sub RegisterShortcutByUserSetting()
 '  CustomizationContext = NormalTemplate
   CustomizationContext = ThisDocument
 
-'  AddKeyBindingAsIni "TsvnUpdate", "Update"
+  AddKeyBindingAsIni "TsvnUpdate", "Update"
   AddKeyBindingAsIni "TsvnCi", "Commit"
-'  AddKeyBindingAsIni "TsvnDiff", "Diff"
-'  AddKeyBindingAsIni "TsvnRepoBrowser", "RepoBrowser"
-'  AddKeyBindingAsIni "TsvnLog", "Log"
-'  AddKeyBindingAsIni "TsvnLock", "Lock"
-'  AddKeyBindingAsIni "TsvnUnlock", "Unlock"
-'  AddKeyBindingAsIni "TsvnAdd", "Add"
-'  AddKeyBindingAsIni "TsvnDelete", "Delete"
-'  AddKeyBindingAsIni "OpenExplorer", "Explorer"
+  AddKeyBindingAsIni "TsvnDiff", "Diff"
+  AddKeyBindingAsIni "TsvnRepoBrowser", "RepoBrowser"
+  AddKeyBindingAsIni "TsvnLog", "Log"
+  AddKeyBindingAsIni "TsvnLock", "Lock"
+  AddKeyBindingAsIni "TsvnUnlock", "Unlock"
+  AddKeyBindingAsIni "TsvnAdd", "Add"
+  AddKeyBindingAsIni "TsvnDelete", "Delete"
+  AddKeyBindingAsIni "OpenExplorer", "Explorer"
 
-   ThisDocument.Save
+  ' Save the key binding setting in the add-in file.
+  ThisDocument.Save
    
 End Sub
 
+' :Function: Add new key binding to keybindings collection as a user set in the ini file.
 Function AddKeyBindingAsIni(ByVal TsvnCmd As String, ByVal IniKeyBase As String)
   Dim i As Long
   Dim StrBuf As String * 128
