@@ -20,12 +20,24 @@ Const gIniFileName As String = "excelsvn.ini"
 'Ini File Full Path
 Public gIniFileFullPath As String
 
+
 ' :Function: Get ini file full path name
 Public Function GetIniFullPath() As String
   GetIniFullPath = ThisWorkbook.Path & "\" & gIniFileName
 End Function
 
-'*** This code is valid only for excel ***
+
+' :Function: Register shortcut keys
+Public Sub RegisterShortcutKey()
+  Dim ShortcutKeyOn As Integer
+  
+  ShortcutKeyOn = GetPrivateProfileInt("InstallOption", "ShortcutKey", 0, gIniFileFullPath)
+  If ShortcutKeyOn = 1 Then
+    RegisterShortcutByUserSetting
+  End If
+End Sub
+
+
 ' :Function: Register shortcut keys by user setting in ini file.
 Sub RegisterShortcutByUserSetting()
   Dim StrBuf As String * 128

@@ -230,13 +230,3 @@ Function GetIniToolBarInstStat() As Long
   GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarInstalled, ToolBarNotInstalled, gIniFileFullPath)
 End Function
 
-' :Function: Register shortcut keys
-Sub RegisterShortcutKey()
-  Dim ShortcutKeyOn As Integer
-  
-  ShortcutKeyOn = GetPrivateProfileInt("InstallOption", "ShortcutKey", 0, gIniFileFullPath)
-  If ShortcutKeyOn = 1 Then
-    RegisterShortcutByUserSetting
-  End If
-End Sub
-
