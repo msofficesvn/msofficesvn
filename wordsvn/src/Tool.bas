@@ -24,14 +24,48 @@ Public Function GetIniFullPath() As String
   GetIniFullPath = ThisDocument.Path & "\" & gIniFileName
 End Function
 
+' :Function: Register shortcut keys
+Sub RegisterShortcutKey()
+  Dim ShortcutKeyRegistered As Integer
+  Dim ShortcutKeyOnOffSetting As Integer
+  
+  ShortcutKeyRegistered = GetPrivateProfileInt("Shortcut", "Registered", 1, gIniFileFullPath)
+  ShortcutKeyOnOffSetting = GetPrivateProfileInt("InstallOption", "ShortcutKey", 0, gIniFileFullPath)
+  If ShortcutKeyRegistered = 0 Then
+    If ShortcutKeyOnOffSetting = 0 Then
+      ' Needs to register shortcut key
+      ClearAllRegisteredShortcut
+    Else
+      RegisterShortcutByUserSetting
+    End If
+    ' Record that registered shortcut key
+    WriteIniShortcutKeyRegStat 1
+  End If
+End Sub
+
+' :Function:  Write shortcut key registered status to ini file
+' :Arguments: 0 Not Registered (Needs to register now)
+'             1 Registered (Not need to register now)
+Function WriteIniShortcutKeyRegStat(ByVal InstStat As Integer) As Long
+  Dim StrBuf As String
+
+  StrBuf = CStr(InstStat)
+  WriteIniShortcutKeyRegStat = _
+  WritePrivateProfileString("Shortcut", "Registered", StrBuf, gIniFileFullPath)
+End Function
+
 ' :Function: Register shortcut key by user setting in ini file.
 Sub RegisterShortcutByUserSetting()
   Dim StrBuf As String * 128
   Dim StrSize As Long
 
-'  CustomizationContext = NormalTemplate
+  ' CustomizationContext = NormalTemplate
   CustomizationContext = ThisDocument
 
+  ' Clear current setting
+  KeyBindings.ClearAll
+
+  ' Register new setting
   AddKeyBindingAsIni "TsvnUpdate", "Update"
   AddKeyBindingAsIni "TsvnCi", "Commit"
   AddKeyBindingAsIni "TsvnDiff", "Diff"
@@ -46,6 +80,13 @@ Sub RegisterShortcutByUserSetting()
   ' Save the key binding setting in the add-in file.
   ThisDocument.Save
    
+End Sub
+  
+Sub ClearAllRegisteredShortcut()
+  CustomizationContext = ThisDocument
+  KeyBindings.ClearAll
+  ' Save the key binding setting in the add-in file.
+  ThisDocument.Save
 End Sub
 
 ' :Function: Add new key binding to keybindings collection as a user set in the ini file.
