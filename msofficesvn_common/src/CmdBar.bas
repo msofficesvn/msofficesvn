@@ -15,10 +15,10 @@ Attribute VB_Name = "CmdBar"
 
 Option Explicit
 
-Const IniSectionName As String = "ToolBar"
+Const IniSectNameToolBar As String = "ToolBar"
 Const IniKeyNameToolBarInstalled As String = "Installed"
-Public Const ToolBarNotInstalled As Long = 0
-Public Const ToolBarInstalled As Long = 1
+Public Const gIniValToolBarNotInstalled As Long = 0
+Public Const gIniValToolBarInstalled As Long = 1
 
 
 ' :Function: Install Subversion tool bar
@@ -48,63 +48,63 @@ Sub InstallSvnToolBar()
   cmbSvn.NameLocal = gcapSvnCmdBar
   cmbSvn.Enabled = True
   cmbSvn.Visible = True
-  
+
   Set btnCmd1 = cmbSvn.Controls.Add(Type:=msoControlButton)
   With btnCmd1
     .Caption = gcapUpdate
     .FaceId = gfidUpdate
     .OnAction = "TsvnUpdate"
   End With
-  
+
   Set btnCmd2 = cmbSvn.Controls.Add(Type:=msoControlButton)
   With btnCmd2
     .Caption = gcapLock
     .FaceId = gfidLock
     .OnAction = "TsvnLock"
   End With
-  
+
   Set btnCmd3 = cmbSvn.Controls.Add(Type:=msoControlButton)
   With btnCmd3
     .Caption = gcapCommit
     .FaceId = gfidCommit
     .OnAction = "TsvnCi"
   End With
-  
+
   Set btnCmd4 = cmbSvn.Controls.Add(Type:=msoControlButton)
   With btnCmd4
     .Caption = gcapDiff
     .FaceId = gfidDiff
     .OnAction = "TsvnDiff"
   End With
-  
+
   Set btnCmd5 = cmbSvn.Controls.Add(Type:=msoControlButton)
   With btnCmd5
     .Caption = gcapLog
     .FaceId = gfidLog
     .OnAction = "TsvnLog"
   End With
-  
+
   Set btnCmd6 = cmbSvn.Controls.Add(Type:=msoControlButton)
   With btnCmd6
     .Caption = gcapRepoBrowser
     .FaceId = gfidRepoBrowser
     .OnAction = "TsvnRepoBrowser"
   End With
-  
+
   Set btnCmd7 = cmbSvn.Controls.Add(Type:=msoControlButton)
   With btnCmd7
     .Caption = gcapUnlock
     .FaceId = gfidUnlock
     .OnAction = "TsvnUnlock"
   End With
-  
+
   Set btnCmd8 = cmbSvn.Controls.Add(Type:=msoControlButton)
   With btnCmd8
     .Caption = gcapAdd
     .FaceId = gfidAdd
     .OnAction = "TsvnAdd"
   End With
-  
+
   Set btnCmd9 = cmbSvn.Controls.Add(Type:=msoControlButton)
   With btnCmd9
     .Caption = gcapExplorer
@@ -112,6 +112,7 @@ Sub InstallSvnToolBar()
     .OnAction = "OpenExplorer"
   End With
 End Sub
+
 
 ' :Function: Install Subversion menu control
 Sub InstallSvnMenu()
@@ -178,17 +179,17 @@ Sub InstallSvnMenu()
   mnuSub8.Caption = gcapAdd & gakyAdd
   mnuSub8.OnAction = "TsvnAdd"
   mnuSub8.FaceId = gfidAdd
-  
+
   Set mnuSub9 = mnuSvn.Controls.Add
   mnuSub9.Caption = gcapDelete & gakyDelete
   mnuSub9.OnAction = "TsvnDelete"
-
 
   Set mnuSub10 = mnuSvn.Controls.Add
   mnuSub10.Caption = gcapExplorer & gakyExplorer
   mnuSub10.OnAction = "OpenExplorer"
   mnuSub10.FaceId = gfidExplorer
 End Sub
+
 
 ' :Function: Delete Subversion menu control
 Sub DeleteSvnMenu()
@@ -201,6 +202,7 @@ Sub DeleteSvnMenu()
     End If
   Next
 End Sub
+
 
 ' :Function: Delete Subversion tool bar
 Sub DeleteSvnToolBar()
@@ -215,18 +217,27 @@ Sub DeleteSvnToolBar()
   Next
 End Sub
 
-' :Function: Write tool bar install status to ini file
+
+' :Function:     Write tool bar install status to ini file
+' :Arguments:    ByVal InstStat As Integer [i] Tool bar install status
+'                                              (gIniValToolBarNotInstalled / gIniValToolBarInstalled)
+' :Return value: Return none-zero value when this function succeeds, zero when it failes.
 Function WriteIniToolBarInstStat(ByVal InstStat As Integer) As Long
   Dim StrBuf As String
 
   StrBuf = CStr(InstStat)
   WriteIniToolBarInstStat = _
-  WritePrivateProfileString(IniSectionName, IniKeyNameToolBarInstalled, StrBuf, gIniFileFullPath)
+  WritePrivateProfileString(IniSectNameToolBar, IniKeyNameToolBarInstalled, _
+                            StrBuf, gIniFileFullPath)
 End Function
 
-' :Function: Get tool bar install status from ini file
+
+' :Function:     Get tool bar install status from ini file
+' :Return value: Tool bar install status
+'                (gIniValToolBarNotInstalled / gIniValToolBarInstalled)
 Function GetIniToolBarInstStat() As Long
   GetIniToolBarInstStat = _
-  GetPrivateProfileInt(IniSectionName, IniKeyNameToolBarInstalled, ToolBarNotInstalled, gIniFileFullPath)
+  GetPrivateProfileInt(IniSectNameToolBar, IniKeyNameToolBarInstalled, _
+                       gIniValToolBarNotInstalled, gIniFileFullPath)
 End Function
 

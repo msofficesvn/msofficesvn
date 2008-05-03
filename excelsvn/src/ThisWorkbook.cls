@@ -42,7 +42,6 @@ End Sub
 ' :Function: Initialize variables because this function is executed when Excel starts.
 Private Sub Workbook_Open()
   Dim StrSize As Long
-  Dim StrBuf As String * 128
 
 '  MsgBox "Workbook_Open"
   Set MsOfficeSvnApp.App = Application
@@ -53,10 +52,8 @@ Private Sub Workbook_Open()
   RegisterShortcutKey
   ' Read commit file open mode setting from ini file
   gCommitFileOpenMode = GetPrivateProfileInt("CommitAction", "CommitFileOpenMode", 1, gIniFileFullPath)
-  '
-  StrSize = GetPrivateProfileString("InstallOption", "FileNameCharEncoding", "iso-8859-1", StrBuf, Len(StrBuf), gIniFileFullPath)
-  gFileNameCharEncoding = StrBuf
-  
+  ' Get file name character encoding scheme from ini file.
+  GetFileNameCharEncoding
 End Sub
 
 
