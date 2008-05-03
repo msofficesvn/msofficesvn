@@ -39,7 +39,6 @@ Dim MsOfficeSvnApp As New AppEvent
 Sub AutoExec()
   Dim bNeedInstToolBar As Boolean
   Dim StrSize As Long
-  Dim StrBuf As String * 128
 
   ' Assume that tool bar must be installed.
   bNeedInstToolBar = True
@@ -68,12 +67,10 @@ Sub AutoExec()
   RegisterShortcutKey
   ' Read commit file open mode setting from ini file
   gCommitFileOpenMode = GetPrivateProfileInt("CommitAction", "CommitFileOpenMode", 1, gIniFileFullPath)
-  ' Read file name character encoding setting
-  GetPrivateProfileString "InstallOption", "FileNameCharEncoding", "iso-8859-1", StrBuf, Len(StrBuf), gIniFileFullPath
-  gFileNameCharEncoding = StrBuf
+  ' Get file name character encoding scheme from ini file.
+  GetFileNameCharEncoding
 
   Register_Event_Handler
-
 End Sub
 
 ' :Function: Uninstall Subversion menu and command bar

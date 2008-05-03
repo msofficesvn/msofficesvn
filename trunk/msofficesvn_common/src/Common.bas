@@ -33,8 +33,24 @@ Public gNeedsLockPropDic As Object
 ' File Open Mode that is set by the user
 Public gCommitFileOpenMode As Integer
 
+Public Const gIniSecNameCheckSvnProp = "CheckSvnProperties"
+Public Const gIniKeyNameFileNameCharEncoding = "FileNameCharEncoding"
 ' Character Encoding Scheme for file name
 Public gFileNameCharEncoding As String
+
+Public Const gIniSectNameInstallOption As String = "InstallOption"
+' Shortcut key setting values in ini file.
+Public Const gIniSectNameShortcutKey As String = "ShortcutKey"
+Public Const gIniKeyNameShortcutKeyOnOff As String = "ShortcutKeyOnOff"
+Public Const gIniKeyNameRegistered As String = "Registered"
+' Turn off the shortcut key
+Public Const gIniValShortcutKeyOff As Long = 0
+' Turn on the shortcut key
+Public Const gIniValShortcutKeyOn As Long = 1
+' Not registered yet
+Public Const gIniValNotRegistered As Long = 0
+' Already registered
+Public Const gIniValRegistered As Long = 1
 
 ' :Function: Get numeric value from INI file
 ' :Remarks:  Declaration of Windows API
@@ -619,6 +635,16 @@ Function IsFileUnderSvnControl(ByVal FullPathName As String) As Boolean
     IsFileUnderSvnControl = False
   End If
 End Function
+
+' :Function: Get file name character encoding scheme from ini file.
+Public Sub GetFileNameCharEncoding
+  Dim StrBuf As String * 128
+
+  ' Get file name character encoding setting from ini file.
+  GetPrivateProfileString mIniSecNameCheckSvnProp, gIniKeyNameFileNameCharEncoding, _
+                          "iso-8859-1", StrBuf, Len(StrBuf), gIniFileFullPath
+  gFileNameCharEncoding = StrBuf
+End Sub
 
 ' :Function:     Convert charater encoding of the specified file.
 ' :Arguments:    ByVal SrcEncoding As String   [i] Original encoding of the file

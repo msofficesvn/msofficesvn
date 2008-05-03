@@ -19,47 +19,58 @@ Const gIniFileName As String = "wordsvn.ini"
 'Ini File Full Path
 Public gIniFileFullPath As String
 
+
 ' :Function: Get ini file full path name
 Public Function GetIniFullPath() As String
   GetIniFullPath = ThisDocument.Path & "\" & gIniFileName
 End Function
+
 
 ' :Function: Register shortcut keys
 Sub RegisterShortcutKey()
   Dim ShortcutKeyRegistered As Integer
   Dim ShortcutKeyOnOffSetting As Integer
   
-  ShortcutKeyRegistered = GetPrivateProfileInt("Shortcut", "Registered", 1, gIniFileFullPath)
-  ShortcutKeyOnOffSetting = GetPrivateProfileInt("InstallOption", "ShortcutKey", 0, gIniFileFullPath)
-  If ShortcutKeyRegistered = 0 Then
-    If ShortcutKeyOnOffSetting = 0 Then
-      ' Needs to register shortcut key
-      ClearAllRegisteredShortcut
-    Else
-      RegisterShortcutByUserSetting
+  ShortcutKeyRegistered = _
+  GetPrivateProfileInt(gIniSectNameShortcutKey, gIniKeyNameRegistered, _
+                       gIniValRegistered, gIniFileFullPath)
+
+  ShortcutKeyOnOffSetting = _
+  GetPrivateProfileInt(gIniSectNameShortcutKey, gIniKeyNameShortcutKeyOnOff, _
+                       gIniValShortcutKeyOff, gIniFileFullPath)
+  If ShortcutKeyRegistered = gIniValNotRegistered Then
+  ' Needs to register shortcut key
+    If ShortcutKeyOnOffSetting = gIniValShortcutKeyOff Then
+      ClearAllRegisteredShortcutKey
+    ElseIf ShortcutKeyOnOffSetting = gIniValShortcutKeyOn Then
+      RegisterShortcutKeyByUserSetting
     End If
-    ' Record that registered shortcut key
-    WriteIniShortcutKeyRegStat 1
+    ' Record that shortcut key assignment is registered.
+    WriteIniShortcutKeyRegStat gIniValRegistered
   End If
 End Sub
 
+
 ' :Function:  Write shortcut key registered status to ini file
-' :Arguments: 0 Not Registered (Needs to register now)
-'             1 Registered (Not need to register now)
+' :Arguments: InstStat [i] Shortcut key assignment registration status
+'                            gIniValNotRegistered (Not registered yet)
+'                            gIniValRegistered    (Already registered)
+' :Return value:
 Function WriteIniShortcutKeyRegStat(ByVal InstStat As Integer) As Long
   Dim StrBuf As String
 
   StrBuf = CStr(InstStat)
   WriteIniShortcutKeyRegStat = _
-  WritePrivateProfileString("Shortcut", "Registered", StrBuf, gIniFileFullPath)
+  WritePrivateProfileString(gIniSectNameShortcutKey, gIniKeyNameRegistered, StrBuf, gIniFileFullPath)
 End Function
 
+
 ' :Function: Register shortcut key by user setting in ini file.
-Sub RegisterShortcutByUserSetting()
+Sub RegisterShortcutKeyByUserSetting()
   Dim StrBuf As String * 128
   Dim StrSize As Long
 
-  ' CustomizationContext = NormalTemplate
+  ' Want to save this customization to the add-in file
   CustomizationContext = ThisDocument
 
   ' Clear current setting
@@ -81,8 +92,10 @@ Sub RegisterShortcutByUserSetting()
   ThisDocument.Save
    
 End Sub
-  
-Sub ClearAllRegisteredShortcut()
+
+
+' :Function: Clear all registered shortcut key bindings from the add-in file.
+Sub ClearAllRegisteredShortcutKey()
   CustomizationContext = ThisDocument
   KeyBindings.ClearAll
   ' Save the key binding setting in the add-in file.
@@ -105,7 +118,7 @@ Function AddKeyBindingAsIni(ByVal TsvnCmd As String, ByVal IniKeyBase As String)
   
   For i = 1 To 4
     IniKey = IniKeyBase & i
-    KeyCode = GetPrivateProfileInt("Shortcut", IniKey, wdNoKey, gIniFileFullPath)
+    KeyCode = GetPrivateProfileInt(gIniSectNameShortcutKey, IniKey, wdNoKey, gIniFileFullPath)
       
     Select Case i
     Case 1
@@ -135,7 +148,6 @@ Function AddKeyBindingAsIni(ByVal TsvnCmd As String, ByVal IniKeyBase As String)
       End If
     Case Else
     End Select
-  
   Next i
 
   Select Case KeyNum
