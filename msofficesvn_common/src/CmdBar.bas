@@ -8,15 +8,15 @@ Attribute VB_Name = "CmdBar"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :$Date$
+' :$Date::                           $
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: CmdBar
 ' :Description: Menu and Command bar Functions
 
 Option Explicit
 
-Const IniSectNameToolBar As String = "ToolBar"
-Const IniKeyNameToolBarInstalled As String = "Installed"
+Private Const mIniSectNameToolBar As String = "ToolBar"
+Private Const mIniKeyNameToolBarInstalled As String = "Installed"
 Public Const gIniValToolBarNotInstalled As Long = 0
 Public Const gIniValToolBarInstalled As Long = 1
 
@@ -24,8 +24,10 @@ Public Const gIniValToolBarInstalled As Long = 1
 ' :Function: Install Subversion tool bar
 Sub InstallSvnToolBar()
   ' Build the Subversion CommandBar
-  Dim cmbCmdBar As CommandBar ' Command tool bar
-  Dim cmbSvn    As CommandBar ' Subversion command tool bar
+  ' Command tool bar
+  Dim cmbCmdBar As CommandBar
+  ' Subversion command tool bar
+  Dim cmbSvn    As CommandBar
   Dim btnCmd1   As CommandBarButton
   Dim btnCmd2   As CommandBarButton
   Dim btnCmd3   As CommandBarButton
@@ -116,7 +118,8 @@ End Sub
 
 ' :Function: Install Subversion menu control
 Sub InstallSvnMenu()
-  Dim ctlMainMenu As CommandBarPopup ' Menu control object
+  ' Menu control object
+  Dim ctlMainMenu As CommandBarPopup
   Dim mnuSvn      As CommandBarControl
   Dim mnuSub1     As CommandBarButton
   Dim mnuSub2     As CommandBarButton
@@ -137,7 +140,8 @@ Sub InstallSvnMenu()
   Next
 
   ' Build the Subversion Menu
-  Set mnuSvn = Application.CommandBars(gMainMenuName).Controls.Add(Type:=msoControlPopup)
+  Set mnuSvn = _
+  Application.CommandBars(gMainMenuName).Controls.Add(Type:=msoControlPopup)
   mnuSvn.Caption = gcapSvnMenuBar
 
   Set mnuSub1 = mnuSvn.Controls.Add
@@ -193,7 +197,8 @@ End Sub
 
 ' :Function: Delete Subversion menu control
 Sub DeleteSvnMenu()
-  Dim ctlMainMenu As CommandBarPopup ' Command bar control object
+  ' Command bar control object
+  Dim ctlMainMenu As CommandBarPopup
 
   ' If Subversion menu exists, delete it.
   For Each ctlMainMenu In Application.CommandBars(gMainMenuName).Controls
@@ -206,7 +211,8 @@ End Sub
 
 ' :Function: Delete Subversion tool bar
 Sub DeleteSvnToolBar()
-  Dim cmbCmdBar As CommandBar ' Command tool bar
+  ' Command tool bar
+  Dim cmbCmdBar As CommandBar
 
   ' If Subversion menu exists, delete it.
   For Each cmbCmdBar In Application.CommandBars
@@ -219,15 +225,15 @@ End Sub
 
 
 ' :Function:     Write tool bar install status to ini file
-' :Arguments:    ByVal InstStat As Integer [i] Tool bar install status
-'                                              (gIniValToolBarNotInstalled / gIniValToolBarInstalled)
+' :Arguments:    InstStat [i] Tool bar install status
+'                             (gIniValToolBarNotInstalled / gIniValToolBarInstalled)
 ' :Return value: Return none-zero value when this function succeeds, zero when it failes.
 Function WriteIniToolBarInstStat(ByVal InstStat As Integer) As Long
   Dim StrBuf As String
 
   StrBuf = CStr(InstStat)
   WriteIniToolBarInstStat = _
-  WritePrivateProfileString(IniSectNameToolBar, IniKeyNameToolBarInstalled, _
+  WritePrivateProfileString(mIniSectNameToolBar, mIniKeyNameToolBarInstalled, _
                             StrBuf, gIniFileFullPath)
 End Function
 
@@ -237,7 +243,7 @@ End Function
 '                (gIniValToolBarNotInstalled / gIniValToolBarInstalled)
 Function GetIniToolBarInstStat() As Long
   GetIniToolBarInstStat = _
-  GetPrivateProfileInt(IniSectNameToolBar, IniKeyNameToolBarInstalled, _
+  GetPrivateProfileInt(mIniSectNameToolBar, mIniKeyNameToolBarInstalled, _
                        gIniValToolBarNotInstalled, gIniFileFullPath)
 End Function
 

@@ -7,7 +7,7 @@ Attribute VB_Name = "Tool"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :$Date$
+' :$Date::                           $
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: Tool
 ' :Description: Tool module for each office application software.
@@ -15,16 +15,16 @@ Attribute VB_Name = "Tool"
 Option Explicit
 
 'Ini File Name
-Public Const gIniFileName As String = "excelsvn.ini"
+Private Const mIniFileName As String = "excelsvn.ini"
 
 'Ini File Full Path
 Public gIniFileFullPath As String
 
 
-' :Function: Get ini file full path name
-Public Function GetIniFullPath() As String
-  GetIniFullPath = ThisWorkbook.Path & "\" & gIniFileName
-End Function
+' :Function:     Get ini file full path name and save it to the global variable
+Public Sub GetIniFullPath()
+  gIniFileFullPath = ThisWorkbook.Path & "\" & mIniFileName
+End Sub
 
 
 ' :Function: Register shortcut keys
@@ -41,7 +41,7 @@ End Sub
 
 
 ' :Function: Register shortcut keys by user setting in ini file.
-Sub RegisterShortcutKeByUserSetting()
+Sub RegisterShortcutKeyByUserSetting()
   Dim StrBuf As String * 128
   Dim StrSize As Long
 

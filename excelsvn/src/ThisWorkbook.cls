@@ -16,7 +16,7 @@ Attribute VB_Exposed = True
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :$Date$
+' :$Date::                           $
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: ThisWorkbook
 ' :Description: Office application software specific module
@@ -25,13 +25,15 @@ Option Explicit
 
 Dim MsOfficeSvnApp As New AppEvent
 
+
 ' :Function: Install Subversion menu and command bar
 Private Sub Workbook_AddinInstall()
-    ' Build the SVN Menu
-    InstallSvnMenu
-    ' Build the SVN Tool bar
-    InstallSvnToolBar
+  ' Build the SVN Menu
+  InstallSvnMenu
+  ' Build the SVN Tool bar
+  InstallSvnToolBar
 End Sub
+
 
 ' :Function: Uninstall Subversion menu and command bar
 Private Sub Workbook_AddinUninstall()
@@ -39,21 +41,23 @@ Private Sub Workbook_AddinUninstall()
   DeleteSvnToolBar
 End Sub
 
+
 ' :Function: Initialize variables because this function is executed when Excel starts.
 Private Sub Workbook_Open()
   Dim StrSize As Long
 
 '  MsgBox "Workbook_Open"
-  Set MsOfficeSvnApp.App = Application
-
   ' Ini file full path name must be aquired when add-in is loaded.
-  gIniFileFullPath = GetIniFullPath
-  ' Register shortcut key
+  GetIniFullPath
   RegisterShortcutKey
-  ' Read commit file open mode setting from ini file
-  gCommitFileOpenMode = GetPrivateProfileInt("CommitAction", "CommitFileOpenMode", 1, gIniFileFullPath)
-  ' Get file name character encoding scheme from ini file.
+  GetCommitFileOpenMode
   GetFileNameCharEncoding
+  RegisterEventHandler
 End Sub
 
+
+' :Function: Register event handler for AppEvent module
+Sub RegisterEventHandler()
+  Set MsOfficeSvnApp.App = Application
+End Sub
 
