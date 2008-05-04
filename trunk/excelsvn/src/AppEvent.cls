@@ -16,27 +16,31 @@ Attribute VB_Exposed = False
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :$Date$
+' :$Date::                           $
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: AppEvent
 ' :Description: Class module.
-'               This class is to handle application events they are issued when a workbook is manipulated.
+'               This class is to handle application events they are issued
+'               when a workbook is manipulated.
 
 
 Option Explicit
 
+
 Public WithEvents App As Application
 Attribute App.VB_VarHelpID = -1
- ' Delete "Attribute App.VB_VarHelpID = -1" line when you copy and paste the source code to excelsvn.xla
+ ' Delete "Attribute App.VB_VarHelpID = -1" line
+ ' when you copy and paste the source code to excelsvn.xla
 
-' :Function:
-' :Arguments:
+
+' :Function:  Event handler for before close workbook
+' :Arguments: Wb     [i] Workbook
+'             Cancel [i] 
 Private Sub App_WorkbookBeforeClose(ByVal Wb As Workbook, Cancel As Boolean)
   'MsgBox "workbook is going to be closed! : " & Wb.FullName
-  'On Error Resume Next
-  
+
   Dim bIsObjNothing As Boolean
-  
+
   bIsObjNothing = gNeedsLockPropDic Is Nothing
   If bIsObjNothing = False Then
       If gNeedsLockPropDic.Exists(Wb.FullName) Then
@@ -45,8 +49,9 @@ Private Sub App_WorkbookBeforeClose(ByVal Wb As Workbook, Cancel As Boolean)
   End If
 End Sub
 
-' :Function:
-' :Arguments:
+
+' :Function:  Event handler for open workbook
+' :Arguments: Wb     [i] Workbook
 Private Sub App_WorkbookOpen(ByVal Wb As Workbook)
   'MsgBox "workbook opened! : " & Wb.FullName
   If gNeedsLockPropDic Is Nothing Then
@@ -60,6 +65,5 @@ Private Sub App_WorkbookOpen(ByVal Wb As Workbook)
       End If
     End If
   End If
-    
 End Sub
 

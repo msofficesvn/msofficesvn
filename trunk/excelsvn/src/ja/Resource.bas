@@ -7,7 +7,7 @@ Attribute VB_Name = "Resource"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :$Date$
+' :$Date::                           $
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: Resource
 ' :Description: This module contains global resource data.

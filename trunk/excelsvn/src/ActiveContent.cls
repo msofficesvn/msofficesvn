@@ -16,22 +16,27 @@ Attribute VB_Exposed = False
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :$Date$
+' :$Date::                           $
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: ActiveContent
 ' :Description: Class module.
-'               This class is to manipulate active content(documnet, workbook, etc.) of MS-Office application.
+'               This class is to manipulate active content(documnet, workbook, etc.)
+'               of MS-Office application.
 '               This class hide difference among Office applications.
 
 Option Explicit
 
-Private mFullName As String ' Full path name of the active content.
-Private mName As String ' File name of the active content
-Private mPath As String ' Path of the active content
+' Full path name of the active content.
+Private mFullName As String
+' File name of the active content
+Private mName As String
+' Path of the active content
+Private mPath As String
 Private mActiveContentName As String
 Private mabsRow As Long
 Private mabsCol As Long
-Private mFileSysObj As Object ' File System Object
+' File System Object
+Private mFileSysObj As Object
 ' File attribute dictionary object
 Private mFileAttribDic As Object
 
@@ -45,11 +50,13 @@ Private Sub Class_Initialize()
   Set mFileAttribDic = CreateObject("Scripting.Dictionary")
 End Sub
 
+
 ' :Function: Terminate class module
 Private Sub Class_Terminate()
   Set mFileSysObj = Nothing
   Set mFileAttribDic = Nothing
 End Sub
+
 
 ' :Function: Return full path name of the current active content.
 ' :Return value: Full path name
@@ -57,11 +64,13 @@ Function GetFullName() As String
   GetFullName = mFullName
 End Function
 
+
 'Function: Return file name of the current active content.
 'Return: File name
 Function GetName() As String
   GetName = mName
 End Function
+
 
 ' :Function: Close the active content
 ' :Retrun value:
@@ -78,6 +87,7 @@ Function CloseFile() As Boolean
   AddWorkbookIfEmpty
 End Function
 
+
 'Function: ReOpen the active content. StoreFullName function must be called before.
 ' :Retrun value:
 Function ReOpenFile() As Boolean
@@ -86,13 +96,15 @@ Function ReOpenFile() As Boolean
   If Err.Number = 0 Then
     ReOpenFile = True
   ElseIf Err.Number = 1004 Then
-    ' User select No to the message that ask discard the current content and open the file.
+    ' User select No to the message that ask discard the current content
+    ' and open the file.
     ReOpenFile = False
   Else
     ReOpenFile = False
     MsgBox (Err.Number & ":" & Err.Description)
   End If
 End Function
+
 
 ' :Function: Save active workbook.
 ' :Retrun value: True = success, False = fail
@@ -110,11 +122,13 @@ Function SaveFile() As Boolean
   End If
 End Function
 
+
 ' :Function: Get active content file save status
 ' :Return value: True = saved, False = not saved
 Function IsSaved() As Boolean
  IsSaved = Workbooks.Item(mName).Saved
 End Function
+
 
 'Function: Store current cursor position as page number and line number of the page.
 Sub StoreCurCursorPos()
@@ -124,13 +138,16 @@ Sub StoreCurCursorPos()
   ' MsgBox "Sheet:" & mActiveContentName & ", " & "Row:" & mabsRow & ", " & "Col:" & mabsCol
 End Sub
 
-' :Function: Jump the cursor to the position that is sotred previously by StoreCurCursorPos function.
+
+' :Function: Jump the cursor to the position that is sotred previously
+'            by StoreCurCursorPos function.
 Sub JumpToStoredPos()
   Dim ActiveRange As Range
   Set ActiveRange = Cells(mabsRow, mabsCol)
   Worksheets(mActiveContentName).Activate
   Range(ActiveRange.Address).Activate
 End Sub
+
 
 ' :Function:Test whether the active content is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
@@ -143,6 +160,7 @@ Function FileExist() As Boolean
   End If
 End Function
 
+
 ' :Function: Test whether the active content file is read only or not.
 ' :Retrun value: True = Read Only, False = Not Read Only
 Function IsFileReadOnly() As Boolean
@@ -152,6 +170,7 @@ Function IsFileReadOnly() As Boolean
     IsFileReadOnly = False
   End If
 End Function
+
 
 ' :Function: Test whether the file exist in the file under version control.
 ' :Return value: True=Under version control, False=Not under version control
@@ -167,6 +186,7 @@ Function IsFolderUnderSvnControl() As Boolean
   End If
 End Function
 
+
 ' :Function: Test whether the file is under subversion control.
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFileUnderSvnControl() As Boolean
@@ -181,8 +201,10 @@ Function IsFileUnderSvnControl() As Boolean
   End If
 End Function
 
+
 ' :Funtion: Add workbook if no workbook exist before open a file.
-' :Remarks: This subroutine is required to avoid application error in Excel 97 when it opne a file.
+' :Remarks: This subroutine is required to avoid application Error
+'           in Excel 97 when it opne a file.
 Sub AddWorkbookIfEmpty()
   If GetAppMajorVersionNum < gOffice2000MajorVer Then
     If Workbooks.Count = 0 Then
