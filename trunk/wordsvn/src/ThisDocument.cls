@@ -23,16 +23,15 @@ Attribute VB_Exposed = True
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' :$Date::                           $
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: ThisDocument
 ' :Description: Office application software specific module
 
 Option Explicit
 
-'Ini File Name
-Const gIniFileName As String = "wordsvn.ini"
-
 Dim MsOfficeSvnApp As New AppEvent
+
 
 ' :Function: Install Subversion menu and command bar
 ' :Remarks:  This function is called when MS-Word starts
@@ -43,7 +42,7 @@ Sub AutoExec()
   ' Assume that tool bar must be installed.
   bNeedInstToolBar = True
   ' Ini file full path name must be aquired when add-in is loaded.
-  gIniFileFullPath = GetIniFullPath
+  GetIniFullPath
 
   ' Build the SVN Menu
   InstallSvnMenu
@@ -52,7 +51,7 @@ Sub AutoExec()
   ' Because tool bar's position is not saved if reinstall it.
   ' NOTE: I'm not sure wether it happens to only Office 97 or not.
   If GetAppMajorVersionNum < gOffice2000MajorVer Then
-    If GetIniToolBarInstStat = ToolBarInstalled Then
+    If GetIniToolBarInstStat = gIniValToolBarInstalled Then
       bNeedInstToolBar = False
     End If
   End If
@@ -60,18 +59,15 @@ Sub AutoExec()
   ' Build the SVN Tool bar
   If bNeedInstToolBar Then
     InstallSvnToolBar
-    WriteIniToolBarInstStat ToolBarInstalled
+    WriteIniToolBarInstStat gIniValToolBarInstalled
   End If
 
-  ' Register shortcut key
   RegisterShortcutKey
-  ' Read commit file open mode setting from ini file
-  gCommitFileOpenMode = GetPrivateProfileInt("CommitAction", "CommitFileOpenMode", 1, gIniFileFullPath)
-  ' Get file name character encoding scheme from ini file.
+  GetCommitFileOpenMode
   GetFileNameCharEncoding
-
-  Register_Event_Handler
+  RegisterEventHandler
 End Sub
+
 
 ' :Function: Uninstall Subversion menu and command bar
 ' :Remarks: This function is called when MS-Word exits
@@ -84,8 +80,9 @@ Sub AutoExit()
   End If
 End Sub
 
+
 ' :Function: Register event handler for AppEvent module
-Sub Register_Event_Handler()
-    Set MsOfficeSvnApp.App = Word.Application
+Sub RegisterEventHandler()
+  Set MsOfficeSvnApp.App = Word.Application
 End Sub
 

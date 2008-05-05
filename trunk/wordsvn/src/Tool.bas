@@ -7,6 +7,7 @@ Attribute VB_Name = "Tool"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' :$Date::                           $
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: Tool
 ' :Description: Tool module for each office application software.
@@ -14,7 +15,7 @@ Attribute VB_Name = "Tool"
 Option Explicit
 
 'Ini File Name
-Const gIniFileName As String = "wordsvn.ini"
+Private Const mIniFileName As String = "wordsvn.ini"
 
 'Ini File Full Path
 Public gIniFileFullPath As String
@@ -22,7 +23,7 @@ Public gIniFileFullPath As String
 
 ' :Function: Get ini file full path name
 Public Function GetIniFullPath() As String
-  GetIniFullPath = ThisDocument.Path & "\" & gIniFileName
+  gIniFileFullPath = ThisDocument.Path & "\" & mIniFileName
 End Function
 
 

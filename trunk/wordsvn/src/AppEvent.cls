@@ -15,6 +15,7 @@ Attribute VB_Exposed = False
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' :$Date::                           $
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: AppEvent
 ' :Description: Class module.
