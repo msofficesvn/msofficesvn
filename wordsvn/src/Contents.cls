@@ -25,7 +25,9 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-' :Function: Test whether content exists on the application.
+' :Function:     Test whether content exists on the application.
+' :Return value: True  = Content exists on the application
+'                False = No content exist on the application
 Function ContentExist() As Boolean
   If Documents.Count = 0 Then
     ContentExist = False

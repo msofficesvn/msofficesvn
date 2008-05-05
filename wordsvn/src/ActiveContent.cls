@@ -19,18 +19,28 @@ Attribute VB_Exposed = False
 ' :$Date::                           $
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: ActiveContent
-'   Class module
-'   This class is to manipulate active content(documnet, workbook, etc.) of MS-Office application.
-'   This class hide difference among Office applications.
+' :Description: Class module.
+'               This class is to manipulate active content(documnet, workbook, etc.)
+'               of MS-Office application.
+'               This class hide difference among Office applications.
 
 Option Explicit
 
-Private mFullName As String ' Full path name of the active content.
-Private mName As String ' File name of the active content
-Private mPath As String ' Path of the active content
-Private absPageNum As Long ' The page number of the cursor position.
-Private absLinePos As Long ' The line number of the top of the page of the cursor position.
-Private mFileSysObj As Object ' File System Object
+' Full path name of the active content.
+Private mFullName As String
+' File name of the active content
+Private mName As String
+' Path of the active content
+Private mPath As String
+' The page number of the cursor position.
+Private absPageNum As Long
+' The line number of the top of the page of the cursor position.
+Private absLinePos As Long
+' File System Object
+Private mFileSysObj As Object
+' File attribute dictionary object
+'Private mFileAttribDic As Object
+
 
 ' :Function: Initialize class module
 Private Sub Class_Initialize()
@@ -38,28 +48,35 @@ Private Sub Class_Initialize()
   mName = ActiveDocument.Name
   mPath = ActiveDocument.Path
   Set mFileSysObj = CreateObject("Scripting.FileSystemObject")
+'  Set mFileAttribDic = CreateObject("Scripting.Dictionary")
 End Sub
+
 
 ' :Function: Terminate class module
 Private Sub Class_Terminate()
   Set mFileSysObj = Nothing
+'  Set mFileAttribDic = Nothing
 End Sub
 
-'Function: Return full path name of the current active content.
-'Return: Full path name
+
+' :Function: Return full path name of the current active content.
+' :Return value: Full path name
 Function GetFullName() As String
   GetFullName = mFullName
 End Function
 
-'Function: Return file name of the current active content.
-'Return: File name
+
+' :Function: Return file name of the current active content.
+' :Return value: File name
 Function GetName() As String
   GetName = mName
 End Function
 
-'Function: Close the active content
+
+' :Function: Close the active content
+' :Retrun value: True = success, False = fail
 Function CloseFile() As Boolean
-  On Error Resume Next
+  'On Error Resume Next
   Documents(mName).Close
   If Err.Number = 0 Then
     CloseFile = True
@@ -75,14 +92,17 @@ Function CloseFile() As Boolean
   End If
 End Function
 
-'Function: ReOpen the active content. StoreFullName function must be called before.
+
+' :Function: Reopen the active content. StoreFullName function must be called before.
+' :Retrun value: True = success, False = fail
 Function ReOpenFile() As Boolean
-  On Error Resume Next
+  'On Error Resume Next
   Documents.Open FileName:=mFullName
   If Err.Number = 0 Then
     ReOpenFile = True
   ElseIf Err.Number = 1004 Then
-    ' User select No to the message that ask discard the current content and open the file.
+    ' User select No to the message that ask discard the current content
+    ' and open the file.
     ReOpenFile = False
   Else
     ReOpenFile = False
@@ -90,10 +110,11 @@ Function ReOpenFile() As Boolean
   End If
 End Function
 
+
 ' :Function: Save active workbook.
 ' :Retrun value: True = success, False = fail
 Function SaveFile() As Boolean
-  On Error Resume Next
+  'On Error Resume Next
   Documents(mName).Save
   If Err.Number = 0 Then
     SaveFile = True
@@ -106,24 +127,29 @@ Function SaveFile() As Boolean
   End If
 End Function
 
+
 ' :Function: Get active content file save status
 ' :Return value: True = saved, False = not saved
 Function IsSaved() As Boolean
  IsSaved = Documents(mName).Saved
 End Function
 
-'Function: Store current cursor position as page number and line number of the page.
+
+' :Function: Store current cursor position as page number and line number of the page.
 Sub StoreCurCursorPos()
   absPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
   absLinePos = Selection.Information(wdFirstCharacterLineNumber)
   'MsgBox "Page:" & absPageNum & "," & "Line:" & absLinePos
 End Sub
 
-'Function: Jump the cursor to the position that is sotred previously by StoreCurCursorPos function.
+
+' :Function: Jump the cursor to the position that is sotred previously
+'            by StoreCurCursorPos function.
 Sub JumpToStoredPos()
   Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=absPageNum, Name:=""
   Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=(absLinePos - 1), Name:=""
 End Sub
+
 
 ' :Function:Test whether the active content is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
@@ -136,6 +162,7 @@ Function FileExist() As Boolean
   End If
 End Function
 
+
 ' :Function: Test whether the active content file is read only or not.
 ' :Retrun value: True = Read Only, False = Not Read Only
 Function IsFileReadOnly() As Boolean
@@ -145,6 +172,7 @@ Function IsFileReadOnly() As Boolean
     IsFileReadOnly = False
   End If
 End Function
+
 
 ' :Function: Test whether the file exist in the file under version control.
 ' :Return value: True=Under version control, False=Not under version control
@@ -159,6 +187,7 @@ Function IsFolderUnderSvnControl() As Boolean
     IsFolderUnderSvnControl = False
   End If
 End Function
+
 
 ' :Function: Test whether the file is under subversion control.
 ' :Return value: True=Under version control, False=Not under version control

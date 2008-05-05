@@ -39,6 +39,7 @@ Sub AutoExec()
   Dim bNeedInstToolBar As Boolean
   Dim StrSize As Long
 
+  'Msgbox "AutoExec Starts."
   ' Assume that tool bar must be installed.
   bNeedInstToolBar = True
   ' Ini file full path name must be aquired when add-in is loaded.

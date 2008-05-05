@@ -21,7 +21,7 @@ Private Const mIniFileName As String = "excelsvn.ini"
 Public gIniFileFullPath As String
 
 
-' :Function:     Get ini file full path name and save it to the global variable
+' :Function: Get ini file full path name and save it to the global variable
 Public Sub GetIniFullPath()
   gIniFileFullPath = ThisWorkbook.Path & "\" & mIniFileName
 End Sub
