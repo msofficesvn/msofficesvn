@@ -21,14 +21,14 @@ Private Const mIniFileName As String = "wordsvn.ini"
 Public gIniFileFullPath As String
 
 
-' :Function: Get ini file full path name
-Public Function GetIniFullPath() As String
+' :Function: Get ini file full path name and save it to the global variable
+Public Sub GetIniFullPath()
   gIniFileFullPath = ThisDocument.Path & "\" & mIniFileName
-End Function
+End Sub
 
 
 ' :Function: Register shortcut keys
-Sub RegisterShortcutKey()
+Public Sub RegisterShortcutKey()
   Dim ShortcutKeyRegistered As Integer
   Dim ShortcutKeyOnOffSetting As Integer
   
@@ -66,7 +66,7 @@ Function WriteIniShortcutKeyRegStat(ByVal InstStat As Integer) As Long
 End Function
 
 
-' :Function: Register shortcut key by user setting in ini file.
+' :Function: Register shortcut keys by user setting in ini file.
 Sub RegisterShortcutKeyByUserSetting()
   Dim StrBuf As String * 128
   Dim StrSize As Long

@@ -19,34 +19,43 @@ Attribute VB_Exposed = False
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: AppEvent
 ' :Description: Class module.
-'               This class is to handle application events they are issued when a workbook is manipulated.
+'               This class is to handle application events they are issued
+'               when a workbook is manipulated.
 
 
 Option Explicit
 
+
 Public WithEvents App As Word.Application
 Attribute App.VB_VarHelpID = -1
+ ' Delete "Attribute App.VB_VarHelpID = -1" line
+ ' when you copy and paste the source code to excelsvn.xla
 
+
+' :Function:  Event handler for before close document
+' :Arguments: Doc    [i] Document
+'             Cancel [i] 
 Private Sub App_DocumentBeforeClose(ByVal Doc As Document, Cancel As Boolean)
-  'MsgBox "workbook is going to be closed! : " & Document.FullName
-  
   Dim bIsObjNothing As Boolean
-  
+
+  'MsgBox "workbook is going to be closed! : " & Document.FullName
   bIsObjNothing = gNeedsLockPropDic Is Nothing
   If bIsObjNothing = False Then
       If gNeedsLockPropDic.Exists(Doc.FullName) Then
          gNeedsLockPropDic.Remove (Doc.FullName)
      End If
   End If
-
 End Sub
 
+
+' :Function:  Event handler for open document
+' :Arguments: Doc    [i] Document
 Private Sub App_DocumentOpen(ByVal Doc As Document)
 '  MsgBox "App_DocumentOpen" & Doc.FullName
   If gNeedsLockPropDic Is Nothing Then
     Set gNeedsLockPropDic = CreateObject("Scripting.Dictionary")
   End If
-  
+
   If IsFileUnderSvnControl(Doc.FullName) Then
     If CheckNeedsLockProperty(Doc.FullName) Then
       If Not gNeedsLockPropDic.Exists(Doc.FullName) Then
@@ -54,6 +63,5 @@ Private Sub App_DocumentOpen(ByVal Doc As Document)
       End If
     End If
   End If
-
 End Sub
 

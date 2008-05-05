@@ -38,7 +38,7 @@ Private mabsCol As Long
 ' File System Object
 Private mFileSysObj As Object
 ' File attribute dictionary object
-Private mFileAttribDic As Object
+'Private mFileAttribDic As Object
 
 
 ' :Function: Initialize class module
@@ -47,14 +47,14 @@ Private Sub Class_Initialize()
   mName = ActiveWorkbook.Name
   mPath = ActiveWorkbook.Path
   Set mFileSysObj = CreateObject("Scripting.FileSystemObject")
-  Set mFileAttribDic = CreateObject("Scripting.Dictionary")
+'  Set mFileAttribDic = CreateObject("Scripting.Dictionary")
 End Sub
 
 
 ' :Function: Terminate class module
 Private Sub Class_Terminate()
   Set mFileSysObj = Nothing
-  Set mFileAttribDic = Nothing
+'  Set mFileAttribDic = Nothing
 End Sub
 
 
@@ -65,15 +65,15 @@ Function GetFullName() As String
 End Function
 
 
-'Function: Return file name of the current active content.
-'Return: File name
+' :Function: Return file name of the current active content.
+' :Return value: File name
 Function GetName() As String
   GetName = mName
 End Function
 
 
 ' :Function: Close the active content
-' :Retrun value:
+' :Retrun value: True = success, False = fail
 Function CloseFile() As Boolean
   'On Error Resume Next
   Workbooks.Item(mName).Close
@@ -88,10 +88,10 @@ Function CloseFile() As Boolean
 End Function
 
 
-'Function: ReOpen the active content. StoreFullName function must be called before.
-' :Retrun value:
+' :Function: Reopen the active content. StoreFullName function must be called before.
+' :Retrun value: True = success, False = fail
 Function ReOpenFile() As Boolean
-  On Error Resume Next
+  'On Error Resume Next
   Workbooks.Open FileName:=mFullName
   If Err.Number = 0 Then
     ReOpenFile = True
@@ -109,7 +109,7 @@ End Function
 ' :Function: Save active workbook.
 ' :Retrun value: True = success, False = fail
 Function SaveFile() As Boolean
-  On Error Resume Next
+  'On Error Resume Next
   Workbooks.Item(mName).Save
   If Err.Number = 0 Then
     SaveFile = True
@@ -130,7 +130,7 @@ Function IsSaved() As Boolean
 End Function
 
 
-'Function: Store current cursor position as page number and line number of the page.
+' :Function: Store current cursor position as page number and line number of the page.
 Sub StoreCurCursorPos()
   mActiveContentName = Workbooks.Item(mName).ActiveSheet.Name
   mabsRow = ActiveCell.Row
