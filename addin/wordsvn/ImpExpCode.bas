@@ -3,7 +3,6 @@ Option Explicit
 
 ' INI file name
 Public Const gIniFileName As String = "ImpExpCode.ini"
-Public Const gIniSectionName As String = "ExcelImportFiles"
 
 ' :Function: Get numeric value from INI file
 ' :Remarks:  Declaration of Windows API
@@ -43,7 +42,7 @@ Sub ImportCode()
   Dim Ret As Long
   Dim AddedComponent As VBComponent
   'Set Content = AddContent
-  Set Content = Workbooks.Add
+  Set Content = Documents.Add
 
   'Content.VBProject.VBComponents.Import "C:\work\msofficesvn\trunk\msofficesvn_common\src\CmdBar.bas"
   'Content.VBProject.VBComponents.Import "C:\work\msofficesvn\trunk\msofficesvn_common\src\Common.bas"
@@ -62,9 +61,9 @@ Sub ImportCode()
     Ret = GetPrivateProfileString(gIniSectionName, IniKeyImpFile, "", ImportFile, 260, IniFullPath)
     Count = Count + 1
     If Ret <> 0 Then
-      If InStr(ImportFile, "ThisWorkbook.cls") <> 0 Then
+      If InStr(ImportFile, gThisContentModule) <> 0 Then
         ' This code causes excel crash.
-        'Content.VBProject.VBComponents("ThisWorkbook").CodeModule.AddFromFile ImportFile
+        'Content.VBProject.VBComponents(gThisContentModule).CodeModule.AddFromFile ImportFile
         ' This code work well
         'Content.VBProject.VBComponents.Add(vbext_ct_ClassModule).CodeModule.AddFromFile ImportFile
         CreateObject("WScript.Shell").Run "Notepad.exe " & ImportFile, , False
@@ -108,8 +107,8 @@ Sub ExportCode()
   For Each Proj In Application.VBE.VBProjects
     Debug.Print Proj.Name & vbCrLf
     Debug.Print Proj.Filename & vbCrLf
-    Debug.Print Proj.Description & vbCrLf
-    Debug.Print Proj.Protection & vbCrLf
+    'Debug.Print Proj.Description & vbCrLf
+    'Debug.Print Proj.Protection & vbCrLf
     
     Dim FoundPos As Integer
     FoundPos = InStr(Proj.Filename, gTargetContentFile)
@@ -170,12 +169,12 @@ Sub ExportCode()
         FoundPos = InStr(ImportFile, CodeFileName)
         If FoundPos <> 0 Then
           n.Export ImportFile
+          Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
         End If
       End If
-      Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
+      'Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
     Loop While Ret <> 0
-  
-  
+ 
   Next
 
 End Sub
