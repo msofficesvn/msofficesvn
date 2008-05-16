@@ -27,9 +27,6 @@ Public Const gOfficeXPMajorVer = 10
 Public Const gOffice2003MajorVer = 11
 Public Const gOffice2007MajorVer = 12
 
-' Dictionary Object to memorize the file name that have svn:needs-lock property.
-Public gNeedsLockPropDic As Object
-
 ' File Open Mode that is set by the user
 Public gCommitFileOpenMode As Integer
 
@@ -184,24 +181,20 @@ End Sub
 
 ' :Function: Check to need to close, commit and reopen the file.
 Function NeedsCloseAndReopenFileInCommit(ByVal FileFullName As String) As Boolean
-    If gNeedsLockPropDic Is Nothing Then
+  Select Case gCommitFileOpenMode
+    Case 1 ' Close the file before commit and reopen it
       NeedsCloseAndReopenFileInCommit = True
-      Exit Function
-    End If
-    Select Case gCommitFileOpenMode
-      Case 1 ' Close the file before commit and reopen it
+    Case 2 ' Not Close the file
+      NeedsCloseAndReopenFileInCommit = False
+    Case 3
+      If IsNeedsLockProp(FileFullName) Then
         NeedsCloseAndReopenFileInCommit = True
-      Case 2 ' Not Close the file
+      Else
         NeedsCloseAndReopenFileInCommit = False
-      Case 3
-        If gNeedsLockPropDic.Exists(FileFullName) Then
-          NeedsCloseAndReopenFileInCommit = True
-        Else
-          NeedsCloseAndReopenFileInCommit = False
-        End If
-      Case Else
-        NeedsCloseAndReopenFileInCommit = True
-    End Select
+      End If
+    Case Else
+      NeedsCloseAndReopenFileInCommit = True
+  End Select
 End Function
 
 
@@ -558,6 +551,9 @@ Sub TsvnAdd()
         End If
       End If
     End If ' If ActiveContent.IsSaved = False Then
+
+    ' Test svn:needs-lock property of the file
+    AddNeedsLockPropAdminTable ActiveContent.GetFullName
 
     TsvnCi
 

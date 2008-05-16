@@ -25,43 +25,25 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-
 Public WithEvents App As Word.Application
 Attribute App.VB_VarHelpID = -1
  ' Delete "Attribute App.VB_VarHelpID = -1" line
  ' when you copy and paste the source code to excelsvn.xla
 
 
-' :Function:  Event handler for before close document
-' :Arguments: Doc    [i] Document
-'             Cancel [i] 
-Private Sub App_DocumentBeforeClose(ByVal Doc As Document, Cancel As Boolean)
-  Dim bIsObjNothing As Boolean
-
-  'MsgBox "workbook is going to be closed! : " & Document.FullName
-  bIsObjNothing = gNeedsLockPropDic Is Nothing
-  If bIsObjNothing = False Then
-      If gNeedsLockPropDic.Exists(Doc.FullName) Then
-         gNeedsLockPropDic.Remove (Doc.FullName)
-     End If
-  End If
-End Sub
-
-
 ' :Function:  Event handler for open document
 ' :Arguments: Doc    [i] Document
 Private Sub App_DocumentOpen(ByVal Doc As Document)
 '  MsgBox "App_DocumentOpen" & Doc.FullName
-  If gNeedsLockPropDic Is Nothing Then
-    Set gNeedsLockPropDic = CreateObject("Scripting.Dictionary")
-  End If
+  AddNeedsLockPropAdminTable Doc.FullName
+End Sub
 
-  If IsFileUnderSvnControl(Doc.FullName) Then
-    If CheckNeedsLockProperty(Doc.FullName) Then
-      If Not gNeedsLockPropDic.Exists(Doc.FullName) Then
-        gNeedsLockPropDic.Add Doc.FullName, Doc.FullName
-      End If
-    End If
-  End If
+
+' :Function:  Event handler for before close document
+' :Arguments: Doc    [i] Document
+'             Cancel [i] 
+Private Sub App_DocumentBeforeClose(ByVal Doc As Document, Cancel As Boolean)
+  'MsgBox "workbook is going to be closed! : " & Document.FullName
+  RemoveNeedsLockPropAdminTable Doc.FullName
 End Sub
 
