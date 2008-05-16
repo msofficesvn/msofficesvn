@@ -90,7 +90,7 @@ End Function
 
 ' :Function: Get commit file open mode setting from ini file
 '            and save it to the global variable
-Sub GetCommitFileOpenMode
+Sub GetCommitFileOpenMode()
   gCommitFileOpenMode = _
   GetPrivateProfileInt("CommitAction", "CommitFileOpenMode", 1, gIniFileFullPath)
 End Sub
@@ -184,20 +184,24 @@ End Sub
 
 ' :Function: Check to need to close, commit and reopen the file.
 Function NeedsCloseAndReopenFileInCommit(ByVal FileFullName As String) As Boolean
-  Select Case gCommitFileOpenMode
-    Case 1 ' Close the file before commit and reopen it
+    If gNeedsLockPropDic Is Nothing Then
       NeedsCloseAndReopenFileInCommit = True
-    Case 2 ' Not Close the file
-      NeedsCloseAndReopenFileInCommit = False
-    Case 3
-      If gNeedsLockPropDic.Exists(FileFullName) Then
+      Exit Function
+    End If
+    Select Case gCommitFileOpenMode
+      Case 1 ' Close the file before commit and reopen it
         NeedsCloseAndReopenFileInCommit = True
-      Else
+      Case 2 ' Not Close the file
         NeedsCloseAndReopenFileInCommit = False
-      End If
-    Case Else
-      NeedsCloseAndReopenFileInCommit = True
-  End Select
+      Case 3
+        If gNeedsLockPropDic.Exists(FileFullName) Then
+          NeedsCloseAndReopenFileInCommit = True
+        Else
+          NeedsCloseAndReopenFileInCommit = False
+        End If
+      Case Else
+        NeedsCloseAndReopenFileInCommit = True
+    End Select
 End Function
 
 
@@ -725,7 +729,7 @@ End Function
 
 
 ' :Function: Get file name character encoding scheme from ini file.
-Public Sub GetFileNameCharEncoding
+Public Sub GetFileNameCharEncoding()
   Dim StrBuf As String * 128
 
   ' Get file name character encoding setting from ini file.
