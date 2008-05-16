@@ -110,10 +110,10 @@ Function AddKeyBindingAsIni(ByVal TsvnCmd As String, ByVal IniKeyBase As String)
   Dim KeyCode As Long
   
   Dim IniKey As String
-  Dim Key1 As WdKey
-  Dim Key2 As WdKey
-  Dim Key3 As WdKey
-  Dim Key4 As WdKey
+  Dim Key1 As Variant
+  Dim Key2 As Variant
+  Dim Key3 As Variant
+  Dim Key4 As Variant
   Dim KeyNum As Long
   Dim KeyCodeSetInIni As Long
   
