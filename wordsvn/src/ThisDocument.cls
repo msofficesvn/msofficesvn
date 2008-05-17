@@ -30,8 +30,9 @@ Attribute VB_Exposed = True
 
 Option Explicit
 
-Dim MsOfficeSvnApp As New AppEvent
-
+Dim MsOfficeSvnAppEvent As New AppEvent
+'Ini File Name
+Private Const mIniFileName As String = "wordsvn.ini"
 
 ' :Function: Install Subversion menu and command bar
 ' :Remarks:  This function is called when MS-Word starts
@@ -43,7 +44,7 @@ Sub AutoExec()
   ' Assume that tool bar must be installed.
   bNeedInstToolBar = True
   ' Ini file full path name must be aquired when add-in is loaded.
-  GetIniFullPath
+  InitializeIniFileFullPath mIniFileName
 
   ' Build the SVN Menu
   InstallSvnMenu
@@ -82,8 +83,8 @@ Sub AutoExit()
 End Sub
 
 
-' :Function: Register event handler for AppEvent module
+' :Function: Register event handler for Application
 Sub RegisterEventHandler()
-  Set MsOfficeSvnApp.App = Word.Application
+  Set MsOfficeSvnAppEvent.App = Application
 End Sub
 

@@ -234,7 +234,7 @@ Function WriteIniToolBarInstStat(ByVal InstStat As Integer) As Long
   StrBuf = CStr(InstStat)
   WriteIniToolBarInstStat = _
   WritePrivateProfileString(mIniSectNameToolBar, mIniKeyNameToolBarInstalled, _
-                            StrBuf, gIniFileFullPath)
+                            StrBuf, GetIniFileFullPath)
 End Function
 
 
@@ -244,6 +244,6 @@ End Function
 Function GetIniToolBarInstStat() As Long
   GetIniToolBarInstStat = _
   GetPrivateProfileInt(mIniSectNameToolBar, mIniKeyNameToolBarInstalled, _
-                       gIniValToolBarNotInstalled, gIniFileFullPath)
+                       gIniValToolBarNotInstalled, GetIniFileFullPath)
 End Function
 
