@@ -38,8 +38,6 @@ Private absPageNum As Long
 Private absLinePos As Long
 ' File System Object
 Private mFileSysObj As Object
-' File attribute dictionary object
-'Private mFileAttribDic As Object
 
 
 ' :Function: Initialize class module
@@ -48,14 +46,12 @@ Private Sub Class_Initialize()
   mName = ActiveDocument.Name
   mPath = ActiveDocument.Path
   Set mFileSysObj = CreateObject("Scripting.FileSystemObject")
-'  Set mFileAttribDic = CreateObject("Scripting.Dictionary")
 End Sub
 
 
 ' :Function: Terminate class module
 Private Sub Class_Terminate()
   Set mFileSysObj = Nothing
-'  Set mFileAttribDic = Nothing
 End Sub
 
 

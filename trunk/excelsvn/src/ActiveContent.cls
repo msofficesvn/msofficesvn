@@ -37,8 +37,6 @@ Private mabsRow As Long
 Private mabsCol As Long
 ' File System Object
 Private mFileSysObj As Object
-' File attribute dictionary object
-'Private mFileAttribDic As Object
 
 
 ' :Function: Initialize class module
@@ -47,7 +45,6 @@ Private Sub Class_Initialize()
   mName = ActiveWorkbook.Name
   mPath = ActiveWorkbook.Path
   Set mFileSysObj = CreateObject("Scripting.FileSystemObject")
-'  Set mFileAttribDic = CreateObject("Scripting.Dictionary")
 End Sub
 
 
@@ -75,7 +72,6 @@ End Function
 ' :Function: Close the active content
 ' :Retrun value: True = success, False = fail
 Function CloseFile() As Boolean
-  'On Error Resume Next
   Workbooks.Item(mName).Close
   If Err.Number = 0 Then
     CloseFile = True
@@ -91,12 +87,11 @@ End Function
 ' :Function: Reopen the active content. StoreFullName function must be called before.
 ' :Retrun value: True = success, False = fail
 Function ReOpenFile() As Boolean
-  'On Error Resume Next
   Workbooks.Open FileName:=mFullName
   If Err.Number = 0 Then
     ReOpenFile = True
   ElseIf Err.Number = 1004 Then
-    ' User select No to the message that ask discard the current content
+    ' User selects No to the message that asks to discard the current content
     ' and open the file.
     ReOpenFile = False
   Else
@@ -109,7 +104,6 @@ End Function
 ' :Function: Save active workbook.
 ' :Retrun value: True = success, False = fail
 Function SaveFile() As Boolean
-  'On Error Resume Next
   Workbooks.Item(mName).Save
   If Err.Number = 0 Then
     SaveFile = True

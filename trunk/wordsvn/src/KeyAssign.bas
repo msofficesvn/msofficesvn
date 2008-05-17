@@ -14,31 +14,18 @@ Attribute VB_Name = "Tool"
 
 Option Explicit
 
-'Ini File Name
-Private Const mIniFileName As String = "wordsvn.ini"
-
-'Ini File Full Path
-Public gIniFileFullPath As String
-
-
-' :Function: Get ini file full path name and save it to the global variable
-Public Sub GetIniFullPath()
-  gIniFileFullPath = ThisDocument.Path & "\" & mIniFileName
-End Sub
-
-
 ' :Function: Register shortcut keys
 Public Sub RegisterShortcutKey()
   Dim ShortcutKeyRegistered As Integer
   Dim ShortcutKeyOnOffSetting As Integer
-  
+
   ShortcutKeyRegistered = _
   GetPrivateProfileInt(gIniSectNameShortcutKey, gIniKeyNameRegistered, _
-                       gIniValRegistered, gIniFileFullPath)
+                       gIniValRegistered, GetIniFileFullPath)
 
   ShortcutKeyOnOffSetting = _
   GetPrivateProfileInt(gIniSectNameShortcutKey, gIniKeyNameShortcutKeyOnOff, _
-                       gIniValShortcutKeyOff, gIniFileFullPath)
+                       gIniValShortcutKeyOff, GetIniFileFullPath)
   If ShortcutKeyRegistered = gIniValNotRegistered Then
   ' Needs to register shortcut key
     If ShortcutKeyOnOffSetting = gIniValShortcutKeyOff Then
@@ -62,7 +49,7 @@ Function WriteIniShortcutKeyRegStat(ByVal InstStat As Integer) As Long
 
   StrBuf = CStr(InstStat)
   WriteIniShortcutKeyRegStat = _
-  WritePrivateProfileString(gIniSectNameShortcutKey, gIniKeyNameRegistered, StrBuf, gIniFileFullPath)
+  WritePrivateProfileString(gIniSectNameShortcutKey, gIniKeyNameRegistered, StrBuf, GetIniFileFullPath)
 End Function
 
 
@@ -119,7 +106,7 @@ Function AddKeyBindingAsIni(ByVal TsvnCmd As String, ByVal IniKeyBase As String)
   
   For i = 1 To 4
     IniKey = IniKeyBase & i
-    KeyCode = GetPrivateProfileInt(gIniSectNameShortcutKey, IniKey, wdNoKey, gIniFileFullPath)
+    KeyCode = GetPrivateProfileInt(gIniSectNameShortcutKey, IniKey, wdNoKey, GetIniFileFullPath)
       
     Select Case i
     Case 1

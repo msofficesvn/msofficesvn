@@ -23,7 +23,9 @@ Attribute VB_Exposed = True
 
 Option Explicit
 
-Dim MsOfficeSvnApp As New AppEvent
+Dim MsOfficeSvnAppEvent As New AppEvent
+'Ini File Name
+Private Const mIniFileName As String = "excelsvn.ini"
 
 
 ' :Function: Install Subversion menu and command bar
@@ -48,7 +50,7 @@ Private Sub Workbook_Open()
 
 '  MsgBox "Workbook_Open"
   ' Ini file full path name must be aquired when add-in is loaded.
-  GetIniFullPath
+  InitializeIniFullPath mIniFileName
   RegisterShortcutKey
   GetCommitFileOpenMode
   GetFileNameCharEncoding
@@ -56,9 +58,9 @@ Private Sub Workbook_Open()
 End Sub
 
 
-' :Function: Register event handler for AppEvent module
+' :Function: Register event handler for Application
 Sub RegisterEventHandler()
-  Set MsOfficeSvnApp.App = Application
+  Set MsOfficeSvnAppEvent.App = Application
 End Sub
 
 
