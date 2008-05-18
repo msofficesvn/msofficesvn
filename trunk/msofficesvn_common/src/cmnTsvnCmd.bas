@@ -1,4 +1,4 @@
-Attribute VB_Name = "TsvnCmd"
+Attribute VB_Name = "cmnTsvnCmd"
 '------------------- Copy & paste from here to the Common object of add-in file --------------------
 ' $Rev: 283 $
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>

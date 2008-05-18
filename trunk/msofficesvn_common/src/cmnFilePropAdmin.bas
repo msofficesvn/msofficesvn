@@ -1,4 +1,4 @@
-Attribute VB_Name = "FilePropAdmin"
+Attribute VB_Name = "cmnFilePropAdmin"
 '------------------- Copy & paste from here to the FilePropAdmin module of excelsvn.xla --------------------
 ' $Rev: 273 $
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>

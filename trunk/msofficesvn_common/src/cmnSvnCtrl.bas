@@ -1,4 +1,4 @@
-Attribute VB_Name = "SvnCtrl.bas"
+Attribute VB_Name = "cmnSvnCtrl.bas"
 '------------------- Copy & paste from here to the Common object of add-in file --------------------
 ' $Rev: 283 $
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
