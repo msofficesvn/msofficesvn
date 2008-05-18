@@ -1,7 +1,7 @@
-Attribute VB_Name = "Common"
+Attribute VB_Name = "cmnVersion"
 '------------------- Copy & paste from here to the Common object of add-in file --------------------
 ' $Rev: 283 $
-' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
+' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     All rights reserved.
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '

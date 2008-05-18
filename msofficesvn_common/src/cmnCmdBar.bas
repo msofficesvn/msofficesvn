@@ -1,4 +1,4 @@
-Attribute VB_Name = "CmdBar"
+Attribute VB_Name = "cmnCmdBar"
 '------------------- Copy & paste from here to the CmdBar module of add-in --------------------
 ' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>

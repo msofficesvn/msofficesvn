@@ -1,14 +1,14 @@
-Attribute VB_Name = "Common"
+Attribute VB_Name = "cmnKeyAssign"
 '------------------- Copy & paste from here to the Common object of add-in file --------------------
-' $Rev$
-' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
+' $Rev: 287 $
+' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     All rights reserved.
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :$Date::                           $
+' :$Date:: 2008-05-18 03:28:35 +0900#$
 ' :Author:        Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name:   Common
 ' :Description:   Common module through office application software.
