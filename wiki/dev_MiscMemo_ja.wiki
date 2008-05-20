@@ -89,7 +89,7 @@ http://support.microsoft.com/?scid=kb%3Ben-us%3B280157&x=7&y=15
  * Excel起動時にadd-in中の関数を自動実行させる方法
 
  # 標準モジュールに Auto_Open を実装する。(ただし、ThisWorkbookモジュールに実装すると実行されないので注意)
- # ThisWorkbookに Workbook_Open を実装する
+ # ThisWorkbookに Workbook_Open を実装する(ただし、Excel97ではファイルを開くイベントが発生しないようである。)
 
  * In place編集のチェック必要?
 
