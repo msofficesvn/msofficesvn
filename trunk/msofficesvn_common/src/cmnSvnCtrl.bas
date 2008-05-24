@@ -18,6 +18,8 @@ Option Explicit
 
 ' Character Encoding Scheme for file name
 Public gFileNameCharEncoding As String
+Private Const mIniSecNameCheckSvnProp = "CheckSvnProperties"
+Private Const mIniKeyNameFileNameCharEncoding = "FileNameCharEncoding"
 
 
 ' :Function:     Test whether the file is under subversion control.
@@ -72,7 +74,7 @@ Public Function ConvFileCharEncoding(ByVal SrcEncoding As String, _
   Set FirstObj = CreateObject("ADODB.Stream")
 
   With FirstObj
-    .Type = adTypeText
+    .Type = 2 'adTypeText
     .Charset = SrcEncoding
     .Open
     .LoadFromFile InputFilePath
@@ -82,7 +84,7 @@ Public Function ConvFileCharEncoding(ByVal SrcEncoding As String, _
   Set SecondObj = CreateObject("ADODB.Stream")
 
   With SecondObj
-    .Type = adTypeText
+    .Type = 2 'adTypeText
     .Charset = DesEncoding
     .Open
   End With
