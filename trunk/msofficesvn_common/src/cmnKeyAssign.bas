@@ -1,32 +1,96 @@
-Attribute VB_Name = "cmnKeyAssign"
-'------------------- Copy & paste from here to the Common object of add-in file --------------------
+Attribute VB_Name = "KeyAssign"
+'------------------- Copy & paste from here to the Tool module of excelsvn.xla --------------------
 ' $Rev: 287 $
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
-'     All rights reserved.
 '     This is free software with ABSOLUTELY NO WARRANTY.
 '
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
 ' :$Date:: 2008-05-18 03:28:35 +0900#$
-' :Author:        Koki Yamamoto <kokiya@gmail.com>
-' :Module Name:   Common
-' :Description:   Common module through office application software.
-'                 This module needs "Microsoft ActiveX Data Objects 2.5 Library"
+' :Author: Koki Yamamoto <kokiya@gmail.com>
+' :Module Name: Tool
+' :Description: Tool module for each office application software.
 
 Option Explicit
 
-' Shortcut key setting values in ini file.
-Public Const gIniSectNameShortcutKey As String = "ShortcutKey"
-Public Const gIniKeyNameShortcutKeyOnOff As String = "ShortcutKeyOnOff"
-Public Const gIniKeyNameRegistered As String = "Registered"
-' Turn off the shortcut key
-Public Const gIniValShortcutKeyOff As Long = 0
-' Turn on the shortcut key
-Public Const gIniValShortcutKeyOn As Long = 1
-' Not registered yet
-Public Const gIniValNotRegistered As Long = 0
-' Already registered
-Public Const gIniValRegistered As Long = 1
+' :Function: Register shortcut keys
+Public Sub RegisterShortcutKey()
+  Dim ShortcutKeyOnOffSetting As Integer
+  
+  ShortcutKeyOnOffSetting = _
+  GetPrivateProfileInt(gIniSectNameShortcutKey, gIniKeyNameShortcutKeyOnOff, _
+                       gIniValShortcutKeyOff, GetIniFileFullPath)
+  If ShortcutKeyOnOffSetting = gIniValShortcutKeyOn Then
+    RegisterShortcutKeyByUserSetting
+  End If
+End Sub
+
+
+' :Function: Register shortcut keys by user setting in ini file.
+Sub RegisterShortcutKeyByUserSetting()
+  Dim StrBuf As String * 128
+  Dim StrSize As Long
+
+  StrSize = GetPrivateProfileString(gIniSectNameShortcutKey, "Update", _
+                                    "", StrBuf, Len(StrBuf), GetIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey StrBuf, "TsvnUpdate"
+  End If
+
+  StrSize = GetPrivateProfileString(gIniSectNameShortcutKey, "Commit", _
+                                    "", StrBuf, Len(StrBuf), GetIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey StrBuf, "TsvnCi"
+  End If
+
+  StrSize = GetPrivateProfileString(gIniSectNameShortcutKey, "Diff", _
+                                    "", StrBuf, Len(StrBuf), GetIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey StrBuf, "TsvnDiff"
+  End If
+
+  StrSize = GetPrivateProfileString(gIniSectNameShortcutKey, "RepoBrowser", _
+                                    "", StrBuf, Len(StrBuf), GetIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey StrBuf, "TsvnRepoBrowser"
+  End If
+
+  StrSize = GetPrivateProfileString(gIniSectNameShortcutKey, "Log", _
+                                    "", StrBuf, Len(StrBuf), GetIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey StrBuf, "TsvnLog"
+  End If
+
+  StrSize = GetPrivateProfileString(gIniSectNameShortcutKey, "Lock", _
+                                    "", StrBuf, Len(StrBuf), GetIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey StrBuf, "TsvnLock"
+  End If
+
+  StrSize = GetPrivateProfileString(gIniSectNameShortcutKey, "Unlock", _
+                                    "", StrBuf, Len(StrBuf), GetIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey StrBuf, "TsvnUnlock"
+  End If
+
+  StrSize = GetPrivateProfileString(gIniSectNameShortcutKey, "Add", _
+                                    "", StrBuf, Len(StrBuf), GetIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey StrBuf, "TsvnAdd"
+  End If
+
+  StrSize = GetPrivateProfileString(gIniSectNameShortcutKey, "Delete", _
+                                    "", StrBuf, Len(StrBuf), GetIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey StrBuf, "TsvnDelete"
+  End If
+
+  StrSize = GetPrivateProfileString(gIniSectNameShortcutKey, "Explorer", _
+                                    "", StrBuf, Len(StrBuf), GetIniFileFullPath)
+  If StrSize <> 0 Then
+    Application.OnKey StrBuf, "OpenExplorer"
+  End If
+End Sub
 
 

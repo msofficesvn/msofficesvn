@@ -1,4 +1,4 @@
-Attribute VB_Name = "Tool"
+Attribute VB_Name = "KeyAssign"
 '------------------- Copy & paste from here to the Tool module of excelsvn.xla --------------------
 ' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>

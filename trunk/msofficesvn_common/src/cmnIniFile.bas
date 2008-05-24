@@ -57,7 +57,7 @@ End Sub
 
 
 ' :Function: Get ini file full path name.
-Public Sub GetIniFileFullPath()
+Public Function GetIniFileFullPath() As String
   GetIniFileFullPath = mIniFileFullPath
-End Sub
+End Function
 
