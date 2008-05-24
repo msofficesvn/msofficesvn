@@ -70,9 +70,10 @@ Sub ImportCode()
         CreateObject("WScript.Shell").Run "Notepad.exe " & ImportFile, , False
       Else
         Content.VBProject.VBComponents.Import (ImportFile)
+        Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
       End If
     End If
-    Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
+    'Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
   Loop While Ret <> 0
 
   ' This VBComponent is imported
@@ -106,10 +107,10 @@ Sub ExportCode()
   
   ' Search the target content file (xla, dot, ppa, etc.).
   For Each Proj In Application.VBE.VBProjects
-    Debug.Print Proj.Name & vbCrLf
-    Debug.Print Proj.Filename & vbCrLf
-    Debug.Print Proj.Description & vbCrLf
-    Debug.Print Proj.Protection & vbCrLf
+    'Debug.Print Proj.Name & vbCrLf
+    'Debug.Print Proj.Filename & vbCrLf
+    'Debug.Print Proj.Description & vbCrLf
+    'Debug.Print Proj.Protection & vbCrLf
     
     Dim FoundPos As Integer
     FoundPos = InStr(Proj.Filename, gTargetContentFile)
@@ -134,19 +135,19 @@ Sub ExportCode()
     ' (for example: module, form, class, etc)
     Select Case n.Type
       Case vbext_ct_StdModule
-         Debug.Print "exporting " & n.Name
+         'Debug.Print "exporting " & n.Name
          CodeFileName = n.Name & ".bas"
       
       Case vbext_ct_ClassModule
-         Debug.Print "exporting " & n.Name
+         'Debug.Print "exporting " & n.Name
          CodeFileName = n.Name & ".cls"
       
       Case vbext_ct_ActiveXDesigner
-         Debug.Print "exporting " & n.Name
+         'Debug.Print "exporting " & n.Name
          CodeFileName = n.Name & ".dsr"
       
       Case vbext_ct_MSForm
-         Debug.Print "exporting " & n.Name
+         'Debug.Print "exporting " & n.Name
          CodeFileName = n.Name & ".frm"
       
       Case vbext_ct_Document
@@ -154,7 +155,7 @@ Sub ExportCode()
          ' always re-import as a Class module.
          ' The original object association is
          ' removed when importing/exporting.
-         Debug.Print "exporting " & n.Name
+         'Debug.Print "exporting " & n.Name
          CodeFileName = n.Name & ".cls"
     End Select
   
@@ -170,9 +171,10 @@ Sub ExportCode()
         FoundPos = InStr(ImportFile, CodeFileName)
         If FoundPos <> 0 Then
           n.Export ImportFile
+          Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
         End If
       End If
-      Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
+      'Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
     Loop While Ret <> 0
   
   
