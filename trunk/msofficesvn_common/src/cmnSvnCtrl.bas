@@ -126,7 +126,7 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   ' Convert the character encoding of svn entires file to the same
   ' as OS file name character encoding.
   EntriesContent = _
-  ConvFileCharEncoding("utf-8", gFileNameCharEncoding, EntriesFile)
+  ConvFileCharEncoding("utf-8", gConfig.GetGetFileNameCharEncoding, EntriesFile)
 
   ' Set default return value as False
   CheckNeedsLockProperty = False
