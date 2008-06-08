@@ -48,13 +48,14 @@ End Sub
 Private Sub Workbook_Open()
   Dim StrSize As Long
 
-'  MsgBox "Workbook_Open"
+  'MsgBox "Workbook_Open"
   ' Ini file full path name must be aquired when add-in is loaded.
   InitializeIniFileFullPath mIniFileName
   RegisterShortcutKey
   'GetCommitFileOpenMode
   'GetFileNameCharEncoding
   Set gConfig = New cmnCfg
+  gConfig.LoadConfig
   RegisterEventHandler
 End Sub
 
@@ -63,6 +64,7 @@ End Sub
 Sub RegisterEventHandler()
   Set MsOfficeSvnAppEvent.App = Application
 End Sub
+
 
 
 
