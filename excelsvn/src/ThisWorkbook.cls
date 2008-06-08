@@ -52,8 +52,9 @@ Private Sub Workbook_Open()
   ' Ini file full path name must be aquired when add-in is loaded.
   InitializeIniFileFullPath mIniFileName
   RegisterShortcutKey
-  GetCommitFileOpenMode
-  GetFileNameCharEncoding
+  'GetCommitFileOpenMode
+  'GetFileNameCharEncoding
+  Set gConfig = New cmnCfg
   RegisterEventHandler
 End Sub
 

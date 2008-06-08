@@ -20,11 +20,10 @@ Option Explicit
 Dim mContents As New Contents
 
 ' File Open Mode that is set by the user
-Public gCommitFileOpenMode As Integer
+'Public gCommitFileOpenMode As Integer
 
-Private Const mIniSecNameCheckSvnProp = "CheckSvnProperties"
-Private Const mIniKeyNameFileNameCharEncoding = "FileNameCharEncoding"
-
+' Configuration
+Public gConfig As cmnCfg
 
 ' :Function:     Execute TortoiseSVN shell Command
 ' :Return value: Always return True
@@ -152,16 +151,22 @@ Sub TsvnCi()
       Exit Sub
     End If
 
-    msgAskSaveMod = _
-    AddActiveContentNameToMsg(gmsgCommitAskSaveModContent, gmsgFileNameCap, _
-                              True, ActiveContent)
-    ansSaveMod = MsgBox(msgAskSaveMod, vbYesNoCancel)
-    If ansSaveMod = vbYes Then
+    If gConfig.GetDispAskSaveModMsg = gCfgOn Then
+      msgAskSaveMod = _
+      AddActiveContentNameToMsg(gmsgCommitAskSaveModContent, gmsgFileNameCap, _
+                                True, ActiveContent)
+      ansSaveMod = MsgBox(msgAskSaveMod, vbYesNoCancel)
+      If ansSaveMod = vbYes Then
+        If ActiveContent.SaveFile = False Then
+          Exit Sub
+        End If
+      ElseIf ansSaveMod = vbCancel Then
+        Exit Sub
+      End If
+    Else
       If ActiveContent.SaveFile = False Then
         Exit Sub
       End If
-    ElseIf ansSaveMod = vbCancel Then
-      Exit Sub
     End If
   End If
 
@@ -212,14 +217,18 @@ Sub TsvnDiff()
   ' Active content is modified but not saved yet.
     ' Test the active content file attributes
     If ActiveContent.IsFileReadOnly = False Then
-      'Save the file
-       msgAskSaveMod = _
-       AddActiveContentNameToMsg(gmsgAskSaveMod, gmsgFileNameCap, _
-                                 True, ActiveContent)
-       ansSaveMod = MsgBox(msgAskSaveMod, vbYesNo)
-       If ansSaveMod = vbYes Then
-         ActiveContent.SaveFile
-       End If
+      If gConfig.GetDispAskSaveModMsg = gCfgOn Then
+        'Save the file
+         msgAskSaveMod = _
+         AddActiveContentNameToMsg(gmsgAskSaveMod, gmsgFileNameCap, _
+                                   True, ActiveContent)
+         ansSaveMod = MsgBox(msgAskSaveMod, vbYesNo)
+         If ansSaveMod = vbYes Then
+           ActiveContent.SaveFile
+         End If
+      Else
+	ActiveContent.SaveFile
+      End If
     End If
   End If
 
@@ -388,17 +397,21 @@ Sub TsvnUnlock()
       Exit Sub
     End If
 
-    msgAskMod = _
-    AddActiveContentNameToMsg(gmsgUnlockAskActiveContentMod, gmsgFileNameCap, _
-                              True, ActiveContent)
-    ans = MsgBox(msgAskMod, vbYesNo)
+    If gConfig.GetDispAskSaveModMsg = gCfgOn Then
+      msgAskMod = _
+      AddActiveContentNameToMsg(gmsgUnlockAskActiveContentMod, gmsgFileNameCap, _
+                                True, ActiveContent)
+      ans = MsgBox(msgAskMod, vbYesNo)
 
-    If ans = vbNo Then
-      Exit Sub ' Exit subroutine without locking
-    Else
-      If ActiveContent.SaveFile = False Then
-        Exit Sub
+      If ans = vbNo Then
+        Exit Sub ' Exit subroutine without locking
+      Else
+        If ActiveContent.SaveFile = False Then
+          Exit Sub
+        End If
       End If
+    Else
+      ActiveContent.SaveFile
     End If
   End If ' If ActiveContent.IsSaved = False Then
 
@@ -455,14 +468,18 @@ Sub TsvnAdd()
         Exit Sub
       End If
 
-      msgAskSaveMod = _
-      AddActiveContentNameToMsg(gmsgCommitAskSaveModContent, _
-                                gmsgFileNameCap, True, ActiveContent)
-      ans = MsgBox(msgAskSaveMod, vbYesNo)
-      If ans = vbYes Then
-        If ActiveContent.SaveFile = False Then
-          Exit Sub
+      If gConfig.GetDispAskSaveModMsg = gCfgOn Then
+        msgAskSaveMod = _
+        AddActiveContentNameToMsg(gmsgCommitAskSaveModContent, _
+                                  gmsgFileNameCap, True, ActiveContent)
+        ans = MsgBox(msgAskSaveMod, vbYesNo)
+        If ans = vbYes Then
+          If ActiveContent.SaveFile = False Then
+            Exit Sub
+          End If
         End If
+      Else
+	ActiveContent.SaveFile
       End If
     End If ' If ActiveContent.IsSaved = False Then
 
@@ -615,27 +632,37 @@ End Function
 
 ' :Function: Get commit file open mode setting from ini file
 '            and save it to the global variable
-Sub GetCommitFileOpenMode()
-  gCommitFileOpenMode = _
-  GetPrivateProfileInt("CommitAction", "CommitFileOpenMode", 1, GetIniFileFullPath)
-End Sub
+'Sub GetCommitFileOpenMode()
+'  gCommitFileOpenMode = _
+'  GetPrivateProfileInt("CommitAction", "CommitFileOpenMode", 1, GetIniFileFullPath)
+'End Sub
 
 
 ' :Function: Check to need to close, commit and reopen the file.
+' :Return value: True  = Close the file before commit and reopen it
+'                False = Not Close the file
 Function NeedsCloseAndReopenFileInCommit(ByVal FileFullName As String) As Boolean
-  Select Case gCommitFileOpenMode
-    Case 1 ' Close the file before commit and reopen it
+
+  ' Default return value
+  NeedsCloseAndReopenFileInCommit = True
+
+ If gConfig.GetDetectNeedsLockProp = gCfgOn Then
+    If IsNeedsLockProp(FileFullName) Then
       NeedsCloseAndReopenFileInCommit = True
-    Case 2 ' Not Close the file
+    ElseIf gConfig.GetDetectNeedsLockProp = gCfgOff
       NeedsCloseAndReopenFileInCommit = False
-    Case 3
-      If IsNeedsLockProp(FileFullName) Then
-        NeedsCloseAndReopenFileInCommit = True
-      Else
-        NeedsCloseAndReopenFileInCommit = False
-      End If
-    Case Else
+    Else
+      MsgBox "Invalid Configuration!"
+    End If
+  ElseIf gConfig.GetDetectNeedsLockProp = gCfgOff Then
+    If gConfig.GetCiCloseReopenFile = gCfgOn Then
       NeedsCloseAndReopenFileInCommit = True
-  End Select
+    ElseIf gConfig.GetCiCloseReopenFile = gCfgOff Then
+      NeedsCloseAndReopenFileInCommit = False
+    Else
+      MsgBox "Invalid Configuration!"
+    End If
+  End If
+
 End Function
 

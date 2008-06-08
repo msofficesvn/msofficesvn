@@ -65,7 +65,7 @@ Sub AutoExec()
   End If
 
   RegisterShortcutKey
-  GetCommitFileOpenMode
+  'GetCommitFileOpenMode
   GetFileNameCharEncoding
   RegisterEventHandler
 End Sub
