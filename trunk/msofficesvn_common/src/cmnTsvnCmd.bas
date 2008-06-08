@@ -164,9 +164,12 @@ Sub TsvnCi()
         Exit Sub
       End If
     Else
+      Application.DisplayAlerts = False
       If ActiveContent.SaveFile = False Then
+        Application.DisplayAlerts = True
         Exit Sub
       End If
+      Application.DisplayAlerts = True
     End If
   End If
 
@@ -227,7 +230,9 @@ Sub TsvnDiff()
            ActiveContent.SaveFile
          End If
       Else
-	ActiveContent.SaveFile
+        Application.DisplayAlerts = False
+        ActiveContent.SaveFile
+        Application.DisplayAlerts = True
       End If
     End If
   End If
@@ -411,7 +416,9 @@ Sub TsvnUnlock()
         End If
       End If
     Else
+      Application.DisplayAlerts = False
       ActiveContent.SaveFile
+      Application.DisplayAlerts = True
     End If
   End If ' If ActiveContent.IsSaved = False Then
 
@@ -479,7 +486,9 @@ Sub TsvnAdd()
           End If
         End If
       Else
-	ActiveContent.SaveFile
+        Application.DisplayAlerts = False
+        ActiveContent.SaveFile
+        Application.DisplayAlerts = True
       End If
     End If ' If ActiveContent.IsSaved = False Then
 
@@ -649,10 +658,8 @@ Function NeedsCloseAndReopenFileInCommit(ByVal FileFullName As String) As Boolea
  If gConfig.GetDetectNeedsLockProp = gCfgOn Then
     If IsNeedsLockProp(FileFullName) Then
       NeedsCloseAndReopenFileInCommit = True
-    ElseIf gConfig.GetDetectNeedsLockProp = gCfgOff
-      NeedsCloseAndReopenFileInCommit = False
     Else
-      MsgBox "Invalid Configuration!"
+      NeedsCloseAndReopenFileInCommit = False
     End If
   ElseIf gConfig.GetDetectNeedsLockProp = gCfgOff Then
     If gConfig.GetCiCloseReopenFile = gCfgOn Then
