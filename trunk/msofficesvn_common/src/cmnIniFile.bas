@@ -51,13 +51,14 @@ Public Declare Function WritePrivateProfileString Lib "kernel32" _
 
 
 ' :Function: Initialize ini file full path name and save it to the global variable.
-Public Sub InitializeIniFileFullPath(ByVal IniFileName As String)
-  mIniFileFullPath = GetThisAddInPath & "\" & IniFileName
-End Sub
+'Public Sub InitializeIniFileFullPath(ByVal IniFileName As String)
+'  mIniFileFullPath = GetThisAddInPath & "\" & IniFileName
+'End Sub
 
 
 ' :Function: Get ini file full path name.
 Public Function GetIniFileFullPath() As String
-  GetIniFileFullPath = mIniFileFullPath
+  'GetIniFileFullPath = mIniFileFullPath
+  GetIniFileFullPath = GetThisAddInPath & "\" & gIniFileName
 End Function
 

@@ -22,9 +22,6 @@ Dim mContents As New Contents
 ' File Open Mode that is set by the user
 'Public gCommitFileOpenMode As Integer
 
-' Configuration
-Public gConfig As cmnCfg
-
 ' :Function:     Execute TortoiseSVN shell Command
 ' :Return value: Always return True
 Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) As Boolean
@@ -151,7 +148,7 @@ Sub TsvnCi()
       Exit Sub
     End If
 
-    If gConfig.GetDispAskSaveModMsg = gCfgOn Then
+    If GetDispAskSaveModMsg(True) = gCfgOn Then
       msgAskSaveMod = _
       AddActiveContentNameToMsg(gmsgCommitAskSaveModContent, gmsgFileNameCap, _
                                 True, ActiveContent)
@@ -220,7 +217,7 @@ Sub TsvnDiff()
   ' Active content is modified but not saved yet.
     ' Test the active content file attributes
     If ActiveContent.IsFileReadOnly = False Then
-      If gConfig.GetDispAskSaveModMsg = gCfgOn Then
+      If GetDispAskSaveModMsg(True) = gCfgOn Then
         'Save the file
          msgAskSaveMod = _
          AddActiveContentNameToMsg(gmsgAskSaveMod, gmsgFileNameCap, _
@@ -402,7 +399,7 @@ Sub TsvnUnlock()
       Exit Sub
     End If
 
-    If gConfig.GetDispAskSaveModMsg = gCfgOn Then
+    If GetDispAskSaveModMsg(True) = gCfgOn Then
       msgAskMod = _
       AddActiveContentNameToMsg(gmsgUnlockAskActiveContentMod, gmsgFileNameCap, _
                                 True, ActiveContent)
@@ -475,7 +472,7 @@ Sub TsvnAdd()
         Exit Sub
       End If
 
-      If gConfig.GetDispAskSaveModMsg = gCfgOn Then
+      If GetDispAskSaveModMsg(True) = gCfgOn Then
         msgAskSaveMod = _
         AddActiveContentNameToMsg(gmsgCommitAskSaveModContent, _
                                   gmsgFileNameCap, True, ActiveContent)
@@ -655,16 +652,16 @@ Function NeedsCloseAndReopenFileInCommit(ByVal FileFullName As String) As Boolea
   ' Default return value
   NeedsCloseAndReopenFileInCommit = True
 
- If gConfig.GetDetectNeedsLockProp = gCfgOn Then
+ If GetDetectNeedsLockProp(True) = gCfgOn Then
     If IsNeedsLockProp(FileFullName) Then
       NeedsCloseAndReopenFileInCommit = True
     Else
       NeedsCloseAndReopenFileInCommit = False
     End If
-  ElseIf gConfig.GetDetectNeedsLockProp = gCfgOff Then
-    If gConfig.GetCiCloseReopenFile = gCfgOn Then
+  ElseIf GetDetectNeedsLockProp(True) = gCfgOff Then
+    If GetCiCloseReopenFile(True) = gCfgOn Then
       NeedsCloseAndReopenFileInCommit = True
-    ElseIf gConfig.GetCiCloseReopenFile = gCfgOff Then
+    ElseIf GetCiCloseReopenFile(True) = gCfgOff Then
       NeedsCloseAndReopenFileInCommit = False
     Else
       MsgBox "Invalid Configuration!"
