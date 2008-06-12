@@ -48,15 +48,15 @@ End Function
 
 
 ' :Function: Get file name character encoding scheme from ini file.
-Public Sub GetFileNameCharEncoding()
-  Dim StrBuf As String * 128
-
-  ' Get file name character encoding setting from ini file.
-  GetPrivateProfileString mIniSecNameCheckSvnProp, _
-                          mIniKeyNameFileNameCharEncoding, _
-                          "iso-8859-1", StrBuf, Len(StrBuf), GetIniFileFullPath
-  gFileNameCharEncoding = StrBuf
-End Sub
+'Public Sub GetFileNameCharEncoding()
+'  Dim StrBuf As String * 128
+'
+'  ' Get file name character encoding setting from ini file.
+'  GetPrivateProfileString mIniSecNameCheckSvnProp, _
+'                          mIniKeyNameFileNameCharEncoding, _
+'                          "iso-8859-1", StrBuf, Len(StrBuf), GetIniFileFullPath
+'  gFileNameCharEncoding = StrBuf
+'End Sub
 
 
 ' :Function:     Convert charater encoding of the specified file.
@@ -115,6 +115,7 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   Dim FileSysObj As Object
   Dim FileName As String
   Dim ParentFolderName As String
+  Dim FileNameCharEncod As String
 
   Set FileSysObj = CreateObject("Scripting.FileSystemObject")
 
@@ -125,8 +126,10 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
 
   ' Convert the character encoding of svn entires file to the same
   ' as OS file name character encoding.
+
+  FileNameCharEncod = GetFileNameCharEncoding(True)
   EntriesContent = _
-  ConvFileCharEncoding("utf-8", gConfig.GetFileNameCharEncoding, EntriesFile)
+  ConvFileCharEncoding("utf-8", FileNameCharEncod, EntriesFile)
 
   ' Set default return value as False
   CheckNeedsLockProperty = False
