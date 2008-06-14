@@ -1,5 +1,5 @@
 Attribute VB_Name = "cmnVersion"
-'------------------- Copy & paste from here to the Common object of add-in file --------------------
+'------------------- Copy & paste from here to the cmnVersion module of add-in file --------------------
 ' $Rev: 283 $
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     All rights reserved.
@@ -10,8 +10,9 @@ Attribute VB_Name = "cmnVersion"
 '
 ' :$Date:: 2008-05-17 03:14:55 +0900#$
 ' :Author:        Koki Yamamoto <kokiya@gmail.com>
-' :Module Name:   Common
-' :Description:   Common module through office application software.
+' :Module Name:   cmnVersion
+' :Description:   Manage version number of this add-in.
+'                 Common module through office application software.
 
 Option Explicit
 

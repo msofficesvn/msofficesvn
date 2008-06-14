@@ -1,5 +1,5 @@
 Attribute VB_Name = "cmnIniFile"
-'------------------- Copy & paste from here to the Common object of add-in file --------------------
+'------------------- Copy & paste from here to the cmnIniFile module of add-in file --------------------
 ' $Rev: 283 $
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     All rights reserved.
@@ -10,15 +10,11 @@ Attribute VB_Name = "cmnIniFile"
 '
 ' :$Date:: 2008-05-17 03:14:55 +0900#$
 ' :Author:        Koki Yamamoto <kokiya@gmail.com>
-' :Module Name:   Common
-' :Description:   Common module through office application software.
-'                 This module needs "Microsoft ActiveX Data Objects 2.5 Library"
+' :Module Name:   cmnIniFile
+' :Description:   Access ini file for this add-in
+'                 Common module through office application software.
 
 Option Explicit
-
-
-'Ini File Full Path
-Private mIniFileFullPath As String
 
 ' :Function: Get numeric value from INI file
 ' :Remarks:  Declaration of Windows API
@@ -50,15 +46,8 @@ Public Declare Function WritePrivateProfileString Lib "kernel32" _
                           ByVal lpFileName As String) As Long
 
 
-' :Function: Initialize ini file full path name and save it to the global variable.
-'Public Sub InitializeIniFileFullPath(ByVal IniFileName As String)
-'  mIniFileFullPath = GetThisAddInPath & "\" & IniFileName
-'End Sub
-
-
 ' :Function: Get ini file full path name.
 Public Function GetIniFileFullPath() As String
-  'GetIniFileFullPath = mIniFileFullPath
   GetIniFileFullPath = GetThisAddInPath & "\" & gIniFileName
 End Function
 

@@ -1,7 +1,20 @@
 Attribute VB_Name = "cmnCfg"
-Option Explicit
+'------------------- Copy & paste from here to the cmnCfg module of add-in file --------------------
+' $Rev: 283 $
+' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
+'     All rights reserved.
+'     This is free software with ABSOLUTELY NO WARRANTY.
+'
+' You can redistribute it and/or modify it under the terms of
+' the GNU General Public License version 2.
+'
+' :$Date:: 2008-05-17 03:14:55 +0900#$
+' :Author:        Koki Yamamoto <kokiya@gmail.com>
+' :Module Name:   cmnVersion
+' :Description:   Manage configuration of this add-in.
+'                 Common module through office application software.
 
-'------------------- Copy & paste from here to the Common object of add-in file --------------------
+Option Explicit
 
 Public Const gCfgOff As Long = 0
 Public Const gCfgOn As Long = 1

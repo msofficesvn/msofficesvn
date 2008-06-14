@@ -36,7 +36,6 @@ Attribute App.VB_VarHelpID = -1
 ' :Arguments: Wb     [i] Workbook
 Private Sub App_WorkbookOpen(ByVal Wb As Workbook)
   'MsgBox "workbook opened! : " & Wb.FullName
-  AddNeedsLockPropAdminTable Wb.FullName
 End Sub
 
 
@@ -45,6 +44,5 @@ End Sub
 '             Cancel [i]
 Private Sub App_WorkbookBeforeClose(ByVal Wb As Workbook, Cancel As Boolean)
   'MsgBox "workbook is going to be closed! : " & Wb.FullName
-  RemoveNeedsLockPropAdminTable Wb.FullName
 End Sub
 

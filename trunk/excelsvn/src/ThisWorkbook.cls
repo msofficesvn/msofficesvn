@@ -19,13 +19,11 @@ Attribute VB_Exposed = True
 ' :$Date::                           $
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: ThisWorkbook
-' :Description: Office application software specific module
+' :Description: excelsvn specific module
 
 Option Explicit
 
 Dim MsOfficeSvnAppEvent As New AppEvent
-'Ini File Name
-'Private Const mIniFileName As String = "excelsvn.ini"
 
 ' :Function: Install Subversion menu and command bar
 Private Sub Workbook_AddinInstall()
@@ -45,24 +43,16 @@ End Sub
 
 ' :Function: Initialize variables because this function is executed when Excel starts.
 Private Sub Workbook_Open()
-  Dim StrSize As Long
 
   'MsgBox "Workbook_Open"
-  ' Ini file full path name must be aquired when add-in is loaded.
-  'InitializeIniFileFullPath mIniFileName
-  RegisterShortcutKey
-  'GetCommitFileOpenMode
-  'GetFileNameCharEncoding
-  LoadConfig
-  RegisterEventHandler
+'  RegisterShortcutKey
+'  LoadConfig
+'  RegisterEventHandler
 End Sub
 
 
 ' :Function: Register event handler for Application
-Sub RegisterEventHandler()
+Public Sub RegisterEventHandler()
   Set MsOfficeSvnAppEvent.App = Application
 End Sub
-
-
-
 
