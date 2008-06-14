@@ -1,5 +1,5 @@
 Attribute VB_Name = "cmnTsvnCmd"
-'------------------- Copy & paste from here to the Common object of add-in file --------------------
+'------------------- Copy & paste from here to the cmnTsvnCmd module of add-in file --------------------
 ' $Rev: 283 $
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
 '     All rights reserved.
@@ -10,8 +10,9 @@ Attribute VB_Name = "cmnTsvnCmd"
 '
 ' :$Date:: 2008-05-17 03:14:55 +0900#$
 ' :Author:        Koki Yamamoto <kokiya@gmail.com>
-' :Module Name:   Common
-' :Description:   Common module through office application software.
+' :Module Name:   cmnTsvnCmd
+' :Description:   TortoiseSVN commands
+'                 Common module through office application software.
 '                 This module needs "Microsoft ActiveX Data Objects 2.5 Library"
 
 Option Explicit
@@ -489,9 +490,6 @@ Sub TsvnAdd()
       End If
     End If ' If ActiveContent.IsSaved = False Then
 
-    ' Test svn:needs-lock property of the file
-    AddNeedsLockPropAdminTable ActiveContent.GetFullName
-
     TsvnCi
 
   End If ' If ans = vbYes Then
@@ -653,7 +651,7 @@ Function NeedsCloseAndReopenFileInCommit(ByVal FileFullName As String) As Boolea
   NeedsCloseAndReopenFileInCommit = True
 
  If GetDetectNeedsLockProp(True) = gCfgOn Then
-    If IsNeedsLockProp(FileFullName) Then
+    If CheckNeedsLockProperty(FileFullName) Then
       NeedsCloseAndReopenFileInCommit = True
     Else
       NeedsCloseAndReopenFileInCommit = False

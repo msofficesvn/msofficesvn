@@ -1,5 +1,5 @@
 Attribute VB_Name = "KeyAssign"
-'------------------- Copy & paste from here to the Tool module of excelsvn.xla --------------------
+'------------------- Copy & paste from here to the KeyAssign module of excelsvn.xla --------------------
 ' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
@@ -8,9 +8,9 @@ Attribute VB_Name = "KeyAssign"
 ' the GNU General Public License version 2.
 '
 ' :$Date::                           $
-' :Author: Koki Yamamoto <kokiya@gmail.com>
-' :Module Name: Tool
-' :Description: Tool module for each office application software.
+' :Author:      Koki Yamamoto <kokiya@gmail.com>
+' :Module Name: KeyAssign
+' :Description: Shortcut key assign
 
 Option Explicit
 
