@@ -8,7 +8,7 @@ Attribute VB_Name = "cmnCmdBar"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :$Date::                                  $
+' :$Date::                           $
 ' :Author: Koki   Yamamoto <kokiya@gmail.com>
 ' :Module Name:   CmdBar
 ' :Description:   Menu and Command bar Functions
