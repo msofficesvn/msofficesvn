@@ -128,6 +128,7 @@ ExcelでApplication.OnKeyでショートカットキーで、TSVNコマンドサ
 http://arrow3.way-nifty.com/shige/2005/07/__fa5b.html
 
 DLL 関数から文字列を返す
+
 http://msdn.microsoft.com/ja-jp/library/cc376816.aspx
 
 =============================================================
