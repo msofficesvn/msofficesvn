@@ -34,9 +34,19 @@ Public Declare Function WritePrivateProfileString Lib "kernel32" _
                           ByVal lpString As Any, _
                           ByVal lpFileName As String) As Long
 
+Function SubtractFileName(ByVal FullPathName As String) As String
+  Dim LastBackSlashPos As Long
+  Dim FileNameLen As Long
+  LastBackSlashPos = InStrRev(FullPathName, "\")
+  FileNameLen = Len(FullPathName) - LastBackSlashPos
+  SubtractFileName = Right(FullPathName, FileNameLen)
+End Function
+
 Sub ImportCode()
   Dim Content As Object
   Dim ImportFile As String
+  ' File name without folder names
+  Dim ImportFileName As String
   Dim Count As Integer
   Dim IniKeyImpFile As String
   Dim IniFullPath As String
@@ -52,17 +62,20 @@ Sub ImportCode()
   'Content.VBProject.VBComponents.Import "C:\work\msofficesvn\trunk\excelsvn\src\ja\Resource.bas"
 
   Count = 1
-  ImportFile = Space(260)
+  'ImportFile = Space(260)
   IniFullPath = GetIniFullPath
   Ret = 0
 
   Do
+    'Initialze ImportFile variable to make StrComp success
     ImportFile = Space(260)
     IniKeyImpFile = "ImportFile" & Count
     Ret = GetPrivateProfileString(gIniSectionName, IniKeyImpFile, "", ImportFile, 260, IniFullPath)
     Count = Count + 1
     If Ret <> 0 Then
-      If InStr(ImportFile, "ThisWorkbook.cls") <> 0 Then
+      ImportFileName = Trim(SubtractFileName(ImportFile))
+      ImportFileName = Left(ImportFileName, Len(ImportFileName) - 1)
+      If StrComp(ImportFileName, "ThisWorkbook.cls") = 0 Then
         ' This code causes excel crash.
         'Content.VBProject.VBComponents("ThisWorkbook").CodeModule.AddFromFile ImportFile
         ' This code work well
@@ -112,9 +125,16 @@ Sub ExportCode()
     'Debug.Print Proj.Description & vbCrLf
     'Debug.Print Proj.Protection & vbCrLf
     
-    Dim FoundPos As Integer
-    FoundPos = InStr(Proj.Filename, gTargetContentFile)
-    If FoundPos <> 0 Then
+    'Dim FoundPos As Integer
+    'Proj.Filename contains full path name. I need the file name only.
+    Dim ProjFileNameWoFldrName As String
+    ProjFileNameWoFldrName = Space(260)
+    ProjFileNameWoFldrName = Trim(SubtractFileName(Proj.Filename))
+    'ProjFileNameWoFldrName = Left(ImportFileName, Len(ProjFileNameWoFldrName) - 1)
+    
+    'FoundPos = InStr(Proj.Filename, gTargetContentFile)
+    'If FoundPos <> 0 Then
+    If StrComp(ProjFileNameWoFldrName, gTargetContentFile) = 0 Then
       ' The target content file is found and it is stored in Proj variable.
       bTargetContentFileExist = True
       Exit For
@@ -163,13 +183,19 @@ Sub ExportCode()
     FoundPos = 0
     
     Do
+      Dim ImportFileName As String
+      
       ImportFile = Space(260)
       IniKeyImpFile = "ImportFile" & Count
       Ret = GetPrivateProfileString(gIniSectionName, IniKeyImpFile, "", ImportFile, 260, IniFullPath)
       Count = Count + 1
       If Ret <> 0 Then
-        FoundPos = InStr(ImportFile, CodeFileName)
-        If FoundPos <> 0 Then
+        'FoundPos = InStr(ImportFile, CodeFileName)
+        ImportFileName = Trim(SubtractFileName(ImportFile))
+        ImportFileName = Left(ImportFileName, Len(ImportFileName) - 1)
+        
+        'If FoundPos <> 0 Then
+        If StrComp(ImportFileName, CodeFileName) = 0 Then
           n.Export ImportFile
           Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
         End If
@@ -225,19 +251,19 @@ Sub ExportCode2()
     ' (for example: module, form, class, etc)
     Select Case n.Type
       Case vbext_ct_StdModule
-         Debug.Print "exporting " & n.Name
+         'Debug.Print "exporting " & n.Name
          n.Export ExpFolder & n.Name & ".bas"
       
       Case vbext_ct_ClassModule
-         Debug.Print "exporting " & n.Name
+         'Debug.Print "exporting " & n.Name
          n.Export ExpFolder & n.Name & ".cls"
       
       Case vbext_ct_ActiveXDesigner
-         Debug.Print "exporting " & n.Name
+         'Debug.Print "exporting " & n.Name
          n.Export ExpFolder & n.Name & ".dsr"
       
       Case vbext_ct_MSForm
-         Debug.Print "exporting " & n.Name
+         'Debug.Print "exporting " & n.Name
          n.Export ExpFolder & n.Name & ".frm"
       
       Case vbext_ct_Document
@@ -245,7 +271,7 @@ Sub ExportCode2()
          ' always re-import as a Class module.
          ' The original object association is
          ' removed when importing/exporting.
-         Debug.Print "exporting " & n.Name
+         'Debug.Print "exporting " & n.Name
          n.Export ExpFolder & n.Name & ".cls"
     End Select
   
