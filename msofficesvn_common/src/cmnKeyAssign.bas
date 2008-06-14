@@ -1,6 +1,6 @@
 Attribute VB_Name = "cmnKeyAssign"
 '------------------- Copy & paste from here to the cmnKeyAssign module of add-in file --------------------
-' $Rev: 287 $
+' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     All rights reserved.
 '     This is free software with ABSOLUTELY NO WARRANTY.
@@ -8,7 +8,7 @@ Attribute VB_Name = "cmnKeyAssign"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :$Date:: 2008-05-18 03:28:35 +0900#$
+' :$Date::                           $
 ' :Author:        Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name:   cmnKeyAssign
 ' :Description:   Common code for key assignment.

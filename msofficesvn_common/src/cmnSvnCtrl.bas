@@ -1,6 +1,6 @@
 Attribute VB_Name = "cmnSvnCtrl"
 '------------------- Copy & paste from here to the cmnSvnCtrl module of add-in file --------------------
-' $Rev: 283 $
+' $Rev$
 ' Copyright (C) 2005 Osamu OKANO <osamu@dkiroku.com>
 '     All rights reserved.
 '     This is free software with ABSOLUTELY NO WARRANTY.
@@ -8,7 +8,7 @@ Attribute VB_Name = "cmnSvnCtrl"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
-' :$Date:: 2008-05-17 03:14:55 +0900#$
+' :$Date::                           $
 ' :Author:        Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name:   cmnSvnCtrl
 ' :Description:   Manage svn control folder.
