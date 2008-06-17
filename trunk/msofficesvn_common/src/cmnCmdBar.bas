@@ -9,7 +9,7 @@ Attribute VB_Name = "cmnCmdBar"
 ' the GNU General Public License version 2.
 '
 ' :$Date::                           $
-' :Author: Koki   Yamamoto <kokiya@gmail.com>
+' :Author:        Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name:   CmdBar
 ' :Description:   Menu and Command bar Functions
 '                 Common module through office application software.

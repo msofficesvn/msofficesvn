@@ -42,13 +42,12 @@ End Sub
 
 
 ' :Function: Initialize variables because this function is executed when Excel starts.
-Private Sub Workbook_Open()
-
+'Private Sub Workbook_Open()
   'MsgBox "Workbook_Open"
 '  RegisterShortcutKey
 '  LoadConfig
 '  RegisterEventHandler
-End Sub
+'End Sub
 
 
 ' :Function: Register event handler for Application
