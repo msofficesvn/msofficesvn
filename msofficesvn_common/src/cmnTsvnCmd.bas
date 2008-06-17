@@ -38,6 +38,7 @@ Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) 
   Dim WsShellObj    As Object
   ' ActiveContent class object
   Dim ActiveContent As New ActiveContent
+  Dim TsvnProgressDlgOption As String
 
   Set WsShellObj = CreateObject("WScript.Shell")
   TsvnProc = _
@@ -50,7 +51,10 @@ Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) 
     TsvnPathParam = "/path:" & """" & ContFileFullName & """"
   End If
 
-  Ret = WsShellObj.Run(TsvnProc & TsvnCmdParam & TsvnPathParam, , True)
+  TsvnProgressDlgOption = "/closeonend:" & GetCiAutoCloseProgressDlg(True)
+
+  Ret = WsShellObj.Run(TsvnProc & TsvnCmdParam & TsvnPathParam & TsvnProgressDlgOption, _
+                       , True)
   Set WsShellObj = Nothing
   ' MsgBox Ret & ", " & Err.Number & ", " & Err.Description
   ' Unfortunately TSVN commands always return 0 even if they fail.
