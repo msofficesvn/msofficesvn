@@ -19,6 +19,10 @@ Option Explicit
 Public Const gCfgOff As Long = 0
 Public Const gCfgOn As Long = 1
 
+Public Const gCiNoCloseReopenFile = 0
+Public Const gCiCloseReopenFile = 1
+Public Const gCiCloseReopenOnlyNeedsLockFile = 2
+
 ' TrotoiseProc.exe /closeonend option
 Public Const gNoAutoClose As Long = 0
 Public Const gAutoCloseIfNoErr As Long = 1
@@ -57,11 +61,11 @@ Public Sub LoadConfig()
 
   mCiCloseReopenFile = _
   GetPrivateProfileInt(mIniSecNameConfig, mIniKeyCiCloseReopenFile, _
-                       gCfgOn, GetIniFileFullPath)
+                       gCiCloseReopenOnlyNeedsLockFile, GetIniFileFullPath)
 
   mCiAutoCloseProgressDlg = _
   GetPrivateProfileInt(mIniSecNameConfig, mIniKeyCiAutoCloseProgressDlg, _
-                       gAutoCloseIfNoErrConflMergeLocal, GetIniFileFullPath)
+                       gAutoCloseIfNoErrConflMerge, GetIniFileFullPath)
 
   ' Get file name character encoding setting from ini file.
   GetPrivateProfileString mIniSecNameConfig, _
@@ -94,7 +98,7 @@ Public Function GetCiCloseReopenFile(ByVal bRead As Boolean) As Long
   If bRead = True Then
     mCiCloseReopenFile = _
     GetPrivateProfileInt(mIniSecNameConfig, mIniKeyCiCloseReopenFile, _
-                         gCfgOn, GetIniFileFullPath)
+                         gCiCloseReopenOnlyNeedsLockFile, GetIniFileFullPath)
   End If
     GetCiCloseReopenFile = mCiCloseReopenFile
 End Function

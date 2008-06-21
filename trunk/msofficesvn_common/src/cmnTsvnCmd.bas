@@ -27,6 +27,7 @@ Dim mContents As New Contents
 ' :Return value: Always return True
 Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) As Boolean
   ' TortoiseProc.exe path
+  Dim TsvnProcPath  As String
   Dim TsvnProc      As String
   ' Tsvn Command Parameter
   Dim TsvnCmdParam  As String
@@ -41,8 +42,17 @@ Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) 
   Dim TsvnProgressDlgOption As String
 
   Set WsShellObj = CreateObject("WScript.Shell")
-  TsvnProc = _
-  """" & WsShellObj.RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath") & """"
+  If WsShellObj Is Nothing Then
+    MsgBox "Failed to CreateObject - WScript.Shell."
+    Exit Function
+  End If
+
+  TsvnProcPath = WsShellObj.RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath")
+  If Len(TsvnProcPath) Then
+    MsgBox "Failed to read TortoiseSVN path from registory."
+  End If
+
+  TsvnProc = """" & TsvnProcPath & """"
   TsvnCmdParam = "/command:" & TsvnCmd & " /notempfile "
 
   If Len(ContFileFullName) = 0 Then
@@ -53,8 +63,8 @@ Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) 
 
   TsvnProgressDlgOption = "/closeonend:" & GetCiAutoCloseProgressDlg(True)
 
-  Ret = WsShellObj.Run(TsvnProc & TsvnCmdParam & TsvnPathParam & TsvnProgressDlgOption, _
-                       , True)
+  Ret = WsShellObj.Run(TsvnProc & TsvnCmdParam & TsvnPathParam _
+                       & TsvnProgressDlgOption, , True)
   Set WsShellObj = Nothing
   ' MsgBox Ret & ", " & Err.Number & ", " & Err.Description
   ' Unfortunately TSVN commands always return 0 even if they fail.
@@ -650,25 +660,40 @@ End Function
 ' :Return value: True  = Close the file before commit and reopen it
 '                False = Not Close the file
 Function NeedsCloseAndReopenFileInCommit(ByVal FileFullName As String) As Boolean
+  ' Close and reopne file in commiting option
+  Dim CiCloseReopneFile As Long
+  ' Detect Needs Lock Property option
+  Dim DetectNeedsLockProp As Long
 
   ' Default return value
   NeedsCloseAndReopenFileInCommit = True
 
- If GetDetectNeedsLockProp(True) = gCfgOn Then
-    If CheckNeedsLockProperty(FileFullName) Then
-      NeedsCloseAndReopenFileInCommit = True
-    Else
-      NeedsCloseAndReopenFileInCommit = False
-    End If
-  ElseIf GetDetectNeedsLockProp(True) = gCfgOff Then
-    If GetCiCloseReopenFile(True) = gCfgOn Then
-      NeedsCloseAndReopenFileInCommit = True
-    ElseIf GetCiCloseReopenFile(True) = gCfgOff Then
-      NeedsCloseAndReopenFileInCommit = False
-    Else
-      MsgBox "Invalid Configuration!"
-    End If
-  End If
+  CiCloseReopneFile = GetCiCloseReopenFile(True)
 
+  Select Case CiCloseReopneFile
+    Case gCiNoCloseReopenFile
+      NeedsCloseAndReopenFileInCommit = False
+    Case gCiCloseReopenFile
+      NeedsCloseAndReopenFileInCommit = True
+    Case gCiCloseReopenOnlyNeedsLockFile
+      DetectNeedsLockProp = GetDetectNeedsLockProp(True)
+
+      If DetectNeedsLockProp = gCfgOn Then
+	If CheckNeedsLockProperty(FileFullName) Then
+	  NeedsCloseAndReopenFileInCommit = True
+	Else
+	  NeedsCloseAndReopenFileInCommit = False
+	End If
+      ElseIf DetectNeedsLockProp = gCfgOff Then
+        MsgBox "Invlid combination of settings in ini file!" _
+	        & "DetectNeedsLockProp : " & DetectNeedsLockProp _
+	        & "CiCloseReopneFile : " & CiCloseReopneFile
+        NeedsCloseAndReopenFileInCommit = True
+      Else
+	MsgBox "Invalid setting in ini file!" & "DetectNeedsLockProp : " & DetectNeedsLockProp
+      End If
+    Case Else
+      MsgBox "Invalid setting in ini file!" & "CiCloseReopenFile : " & CiCloseReopneFile
+  End Select
 End Function
 
