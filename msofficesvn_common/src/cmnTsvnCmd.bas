@@ -48,7 +48,7 @@ Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) 
   End If
 
   TsvnProcPath = WsShellObj.RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath")
-  If Len(TsvnProcPath) Then
+  If Len(TsvnProcPath) = 0 Then
     MsgBox "Failed to read TortoiseSVN path from registory."
   End If
 
