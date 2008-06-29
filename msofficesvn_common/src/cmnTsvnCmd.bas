@@ -679,18 +679,18 @@ Function NeedsCloseAndReopenFileInCommit(ByVal FileFullName As String) As Boolea
       DetectNeedsLockProp = GetDetectNeedsLockProp(True)
 
       If DetectNeedsLockProp = gCfgOn Then
-	If CheckNeedsLockProperty(FileFullName) Then
-	  NeedsCloseAndReopenFileInCommit = True
-	Else
-	  NeedsCloseAndReopenFileInCommit = False
-	End If
+        If CheckNeedsLockProperty(FileFullName) Then
+          NeedsCloseAndReopenFileInCommit = True
+        Else
+          NeedsCloseAndReopenFileInCommit = False
+        End If
       ElseIf DetectNeedsLockProp = gCfgOff Then
         MsgBox "Invlid combination of settings in ini file!" _
-	        & "DetectNeedsLockProp : " & DetectNeedsLockProp _
-	        & "CiCloseReopneFile : " & CiCloseReopneFile
+                & "DetectNeedsLockProp : " & DetectNeedsLockProp _
+                & "CiCloseReopneFile : " & CiCloseReopneFile
         NeedsCloseAndReopenFileInCommit = True
       Else
-	MsgBox "Invalid setting in ini file!" & "DetectNeedsLockProp : " & DetectNeedsLockProp
+        MsgBox "Invalid setting in ini file!" & "DetectNeedsLockProp : " & DetectNeedsLockProp
       End If
     Case Else
       MsgBox "Invalid setting in ini file!" & "CiCloseReopenFile : " & CiCloseReopneFile

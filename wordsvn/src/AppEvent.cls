@@ -40,7 +40,7 @@ End Sub
 
 ' :Function:  Event handler for before close document
 ' :Arguments: Doc    [i] Document
-'             Cancel [i] 
+'             Cancel [i]
 Private Sub App_DocumentBeforeClose(ByVal Doc As Document, Cancel As Boolean)
   'MsgBox "workbook is going to be closed! : " & Document.FullName
 End Sub
