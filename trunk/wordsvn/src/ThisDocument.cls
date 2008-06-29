@@ -44,7 +44,7 @@ Sub AutoExec()
   ' Assume that tool bar must be installed.
   bNeedInstToolBar = True
   ' Ini file full path name must be aquired when add-in is loaded.
-  InitializeIniFileFullPath mIniFileName
+  'InitializeIniFileFullPath mIniFileName
 
   ' Build the SVN Menu
   InstallSvnMenu
@@ -66,7 +66,7 @@ Sub AutoExec()
 
   RegisterShortcutKey
   'GetCommitFileOpenMode
-  GetFileNameCharEncoding
+  'GetFileNameCharEncoding
   RegisterEventHandler
 End Sub
 
@@ -87,4 +87,5 @@ End Sub
 Sub RegisterEventHandler()
   Set MsOfficeSvnAppEvent.App = Application
 End Sub
+
 

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Tool"
+Attribute VB_Name = "KeyAssign"
 '------------------- Copy & paste from here to the Tool module of excelsvn.xla --------------------
 ' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
@@ -139,6 +139,8 @@ Function AddKeyBindingAsIni(ByVal TsvnCmd As String, ByVal IniKeyBase As String)
   Next i
 
   Select Case KeyNum
+  Case 0
+    Exit Function
   Case 1
     KeyCodeSetInIni = BuildKeyCode(Key1)
   Case 2
