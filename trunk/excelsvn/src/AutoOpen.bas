@@ -19,6 +19,5 @@ Option Explicit
 Sub Auto_Open()
   'MsgBox "Auto_Open"
   RegisterShortcutKey
-  LoadConfig
   'ThisWorkbook.RegisterEventHandler
 End Sub
