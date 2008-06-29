@@ -25,6 +25,7 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
+
 ' :Function:     Test whether content exists on the application.
 ' :Return value: True  = Content exists on the application
 '                False = No content exist on the application
