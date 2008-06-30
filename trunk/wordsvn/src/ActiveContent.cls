@@ -42,6 +42,10 @@ Private mFileSysObj As Object
 
 ' :Function: Initialize class module
 Private Sub Class_Initialize()
+  If ActiveDocument Is Nothing Then
+    Exit Sub
+  End If
+  
   mFullName = ActiveDocument.FullName
   mName = ActiveDocument.Name
   mPath = ActiveDocument.Path
@@ -72,8 +76,13 @@ End Function
 ' :Function: Close the active content
 ' :Retrun value: True = success, False = fail
 Function CloseFile() As Boolean
-  'On Error Resume Next
+  If Len(mName) = Null Then
+    CloseFile = False
+    Exit Function
+  End If
+
   Documents(mName).Close
+
   If Err.Number = 0 Then
     CloseFile = True
   ElseIf Err.Number = 4198 Then
@@ -92,8 +101,13 @@ End Function
 ' :Function: Reopen the active content. StoreFullName function must be called before.
 ' :Retrun value: True = success, False = fail
 Function ReOpenFile() As Boolean
-  'On Error Resume Next
+  If Len(mFullName) = Null Then
+    ReOpenFile = False
+    Exit Function
+  End If
+
   Documents.Open FileName:=mFullName
+
   If Err.Number = 0 Then
     ReOpenFile = True
   ElseIf Err.Number = 1004 Then
@@ -110,8 +124,13 @@ End Function
 ' :Function: Save active workbook.
 ' :Retrun value: True = success, False = fail
 Function SaveFile() As Boolean
-  'On Error Resume Next
+  If Len(mName) = Null Then
+    SaveFile = False
+    Exit Function
+  End If
+
   Documents(mName).Save
+
   If Err.Number = 0 Then
     SaveFile = True
   ElseIf Err.Number = 1004 Then
@@ -127,6 +146,11 @@ End Function
 ' :Function: Get active content file save status
 ' :Return value: True = saved, False = not saved
 Function IsSaved() As Boolean
+  If Len(mName) = Null Then
+    IsSaved = False
+    Exit Function
+  End If
+
  IsSaved = Documents(mName).Saved
 End Function
 
@@ -150,7 +174,13 @@ End Sub
 ' :Function:Test whether the active content is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
 Function FileExist() As Boolean
+  If Len(mName) = Null Then
+    FileExist = False
+    Exit Function
+  End If
+
   If Documents(mName).Path = "" Then
+
     ' Judge that no file exists when no path exists.
     FileExist = False
   Else
@@ -162,6 +192,11 @@ End Function
 ' :Function: Test whether the active content file is read only or not.
 ' :Retrun value: True = Read Only, False = Not Read Only
 Function IsFileReadOnly() As Boolean
+  If Len(mFullName) = Null Then
+    IsFileReadOnly = False
+    Exit Function
+  End If
+  
   If mFileSysObj.GetFile(mFullName).Attributes And 1 Then
     IsFileReadOnly = True
   Else
@@ -174,6 +209,11 @@ End Function
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFolderUnderSvnControl() As Boolean
   Dim DotSvnFolder As String ' Subversion control folder ".svn"
+
+  If Len(mPath) = Null Then
+    IsFolderUnderSvnControl = False
+    Exit Function
+  End If
 
   DotSvnFolder = mPath & "\.svn"
 
@@ -189,6 +229,11 @@ End Function
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFileUnderSvnControl() As Boolean
   Dim TextBaseFile As String ' Base file full path name
+
+  If Len(mPath) = Null Then
+    IsFileUnderSvnControl = False
+    Exit Function
+  End If
 
   TextBaseFile = mPath & "\.svn\text-base\" & mName & ".svn-base"
 
