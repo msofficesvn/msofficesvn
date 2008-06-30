@@ -45,7 +45,6 @@ End Sub
 'Private Sub Workbook_Open()
   'MsgBox "Workbook_Open"
 '  RegisterShortcutKey
-'  LoadConfig
 '  RegisterEventHandler
 'End Sub
 

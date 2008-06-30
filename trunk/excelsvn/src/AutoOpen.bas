@@ -10,7 +10,7 @@ Attribute VB_Name = "AutoOpen"
 ' :$Date::                           $
 ' :Author:      Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: AutoOpen
-' :Description:
+' :Description: Auto_Open must be implemented in standard module.
 
 Option Explicit
 
