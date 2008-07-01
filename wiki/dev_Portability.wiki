@@ -9,3 +9,33 @@ To increase portability
      Codes vary from office applications
    - Module1
      Common codes through office applications
+
+Port Word add-in to PowerPoint add-in
+
+|| Documents || Presentaions ||
+|| Document || Presentaion ||
+|| ActiveDocument || ActivePresentaion ||
+
+ * Position of documents
+ 
+ - Current position
+
+ absPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
+
+ absLinePos = Selection.Information(wdFirstCharacterLineNumber)
+
+ - Jump to the specified position
+
+  Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=absPageNum, Name:=""
+
+  Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=(absLinePos - 1), Name:=""
+
+ * Position of Presentations
+
+ - Current position
+
+  absPageNum = ActiveWindow.Selection.SlideRange.SlideIndex
+
+ - Jump to the specified position
+
+   ActiveWindow.View.GotoSlide Index:=absPageNum
