@@ -2,6 +2,10 @@ Links
 
 =English=
 
+Document file format and repository size.
+
+http://svn.haxx.se/tsvnusers/archive-2008-03/0121.shtml
+
 http://www.52novels.com/archives/the-version-suicides-part-1/
 
 http://www.52novels.com/archives/the-version-suicides-part-2/
