@@ -25,7 +25,7 @@ Port Word add-in to PowerPoint add-in
     So, it seems to be unstable that it contains extension or not.
 
  * Position of documents
- 
+
  - Current position
 
  absPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
