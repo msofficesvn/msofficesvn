@@ -20,7 +20,8 @@ Port Word add-in to PowerPoint add-in
 
  * ActivePresentation.Name
 
-    It doesn't contain extension on ppt97.
+    It the presentaion name in title bar.
+    So, it seems to be unstable that it contains extension or not.
 
  * Position of documents
  
