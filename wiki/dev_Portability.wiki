@@ -12,6 +12,8 @@ To increase portability
 
 Port Word add-in to PowerPoint add-in
 
+ * Object change
+
 || Documents || Presentaions ||
 || Document || Presentaion ||
 || ActiveDocument || ActivePresentaion ||
