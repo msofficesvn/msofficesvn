@@ -54,3 +54,5 @@ Port Word add-in to PowerPoint add-in
 || AutoExec() || Auto_Open() ||
 || AutoExit() || Auto_Close() ||
 
+ * Dose really needs to register to HKEY_CURRENT_USER ?
+
