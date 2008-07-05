@@ -13,10 +13,14 @@ To increase portability
 Port Word add-in to PowerPoint add-in
 
  * Object change
-
+|| Word || PowerPoint ||
 || Documents || Presentaions ||
 || Document || Presentaion ||
 || ActiveDocument || ActivePresentaion ||
+
+ * ActivePresentation.Name
+
+    It doesn't contain extension on ppt97.
 
  * Position of documents
  
@@ -41,3 +45,9 @@ Port Word add-in to PowerPoint add-in
  - Jump to the specified position
 
    ActiveWindow.View.GotoSlide Index:=absPageNum
+
+ * Start and End add-in function
+
+|| Word || PowerPoint ||
+|| AutoExec() || Auto_Open() ||
+|| AutoExit() || Auto_Close() ||
