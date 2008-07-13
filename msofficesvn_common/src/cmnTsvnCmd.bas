@@ -114,7 +114,7 @@ Sub TsvnUpdate()
   End If
 
   ActiveContent.StoreCurCursorPos
-  ActiveContent.CloseFile
+  ActiveContent.CloseFile True
   
   ExecTsvnCmd "update", ActiveContent.GetFullName
   
@@ -169,25 +169,22 @@ Sub TsvnCi()
                                 True, ActiveContent)
       ansSaveMod = MsgBox(msgAskSaveMod, vbYesNoCancel)
       If ansSaveMod = vbYes Then
-        If ActiveContent.SaveFile = False Then
+        If ActiveContent.SaveFile(True) = False Then
           Exit Sub
         End If
       ElseIf ansSaveMod = vbCancel Then
         Exit Sub
       End If
     Else
-      Application.DisplayAlerts = False
-      If ActiveContent.SaveFile = False Then
-        Application.DisplayAlerts = True
+      If ActiveContent.SaveFile(False) = False Then
         Exit Sub
       End If
-      Application.DisplayAlerts = True
     End If
   End If
 
   If NeedsCloseAndReopenFileInCommit(ActiveContent.GetFullName) Then
     ActiveContent.StoreCurCursorPos
-    ActiveContent.CloseFile
+    ActiveContent.CloseFile True
 
     ExecTsvnCmd "commit", ActiveContent.GetFullName
 
@@ -239,12 +236,10 @@ Sub TsvnDiff()
                                    True, ActiveContent)
          ansSaveMod = MsgBox(msgAskSaveMod, vbYesNo)
          If ansSaveMod = vbYes Then
-           ActiveContent.SaveFile
+           ActiveContent.SaveFile (True)
          End If
       Else
-        Application.DisplayAlerts = False
-        ActiveContent.SaveFile
-        Application.DisplayAlerts = True
+        ActiveContent.SaveFile (False)
       End If
     End If
   End If
@@ -306,8 +301,11 @@ Sub TsvnLock()
   Dim ActiveContent As New ActiveContent
   ' Discard change and lock the file
   Dim bDiscardChangeAndLock As Boolean
-
+  ' True = Dispaly alerts on closing file
+  Dim bAlertsOnClosing As Boolean
+  
   bDiscardChangeAndLock = False
+  bAlertsOnClosing = True
 
   ' Exit when no content exist
   If mContents.ContentExist = False Then
@@ -348,11 +346,16 @@ Sub TsvnLock()
       msgAskSaveMod = _
       AddActiveContentNameToMsg(gmsgLockAskSaveModContent, gmsgFileNameCap, _
                                 True, ActiveContent)
-      ans = MsgBox(msgAskSaveMod, vbYesNo)
+      ans = MsgBox(msgAskSaveMod, vbYesNoCancel)
       If ans = vbYes Then
-        If ActiveContent.SaveFile = False Then
+        bAlertsOnClosing = True
+        If ActiveContent.SaveFile(True) = False Then
           Exit Sub
         End If
+      ElseIf ans = vbNo Then
+        bAlertsOnClosing = False
+      ElseIf ans = vbCancel Then
+        Exit Sub
       End If
     End If
   End If
@@ -363,7 +366,7 @@ Sub TsvnLock()
   '  * The file attribute of read only / read write is changed after lock the file.
   '  * The file can be updated when the file in repository is newer than the working copy.
   '  * If the word open the file and svn failes to update working copy, svn require clean-up.
-  ActiveContent.CloseFile
+  ActiveContent.CloseFile bAlertsOnClosing
 
   ExecTsvnCmd "lock", ActiveContent.GetFullName
 
@@ -423,21 +426,19 @@ Sub TsvnUnlock()
       If ans = vbNo Then
         Exit Sub ' Exit subroutine without locking
       Else
-        If ActiveContent.SaveFile = False Then
+        If ActiveContent.SaveFile(True) = False Then
           Exit Sub
         End If
       End If
     Else
-      Application.DisplayAlerts = False
-      ActiveContent.SaveFile
-      Application.DisplayAlerts = True
+      ActiveContent.SaveFile False
     End If
   End If ' If ActiveContent.IsSaved = False Then
 
   ' Close the file and reopen after unlock it, because the following reason
   '  * The file attribute of read only / read write is changed after unlock the file.
   ActiveContent.StoreCurCursorPos
-  ActiveContent.CloseFile
+  ActiveContent.CloseFile True
 
   ExecTsvnCmd "unlock", ActiveContent.GetFullName
 
@@ -493,14 +494,12 @@ Sub TsvnAdd()
                                   gmsgFileNameCap, True, ActiveContent)
         ans = MsgBox(msgAskSaveMod, vbYesNo)
         If ans = vbYes Then
-          If ActiveContent.SaveFile = False Then
+          If ActiveContent.SaveFile(True) = False Then
             Exit Sub
           End If
         End If
       Else
-        Application.DisplayAlerts = False
-        ActiveContent.SaveFile
-        Application.DisplayAlerts = True
+        ActiveContent.SaveFile False
       End If
     End If ' If ActiveContent.IsSaved = False Then
 
@@ -543,6 +542,7 @@ Sub TsvnDelete()
     Exit Sub
   End If
 
+  ActiveContent.CloseFile False
   ExecTsvnCmd "remove", ""
 
   ansAskCommit = MsgBox(gmsgDeleteAskCommit, vbYesNo)
