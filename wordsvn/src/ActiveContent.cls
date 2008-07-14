@@ -3,10 +3,10 @@ BEGIN
   MultiUse = -1  'True
 END
 Attribute VB_Name = "ActiveContent"
-Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+
 
 '------------------- Copy & paste from here to the ActiveContent class module of excelsvn.xla --------------------
 ' $Rev$
@@ -43,6 +43,10 @@ Private mFileSysObj As Object
 ' :Function: Initialize class module
 Private Sub Class_Initialize()
   If ActiveDocument Is Nothing Then
+    mFullName = ""
+    mName = ""
+    mPath = ""
+    Set mFileSysObj = Nothing
     Exit Sub
   End If
   
@@ -76,7 +80,7 @@ End Function
 ' :Function: Close the active content
 ' :Retrun value: True = success, False = fail
 Function CloseFile() As Boolean
-  If Len(mName) = Null Then
+  If Len(mName) = 0 Then
     CloseFile = False
     Exit Function
   End If
@@ -101,7 +105,7 @@ End Function
 ' :Function: Reopen the active content. StoreFullName function must be called before.
 ' :Retrun value: True = success, False = fail
 Function ReOpenFile() As Boolean
-  If Len(mFullName) = Null Then
+  If Len(mFullName) = 0 Then
     ReOpenFile = False
     Exit Function
   End If
@@ -124,7 +128,7 @@ End Function
 ' :Function: Save active workbook.
 ' :Retrun value: True = success, False = fail
 Function SaveFile() As Boolean
-  If Len(mName) = Null Then
+  If Len(mName) = 0 Then
     SaveFile = False
     Exit Function
   End If
@@ -146,7 +150,7 @@ End Function
 ' :Function: Get active content file save status
 ' :Return value: True = saved, False = not saved
 Function IsSaved() As Boolean
-  If Len(mName) = Null Then
+  If Len(mName) = 0 Then
     IsSaved = False
     Exit Function
   End If
@@ -174,7 +178,7 @@ End Sub
 ' :Function:Test whether the active content is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
 Function FileExist() As Boolean
-  If Len(mName) = Null Then
+  If Len(mName) = 0 Then
     FileExist = False
     Exit Function
   End If
@@ -192,7 +196,7 @@ End Function
 ' :Function: Test whether the active content file is read only or not.
 ' :Retrun value: True = Read Only, False = Not Read Only
 Function IsFileReadOnly() As Boolean
-  If Len(mFullName) = Null Then
+  If Len(mFullName) = 0 Then
     IsFileReadOnly = False
     Exit Function
   End If
@@ -210,7 +214,7 @@ End Function
 Function IsFolderUnderSvnControl() As Boolean
   Dim DotSvnFolder As String ' Subversion control folder ".svn"
 
-  If Len(mPath) = Null Then
+  If Len(mPath) = 0 Then
     IsFolderUnderSvnControl = False
     Exit Function
   End If
@@ -230,7 +234,7 @@ End Function
 Function IsFileUnderSvnControl() As Boolean
   Dim TextBaseFile As String ' Base file full path name
 
-  If Len(mPath) = Null Then
+  If Len(mPath) = 0 Then
     IsFileUnderSvnControl = False
     Exit Function
   End If
