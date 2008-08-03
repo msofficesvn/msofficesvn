@@ -543,11 +543,11 @@ Sub TsvnDelete()
   End If
 
   ActiveContent.CloseFile False
-  ExecTsvnCmd "remove", ""
+  ExecTsvnCmd "remove", ActiveContent.GetFullName
 
   ansAskCommit = MsgBox(gmsgDeleteAskCommit, vbYesNo)
   If ansAskCommit = vbYes Then
-    TsvnCi
+    ExecTsvnCmd "commit", ActiveContent.GetFullName
   End If ' If ans = vbYes Then
 End Sub
 
