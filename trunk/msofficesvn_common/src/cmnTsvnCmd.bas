@@ -133,6 +133,7 @@ Sub TsvnCi()
   Dim ansSaveMod As Integer
   ' ActiveContent class object
   Dim ActiveContent As New ActiveContent
+  Dim bAlertOnClose As Boolean
 
   ' Exit when no content exist
   If mContents.ContentExist = False Then
@@ -183,8 +184,17 @@ Sub TsvnCi()
   End If
 
   If NeedsCloseAndReopenFileInCommit(ActiveContent.GetFullName) Then
+    
+    If ansSaveMod = vbNo Then
+    ' User selected not to save the file.
+    'So, the file is closed without any warning messages.
+      bAlertOnClose = False
+    Else
+      bAlertOnClose = True
+    End If
+    
     ActiveContent.StoreCurCursorPos
-    ActiveContent.CloseFile True
+    ActiveContent.CloseFile bAlertOnClose
 
     ExecTsvnCmd "commit", ActiveContent.GetFullName
 
@@ -568,7 +578,7 @@ Sub OpenExplorer()
   End If
 
   CreateObject("WScript.Shell").Run "%SystemRoot%\explorer.exe /e, /select," _
-                                    & ActiveContent.GetFullName, , True
+                                    & """" & ActiveContent.GetFullName & """", , True
 End Sub
 
 
