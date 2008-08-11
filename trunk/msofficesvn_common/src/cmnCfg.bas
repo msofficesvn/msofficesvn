@@ -32,29 +32,21 @@ Public Const gAutoCloseIfNoErrConflMergeLocal = 4
 
 Private Const mIniSecNameConfig As String = "Configuration"
 Private Const mIniKeyNameFileNameCharEncoding As String = "FileNameCharEncoding"
-Private Const mIniKeyDetectNeedsLockProp As String = "DetectNeedsLockProp"
 
 Private Const mIniKeyCiCloseReopenFile As String = "CiCloseReopenFile"
 Private Const mIniKeyCiAutoCloseProgressDlg As String = "CiAutoCloseProgressDlg"
 Private Const mIniKeyDispAskSaveModMsg As String = "DispAskSaveModMsg"
 
-Private mDetectNeedsLockProp As Long
 Private mDispAskSaveModMsg As Long
 
-' When mDetectNeedsLockProp is False, mCiCloseReopenFile is adopted.
-' When mDetectNeedsLockProp is True, if the file has NLP, it is closed and reopened and if it doesn't have the property it is never closed in commiting.
+' Options in comitting
 Private mCiCloseReopenFile As Long
 Private mCiAutoCloseProgressDlg As Long
+' File name character encoding of MS-Office data file
 Private mFileNameCharEncoding As String * 128
 
 
 Public Sub LoadConfig()
-  mDetectNeedsLockProp = _
-  GetPrivateProfileInt(mIniSecNameConfig, mIniKeyDetectNeedsLockProp, _
-                       gCfgOn, GetIniFileFullPath)
-
-  'MsgBox "mDetectNeedsLockProp : " & mDetectNeedsLockProp
-
   mDispAskSaveModMsg = _
   GetPrivateProfileInt(mIniSecNameConfig, mIniKeyDispAskSaveModMsg, _
                        gCfgOff, GetIniFileFullPath)
@@ -76,14 +68,6 @@ Public Sub LoadConfig()
                           GetIniFileFullPath
 End Sub
 
-Public Function GetDetectNeedsLockProp(ByVal bRead As Boolean) As Long
-  If bRead = True Then
-    mDetectNeedsLockProp = _
-    GetPrivateProfileInt(mIniSecNameConfig, mIniKeyDetectNeedsLockProp, _
-                         gCfgOn, GetIniFileFullPath)
-  End If
-  GetDetectNeedsLockProp = mDetectNeedsLockProp
-End Function
 
 Public Function GetDispAskSaveModMsg(ByVal bRead As Boolean) As Long
   If bRead = True Then

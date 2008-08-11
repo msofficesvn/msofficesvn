@@ -3,7 +3,7 @@
 ==SVN action options==
 
  * Make full message mode and least message mode.
- * Detect svn:needs-lock property especially in commiting.
+ * Close and reopen the data file especially in commiting.
 
 ==Each action option==
 
@@ -17,7 +17,6 @@
 
  * Commit
 
-   # Whether detect svn:needs-lock property(Call "NLP" here) or not
    # Whether close and reopen the file before/after commiting or not (Depends on NLP)
    # Whether display the message to ask to save the modified file or not (Depends on NLP)
    # Whether dsiplay the progress dialog box after commiting or not (Depends on NLP)
