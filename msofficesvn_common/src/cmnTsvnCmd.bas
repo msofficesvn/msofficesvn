@@ -672,8 +672,6 @@ End Function
 Function NeedsCloseAndReopenFileInCommit(ByVal FileFullName As String) As Boolean
   ' Close and reopne file in commiting option
   Dim CiCloseReopneFile As Long
-  ' Detect Needs Lock Property option
-  Dim DetectNeedsLockProp As Long
 
   ' Default return value
   NeedsCloseAndReopenFileInCommit = True
@@ -686,21 +684,10 @@ Function NeedsCloseAndReopenFileInCommit(ByVal FileFullName As String) As Boolea
     Case gCiCloseReopenFile
       NeedsCloseAndReopenFileInCommit = True
     Case gCiCloseReopenOnlyNeedsLockFile
-      DetectNeedsLockProp = GetDetectNeedsLockProp(True)
-
-      If DetectNeedsLockProp = gCfgOn Then
-        If CheckNeedsLockProperty(FileFullName) Then
-          NeedsCloseAndReopenFileInCommit = True
-        Else
-          NeedsCloseAndReopenFileInCommit = False
-        End If
-      ElseIf DetectNeedsLockProp = gCfgOff Then
-        MsgBox "Invlid combination of settings in ini file!" _
-                & "DetectNeedsLockProp : " & DetectNeedsLockProp _
-                & "CiCloseReopneFile : " & CiCloseReopneFile
+      If CheckNeedsLockProperty(FileFullName) Then
         NeedsCloseAndReopenFileInCommit = True
       Else
-        MsgBox "Invalid setting in ini file!" & "DetectNeedsLockProp : " & DetectNeedsLockProp
+        NeedsCloseAndReopenFileInCommit = False
       End If
     Case Else
       MsgBox "Invalid setting in ini file!" & "CiCloseReopenFile : " & CiCloseReopneFile

@@ -3,6 +3,7 @@ BEGIN
   MultiUse = -1  'True
 END
 Attribute VB_Name = "ActiveContent"
+Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
@@ -79,13 +80,15 @@ End Function
 
 ' :Function: Close the active content
 ' :Retrun value: True = success, False = fail
-Function CloseFile() As Boolean
+Function CloseFile(ByVal bDisplayAlerts As Boolean) As Boolean
   If Len(mName) = 0 Then
     CloseFile = False
     Exit Function
   End If
 
+  Application.DisplayAlerts = bDisplayAlerts
   Documents(mName).Close
+  Application.DisplayAlerts = True
 
   If Err.Number = 0 Then
     CloseFile = True
@@ -127,13 +130,15 @@ End Function
 
 ' :Function: Save active workbook.
 ' :Retrun value: True = success, False = fail
-Function SaveFile() As Boolean
+Function SaveFile(ByVal bDisplayAlerts As Boolean) As Boolean
   If Len(mName) = 0 Then
     SaveFile = False
     Exit Function
   End If
 
+  Application.DisplayAlerts = bDisplayAlerts
   Documents(mName).Save
+  Application.DisplayAlerts = True
 
   If Err.Number = 0 Then
     SaveFile = True
