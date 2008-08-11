@@ -1,0 +1,31 @@
+http://msdn.microsoft.com/ja-jp/library/cc384080.aspx
+
+キー	コード
+↑	{UP}
+→	{RIGHT}
+↓	{DOWN}
+←	{LEFT}
+BackSpace	{BACKSPACE} または {BS}
+CapsLock	{CAPSLOCK}
+Clear	{CLEAR}
+Ctrl + Break	{BREAK}
+Delete または Del	{DELETE} または {DEL}
+End	{END}
+Enter	?
+Enter (テンキー)	{ENTER}
+Esc	{ESCAPE} or {ESC}
+F1 ? F15	{F1} から {F15}
+Help	{HELP}
+Home	{HOME}
+Ins	{INSERT}
+NumLock	{NUMLOCK}
+PageDown	{PGDN}
+PageUp	{PGUP}
+Return	{RETURN}
+ScrollLock	{SCROLLLOCK}
+Tab	{TAB}
+
+キー 	コード
+Shift 	+
+Ctrl 	^
+Alt 	%
