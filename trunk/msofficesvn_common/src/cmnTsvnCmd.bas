@@ -371,6 +371,7 @@ Sub TsvnLock()
         Exit Sub
       ElseIf ans = vbNo Then
         bDiscardChangeAndLock = True
+        bAlertsOnClosing = False
       End If
     End If
 
