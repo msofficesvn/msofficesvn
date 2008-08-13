@@ -100,6 +100,50 @@ Public Function ConvFileCharEncoding(ByVal SrcEncoding As String, _
   SecondObj.Close
 End Function
 
+' :Function: Search file name in .svn\entries file.
+' :Arguments: EntriesContent [i] String of the entries file converted to shift-jis
+'             FileName       [i] Target file name to find in entires file
+' :Return Value: File name position (number of characters) in entires file
+'                0 = File name is not found
+'
+Function SearchFileNameInEntries(ByRef EntriesContent As String, ByRef FileName As String) As Long
+  Dim FoundPos As Long
+  Dim StartPos As Long
+  Dim bFoundFileName As Boolean
+  Dim PrevChar As String
+  Dim PostChar As String
+  Dim FileNameLen As Long
+  
+  bFoundFileName = False
+  StartPos = 1
+  FileNameLen = Len(FileName)
+  
+  Do
+    FoundPos = InStr(StartPos, EntriesContent, FileName, vbBinaryCompare)
+    If FoundPos = 0 Or FoundPos = Null Or FoundPos = StartPos Then
+    ' File name not found
+      bFoundFileName = False
+      Exit Do
+    Else
+      PrevChar = Mid(EntriesContent, (FoundPos - 1), 1)
+      PostChar = Mid(EntriesContent, (FoundPos + FileNameLen), 1)
+      If StrComp(PrevChar, Chr(10), vbBinaryCompare) = 0 And _
+         StrComp(PostChar, Chr(10), vbBinaryCompare) = 0 Then
+      ' The found file name exactly matchs
+        bFoundFileName = True
+      Else
+      ' The found file name is the part of longer file name.
+        StartPos = FoundPos + FileNameLen
+      End If
+    End If
+  Loop While bFoundFileName = False
+  
+  If bFoundFileName Then
+    SearchFileNameInEntries = FoundPos
+  Else
+    SearchFileNameInEntries = 0
+  End If
+End Function
 
 ' :Function:     Check svn:needs-lock property of the file
 '                from .entries file under .svn folder.
@@ -137,7 +181,7 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
 
   ' Find out target file name in svn entries file
   ' and check the existence of svn:needs-lock property.
-  FileNamePos = InStr(1, EntriesContent, FileName, vbBinaryCompare)
+  FileNamePos = SearchFileNameInEntries(EntriesContent, FileName)
   If FileNamePos = 0 Then
     Exit Function
   End If
