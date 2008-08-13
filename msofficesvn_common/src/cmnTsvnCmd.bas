@@ -144,9 +144,12 @@ Sub TsvnCi()
   Dim ActiveContent As New ActiveContent
   ' True = Dispaly alerts on closing file
   Dim bAlertsOnClosing As Boolean
+  ' True = Close and reopen file
+  Dim bCloseReopen As Boolean
 
   ' Initialize flags
   bAlertsOnClosing = True
+  ansSaveMod = vbYes
 
   ' Exit when no content exist
   If mContents.ContentExist = False Then
@@ -163,8 +166,7 @@ Sub TsvnCi()
     Exit Sub
   End If
  
-  ' Initialize user's anser
-  ansSaveMod = vbYes
+  bCloseReopen = NeedsCloseAndReopenFileInCommit(ActiveContent.GetFullName)
 
   If ActiveContent.IsSaved = False Then
   ' Active content is modified but not saved yet.
@@ -178,9 +180,16 @@ Sub TsvnCi()
     End If
 
     If GetDispAskSaveModMsg(True) = gCfgOn Then
-      msgAskSaveMod = _
-      AddActiveContentNameToMsg(gmsgCommitAskSaveModContent, gmsgFileNameCap, _
-                                True, ActiveContent)
+      If bCloseReopen Then
+        msgAskSaveMod = _
+        AddActiveContentNameToMsg(gmsgCommitAskSaveModCloseReopen, gmsgFileNameCap, _
+                                  True, ActiveContent)
+      Else
+        msgAskSaveMod = _
+        AddActiveContentNameToMsg(gmsgCommitAskSaveMod, gmsgFileNameCap, _
+                                  True, ActiveContent)
+      End If
+      
       ansSaveMod = MsgBox(msgAskSaveMod, vbYesNoCancel)
       If ansSaveMod = vbYes Then
         If ActiveContent.SaveFile(True) = False Then
@@ -196,7 +205,7 @@ Sub TsvnCi()
     End If
   End If
 
-  If NeedsCloseAndReopenFileInCommit(ActiveContent.GetFullName) Then
+  If bCloseReopen Then
     
     If ansSaveMod = vbNo Then
     ' User selected not to save the file.
