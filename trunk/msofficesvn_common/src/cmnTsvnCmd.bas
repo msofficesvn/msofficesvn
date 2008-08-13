@@ -81,6 +81,11 @@ Sub TsvnUpdate()
   Dim ActiveContent As New ActiveContent
   ' Ask user to abort update procedure
   Dim ansAskAbort As Integer
+  ' True = Dispaly alerts on closing file
+  Dim bAlertsOnClosing As Boolean
+
+  ' Initialize flags
+  bAlertsOnClosing = True
 
   ' Exit when no content exist
   If mContents.ContentExist = False Then
@@ -110,14 +115,18 @@ Sub TsvnUpdate()
     ansAskAbort = MsgBox(msgErrMod, vbYesNo)
     If ansAskAbort = vbYes Then
       Exit Sub
+    Else
+    ' User selected discard the changes of the data file.
+    ' So, the file is closed without any warning messages.
+      bAlertsOnClosing = False
     End If
   End If
 
   ActiveContent.StoreCurCursorPos
-  ActiveContent.CloseFile True
-  
+  ActiveContent.CloseFile bAlertsOnClosing
+
   ExecTsvnCmd "update", ActiveContent.GetFullName
-  
+
   ActiveContent.ReOpenFile
   ActiveContent.JumpToStoredPos
 End Sub
@@ -133,7 +142,11 @@ Sub TsvnCi()
   Dim ansSaveMod As Integer
   ' ActiveContent class object
   Dim ActiveContent As New ActiveContent
-  Dim bAlertOnClose As Boolean
+  ' True = Dispaly alerts on closing file
+  Dim bAlertsOnClosing As Boolean
+
+  ' Initialize flags
+  bAlertsOnClosing = True
 
   ' Exit when no content exist
   If mContents.ContentExist = False Then
@@ -187,14 +200,14 @@ Sub TsvnCi()
     
     If ansSaveMod = vbNo Then
     ' User selected not to save the file.
-    'So, the file is closed without any warning messages.
-      bAlertOnClose = False
+    ' So, the file is closed without any warning messages.
+      bAlertsOnClosing = False
     Else
-      bAlertOnClose = True
+      bAlertsOnClosing = True
     End If
     
     ActiveContent.StoreCurCursorPos
-    ActiveContent.CloseFile bAlertOnClose
+    ActiveContent.CloseFile bAlertsOnClosing
 
     ExecTsvnCmd "commit", ActiveContent.GetFullName
 
@@ -487,34 +500,7 @@ Sub TsvnAdd()
 
   ans = MsgBox(gmsgAddAskCommit, vbYesNo)
   If ans = vbYes Then
-    If ActiveContent.IsSaved = False Then
-    ' Active content is modified but not saved yet.
-      ' Test the active content file attributes
-      If ActiveContent.IsFileReadOnly = True Then
-        msgErrReadOnly = _
-        AddActiveContentNameToMsg(gmsgCommitErrActiveContentFileReadOnly, _
-                                  gmsgFileNameCap, True, ActiveContent)
-        MsgBox msgErrReadOnly
-        Exit Sub
-      End If
-
-      If GetDispAskSaveModMsg(True) = gCfgOn Then
-        msgAskSaveMod = _
-        AddActiveContentNameToMsg(gmsgCommitAskSaveModContent, _
-                                  gmsgFileNameCap, True, ActiveContent)
-        ans = MsgBox(msgAskSaveMod, vbYesNo)
-        If ans = vbYes Then
-          If ActiveContent.SaveFile(True) = False Then
-            Exit Sub
-          End If
-        End If
-      Else
-        ActiveContent.SaveFile False
-      End If
-    End If ' If ActiveContent.IsSaved = False Then
-
     TsvnCi
-
   End If ' If ans = vbYes Then
 End Sub
 
