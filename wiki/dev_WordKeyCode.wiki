@@ -1,3 +1,5 @@
+http://msdn.microsoft.com/ja-jp/library/cc382392.aspx
+
 || Name || Value || Description ||
 || wdKey0 || 48 || 0 key ||
 || wdKey1 || 49 || 1 key ||
