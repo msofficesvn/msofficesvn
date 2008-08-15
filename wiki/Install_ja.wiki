@@ -2,48 +2,81 @@
 
 ==準備==
 
- # まず、TortoiseSVNをインストールしてください。
- # 本サイトのDownloadsページより、最新バージョンの `msofficesvn_<version>_ja.zip` ファイルをダウンロードし、解凍してください。wordsvn.dot,excelsvn.xlaが得られます。
+1. まず、TortoiseSVNをインストールしてください。  
+
+http://tortoisesvn.net/downloads
+
+2. 本サイトのDownloadsページより、最新バージョンの `msofficesvn_<version>_ja.zip` ファイルをダウンロードし、解凍してください。以下のファイルが得られます。
+
+Excelアドイン用ファイル
+ * excelsvn.xla
+ * excelsvn.ini
+
+Wordアドイン用ファイル
+ * wordsvn.dot
+ * wordsvn.ini
 
 ==Office97SR2～Office2003の場合==
 
 ===Excel===
 
- # excelsvn.xlaを以下のフォルダへコピーしてください。
-  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
-  || Office2000   || ? ||
-  || OfficeXP     || ? ||
-  || Office2003   || ? ||
- # Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンとしてください。
- # [Subversion]メニューとコマンドバーが表示されます。
+1. Excelアドイン用ファイルを以下のフォルダへコピーしてください。
+
+|| Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
+|| Office2000 || ? ||
+|| OfficeXP || C:\Program Files\Microsoft Office\Office10\Library\ ||
+|| Office2003 || %APPDATA%\Microsoft\AddIns\ ||
+
+%APPDATA%は、ログインユーザのApplication Dataフォルダを指します。
+
+例えば、ログイン名が"koki"の場合は、%APPDATA%は以下のようになります。
+{{{
+C:\Documents and Settings\koki\Application Data
+}}}
+%APPDATA%をエクスプローラのアドレスバーに入力することでApplication Dataフォルダを表示することができます。
+
+2. Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンにしてください。
+
+3. [Subversion]メニューとコマンドバーが表示されます。
 
 ===Word===
 
- # wordsvn.dot以下のフォルダへコピーしてください。
-  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
-  || Office2000 || ? ||
-  || OfficeXP || ? ||
-  || Office2003 || ? ||
- # Wordを起動してください。 
- # [Subversion]メニューとコマンドバーが表示されます。
+1. Wordアドイン用ファイルを以下のフォルダへコピーしてください。
+
+|| Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
+|| Office2000 || ? ||
+|| OfficeXP || C:\Program Files\Microsoft Office\Office10\STARTUP\ ||
+|| Office2003 || %APPDATA%\Microsoft\Word\STARTUP\ ||
+
+2. Wordを起動してください。 
+
+3. [Subversion]メニューとコマンドバーが表示されます。
 
 ==Office2007の場合==
 
 ===Excel===
 
- # excelsvn.xlaを以下のフォルダへコピーしてください。
-  C:\Documents and Settings\koki\Application Data\Microsoft\AddIns\
- # Excelを起動し、[Officeボタン]/[Excelのオプション]/[アドイン]/[管理]で"Excelアドイン"を選択して、[設定]ボタンをクリックしてください。アドイン画面が表示されます。
- # アドイン画面で、Excelsvnチェックボックスが表示されますので、オンにしてください。
- # [Subversion]メニューとコマンドバーが表示されます。
+1. Excelアドイン用ファイルを以下のフォルダへコピーしてください。
+{{{
+%APPDATA%\Microsoft\AddIns\
+}}}
+
+2. Excelを起動し、[Officeボタン]/[Excelのオプション]/[アドイン]/[管理]で"Excelアドイン"を選択して、[設定]ボタンをクリックしてください。アドイン画面が表示されます。
+
+3. アドイン画面で、Excelsvnチェックボックスが表示されますので、オンにしてください。
+
+4. [Subversion]メニューとコマンドバーが表示されます。
 
 ===Word===
 
- # wordsvn.dotを以下のフォルダへコピーしてください。
-  C:\Documents and Settings\koki\Application Data\Microsoft\Word\STARTUP\
- # Wordを起動してください。 
- # [Subversion]メニューとコマンドバーが表示されます。
+1. Wordアドイン用ファイルを以下のフォルダへコピーしてください。
+{{{
+%APPDATA%\Microsoft\Word\STARTUP\
+}}}
 
+2. Wordを起動してください。 
+
+3. [Subversion]メニューとコマンドバーが表示されます。
 
 =アンインストール方法=
 
@@ -51,28 +84,215 @@
 
 ===Excel===
 
- # Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオフにしてください。
- # [Subversion]メニューとコマンドバーが削除されます。
- # インストール時にコピーした、excelsvn.xlaを削除してください。
+1. Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオフにしてください。
+
+2. [Subversion]メニューとコマンドバーが削除されます。
+
+3. インストール時にコピーした、Excelアドイン用ファイルを削除してください。
 
 ===Word===
 
- # Wordを起動し、[ツール]/[テンプレートとアドイン...]メニューより表示される画面で、wordsvn.dotチェックボックスをオフにしてください。
- # [Subversion]メニューとコマンドバーが削除されます。
- # インストール時にコピーした、wordsvn.dotを削除してください。
+1. Wordを起動し、[ツール]/[テンプレートとアドイン...]メニューより表示される画面で、wordsvn.dotチェックボックスをオフにしてください。
+
+2. [Subversion]メニューとコマンドバーが削除されます。
+
+3. インストール時にコピーした、Wordアドイン用ファイルを削除してください。
 
 ==Office2007の場合==
 
 ===Excel===
 
- # Excelを起動し、[Officeボタン]/[Excelのオプション]/[アドイン]/[管理]で"Excelアドイン"を選択して、[設定]ボタンをクリックしてください。アドイン画面が表示されます。
- # アドイン画面で、Excelsvnチェックボックスが表示されますので、オフにしてください。
- # [Subversion]メニューとコマンドバーが削除されます。
- # インストール時にコピーした、excelsvn.xlaを削除してください。
+1. Excelを起動し、[Officeボタン]/[Excelのオプション]/[アドイン]/[管理]で"Excelアドイン"を選択して、[設定]ボタンをクリックしてください。アドイン画面が表示されます。
+
+2. アドイン画面で、Excelsvnチェックボックスが表示されますので、オフにしてください。
+
+3. [Subversion]メニューとコマンドバーが削除されます。
+
+4. インストール時にコピーした、Excelアドイン用ファイルを削除してください。
 
 ===Word===
 
- # Wordを起動し、[Officeボタン]/[Wordのオプション]/[アドイン]/[管理]で"Wordアドイン"を選択して、[設定]ボタンをクリックしてください。アドイン画面が表示されます。
- # アドイン画面で、Wordsvnチェックボックスが表示されますので、オフにしてください。
- # [Subversion]メニューとコマンドバーが削除されます。
- # インストール時にコピーした、wordsvn.dotを削除してください。
+1. Wordを起動し、[Officeボタン]/[Wordのオプション]/[アドイン]/[管理]で"Wordアドイン"を選択して、[設定]ボタンをクリックしてください。アドイン画面が表示されます。
+
+2. アドイン画面で、Wordsvnチェックボックスが表示されますので、オフにしてください。
+
+3. [Subversion]メニューとコマンドバーが削除されます。
+
+4. インストール時にコピーした、Wordアドイン用ファイルを削除してください。
+
+=ショートカットキー設定=
+
+==Excel==
+
+1. Excelを終了してください。
+
+2. インストール時にコピーしたexcelsvn.iniの[ShortcutKey]セクションのShortcutKeyOnOffキーの値を1にしてください。
+{{{
+ShortcutKeyOnOff=1
+}}}
+
+2. 次にショートカットキーを割り当てている部分を必要に応じて編集してください。
+{{{
+Update="+^{u}"
+Commit="+^{i}"
+Diff="+^{d}"
+RepoBrowser="+^{w}"
+Log="+^{l}"
+Lock="+^{k}"
+Unlock="+^{n}"
+Add="+^{a}"
+Explorer="+^{e}"
+}}}
+
+"+" はShiftキー、"^" はCtrlキーを示します。また、{}でくくられたアルファベットはそのアルファベットキーを示します。 上記の例では、更新コマンド(Update)は"Shift"キー、"Ctrl"キー、"u"キーを同時に押すと実行されます。
+
+不要なショートカットキー割り当ては削除するか、コメントアウトしてください。コメントアウトは行頭に";"を挿入してください。
+
+ (例)更新コマンドのショートカットキー割り当てを無効にする場合
+{{{
+;Update="+^{u}"
+}}}
+
+3. Excelを起動してショートカットキーが機能することを確認してください。
+
+==Word==
+
+1. Wordを終了してください。
+
+2. インストール時にコピーしたwordsvn.iniの[ShortcutKey]セクションのShortcutKeyOnOffキーの値を1に、Registeredキーの値を0にしてください。
+{{{
+ShortcutKeyOnOff=1
+Registered=0
+}}}
+
+3. 次にショートカットキーを割り当てている部分を必要に応じて編集してください。
+{{{
+;Shift+Ctrl+u
+Update1=256
+Update2=512
+Update3=85
+
+;Shift+Ctrl+i
+Commit1=256
+Commit2=512
+Commit3=73
+
+(以下略)
+}}}
+
+<コマンド名><番号>のキーに、ショートカットキーのキーコードを割り当ててください。
+
+ (例)上記の例では、更新コマンド(Update)は"Shift"キー、"Ctrl"キー、"u"キーを同時に押すと実行されます。
+|| キー || キーコード ||
+|| Shift || 256 ||
+|| Ctrl || 512 ||
+|| u || 85 ||
+
+キーコードは以下をご参照ください。
+[dev_WordKeyCode Word Key Code]
+
+不要なショートカットキー割り当ては削除するか、コメントアウトしてください。コメントアウトは行頭に";"を挿入してください。
+
+ (例)更新コマンドのショートカットキー割り当てを無効にする場合
+{{{
+;Shift+Ctrl+u
+;Update1=256
+;Update2=512
+;Update3=85
+}}}
+
+4. Wordを起動してショートカットキーが機能することを確認してください。
+
+5. ショートカットキーをさらに変更したい場合は、Wordを起動する前に、wordsvn.iniの[ShortcutKey]セクションのRegisteredキーの値を必ず0にしてください。Registeredキーの値はWordを起動してショートカットキーを登録すると1にセットされます。この値が0でなければ、Word起動時にショートカットキー登録は実行されません。
+
+=ショートカットキー設定のクリア=
+
+==Excel==
+
+1. Excelを終了してください。
+
+2. インストール時にコピーしたexcelsvn.iniの[ShortcutKey]セクションのShortcutKeyOnOffキーの値を0にしてください。
+{{{
+ShortcutKeyOnOff=0
+}}}
+
+3. Excelを起動してショートカットキーが無効となっているか、元の割り当て機能が実行されることを確認してください。
+
+==Word==
+
+1. Wordを終了してください。
+
+2. インストール時にコピーしたwordsvn.iniの[ShortcutKey]セクションのShortcutKeyOnOffキーの値を0に、Registeredキーの値を0にしてください。
+{{{
+ShortcutKeyOnOff=0
+Registered=0
+}}}
+
+3. Wordを起動してショートカットキーが無効となっているか、元の割り当て機能が実行されることを確認してください。
+
+=オプション設定=
+
+==コマンド実行時のファイル保存メッセージのオン／オフ==
+
+===Excel===
+
+1. excelsvn.iniの[Configuration]セクションのDispAskSaveModMsgキーを設定してください。
+|| DispAskSaveModMsgの値 || 説明 ||
+|| 0 || メッセージを表示しない ||
+|| 1 || メッセージを表示する ||
+
+{{{
+[Configuration]
+DispAskSaveModMsg=1
+}}}
+
+===Word===
+
+wordsvn.iniにExcelと同様に設定をしてください。
+
+==コミットコマンド実行時のファイルの閉じる／再度開くのオン／オフ==
+
+===Excel===
+
+1. excelsvn.iniの[Configuration]セクションのCiCloseReopenFileキーを設定してください。
+|| CiCloseReopenFileの値 || 説明 ||
+|| 0 || コミット実行時の前後でファイルを閉じたり開いたりしない ||
+|| 1 || コミット実行前にファイルを閉じ、実行後にそのファイルを再度開く ||
+|| 2 || svn:needs-lock属性が付いているファイルに対しては、コミット実行時にファイルを閉じたり開いたりするが、その属性が付いていないファイルに対しては、ファイルを閉じたり開いたりしない。 ||
+
+FileNameCharEncodingキーは、
+{{{
+CiCloseReopenFile=2
+}}}
+のときにアドインプログラムで使用します。通常は"shift-jis"のままで変更の必要はありません。
+
+{{{
+[Configuration]
+FileNameCharEncoding="shift-jis"
+CiCloseReopenFile=0
+}}}
+
+===Word===
+
+wordsvn.iniにExcelと同様に設定をしてください。
+
+==[更新]、[コミット]のコマンド終了時の進行ダイアログボックスの自動終了==
+
+===Excel===
+
+excelsvn.iniの[Configuration]セクションのCiAutoCloseProgressDlgキーを設定してください。
+|| CiAutoCloseProgressDlgの値 || 説明 ||
+|| 0 || 自動でダイアログを閉じません。 ||
+|| 1 || エラーがなければ自動で閉じます。 ||
+|| 2 || エラーや競合がなければ自動で閉じます。 ||
+|| 3 || エラー、競合、マージがなければ自動で閉じます。 ||
+|| 4 || エラー、競合、マージが手元の操作で起きなければ自動で閉じます。 ||
+
+{{{
+[Configuration]
+CiAutoCloseProgressDlg=3
+}}}
+
+===Word===
+
+wordsvn.iniにExcelと同様に設定をしてください。
