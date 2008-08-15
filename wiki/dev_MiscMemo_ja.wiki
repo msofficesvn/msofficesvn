@@ -136,11 +136,11 @@ Wordのアドインdotファイルを作成するときに、BVEでプロジェ�
 Wordで以下の問題が発生していたが、 %APPDATA%\Microsoft\Templates\Normal.dotm を削除して新規作成すると直った。
  * Word2007でwordsvnをアンインストールすると、ツールバーは削除されるのに、なぜかメニューは削除されないことがある。
  * wordsvn.iniで、以下の設定をしても、なぜかShift+Ctrl+uの割り当てだけが残っている。
-
+{{{
     [ShortcutKey]
     ShortcutKeyOnOff=0
     Registered=0
-
+}}}
 
 =============================================================
 
