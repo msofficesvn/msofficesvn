@@ -35,7 +35,7 @@ C:\Documents and Settings\koki\Application Data
 }}}
 %APPDATA%をエクスプローラのアドレスバーに入力することでApplication Dataフォルダを表示することができます。
 
-2. Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンとしてください。
+2. Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンにしてください。
 
 3. [Subversion]メニューとコマンドバーが表示されます。
 
@@ -73,7 +73,9 @@ C:\Documents and Settings\koki\Application Data
 {{{
 %APPDATA%\Microsoft\Word\STARTUP\
 }}}
+
 2. Wordを起動してください。 
+
 3. [Subversion]メニューとコマンドバーが表示されます。
 
 =アンインストール方法=
@@ -142,14 +144,11 @@ Add="+^{a}"
 Explorer="+^{e}"
 }}}
 
-"+" はShiftキー、"^" はCtrlキーを示します。また、{}でくくられたアルファベットはそのアルファベットキーを示します。 
-
- (例)上記の例では、更新コマンド(Update)は"Shift"キー、"Ctrl"キー、"u"キーを同時に押すと実行されます。
+"+" はShiftキー、"^" はCtrlキーを示します。また、{}でくくられたアルファベットはそのアルファベットキーを示します。 上記の例では、更新コマンド(Update)は"Shift"キー、"Ctrl"キー、"u"キーを同時に押すと実行されます。
 
 不要なショートカットキー割り当ては削除するか、コメントアウトしてください。コメントアウトは行頭に";"を挿入してください。
 
  (例)更新コマンドのショートカットキー割り当てを無効にする場合
-
 {{{
 ;Update="+^{u}"
 }}}
@@ -184,10 +183,10 @@ Commit3=73
 <コマンド名><番号>のキーに、ショートカットキーのキーコードを割り当ててください。
 
  (例)上記の例では、更新コマンド(Update)は"Shift"キー、"Ctrl"キー、"u"キーを同時に押すと実行されます。
-        || キー  || キーコード ||
-        || Shift || 256        ||
-        || Ctrl  || 512        ||
-        || u     || 85         ||
+|| キー || キーコード ||
+|| Shift || 256 ||
+|| Ctrl || 512 ||
+|| u || 85 ||
 
 キーコードは以下をご参照ください。
 [dev_WordKeyCode Word Key Code]
@@ -214,7 +213,7 @@ Commit3=73
 
 2. インストール時にコピーしたexcelsvn.iniの[ShortcutKey]セクションのShortcutKeyOnOffキーの値を0にしてください。
 {{{
-   ShortcutKeyOnOff=0
+ShortcutKeyOnOff=0
 }}}
 
 3. Excelを起動してショートカットキーが無効となっているか、元の割り当て機能が実行されることを確認してください。
@@ -225,12 +224,11 @@ Commit3=73
 
 2. インストール時にコピーしたwordsvn.iniの[ShortcutKey]セクションのShortcutKeyOnOffキーの値を0に、Registeredキーの値を0にしてください。
 {{{
-   ShortcutKeyOnOff=0
-   Registered=0
+ShortcutKeyOnOff=0
+Registered=0
 }}}
 
 3. Wordを起動してショートカットキーが無効となっているか、元の割り当て機能が実行されることを確認してください。
-
 
 =オプション設定=
 
@@ -239,7 +237,7 @@ Commit3=73
 ===Excel===
 
 1. excelsvn.iniの[Configuration]セクションのDispAskSaveModMsgキーを設定してください。
-
+|| DispAskSaveModMsgの値 || 説明 ||
 || 0 || メッセージを表示しない ||
 || 1 || メッセージを表示する ||
 
@@ -257,7 +255,7 @@ wordsvn.iniにExcelと同様に設定をしてください。
 ===Excel===
 
 1. excelsvn.iniの[Configuration]セクションのCiCloseReopenFileキーを設定してください。
-
+|| CiCloseReopenFileの値 || 説明 ||
 || 0 || コミット実行時の前後でファイルを閉じたり開いたりしない ||
 || 1 || コミット実行前にファイルを閉じ、実行後にそのファイルを再度開く ||
 || 2 || svn:needs-lock属性が付いているファイルに対しては、コミット実行時にファイルを閉じたり開いたりするが、その属性が付いていないファイルに対しては、ファイルを閉じたり開いたりしない。 ||
@@ -283,7 +281,7 @@ wordsvn.iniにExcelと同様に設定をしてください。
 ===Excel===
 
 excelsvn.iniの[Configuration]セクションのCiAutoCloseProgressDlgキーを設定してください。
-
+|| CiAutoCloseProgressDlgの値 || 説明 ||
 || 0 || 自動でダイアログを閉じません。 ||
 || 1 || エラーがなければ自動で閉じます。 ||
 || 2 || エラーや競合がなければ自動で閉じます。 ||
