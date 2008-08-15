@@ -2,33 +2,38 @@
 
 ==準備==
 
- # まず、TortoiseSVNをインストールしてください。
+1. まず、TortoiseSVNをインストールしてください。  
 
-  http://tortoisesvn.net/downloads
+http://tortoisesvn.net/downloads
 
- # 本サイトのDownloadsページより、最新バージョンの `msofficesvn_<version>_ja.zip` ファイルをダウンロードし、解凍してください。以下のファイルが得られます。
+2. 本サイトのDownloadsページより、最新バージョンの `msofficesvn_<version>_ja.zip` ファイルをダウンロードし、解凍してください。以下のファイルが得られます。
 
-  Excelアドイン用ファイル
-     excelsvn.xla
-     excelsvn.ini
+Excelアドイン用ファイル
+ * excelsvn.xla
+ * excelsvn.ini
 
-  Wordアドイン用ファイル
-     wordsvn.dot
-     wordsvn.ini
+Wordアドイン用ファイル
+ * wordsvn.dot
+ * wordsvn.ini
 
 ==Office97SR2～Office2003の場合==
 
 ===Excel===
 
- # Excelアドイン用ファイルを以下のフォルダへコピーしてください。
-  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
-  || Office2000   || ? ||
-  || OfficeXP     || C:\Program Files\Microsoft Office\Office10\Library\ ||
-  || Office2003   || %APPDATA%\Microsoft\AddIns\ ||
+1. Excelアドイン用ファイルを以下のフォルダへコピーしてください。
 
-  %APPDATA%は、ログインユーザのApplication Dataフォルダを指します。例えば、ログイン名が"koki"の場合は、%APPDATA%は以下のようになります。
+|| Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
+|| Office2000 || ? ||
+|| OfficeXP || C:\Program Files\Microsoft Office\Office10\Library\ ||
+|| Office2003 || %APPDATA%\Microsoft\AddIns\ ||
+
+ %APPDATA%は、ログインユーザのApplication Dataフォルダを指します。
+
+例えば、ログイン名が"koki"の場合は、`%APPDATA%`は以下のようになります。
+{{{
   C:\Documents and Settings\koki\Application Data
-  %APPDATA%をエクスプローラのアドレスバーに入力することでApplication Dataフォルダを表示することができます。
+}}}
+%APPDATA%をエクスプローラのアドレスバーに入力することでApplication Dataフォルダを表示することができます。
 
  # Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンとしてください。
  # [Subversion]メニューとコマンドバーが表示されます。
@@ -274,4 +279,3 @@ CiAutoCloseProgressDlg=3
 ===Word===
 
 wordsvn.iniにExcelと同様に設定をしてください。
-
