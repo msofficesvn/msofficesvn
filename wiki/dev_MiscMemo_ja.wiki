@@ -133,6 +133,15 @@ http://msdn.microsoft.com/ja-jp/library/cc376816.aspx
 
 Wordのアドインdotファイルを作成するときに、BVEでプロジェクトのコンパイルを実行してからdotファイルに保存しないと、アドインロード時のショートカットキー割り当てでエラーが発生し、ショートカットキー割り当てできなくなる。
 
+Wordで以下の問題が発生していたが、 %APPDATA%\Microsoft\Templates\Normal.dotm を削除して新規作成すると直った。
+ * Word2007でwordsvnをアンインストールすると、ツールバーは削除されるのに、なぜかメニューは削除されないことがある。
+ * wordsvn.iniで、以下の設定をしても、なぜかShift+Ctrl+uの割り当てだけが残っている。
+
+    [ShortcutKey]
+    ShortcutKeyOnOff=0
+    Registered=0
+
+
 =============================================================
 
 検討が必要な新規仕様
