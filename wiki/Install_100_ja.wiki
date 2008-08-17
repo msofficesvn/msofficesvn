@@ -1,0 +1,78 @@
+=インストール方法=
+
+==準備==
+
+ # まず、TortoiseSVNをインストールしてください。
+ # 本サイトのDownloadsページより、最新バージョンの `msofficesvn_<version>_ja.zip` ファイルをダウンロードし、解凍してください。wordsvn.dot,excelsvn.xlaが得られます。
+
+==Office97SR2～Office2003の場合==
+
+===Excel===
+
+ # excelsvn.xlaを以下のフォルダへコピーしてください。
+  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
+  || Office2000   || ? ||
+  || OfficeXP     || ? ||
+  || Office2003   || ? ||
+ # Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンとしてください。
+ # [Subversion]メニューとコマンドバーが表示されます。
+
+===Word===
+
+ # wordsvn.dot以下のフォルダへコピーしてください。
+  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
+  || Office2000 || ? ||
+  || OfficeXP || ? ||
+  || Office2003 || ? ||
+ # Wordを起動してください。 
+ # [Subversion]メニューとコマンドバーが表示されます。
+
+==Office2007の場合==
+
+===Excel===
+
+ # excelsvn.xlaを以下のフォルダへコピーしてください。
+  C:\Documents and Settings\koki\Application Data\Microsoft\AddIns\
+ # Excelを起動し、[Officeボタン]/[Excelのオプション]/[アドイン]/[管理]で"Excelアドイン"を選択して、[設定]ボタンをクリックしてください。アドイン画面が表示されます。
+ # アドイン画面で、Excelsvnチェックボックスが表示されますので、オンにしてください。
+ # [Subversion]メニューとコマンドバーが表示されます。
+
+===Word===
+
+ # wordsvn.dotを以下のフォルダへコピーしてください。
+  C:\Documents and Settings\koki\Application Data\Microsoft\Word\STARTUP\
+ # Wordを起動してください。 
+ # [Subversion]メニューとコマンドバーが表示されます。
+
+
+=アンインストール方法=
+
+==Office97SR2～Office2003の場合==
+
+===Excel===
+
+ # Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオフにしてください。
+ # [Subversion]メニューとコマンドバーが削除されます。
+ # インストール時にコピーした、excelsvn.xlaを削除してください。
+
+===Word===
+
+ # Wordを起動し、[ツール]/[テンプレートとアドイン...]メニューより表示される画面で、wordsvn.dotチェックボックスをオフにしてください。
+ # [Subversion]メニューとコマンドバーが削除されます。
+ # インストール時にコピーした、wordsvn.dotを削除してください。
+
+==Office2007の場合==
+
+===Excel===
+
+ # Excelを起動し、[Officeボタン]/[Excelのオプション]/[アドイン]/[管理]で"Excelアドイン"を選択して、[設定]ボタンをクリックしてください。アドイン画面が表示されます。
+ # アドイン画面で、Excelsvnチェックボックスが表示されますので、オフにしてください。
+ # [Subversion]メニューとコマンドバーが削除されます。
+ # インストール時にコピーした、excelsvn.xlaを削除してください。
+
+===Word===
+
+ # Wordを起動し、[Officeボタン]/[Wordのオプション]/[アドイン]/[管理]で"Wordアドイン"を選択して、[設定]ボタンをクリックしてください。アドイン画面が表示されます。
+ # アドイン画面で、Wordsvnチェックボックスが表示されますので、オフにしてください。
+ # [Subversion]メニューとコマンドバーが削除されます。
+ # インストール時にコピーした、wordsvn.dotを削除してください。
