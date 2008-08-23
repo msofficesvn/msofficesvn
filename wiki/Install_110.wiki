@@ -282,9 +282,30 @@ FileNameCharEncoding key is used by add-in when the following value is set.
 CiCloseReopenFile=2
 }}}
 
-If you wish to use a language other than "iso-8859-1"(Western European), try to set the character set value to FileNameCharEncoding key. (Sorry, I'm not sure wether they realy work or not.)
+If you wish to use a language other than "iso-8859-1"(Western European) for the data file name, try to set the character set value to FileNameCharEncoding key. (Sorry, I'm not sure wether they realy work or not.)
 
-Refer to [] about character set values.
+|| big5 ||
+|| euc-jp ||
+|| euc-kr ||
+|| gb2312 ||
+|| iso-2022-jp ||
+|| iso-2022-kr ||
+|| iso-8859-1 ||
+|| iso-8859-2 ||
+|| iso-8859-3 ||
+|| iso-8859-4 ||
+|| iso-8859-5 ||
+|| iso-8859-6 ||
+|| iso-8859-7 ||
+|| iso-8859-8 ||
+|| iso-8859-9 ||
+|| koi8-r ||
+|| shift-jis ||
+|| us-ascii ||
+|| utf-7 ||
+|| utf-8 ||
+
+Refer to http://en.wikipedia.org/wiki/Character_encoding about character set values.
 
 {{{
 [Configuration]
@@ -294,19 +315,20 @@ CiCloseReopenFile=0
 
 ===Word===
 
-wordsvn.iniにExcelと同様に設定をしてください。
+Set up wordsvn.ini as in the case of Excel.
 
-==[更新]、[コミット]のコマンド終了時の進行ダイアログボックスの自動終了==
+==Turn on/off auto closing of the progress dialog box in the end of performing [SVN Update], [SVN Commit]==
 
 ===Excel===
 
-excelsvn.iniの[Configuration]セクションのCiAutoCloseProgressDlgキーを設定してください。
-|| CiAutoCloseProgressDlgの値 || 説明 ||
-|| 0 || 自動でダイアログを閉じません。 ||
-|| 1 || エラーがなければ自動で閉じます。 ||
-|| 2 || エラーや競合がなければ自動で閉じます。 ||
-|| 3 || エラー、競合、マージがなければ自動で閉じます。 ||
-|| 4 || エラー、競合、マージが手元の操作で起きなければ自動で閉じます。 ||
+Set the value of CiAutoCloseProgressDlg key in [Configuration] section of excelsvn.ini.
+
+|| The value of CiAutoCloseProgressDlg key || Description ||
+|| 0 || don't close the dialog automatically ||
+|| 1 || auto close if no errors ||
+|| 2 || auto close if no errors and conflicts ||
+|| 3 || auto close if no errors, conflicts and merges ||
+|| 4 || auto close if no errors, conflicts and merges for local operations ||
 
 {{{
 [Configuration]
@@ -315,5 +337,5 @@ CiAutoCloseProgressDlg=3
 
 ===Word===
 
-wordsvn.iniにExcelと同様に設定をしてください。
+Set up wordsvn.ini as in the case of Excel.
 
