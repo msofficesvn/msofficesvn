@@ -33,9 +33,18 @@ Public Declare Function WritePrivateProfileString Lib "kernel32" _
                           ByVal lpString As Any, _
                           ByVal lpFileName As String) As Long
 
+Function SubtractFileName(ByVal FullPathName As String) As String
+  Dim LastBackSlashPos As Long
+  Dim FileNameLen As Long
+  LastBackSlashPos = InStrRev(FullPathName, "\")
+  FileNameLen = Len(FullPathName) - LastBackSlashPos
+  SubtractFileName = Right(FullPathName, FileNameLen)
+End Function
+
 Sub ImportCode()
   Dim Content As Object
   Dim ImportFile As String
+  Dim ImportFileName As String
   Dim Count As Integer
   Dim IniKeyImpFile As String
   Dim IniFullPath As String
@@ -61,7 +70,9 @@ Sub ImportCode()
     Ret = GetPrivateProfileString(gIniSectionName, IniKeyImpFile, "", ImportFile, 260, IniFullPath)
     Count = Count + 1
     If Ret <> 0 Then
-      If InStr(ImportFile, gThisContentModule) <> 0 Then
+      ImportFileName = Trim(SubtractFileName(ImportFile))
+      ImportFileName = Left(ImportFileName, Len(ImportFileName) - 1)
+      If StrComp(ImportFileName, gThisContentModule) = 0 Then
         ' This code causes excel crash.
         'Content.VBProject.VBComponents(gThisContentModule).CodeModule.AddFromFile ImportFile
         ' This code work well
@@ -110,9 +121,14 @@ Sub ExportCode()
     'Debug.Print Proj.Description & vbCrLf
     'Debug.Print Proj.Protection & vbCrLf
     
-    Dim FoundPos As Integer
-    FoundPos = InStr(Proj.Filename, gTargetContentFile)
-    If FoundPos <> 0 Then
+'    Dim FoundPos As Integer
+    Dim ProjFileNameWoFldrName As String
+    ProjFileNameWoFldrName = Space(260)
+    ProjFileNameWoFldrName = Trim(SubtractFileName(Proj.Filename))
+    
+'    FoundPos = InStr(Proj.Filename, gTargetContentFile)
+'    If FoundPos <> 0 Then
+    If StrComp(ProjFileNameWoFldrName, gTargetContentFile) = 0 Then
       ' The target content file is found and it is stored in Proj variable.
       bTargetContentFileExist = True
       Exit For
@@ -158,16 +174,22 @@ Sub ExportCode()
     End Select
   
     Count = 1
-    FoundPos = 0
+    'FoundPos = 0
     
     Do
+      Dim ImportFileName As String
+      
       ImportFile = Space(260)
       IniKeyImpFile = "ImportFile" & Count
       Ret = GetPrivateProfileString(gIniSectionName, IniKeyImpFile, "", ImportFile, 260, IniFullPath)
       Count = Count + 1
       If Ret <> 0 Then
-        FoundPos = InStr(ImportFile, CodeFileName)
-        If FoundPos <> 0 Then
+        'FoundPos = InStr(ImportFile, CodeFileName)
+        ImportFileName = Trim(SubtractFileName(ImportFile))
+        ImportFileName = Left(ImportFileName, Len(ImportFileName) - 1)
+
+        'If FoundPos <> 0 Then
+        If StrComp(ImportFileName, CodeFileName) = 0 Then
           n.Export ImportFile
           Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
         End If
