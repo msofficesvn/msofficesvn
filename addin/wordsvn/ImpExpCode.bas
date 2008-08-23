@@ -2,7 +2,8 @@ Attribute VB_Name = "ImpExpCode"
 Option Explicit
 
 ' INI file name
-Public Const gIniFileName As String = "ImpExpCode.ini"
+Public Const gIniFileNameJa As String = "ImpExpCodeJa.ini"
+Public Const gIniFileNameEn As String = "ImpExpCodeEn.ini"
 
 ' :Function: Get numeric value from INI file
 ' :Remarks:  Declaration of Windows API
@@ -41,7 +42,19 @@ Function SubtractFileName(ByVal FullPathName As String) As String
   SubtractFileName = Right(FullPathName, FileNameLen)
 End Function
 
-Sub ImportCode()
+Sub ImportCodeJa()
+  ImportCode "Ja"
+End Sub
+
+Sub ImportCodeEn()
+  ImportCode "En"
+End Sub
+
+Sub ExportCodeJa()
+  ExportCode "Ja"
+End Sub
+
+Function ImportCode(ByVal LangFlag As String)
   Dim Content As Object
   Dim ImportFile As String
   Dim ImportFileName As String
@@ -61,7 +74,7 @@ Sub ImportCode()
 
   Count = 1
   ImportFile = Space(260)
-  IniFullPath = GetIniFullPath
+  IniFullPath = GetIniFullPath(LangFlag)
   Ret = 0
 
   Do
@@ -96,9 +109,9 @@ Sub ImportCode()
 'Doc.Save ("excelsvn.xls")
 'Debug.Print "after=" & FileLen(Doc.FullName)
 
-End Sub
+End Function
 
-Sub ExportCode()
+Function ExportCode(ByVal LangFlag As String)
 
   Dim n As VBComponent
   Dim Proj As VBProject
@@ -111,7 +124,7 @@ Sub ExportCode()
   Dim Ret As Long
   Dim bTargetContentFileExist As Boolean
 
-  IniFullPath = GetIniFullPath
+  IniFullPath = GetIniFullPath(LangFlag)
   bTargetContentFileExist = False
   
   ' Search the target content file (xla, dot, ppa, etc.).
@@ -137,7 +150,7 @@ Sub ExportCode()
   
   If bTargetContentFileExist = False Then
     MsgBox "Can't find target content file! Export is aborted."
-    Exit Sub
+    Exit Function
   End If
   
   ' Export all source code of the target content file
@@ -199,17 +212,17 @@ Sub ExportCode()
  
   Next
 
-End Sub
+End Function
 
 
-Sub ExportCode2()
+Sub ExportCodeAsKExportFolder(ByVal LangFlag As String)
 
   Dim n As VBComponent
   Dim Proj As VBProject
   Dim ExpFolder As String
 
   ExpFolder = Space(260)
-  GetPrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, "c:\", ExpFolder, 260, GetIniFullPath
+  GetPrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, "c:\", ExpFolder, 260, GetIniFullPath(LangFlag)
   frmExpFolder.SetExpFolder ExpFolder
   frmExpFolder.Show
   ExpFolder = frmExpFolder.GetExpFolder
@@ -232,7 +245,7 @@ Sub ExportCode2()
 '    ExpFolder = ExpFolder & "\"
 '  End If
   
-  WritePrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, ExpFolder, GetIniFullPath
+  WritePrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, ExpFolder, GetIniFullPath(LangFlag)
 
   Debug.Print ExpFolder
 
