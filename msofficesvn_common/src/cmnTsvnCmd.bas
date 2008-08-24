@@ -171,7 +171,7 @@ Sub TsvnCi()
   If ActiveContent.IsSaved = False Then
   ' Active content is modified but not saved yet.
     ' Test the active content file attributes
-    If ActiveContent.IsFileReadOnly = True Then
+    If ActiveContent.IsFileReadOnly Then
       msgErrReadOnly = _
       AddActiveContentNameToMsg(gmsgCommitErrActiveContentFileReadOnly, _
                                 gmsgFileNameCap, True, ActiveContent)
@@ -362,7 +362,7 @@ Sub TsvnLock()
   If ActiveContent.IsSaved = False Then
   ' Active content is modified but not saved yet.
     ' Test the active content file attributes
-    If ActiveContent.IsFileReadOnly = True Then
+    If ActiveContent.IsFileReadOnly Then
       msgErrReadOnly = _
       AddActiveContentNameToMsg(gmsgLockAskActiveContentFileReadOnly, _
                                 gmsgFileNameCap, True, ActiveContent)
@@ -441,7 +441,7 @@ Sub TsvnUnlock()
 
   If ActiveContent.IsSaved = False Then
   ' Active content is modified but not saved yet.
-    If ActiveContent.IsFileReadOnly = True Then
+    If ActiveContent.IsFileReadOnly Then
     ' Test the active content file attributes
       msgErrReadOnly = _
       AddActiveContentNameToMsg(gmsgUnlockErrActiveContentFileReadOnly, _
@@ -471,7 +471,7 @@ Sub TsvnUnlock()
   ' Close the file and reopen after unlock it, because the following reason
   '  * The file attribute of read only / read write is changed after unlock the file.
   ActiveContent.StoreCurCursorPos
-  ActiveContent.CloseFile True
+  ActiveContent.CloseFile False
 
   ExecTsvnCmd "unlock", ActiveContent.GetFullName
 
