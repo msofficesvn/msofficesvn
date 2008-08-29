@@ -1,0 +1,81 @@
+=Installation=
+
+==Preparation==
+
+ # First, Install TortoiseSVN.
+ # Download latest `msofficesvn_<version>_en.zip` file from Downloads page of this site.
+ # Unzip the file and you get wordsvn.dot and excelsvn.xla.
+
+==Office97SR2 to Office2003==
+
+===Excel===
+
+ # Copy excelsvn.xla to the following folders.
+  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
+  || Office2000   || ? ||
+  || Office XP     || ? ||
+  || Office2003   || ? ||
+ # Start Excel and check Excelsvn check box in [Tool]/[Add-Ins...] of main menu.
+ # [Subversion] menu and the command bar appear.
+
+===Word===
+
+ # Copy wordsvn.dot to the following folders.
+  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
+  || Office2000   || ? ||
+  || Office XP     || ? ||
+  || Office2003   || ? ||
+ # Start Word. 
+ # [Subversion] menu and the command bar appear.
+
+==Office2007==
+
+===Excel===
+
+ # Copy excelsvn.xla to the following folders.
+  C:\Documents and Settings\koki\Application Data\Microsoft\AddIns\
+ # Start Excel and select "Excel Add-Ins" in [Office button]/[Excel Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
+ # Check the "Excelsvn" check box in [Add-Ins available] list box.
+ # [Subversion] menu and the command bar appear.
+
+===Word===
+
+ # Copy wordsvn.dot to the following folders.
+  C:\Documents and Settings\koki\Application Data\Microsoft\Word\STARTUP\
+ # Start Word. 
+ # [Subversion] menu and the command bar appear.
+
+
+=Uninstallation=
+
+==Office97SR2 to Office2003==
+
+===Excel===
+
+ # Start Excel and select [Tool]/[Add-Ins...] menu item of main menu. Add-Ins dialog box appears.
+ # Clear the "Excelsvn" check box in [Add-Ins available] list box.
+ # [Subversion] menu and the command bar disappear.
+ # Delete excelsvn.xla that you copied in installation.
+
+===Word===
+
+ # Start Word and select [Tool]/[Add-Ins...] menu item of main menu. Templates and Add-Ins dialog box appears.
+ # Clear the "wordsvn.dot" check box in [Global templates and add-ins] list box.
+ # [Subversion] menu and the command bar disappear.
+ # Delete wordsvn.dot that you copied in installation.
+
+==Office2007==
+
+===Excel===
+
+ # Start Excel and select "Excel Add-Ins" in [Office button]/[Excel Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
+ # Clear the "Excelsvn" check box in [Add-Ins available] list box.
+ # [Subversion] menu and the command bar disappear.
+ # Delete excelsvn.xla that you copied in installation.
+
+===Word===
+
+ # Start Word and select "Word Add-Ins" in [Office button]/[Word Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
+ # Clear the "wordsvn.dot" check box in [Add-Ins available] list box.
+ # [Subversion] menu and the command bar disappear.
+ # Delete wordsvn.dot that you copied in installation.

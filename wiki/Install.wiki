@@ -2,49 +2,88 @@
 
 ==Preparation==
 
- # First, Install TortoiseSVN.
- # Download latest `msofficesvn_<version>_en.zip` file from Downloads page of this site.
- # Unzip the file and you get wordsvn.dot and excelsvn.xla.
+1. First, Install TortoiseSVN.
+
+http://tortoisesvn.net/downloads
+
+2. Download latest `msofficesvn_<version>_en.zip` file from Downloads page of this site.
+
+3. Unzip the file and you get the files of Word add-in and Excel add-in.
+
+Files of Excel add-in
+ * excelsvn.xla
+ * excelsvn.ini
+
+Files of Word add-in
+ * wordsvn.dot
+ * wordsvn.ini
+
 
 ==Office97SR2 to Office2003==
 
 ===Excel===
 
- # Copy excelsvn.xla to the following folders.
-  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
-  || Office2000   || ? ||
-  || Office XP     || ? ||
-  || Office2003   || ? ||
- # Start Excel and check Excelsvn check box in [Tool]/[Add-Ins...] of main menu.
- # [Subversion] menu and the command bar appear.
+1. Copy files of Excel add-in to the following folders.
+
+|| Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
+|| Office2000 || ? ||
+|| Office XP || C:\Program Files\Microsoft Office\Office10\Library\ ||
+|| Office2003 || %APPDATA%\Microsoft\AddIns\ ||
+
+%APPDATA% means the "Application Data folder" of the login user.
+
+For example, when the login user is "koki", %APPDATA% points the following folder.
+
+{{{
+C:\Documents and Settings\koki\Application Data
+}}}
+
+If you input the %APPDATA% to the address bar of Explorer, it displays "Application Data folder".
+
+2. Start Excel and check Excelsvn check box in [Tool]/[Add-Ins...] of main menu.
+
+3. [Subversion] menu and the command bar appear.
 
 ===Word===
 
- # Copy wordsvn.dot to the following folders.
-  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
-  || Office2000   || ? ||
-  || Office XP     || ? ||
-  || Office2003   || ? ||
- # Start Word. 
- # [Subversion] menu and the command bar appear.
+1. Copy the files of Word add-in to the following folders.
+
+|| Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
+|| Office2000 || ? ||
+|| Office XP || C:\Program Files\Microsoft Office\Office10\STARTUP\ ||
+|| Office2003 || %APPDATA%\Microsoft\Word\STARTUP\ ||
+
+2. Start Word. 
+
+3. [Subversion] menu and the command bar appear.
 
 ==Office2007==
 
 ===Excel===
 
- # Copy excelsvn.xla to the following folders.
-  C:\Documents and Settings\koki\Application Data\Microsoft\AddIns\
- # Start Excel and select "Excel Add-Ins" in [Office button]/[Excel Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
- # Check the "Excelsvn" check box in [Add-Ins available] list box.
- # [Subversion] menu and the command bar appear.
+1. Copy the files of Excel add-in to the following folders.
+
+{{{
+%APPDATA%\Microsoft\AddIns\
+}}}
+
+2. Start Excel and select "Excel Add-Ins" in [Office button]/[Excel Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
+
+3. Check the "Excelsvn" check box in [Add-Ins available] list box.
+
+4. [Subversion] menu and the command bar appear.
 
 ===Word===
 
- # Copy wordsvn.dot to the following folders.
-  C:\Documents and Settings\koki\Application Data\Microsoft\Word\STARTUP\
- # Start Word. 
- # [Subversion] menu and the command bar appear.
+1. Copy the files of Word add-in to the following folders.
 
+{{{
+%APPDATA%\Microsoft\Word\STARTUP\
+}}}
+
+2. Start Word. 
+
+3. [Subversion] menu and the command bar appear.
 
 =Uninstallation=
 
@@ -52,30 +91,251 @@
 
 ===Excel===
 
- # Start Excel and select [Tool]/[Add-Ins...] menu item of main menu. Add-Ins dialog box appears.
- # Clear the "Excelsvn" check box in [Add-Ins available] list box.
- # [Subversion] menu and the command bar disappear.
- # Delete excelsvn.xla that you copied in installation.
+1. Start Excel and select [Tool]/[Add-Ins...] menu item of main menu. Add-Ins dialog box appears.
+
+2. Clear the "Excelsvn" check box in [Add-Ins available] list box.
+
+3. [Subversion] menu and the command bar disappear.
+
+4. Delete the files of Excel add-in that you copied in installation.
 
 ===Word===
 
- # Start Word and select [Tool]/[Add-Ins...] menu item of main menu. Templates and Add-Ins dialog box appears.
- # Clear the "wordsvn.dot" check box in [Global templates and add-ins] list box.
- # [Subversion] menu and the command bar disappear.
- # Delete wordsvn.dot that you copied in installation.
+1. Start Word and select [Tool]/[Add-Ins...] menu item of main menu. Templates and Add-Ins dialog box appears.
+
+2. Clear the "wordsvn.dot" check box in [Global templates and add-ins] list box.
+
+3. [Subversion] menu and the command bar disappear.
+
+4. Delete the files of Word add-in that you copied in installation.
 
 ==Office2007==
 
 ===Excel===
 
- # Start Excel and select "Excel Add-Ins" in [Office button]/[Excel Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
- # Clear the "Excelsvn" check box in [Add-Ins available] list box.
- # [Subversion] menu and the command bar disappear.
- # Delete excelsvn.xla that you copied in installation.
+1. Start Excel and select "Excel Add-Ins" in [Office button]/[Excel Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
+
+2. Clear the "Excelsvn" check box in [Add-Ins available] list box.
+
+3. [Subversion] menu and the command bar disappear.
+
+4. Delete the files of Excel add-in that you copied in installation.
 
 ===Word===
 
- # Start Word and select "Word Add-Ins" in [Office button]/[Word Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
- # Clear the "wordsvn.dot" check box in [Add-Ins available] list box.
- # [Subversion] menu and the command bar disappear.
- # Delete wordsvn.dot that you copied in installation.
+1. Start Word and select "Word Add-Ins" in [Office button]/[Word Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
+
+2. Clear the "wordsvn.dot" check box in [Add-Ins available] list box.
+
+3. [Subversion] menu and the command bar disappear.
+
+4. Delete wordsvn.dot that you copied in installation.
+
+=Shortcut key setting=
+
+==Excel==
+
+1. Exit Excel.
+
+2. Set the value of ShortcutKeyOnOff key to 1 in [ShortcutKey] section of excelsvn.ini that is copied in installing.
+{{{
+[ShortcutKey]
+ShortcutKeyOnOff=1
+}}}
+
+3. Edit the parts that assign shortcut keys to SVN commands depending on your needs.
+{{{
+Update="+^{u}"
+Commit="+^{i}"
+Diff="+^{d}"
+RepoBrowser="+^{w}"
+Log="+^{l}"
+Lock="+^{k}"
+Unlock="+^{n}"
+Add="+^{a}"
+Explorer="+^{e}"
+}}}
+
+"+" means Shift key and "^" means Ctrl key. The alphabet that is braced by {} means the alphabet key. In the above example, Update command is performed when the "Shift" key, "Ctrl" key and "u" keys are pressed at the same time.
+
+Refer to [dev_ExcelOnKey] about key notation.
+
+If you don't wish to assign some shortcut keys, remove them or comment them out. Insert the ";" at the top of the line to comment it out.
+
+ (Example) In the case that disable the shortcut key for Update command.
+{{{
+;Update="+^{u}"
+}}}
+
+4. Start Excel and confirm that shortcut keys work.
+
+==Word==
+
+1. Exit Word.
+
+2. Set the value of ShortcutKeyOnOff key to 1, and the value of Registered key to 0 in [ShortcutKey] section of wordsvn.ini that is copied in installing.
+{{{
+[ShortcutKey]
+ShortcutKeyOnOff=1
+Registered=0
+}}}
+
+3. Edit the parts that assign shortcut keys to SVN commands depending on your needs.
+{{{
+;Shift+Ctrl+u
+Update1=256
+Update2=512
+Update3=85
+
+;Shift+Ctrl+i
+Commit1=256
+Commit2=512
+Commit3=73
+
+(snip)
+}}}
+
+Assign shortcut key codes to <Command Name><No.> keys.
+
+ (Example) In the above example, Update command is performed when the "Shift" key, "Ctrl" key and "u" keys are pressed at the same time.
+|| Key || Key code ||
+|| Shift || 256 ||
+|| Ctrl || 512 ||
+|| u || 85 ||
+
+Refer to [dev_WordKeyCode] about key code.
+
+If you don't wish to assign some shortcut keys, remove them or comment them out. Insert the ";" at the top of the line to comment it out.
+
+ (Example) In the case that disable the shortcut key for Update command.
+{{{
+;Shift+Ctrl+u
+;Update1=256
+;Update2=512
+;Update3=85
+}}}
+
+4. Start Word and confirm that shortcut keys work.
+
+5. If you wish to change the shortcut key assignment furthermore, make sure to set the value of Registered key to 0 in [ShortcutKey] section of wordsvn.ini before you start Word. The value of Registered key is set to 1 when you start Word and shortcut key assignment is registered. If the value is not 0, The shortcut key assignment is not registered when you start Word.
+
+=Clear the shortcut key assignment=
+
+==Excel==
+
+1. Exit Excel.
+
+2. Set the value of ShortcutKeyOnOff key to 0 in [ShortcutKey] section of excelsvn.ini that is copied in installing.
+{{{
+[ShortcutKey]
+ShortcutKeyOnOff=0
+}}}
+
+3. Start Excel and confirm that shortcut keys are disabled or originally assigned functions are invoked.
+
+==Word==
+
+1. Exit Word.
+
+2. Set the value of ShortcutKeyOnOff key to 0, and the value of Registered key to 0 in [ShortcutKey] section of wordsvn.ini that is copied in installing.
+
+{{{
+[ShortcutKey]
+ShortcutKeyOnOff=0
+Registered=0
+}}}
+
+3. Start Word and confirm that shortcut keys are disabled or originally assigned functions are invoked.
+
+=Option Setting=
+
+==Turn on/off displaying a message asking data file saving in performing commands==
+
+===Excel===
+
+1. Set the value of DispAskSaveModMsg key in [Configuration] section of excelsvn.ini.
+|| The value of DispAskSaveModMsg key || Description ||
+|| 0 || Not display a message ||
+|| 1 || Display a message ||
+
+{{{
+[Configuration]
+DispAskSaveModMsg=1
+}}}
+
+===Word===
+
+Set up wordsvn.ini as in the case of Excel.
+
+==Turn on/off closing and reopening the data file in performing commit command==
+
+===Excel===
+
+1. Set the value of CiCloseReopenFile key in [Configuration] section of excelsvn.ini.
+|| The value of CiCloseReopenFile key || Description ||
+|| 0 || Not close and reopen the data file in performing commit ||
+|| 1 || Close and reopen the data file in performing commit ||
+|| 2 || Close and reopen the data file that has svn:needs-lock property in performing commit, and not do that for the data file that has no svn:needs-lock property ||
+
+FileNameCharEncoding key is used by add-in when the following value is set.
+{{{
+CiCloseReopenFile=2
+}}}
+
+If you wish to use a language other than "iso-8859-1"(Western European) for the data file name, try to set the character set value to FileNameCharEncoding key. (Sorry, I'm not sure wether they realy work or not.)
+
+|| big5 ||
+|| euc-jp ||
+|| euc-kr ||
+|| gb2312 ||
+|| iso-2022-jp ||
+|| iso-2022-kr ||
+|| iso-8859-1 ||
+|| iso-8859-2 ||
+|| iso-8859-3 ||
+|| iso-8859-4 ||
+|| iso-8859-5 ||
+|| iso-8859-6 ||
+|| iso-8859-7 ||
+|| iso-8859-8 ||
+|| iso-8859-9 ||
+|| koi8-r ||
+|| shift-jis ||
+|| us-ascii ||
+|| utf-7 ||
+|| utf-8 ||
+
+Refer to http://en.wikipedia.org/wiki/Character_encoding about character set values.
+
+{{{
+[Configuration]
+FileNameCharEncoding="iso-8859-1"
+CiCloseReopenFile=0
+}}}
+
+===Word===
+
+Set up wordsvn.ini as in the case of Excel.
+
+==Turn on/off auto closing of the progress dialog box in the end of performing [SVN Update], [SVN Commit]==
+
+===Excel===
+
+Set the value of CiAutoCloseProgressDlg key in [Configuration] section of excelsvn.ini.
+
+|| The value of CiAutoCloseProgressDlg key || Description ||
+|| 0 || don't close the dialog automatically ||
+|| 1 || auto close if no errors ||
+|| 2 || auto close if no errors and conflicts ||
+|| 3 || auto close if no errors, conflicts and merges ||
+|| 4 || auto close if no errors, conflicts and merges for local operations ||
+
+{{{
+[Configuration]
+CiAutoCloseProgressDlg=3
+}}}
+
+===Word===
+
+Set up wordsvn.ini as in the case of Excel.
+

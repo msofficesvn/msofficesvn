@@ -7,7 +7,6 @@ Excel
 http://dkiroku.com/2005-07-01-11.html
 
 Word
-
 http://www.nekoconeko.com/~nagamori/wordsvn/
 
 But, these programs work not well on MS-Office97 SR2 that I use and they don't support lock functions. Lock functions are required when you share and edit binary data files in cooperation with others. So, I modified them.
@@ -41,7 +40,7 @@ I tested on the following environment.
 
  * Windows XP Professional
  * Office97 SR2, Office2007
- * TortoiseSVN 1.4.7, 1.5.2
+ * TortoiseSVN 1.4.7
 
 ==Installation and Uninstallation==
 
@@ -59,24 +58,11 @@ The add-ins can apply the following commands to the active workbook and document
  * SVN Repo-browser
  * SVN Release lock
  * SVN Add
- * SVN Delete
  * Open Explorer
 
-In the case of [SVN Update], [SVN Get lock], [SVN Commit] and [SVN Release lock], once the active document or book is closed, and the TortoiseSVN command is applied to it, and reopen it after.
+In the case of [SVN Update], [SVN Get lock], [SVN Commit], once the active document or book is closed, and the TortoiseSVN command is applied to it, and reopen it after.
 
 [Open Explorer] command open Explorer with selecting the active document or book, so you can use the other commands quickly that can't be invoked from the add-ins.
-
-==Shortcut key (Ver.1.1.0 New feature)==
-
-Shortcut keys can be assigned to commands.
-
-==Option Setting (Ver.1.1.0 New feature)==
-
-Following option settings are available.
-
- * Turn on/off displaying a message asking data file saving in performing commands.
- * Turn on/off closing and reopening the data file in performing commit command.
- * Turn on/off auto closing of the progress dialog box in the end of performing [SVN Update], [SVN Commit].
 
 ==Merit and Demerit==
 
@@ -87,6 +73,7 @@ Merit
 
 Demerit
 
+ * The add-ins close and reopen the file when SVN Update, SVN Get lock, SVN Commit are executed. If the file is large, it might be frustrating because it takes time.
  * The add-ins apply the commands to only the active document or book, so you can't use it when you wish to edit multiple files and commit them at the same time to make a "change set".
 
 ==Tutorial==
