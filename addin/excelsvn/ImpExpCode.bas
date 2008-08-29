@@ -2,8 +2,7 @@ Attribute VB_Name = "ImpExpCode"
 Option Explicit
 
 ' INI file name
-Public Const gIniFileNameJa As String = "ImpExpCodeJa.ini"
-Public Const gIniFileNameEn As String = "ImpExpCodeEn.ini"
+Public Const gIniFileName As String = "ImpExpCode.ini"
 Public Const gIniSectionName As String = "ExcelImportFiles"
 
 ' :Function: Get numeric value from INI file
@@ -43,19 +42,7 @@ Function SubtractFileName(ByVal FullPathName As String) As String
   SubtractFileName = Right(FullPathName, FileNameLen)
 End Function
 
-Sub ImportCodeJa()
-  ImportCode "Ja"
-End Sub
-
-Sub ImportCodeEn()
-  ImportCode "En"
-End Sub
-
-Sub ExportCodeJa()
-  ExportCode "Ja"
-End Sub
-
-Function ImportCode(ByVal LangFlag As String)
+Sub ImportCode()
   Dim Content As Object
   Dim ImportFile As String
   ' File name without folder names
@@ -76,7 +63,7 @@ Function ImportCode(ByVal LangFlag As String)
 
   Count = 1
   'ImportFile = Space(260)
-  IniFullPath = GetIniFullPath(LangFlag)
+  IniFullPath = GetIniFullPath
   Ret = 0
 
   Do
@@ -113,9 +100,9 @@ Function ImportCode(ByVal LangFlag As String)
 'Doc.Save ("excelsvn.xls")
 'Debug.Print "after=" & FileLen(Doc.FullName)
 
-End Function
+End Sub
 
-Function ExportCode(ByVal LangFlag As String)
+Sub ExportCode()
 
   Dim n As VBComponent
   Dim Proj As VBProject
@@ -128,7 +115,7 @@ Function ExportCode(ByVal LangFlag As String)
   Dim Ret As Long
   Dim bTargetContentFileExist As Boolean
 
-  IniFullPath = GetIniFullPath(LangFlag)
+  IniFullPath = GetIniFullPath
   bTargetContentFileExist = False
   
   ' Search the target content file (xla, dot, ppa, etc.).
@@ -156,7 +143,7 @@ Function ExportCode(ByVal LangFlag As String)
   
   If bTargetContentFileExist = False Then
     MsgBox "Can't find target content file! Export is aborted."
-    Exit Function
+    Exit Sub
   End If
   
   ' Export all source code of the target content file
@@ -193,7 +180,7 @@ Function ExportCode(ByVal LangFlag As String)
     End Select
   
     Count = 1
-    'FoundPos = 0
+    FoundPos = 0
     
     Do
       Dim ImportFileName As String
@@ -219,17 +206,17 @@ Function ExportCode(ByVal LangFlag As String)
   
   Next
 
-End Function
+End Sub
 
 
-Sub ExportCodeAsKExportFolder(ByVal LangFlag As String)
+Sub ExportCode2()
 
   Dim n As VBComponent
   Dim Proj As VBProject
   Dim ExpFolder As String
 
   ExpFolder = Space(260)
-  GetPrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, "c:\", ExpFolder, 260, GetIniFullPath(LangFlag)
+  GetPrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, "c:\", ExpFolder, 260, GetIniFullPath
   frmExpFolder.SetExpFolder ExpFolder
   frmExpFolder.Show
   ExpFolder = frmExpFolder.GetExpFolder
@@ -252,7 +239,7 @@ Sub ExportCodeAsKExportFolder(ByVal LangFlag As String)
 '    ExpFolder = ExpFolder & "\"
 '  End If
   
-  WritePrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, ExpFolder, GetIniFullPath(LangFlag)
+  WritePrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, ExpFolder, GetIniFullPath
 
   Debug.Print ExpFolder
 

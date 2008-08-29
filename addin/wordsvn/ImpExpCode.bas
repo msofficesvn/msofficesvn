@@ -2,8 +2,7 @@ Attribute VB_Name = "ImpExpCode"
 Option Explicit
 
 ' INI file name
-Public Const gIniFileNameJa As String = "ImpExpCodeJa.ini"
-Public Const gIniFileNameEn As String = "ImpExpCodeEn.ini"
+Public Const gIniFileName As String = "ImpExpCode.ini"
 
 ' :Function: Get numeric value from INI file
 ' :Remarks:  Declaration of Windows API
@@ -34,30 +33,9 @@ Public Declare Function WritePrivateProfileString Lib "kernel32" _
                           ByVal lpString As Any, _
                           ByVal lpFileName As String) As Long
 
-Function SubtractFileName(ByVal FullPathName As String) As String
-  Dim LastBackSlashPos As Long
-  Dim FileNameLen As Long
-  LastBackSlashPos = InStrRev(FullPathName, "\")
-  FileNameLen = Len(FullPathName) - LastBackSlashPos
-  SubtractFileName = Right(FullPathName, FileNameLen)
-End Function
-
-Sub ImportCodeJa()
-  ImportCode "Ja"
-End Sub
-
-Sub ImportCodeEn()
-  ImportCode "En"
-End Sub
-
-Sub ExportCodeJa()
-  ExportCode "Ja"
-End Sub
-
-Function ImportCode(ByVal LangFlag As String)
+Sub ImportCode()
   Dim Content As Object
   Dim ImportFile As String
-  Dim ImportFileName As String
   Dim Count As Integer
   Dim IniKeyImpFile As String
   Dim IniFullPath As String
@@ -74,7 +52,7 @@ Function ImportCode(ByVal LangFlag As String)
 
   Count = 1
   ImportFile = Space(260)
-  IniFullPath = GetIniFullPath(LangFlag)
+  IniFullPath = GetIniFullPath
   Ret = 0
 
   Do
@@ -83,9 +61,7 @@ Function ImportCode(ByVal LangFlag As String)
     Ret = GetPrivateProfileString(gIniSectionName, IniKeyImpFile, "", ImportFile, 260, IniFullPath)
     Count = Count + 1
     If Ret <> 0 Then
-      ImportFileName = Trim(SubtractFileName(ImportFile))
-      ImportFileName = Left(ImportFileName, Len(ImportFileName) - 1)
-      If StrComp(ImportFileName, gThisContentModule) = 0 Then
+      If InStr(ImportFile, gThisContentModule) <> 0 Then
         ' This code causes excel crash.
         'Content.VBProject.VBComponents(gThisContentModule).CodeModule.AddFromFile ImportFile
         ' This code work well
@@ -109,9 +85,9 @@ Function ImportCode(ByVal LangFlag As String)
 'Doc.Save ("excelsvn.xls")
 'Debug.Print "after=" & FileLen(Doc.FullName)
 
-End Function
+End Sub
 
-Function ExportCode(ByVal LangFlag As String)
+Sub ExportCode()
 
   Dim n As VBComponent
   Dim Proj As VBProject
@@ -124,7 +100,7 @@ Function ExportCode(ByVal LangFlag As String)
   Dim Ret As Long
   Dim bTargetContentFileExist As Boolean
 
-  IniFullPath = GetIniFullPath(LangFlag)
+  IniFullPath = GetIniFullPath
   bTargetContentFileExist = False
   
   ' Search the target content file (xla, dot, ppa, etc.).
@@ -134,14 +110,9 @@ Function ExportCode(ByVal LangFlag As String)
     'Debug.Print Proj.Description & vbCrLf
     'Debug.Print Proj.Protection & vbCrLf
     
-'    Dim FoundPos As Integer
-    Dim ProjFileNameWoFldrName As String
-    ProjFileNameWoFldrName = Space(260)
-    ProjFileNameWoFldrName = Trim(SubtractFileName(Proj.Filename))
-    
-'    FoundPos = InStr(Proj.Filename, gTargetContentFile)
-'    If FoundPos <> 0 Then
-    If StrComp(ProjFileNameWoFldrName, gTargetContentFile) = 0 Then
+    Dim FoundPos As Integer
+    FoundPos = InStr(Proj.Filename, gTargetContentFile)
+    If FoundPos <> 0 Then
       ' The target content file is found and it is stored in Proj variable.
       bTargetContentFileExist = True
       Exit For
@@ -150,7 +121,7 @@ Function ExportCode(ByVal LangFlag As String)
   
   If bTargetContentFileExist = False Then
     MsgBox "Can't find target content file! Export is aborted."
-    Exit Function
+    Exit Sub
   End If
   
   ' Export all source code of the target content file
@@ -187,22 +158,16 @@ Function ExportCode(ByVal LangFlag As String)
     End Select
   
     Count = 1
-    'FoundPos = 0
+    FoundPos = 0
     
     Do
-      Dim ImportFileName As String
-      
       ImportFile = Space(260)
       IniKeyImpFile = "ImportFile" & Count
       Ret = GetPrivateProfileString(gIniSectionName, IniKeyImpFile, "", ImportFile, 260, IniFullPath)
       Count = Count + 1
       If Ret <> 0 Then
-        'FoundPos = InStr(ImportFile, CodeFileName)
-        ImportFileName = Trim(SubtractFileName(ImportFile))
-        ImportFileName = Left(ImportFileName, Len(ImportFileName) - 1)
-
-        'If FoundPos <> 0 Then
-        If StrComp(ImportFileName, CodeFileName) = 0 Then
+        FoundPos = InStr(ImportFile, CodeFileName)
+        If FoundPos <> 0 Then
           n.Export ImportFile
           Debug.Print Len(Trim(ImportFile)) & ",  " & ImportFile
         End If
@@ -212,17 +177,17 @@ Function ExportCode(ByVal LangFlag As String)
  
   Next
 
-End Function
+End Sub
 
 
-Sub ExportCodeAsKExportFolder(ByVal LangFlag As String)
+Sub ExportCode2()
 
   Dim n As VBComponent
   Dim Proj As VBProject
   Dim ExpFolder As String
 
   ExpFolder = Space(260)
-  GetPrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, "c:\", ExpFolder, 260, GetIniFullPath(LangFlag)
+  GetPrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, "c:\", ExpFolder, 260, GetIniFullPath
   frmExpFolder.SetExpFolder ExpFolder
   frmExpFolder.Show
   ExpFolder = frmExpFolder.GetExpFolder
@@ -245,7 +210,7 @@ Sub ExportCodeAsKExportFolder(ByVal LangFlag As String)
 '    ExpFolder = ExpFolder & "\"
 '  End If
   
-  WritePrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, ExpFolder, GetIniFullPath(LangFlag)
+  WritePrivateProfileString gIniSectExpFolder, gIniKeyExpFolder, ExpFolder, GetIniFullPath
 
   Debug.Print ExpFolder
 

@@ -81,21 +81,13 @@ End Function
 ' :Function: Close the active content
 ' :Retrun value: True = success, False = fail
 Function CloseFile(ByVal bDisplayAlerts As Boolean) As Boolean
-  Dim SaveOption As WdSaveOptions
-  
   If Len(mName) = 0 Then
     CloseFile = False
     Exit Function
   End If
 
-  If bDisplayAlerts Then
-    SaveOption = wdPromptToSaveChanges
-  Else
-    SaveOption = wdDoNotSaveChanges
-  End If
-
   Application.DisplayAlerts = bDisplayAlerts
-  Documents(mName).Close SaveChanges:=SaveOption
+  Documents(mName).Close
   Application.DisplayAlerts = True
 
   If Err.Number = 0 Then
