@@ -1,5 +1,7 @@
 [Introduction English Page]
 
+注記! これはver.1.0.0用の文書です。最新の文書は、[http://code.google.com/p/msofficesvn/wiki/Introduction_ja]です。
+
 =Microsoft OfficeからTortoiseSVNコマンドを呼び出すVBAアドインプログラム=
 
 Subversionを利用して文書管理を行う場合、Word, Excelといったアプリケーションソフトで、編集中のファイルに対して、バージョン管理が行なえると便利なことが多いものです。
