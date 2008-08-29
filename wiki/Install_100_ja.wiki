@@ -1,3 +1,5 @@
+注記! これはver.1.0.0用の文書です。最新の文書は、[http://code.google.com/p/msofficesvn/wiki/Install_ja]です。
+
 =インストール方法=
 
 ==準備==
