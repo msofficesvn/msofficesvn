@@ -66,11 +66,11 @@ In the case of [SVN Update], [SVN Get lock], [SVN Commit] and [SVN Release lock]
 
 [Open Explorer] command open Explorer with selecting the active document or book, so you can use the other commands quickly that can't be invoked from the add-ins.
 
-==Shortcut key (Ver.1.1.0 New feature)==
+==Shortcut key (Ver.1.1.1 New feature)==
 
 Shortcut keys can be assigned to commands.
 
-==Option Setting (Ver.1.1.0 New feature)==
+==Option Setting (Ver.1.1.1 New feature)==
 
 Following option settings are available.
 
