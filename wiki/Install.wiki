@@ -2,7 +2,7 @@
 
 ==Preparation==
 
-1. If you install old version msofficesvn already, please uninstall it. Please refer to [Install_100.wiki Installation/Uninstallation] for unistallation.
+1. If you install old version msofficesvn already, please uninstall it. Please refer to [Install_100 Installation/Uninstallation] for unistallation.
 
 2. First, Install TortoiseSVN.
 
