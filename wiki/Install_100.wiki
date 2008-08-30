@@ -1,6 +1,6 @@
 NOTE! This document is for ver.1.0.0. The latest document is [http://code.google.com/p/msofficesvn/wiki/Install].
 
-=Installation=
+=Installation/Uninstallation=
 
 ==Preparation==
 
