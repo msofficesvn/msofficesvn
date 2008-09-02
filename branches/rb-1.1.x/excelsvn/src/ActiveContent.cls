@@ -74,16 +74,16 @@ End Function
 
 
 ' :Function: Close the active content
-' :Arguments: bDisplayAlerts [i] False = Inhibits alert message box when save the file.
+' :Arguments: bDisplayAlerts [i] False = Inhibits alert message box and discard changes when close the file.
 ' :Retrun value: True = success, False = fail
 Function CloseFile(ByVal bDisplayAlerts As Boolean) As Boolean
-  If Len(mName) = 0 Then
+ If Len(mName) = 0 Then
     CloseFile = False
     Exit Function
   End If
 
   Application.DisplayAlerts = bDisplayAlerts
-  Workbooks.Item(mName).Close
+  Workbooks.Item(mName).Close SaveChanges:=bDisplayAlerts
   Application.DisplayAlerts = True
 
   If Err.Number = 0 Then
