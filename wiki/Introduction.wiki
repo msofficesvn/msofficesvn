@@ -78,6 +78,13 @@ Following option settings are available.
  * Turn on/off closing and reopening the data file in performing commit command.
  * Turn on/off auto closing of the progress dialog box in the end of performing [SVN Update], [SVN Commit].
 
+
+<NOTE>
+
+Some customizations are needed to use ver.1.1.0 new features after installation.
+Please refer to [CustomSetting_ja Customization] for details.
+
+
 ==Merit and Demerit==
 
 Merit
@@ -106,3 +113,4 @@ I appreciate Mr. Osamu OKANO and Mr. Kazuyuki NAGAMORI, who created original pro
 If you have some comments about these programs, e-mail me.
 
 Koki Yamamoto <kokiya@gmail.com> 
+
