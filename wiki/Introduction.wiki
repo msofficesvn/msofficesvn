@@ -82,7 +82,7 @@ Following option settings are available.
 <NOTE>
 
 Some customizations are needed to use ver.1.1.0 new features after installation.
-Please refer to [CustomSetting_ja Customization] for details.
+Please refer to [CustomSetting Customization] for details.
 
 
 ==Merit and Demerit==
@@ -113,4 +113,3 @@ I appreciate Mr. Osamu OKANO and Mr. Kazuyuki NAGAMORI, who created original pro
 If you have some comments about these programs, e-mail me.
 
 Koki Yamamoto <kokiya@gmail.com> 
-
