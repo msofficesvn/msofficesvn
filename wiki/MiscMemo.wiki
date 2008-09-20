@@ -21,11 +21,13 @@ MSOfficeのメモリ消費
 
    最小化すると減る。
 
-ファイル保存、オープン
-
- * ActiveWorkbook.Save でファイルがRead Onlyで上書きしてもエラーとならない。
-
-
 -> Windowsアプリはだいたいそういうものらしい。
 
 http://support.microsoft.com/?scid=kb%3Ben-us%3B293215&x=9&y=10
+
+ファイル保存、オープン
+
+ * ActiveWorkbook.Save でファイルがRead Onlyで上書きしてもエラーとならない。もちろん上書きはできていない。
+ * ActiveWorkbook.Saveで、保存に問題があれば、それ以降の動作を中止する旨のメッセージを表示するべき。
+
+
