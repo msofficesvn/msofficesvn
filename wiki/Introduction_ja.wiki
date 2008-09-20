@@ -48,12 +48,12 @@ http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl2007menu
  * Windows XP Professional
  * Office97, Office2007
 
-==インストール==
+==インストール/アンインストール==
 ----------------------------------
 
-インストール方法は以下をご参照ください。
+インストール/アンインストール方法は以下をご参照ください。
 
-[Install_ja インストール方法]
+[Install_ja インストール/アンインストール方法]
 
 ==機能概要==
 ----------------------------------
