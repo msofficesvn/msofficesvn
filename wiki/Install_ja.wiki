@@ -3,7 +3,7 @@
 ==準備==
 
  # まず、TortoiseSVNをインストールしてください。
- # Downloadsページより、最新バージョンのmsofficesvn_<version>_ja.zipファイルをダウンロードし、解凍してください。wordsvn.dot,excelsvn.xlaが得られます。
+ # 本サイトのDownloadsページより、最新バージョンのmsofficesvn_<version>_ja.zipファイルをダウンロードし、解凍してください。wordsvn.dot,excelsvn.xlaが得られます。
 
 ==Office97～Office2003の場合==
 
