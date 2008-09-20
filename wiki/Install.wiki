@@ -8,9 +8,7 @@ First, Install TortoiseSVN.
 
  # Download excelsvn.xla.
  # Copy the file to the following folders.
-
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
-
  # Start Excel and check Excelsvn check box in [Tool/Addin...] of main menu.
  # [Subversion] menu and the command bar appear.
 
@@ -18,6 +16,6 @@ First, Install TortoiseSVN.
 
  # Download wordlsvn.dot.
  # Copy the file to the following folders.
-
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
- # Start Word and [Subversion] menu and the command bar appear.
+ # Start Word. 
+ # [Subversion] menu and the command bar appear.
