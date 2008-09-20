@@ -11,7 +11,7 @@
  # Downloadsページより、excelsvn.xlaをダウンロードしてください。
  # 以下のフォルダへコピーしてください。
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
- # Excelを起動し、[ツール/アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンとしてください。
+ # Excelを起動し、[ツール]/[アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンとしてください。
  # [Subversion]メニューとコマンドバーが表示されます。
 
 ===Word===
