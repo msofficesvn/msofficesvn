@@ -46,7 +46,7 @@ http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl2007menu
 以下の環境で動作することは確認しました。
 
  * Windows XP Professional
- * Office97, Office2007
+ * Office97 SR2, Office2007
 
 ==インストール/アンインストール==
 ----------------------------------
