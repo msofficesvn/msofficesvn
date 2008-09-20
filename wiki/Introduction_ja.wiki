@@ -29,7 +29,11 @@ http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl97menu.j
 
   Word2007の場合
 
+http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/wd2007menu.jpg
+
   Excel2007の場合
+
+http://msofficesvn.googlecode.com/svn/trunk/msofficesvn_common/doc/ja/xl2007menu.jpg
 
 ==動作環境==
 ----------------------------------
