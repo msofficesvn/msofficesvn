@@ -21,3 +21,10 @@
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
  # Wordを起動してください。 
  # [Subversion]メニューとコマンドバーが表示されます。
+
+==Office2007の場合==
+
+===Excel===
+
+
+===Word===
