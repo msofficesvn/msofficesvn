@@ -12,7 +12,7 @@ Option Explicit
 
     b   = Boolean
 
-    str = 文字列
+    msg = メッセージ文字列
 
   よく使う名前/サフィックス:
 
