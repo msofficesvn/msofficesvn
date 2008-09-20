@@ -10,7 +10,7 @@
 
  # Downloadsページより、excelsvn.xlaをダウンロードしてください。
  # 以下のフォルダへコピーしてください。
-  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
+  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
  # Excelを起動し、[ツール/アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンとしてください。
  # [Subversion]メニューとコマンドバーが表示されます。
 
@@ -18,7 +18,7 @@
 
  # Downloadsページより、wordsvn.dotをダウンロードしてください。
  # 以下のフォルダへコピーしてください。
-  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
+  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
  # Wordを起動してください。 
  # [Subversion]メニューとコマンドバーが表示されます。
 
@@ -37,6 +37,6 @@
 
  # Downloadsページより、wordsvn.dotをダウンロードしてください。
  # 以下のフォルダへコピーしてください。
-  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
+  C:\Documents and Settings\koki\Application Data\Microsoft\Word\STARTUP\
  # Wordを起動してください。 
  # [Subversion]メニューとコマンドバーが表示されます。
