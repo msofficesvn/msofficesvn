@@ -1,115 +1,50 @@
-=Microsoft Office VBA add-ins that invoke TortoiseSVN commands=
+Microsoft OfficeからTortoiseSVNコマンドを呼び出すVBAアドインプログラム
+==============================================================================
 
-I've been using Subversion for document management. I thought that it was convenient if I could control the version of Word and Excel data files while I edit them. So, I had been looking for such programs and had found the followings.
+Word, Excelといったアプリケーションソフトで、編集中のファイルに対して、バージョン管理が行なえると便利なことが多い。
+そういうことができるプログラムが何かないかと探していたら、それぞれ以下で見つけた。
 
 Excel
 
-http://dkiroku.com/2005-07-01-11.html
-
 Word
 
-http://www.nekoconeko.com/~nagamori/wordsvn/
+ただし、これらのプログラムは私が使用しているOffice97ではエラーとなる部分があり、また、バイナリファイル共有には欠かせないロック機能も無かったので、改修を施した。
 
-But, these programs work not well on MS-Office97 SR2 that I use and they don't support lock functions. Lock functions are required when you share and edit binary data files in cooperation with others. So, I modified them.
+メリット/デメリット
+----------------------------------
 
-==Looks==
+メリット
 
-They go like followings.
-Each commands can be invoked from the menu and the command bar.
+ * 特に画面が狭い場合、TortoiseSVNを使うために画面をエクスプローラに切り替えて編集中のファイルを探してバージョン管理操作をするのは結構手間なことがあるが、このプログラムによって解消される。
+ * 編集中にファイルの保存や閉じるのを忘れて、コミットしたりロックの取得をしたりすることが無くなる。
+ * 試行錯誤しながら文書作成していると、頻繁に差分やログを見たいことがあるが、編集中のファイルに対して１ストロークで実行できるのでうれしい。
 
-  Word97 SR2
-<NO IMAGE>
+デメリット
 
-  Excel97 SR2
-<NO IMAGE>
+ * 更新、ロック取得、コミットなどのコマンド実行前にファイルをいったん閉じて、コマンド実行後ファイルを開き直すので、ファイルサイズが大きいと時間がかかってうっとうしいかもしれない。
+ * アクティブな文書やブックに対してのみコマンドを実行するので、複数ファイルを編集してまとめてコミットするような場合は使えない。
 
-  Word2007
-http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/en/wd2007menu.jpg
+見た目
+----------------------------------
 
-  Excel2007
-http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/en/xl2007menu.jpg
+こんな感じ。
+各コマンドは、メニュー、コマンドバー、ショートカットキーから実行できる。
 
-==Operating Environment==
+  Word97sr2の場合
 
-I guess that the add-ins work on the following environment.
+  Excel97sr2の場合
+  Word2007の場合
 
- * Windows OS where WSH is installed.
- * Microsoft Office97 to Office2007
- * TortoiseSVN must be installed.
+  Excel2007の場合
 
-I tested on the following environment.
+動作環境
+----------------------------------
 
- * Windows XP Professional
- * Office97 SR2, Office2007
- * TortoiseSVN 1.4.7, 1.5.2
+インストール
+----------------------------------
 
-==Installation and Uninstallation==
+チュートリアル
+----------------------------------
 
-Please refer to [Install Installation/Uninstallation Page].
-
-==Functional Overview==
-
-The add-ins can apply the following commands to the active workbook and document.
-
- * SVN Update
- * SVN Get lock
- * SVN Commit
- * SVN Diff
- * SVN Show log
- * SVN Repo-browser
- * SVN Release lock
- * SVN Add
- * SVN Delete
- * Open Explorer
-
-In the case of [SVN Update], [SVN Get lock], [SVN Commit] and [SVN Release lock], once the active document or book is closed, and the TortoiseSVN command is applied to it, and reopen it after.
-
-[Open Explorer] command open Explorer with selecting the active document or book, so you can use the other commands quickly that can't be invoked from the add-ins.
-
-==Shortcut key (Ver.1.1.1 New feature)==
-
-Shortcut keys can be assigned to commands.
-
-==Option Setting (Ver.1.1.1 New feature)==
-
-Following option settings are available.
-
- * Turn on/off displaying a message asking data file saving in performing commands.
- * Turn on/off closing and reopening the data file in performing commit command.
- * Turn on/off auto closing of the progress dialog box in the end of performing [SVN Update], [SVN Commit].
-
-
-<NOTE>
-
-Some customizations are needed to use ver.1.1.0 new features after installation.
-Please refer to [CustomSetting Customization] for details.
-
-
-==Merit and Demerit==
-
-Merit
-
- * It's take some time especially in narrow screen that you open Explorer and select the editing file and apply the TortoiseSVN command to it. This add-in helps that operation. For example, when you make documents by try and error, you may wish to see the difference between original document and current one frequently. You can see it by just clicking [Diff] button when you edit the document.
- * You can avoid committing or getting lock without saving and closing during editing the file.
-
-Demerit
-
- * The add-ins apply the commands to only the active document or book, so you can't use it when you wish to edit multiple files and commit them at the same time to make a "change set".
-
-==Tutorial==
-
-<NOT CREATED YET>
-
-==License==
-
-Please use these programs under GNU General Public License v2.
-
-==Acknowledgment==
-
-I appreciate Mr. Osamu OKANO and Mr. Kazuyuki NAGAMORI, who created original programs and opened their source code to public.
-
-==Contact==
-
-If you have some comments about these programs, e-mail me.
-
-Koki Yamamoto <kokiya@gmail.com> 
+謝辞
+----------------------------------
