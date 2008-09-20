@@ -8,7 +8,7 @@
 
 ===Excel===
 
- # excelsvn.xlaをダウンロードしてください。
+ # Downloadsページより、excelsvn.xlaをダウンロードしてください。
  # 以下のフォルダへコピーしてください。
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
  # Excelを起動し、[ツール/アドイン...]メニューより表示される画面で、Excelsvnチェックボックスをオンとしてください。
@@ -16,7 +16,7 @@
 
 ===Word===
 
- # wordsvn.dotをダウンロードしてください。
+ # Downloadsページより、wordsvn.dotをダウンロードしてください。
  # 以下のフォルダへコピーしてください。
   || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
  # Wordを起動してください。 
@@ -26,5 +26,17 @@
 
 ===Excel===
 
+ # Downloadsページより、excelsvn.xlaをダウンロードしてください。
+ # 以下のフォルダへコピーしてください。
+  C:\Documents and Settings\koki\Application Data\Microsoft\AddIns\
+ # Excelを起動し、[Officeボタン]/[Excelのオプション]/[アドイン]/[管理]で"Excelアドイン"を選択して、[設定]ボタンをクリックしてください。アドイン画面が表示されます。
+ # アドイン画面で、Excelsvnチェックボックスが表示されますので、オンにしてください。
+ # [Subversion]メニューとコマンドバーが表示されます。
 
 ===Word===
+
+ # Downloadsページより、wordsvn.dotをダウンロードしてください。
+ # 以下のフォルダへコピーしてください。
+  || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
+ # Wordを起動してください。 
+ # [Subversion]メニューとコマンドバーが表示されます。
