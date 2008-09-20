@@ -42,6 +42,8 @@ Option Explicit
 
 --------------------------------------------------------------------------
 参考資料
+http://msdn.microsoft.com/library/ja/default.asp?url=/library/ja/odeopg/html/deconnamingvariablesconstants.asp
+
 http://local.joelonsoftware.com/mediawiki/index.php/Project_Aardvark_Functional_Specification_(Jp)
 {{{
 コーディング規約
