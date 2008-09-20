@@ -1,4 +1,3 @@
-#Installation of msoffice add-ins.
 
 = Preparation =
 
