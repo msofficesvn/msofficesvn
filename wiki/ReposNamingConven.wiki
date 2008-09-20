@@ -1,13 +1,9 @@
-#summary One-sentence summary of this page.
+=Repository Naming Convention=
 
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+|| Object || Naming Format || Example ||
+|| Release branch || rb-<Release No.> || rb-1.0.0 ||
+|| Release || rel-<Release No.> || rel-1.0.0 ||
+|| Bug fix branch || bug-<Issue ID> || bug-1 ||
+|| Before fix the bug || pre-<Issue ID> || pre-1 ||
+|| After fix the bug || post-<Issue ID> || post-1 ||
+|| Experimental code branch || try-<Experiment Name> || try-autolock ||
