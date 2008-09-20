@@ -1,4 +1,4 @@
-NOTE: `msofficesvn_<version>_en.zip` is not available now.
+= NOTE: `msofficesvn_<version>_en.zip` is not available now. =
 
 = Installation =
 
