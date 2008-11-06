@@ -184,3 +184,6 @@ Wordで以下の問題が発生していたが、 %APPDATA%\Microsoft\Templates\
    - 各ボタン、メニュー項目の表示の有無の設定
    - メニューやボタンの表示位置の設定
    - キャプション、ボタン画像の設定
+
+* TortoiseSVNのdiffツール設定
+HKEY_CURRENT_USER\Software\TortoiseSVN
