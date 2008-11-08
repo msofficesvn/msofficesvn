@@ -186,4 +186,7 @@ Wordで以下の問題が発生していたが、 %APPDATA%\Microsoft\Templates\
    - キャプション、ボタン画像の設定
 
 * TortoiseSVNのdiffツール設定
+
 HKEY_CURRENT_USER\Software\TortoiseSVN
+
+HKEY_CURRENT_USER\Software\TortoiseSVN\DiffTools
