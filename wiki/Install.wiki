@@ -27,8 +27,8 @@ Files of Word add-in
 
 1. Copy files of Excel add-in to the following folders.
 
-|| Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library ||
-|| Office2000 || ? ||
+|| Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
+|| Office2000 || C:\Program Files\Microsoft Office\Office\Library\ ||
 || Office XP || C:\Program Files\Microsoft Office\Office10\Library\ ||
 || Office2003 || %APPDATA%\Microsoft\AddIns\ ||
 
@@ -50,8 +50,8 @@ If you input the %APPDATA% to the address bar of Explorer, it displays "Applicat
 
 1. Copy the files of Word add-in to the following folders.
 
-|| Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP ||
-|| Office2000 || ? ||
+|| Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
+|| Office2000 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
 || Office XP || C:\Program Files\Microsoft Office\Office10\STARTUP\ ||
 || Office2003 || %APPDATA%\Microsoft\Word\STARTUP\ ||
 
@@ -136,4 +136,3 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 3. [Subversion] menu and the command bar disappear.
 
 4. Delete wordsvn.dot that you copied in installation.
-
