@@ -26,7 +26,7 @@ Wordアドイン用ファイル
 1. Excelアドイン用ファイルを以下のフォルダへコピーしてください。
 
 || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
-|| Office2000 || ? ||
+|| Office2000 || C:\Program Files\Microsoft Office\Office\Library\ ||
 || OfficeXP || C:\Program Files\Microsoft Office\Office10\Library\ ||
 || Office2003 || %APPDATA%\Microsoft\AddIns\ ||
 
@@ -47,7 +47,7 @@ C:\Documents and Settings\koki\Application Data
 1. Wordアドイン用ファイルを以下のフォルダへコピーしてください。
 
 || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
-|| Office2000 || ? ||
+|| Office2000 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
 || OfficeXP || C:\Program Files\Microsoft Office\Office10\STARTUP\ ||
 || Office2003 || %APPDATA%\Microsoft\Word\STARTUP\ ||
 
@@ -126,4 +126,3 @@ C:\Documents and Settings\koki\Application Data
 3. [Subversion]メニューとコマンドバーが削除されます。
 
 4. インストール時にコピーした、Wordアドイン用ファイルを削除してください。
-
