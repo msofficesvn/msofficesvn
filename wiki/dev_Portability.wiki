@@ -56,3 +56,23 @@ Port Word add-in to PowerPoint add-in
 
  * Dose really needs to register to HKEY_CURRENT_USER ?
 
+ * Close method
+
+    Word : SaveOptions argument is available.
+
+    PPT: No argument is available. Use Presentation.Saved property to control alert in closing a file.
+
+ * Application.DisplayAlerts
+
+    Word : WdAlertLevel can be set.
+    WdAlertLevel
+    Constant Value 
+    wdAlertsAll  -1 
+    wdAlertsMessageBox  -2 
+    wdAlertsNone  0 
+
+    PPT : PpAlertLevel can be set.
+    PpAlertLevel
+    Constant Value 
+    ppAlertsAll  2 
+    ppAlertsNone  1 
