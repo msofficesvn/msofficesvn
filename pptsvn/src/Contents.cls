@@ -3,12 +3,12 @@ BEGIN
   MultiUse = -1  'True
 END
 Attribute VB_Name = "Contents"
+Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 
-
-'------------------- Copy & paste from here to the Contents class module of wordsvn.dot --------------------
+'------------------- Copy & paste from here to the Contents class module of pptsvn.ppa --------------------
 ' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
@@ -16,6 +16,7 @@ Attribute VB_Exposed = False
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' :$Date:: 2008-06-30 00:09:02 +0900#$
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: Contents
 '   Class module.
@@ -24,7 +25,10 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-' :Function: Test whether content exists on the application.
+
+' :Function:     Test whether content exists on the application.
+' :Return value: True  = Content exists on the application
+'                False = No content exist on the application
 Function ContentExist() As Boolean
   If Presentations.Count = 0 Then
     ContentExist = False
