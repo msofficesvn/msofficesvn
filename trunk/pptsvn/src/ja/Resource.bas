@@ -1,5 +1,5 @@
 Attribute VB_Name = "Resource"
-'------------------- Copy & paste from here to the Resource module of wordsvn.dot --------------------
+'------------------- Copy & paste from here to the Resource module of pptsvn.ppa --------------------
 ' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
@@ -7,6 +7,7 @@ Attribute VB_Name = "Resource"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' :$Date:: 2008-08-14 03:59:46 +0900#$
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: Resource
 ' :Description: This module contains global resource data.
@@ -34,6 +35,8 @@ Public Const gcapUnlock      As String = "ƒƒbƒN‚ğŠJ•ú"
 Public Const gakyUnlock      As String = "(&C)"
 Public Const gcapAdd         As String = "’Ç‰Á"
 Public Const gakyAdd         As String = "(&A)"
+Public Const gcapDelete      As String = "íœ"
+Public Const gakyDelete      As String = "(&L)"
 Public Const gcapExplorer    As String = "ƒGƒNƒXƒvƒ[ƒ‰‚ğŠJ‚­"
 Public Const gakyExplorer    As String = "(&E)"
 
@@ -47,13 +50,15 @@ Public Const gfidRepoBrowser As Integer = 25
 Public Const gfidUnlock      As Integer = 277
 Public Const gfidAdd         As Integer = 316
 Public Const gfidExplorer    As Integer = 23
+Public Const gfidDelete      As Integer = 1786
 
 ' Message Strings
 Public Const gmsgFileNameCap As String = "ƒtƒ@ƒCƒ‹–¼ : "
 Public Const gmsgContentNameCap As String = "ƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“–¼ : "
 Public Const gmsgUpdateAskActiveContentMod As String = "ƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚Í•ÏX‚³‚ê‚Ä‚¢‚Ü‚·BXV‚ğ’†~‚µ‚Ü‚·‚©Hu‚¢‚¢‚¦v‚ğ‘I‘ğ‚·‚é‚Æ•ÏX‚Í”jŠü‚³‚êAXV‚ğŒp‘±‚µ‚Äs‚¢‚Ü‚·B"
 Public Const gmsgCommitErrActiveContentFileReadOnly As String = "ƒRƒ~ƒbƒg‚Å‚«‚Ü‚¹‚ñBƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚Í•ÏX‚³‚ê‚Ä‚¢‚Ü‚·‚ªAƒtƒ@ƒCƒ‹‘®«‚ª“Ç‚İæ‚èê—p‚Æ‚È‚Á‚Ä‚¢‚Ü‚·B"
-Public Const gmsgCommitAskSaveModContent As String = "ƒRƒ~ƒbƒg‚ÉAƒtƒ@ƒCƒ‹‚ğ‚¢‚Á‚½‚ñ•Â‚¶‚ÄÄ“xŠJ‚«‚Ü‚·BƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚É‚Í•ÏX‚ª‚ ‚è‚Ü‚·Bã‘‚«•Û‘¶‚µ‚Ü‚·‚©H"
+Public Const gmsgCommitAskSaveMod As String = "ƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚É‚Í•ÏX‚ª‚ ‚è‚Ü‚·Bã‘‚«•Û‘¶‚µ‚Ü‚·‚©H"
+Public Const gmsgCommitAskSaveModCloseReopen As String = "ƒRƒ~ƒbƒg‚ÉAƒtƒ@ƒCƒ‹‚ğ‚¢‚Á‚½‚ñ•Â‚¶‚ÄÄ“xŠJ‚«‚Ü‚·BƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚É‚Í•ÏX‚ª‚ ‚è‚Ü‚·Bã‘‚«•Û‘¶‚µ‚Ü‚·‚©H"
 Public Const gmsgLockAskActiveContentFileReadOnly As String = "ƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚Í•ÏX‚³‚ê‚Ä‚¢‚Ü‚·‚ªAƒtƒ@ƒCƒ‹‘®«‚ª“Ç‚İæ‚èê—p‚Æ‚È‚Á‚Ä‚¢‚Ü‚·BƒƒbƒNæ“¾‚ğ’†~‚µ‚Ü‚·‚©Hu‚¢‚¢‚¦v‚ğ‘I‘ğ‚·‚é‚Æ•ÏX‚Í”jŠü‚³‚êAƒƒbƒNæ“¾‚ğŒp‘±‚µ‚Äs‚¢‚Ü‚·B"
 Public Const gmsgLockAskSaveModContent As String = "ƒƒbƒN‚ğæ“¾‚ÉAƒtƒ@ƒCƒ‹‚ğ‚¢‚Á‚½‚ñ•Â‚¶‚ÄÄ“xŠJ‚«‚Ü‚·BƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚É‚Í•ÏX‚ª‚ ‚è‚Ü‚·Bã‘‚«•Û‘¶‚µ‚Ü‚·‚©H"
 Public Const gmsgUnlockErrActiveContentFileReadOnly As String = "ƒƒbƒN‚ğŠJ•ú‚Å‚«‚Ü‚¹‚ñBƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚Í•ÏX‚³‚ê‚Ä‚¢‚Ü‚·‚ªAƒtƒ@ƒCƒ‹‘®«‚ª“Ç‚İæ‚èê—p‚Æ‚È‚Á‚Ä‚¢‚Ü‚·B"
@@ -63,5 +68,7 @@ Public Const gmsgErrNotSaveFile As String = "ƒtƒ@ƒCƒ‹‚ğ•Û‘¶‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñ‚
 Public Const gmsgErrActiveContentFileNotExist As String = "ƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚Ìƒtƒ@ƒCƒ‹‚ª‚ ‚è‚Ü‚¹‚ñBƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚ğƒtƒ@ƒCƒ‹‚É•Û‘¶‚µ‚Ä‚©‚ç‚±‚Ì‘€ì‚ğs‚Á‚Ä‚­‚¾‚³‚¢B"
 Public Const gmsgErrFolderNotUnderCtrl As String = "ƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚Íƒo[ƒWƒ‡ƒ“ƒRƒ“ƒgƒ[ƒ‹‰º‚ÌƒtƒHƒ‹ƒ_‚É‚ ‚è‚Ü‚¹‚ñB"
 Public Const gmsgErrFileNotUnderCtrl As String = "ƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚Íƒo[ƒWƒ‡ƒ“ƒRƒ“ƒgƒ[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB"
-
+Public Const gmsgDeleteAskDelete As String = "ƒtƒ@ƒCƒ‹‚ğíœ‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚Ü‚·B‚æ‚ë‚µ‚¢‚Å‚·‚©H"
+Public Const gmsgDeleteAskCommit As String = "‘±‚¯‚ÄƒRƒ~ƒbƒg‚ğÀs‚µ‚Ü‚·‚©?"
+Public Const gmsgAskSaveMod As String = "ƒAƒNƒeƒBƒuƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‚É‚Í•ÏX‚ª‚ ‚è‚Ü‚·Bã‘‚«•Û‘¶‚µ‚Ü‚·‚©H"
 

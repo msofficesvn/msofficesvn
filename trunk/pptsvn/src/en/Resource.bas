@@ -1,5 +1,5 @@
 Attribute VB_Name = "Resource"
-'------------------- Copy & paste from here to the Resource module of wordsvn.dot --------------------
+'------------------- Copy & paste from here to the Resource module of pptsvn.ppa --------------------
 ' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
 '     This is free software with ABSOLUTELY NO WARRANTY.
@@ -7,6 +7,7 @@ Attribute VB_Name = "Resource"
 ' You can redistribute it and/or modify it under the terms of
 ' the GNU General Public License version 2.
 '
+' :$Date:: 2008-08-14 03:59:46 +0900#$
 ' :Author: Koki Yamamoto <kokiya@gmail.com>
 ' :Module Name: Resource
 ' :Description: This module contains global resource data.
@@ -34,6 +35,8 @@ Public Const gcapUnlock      As String = "Release lo&ck"
 Public Const gakyUnlock      As String = ""
 Public Const gcapAdd         As String = "&Add"
 Public Const gakyAdd         As String = ""
+Public Const gcapDelete      As String = "De&lete"
+Public Const gakyDelete      As String = ""
 Public Const gcapExplorer    As String = "Open &Explorer"
 Public Const gakyExplorer    As String = ""
 
@@ -47,21 +50,26 @@ Public Const gfidRepoBrowser As Integer = 25
 Public Const gfidUnlock      As Integer = 277
 Public Const gfidAdd         As Integer = 316
 Public Const gfidExplorer    As Integer = 23
+Public Const gfidDelete      As Integer = 1786
 
 ' Message Strings
 Public Const gmsgFileNameCap As String = "File Name : "
 Public Const gmsgContentNameCap As String = "Presentation Name : "
 Public Const gmsgUpdateAskActiveContentMod As String = "The active presentation is modified. Do you abort updating? If you select [No], the changes are discarded and continue to update."
 Public Const gmsgCommitErrActiveContentFileReadOnly As String = "Can't commit the active presentation. It is modified but it's file attribute is read only."
-Public Const gmsgCommitAskSaveModContent As String = "Once the active presentation file is closed, and reopened after committing. The active presentation is modified. Do you save it?"
+Public Const gmsgCommitAskSaveMod As String = "The active presentation is modified. Do you save it?"
+Public Const gmsgCommitAskSaveModCloseReopen As String = "Once the active presentation file is closed, and reopened after committing. The active presentation is modified. Do you save it?"
 Public Const gmsgLockAskActiveContentFileReadOnly As String = "The active presentation is modified but it's file attribute is read only. Do you wish to abort getting lock? If you select [No], the changes are discarded and continue to get lock."
 Public Const gmsgLockAskSaveModContent As String = "Once the active presentation file is closed, and reopened after getting lock. The active presentation is modified. Do you save it?"
 Public Const gmsgUnlockErrActiveContentFileReadOnly As String = "Can't release lock of the active presentation. It is modified but it's file attribute is read only."
-Public Const gmsgUnlockAskActiveContentMod As String = "The active presentation is modified. You can't put the changes into the repository by realeasing lock. Do you continue?"
+Public Const gmsgUnlockAskActiveContentMod As String = "The active presentation is modified. You can't put the changes into the repository by releasing lock. Do you continue?"
 Public Const gmsgAddAskCommit As String = "Do you go on to commit it?"
 Public Const gmsgErrNotSaveFile As String = "Failed to save the file."
 Public Const gmsgErrActiveContentFileNotExist As String = "Can't find the active presentation file. Save the active presentation and retry. "
 Public Const gmsgErrFolderNotUnderCtrl As String = "The active presentation file is not in the folder under version control."
 Public Const gmsgErrFileNotUnderCtrl As String = "The active presentation file is not under version control."
+Public Const gmsgDeleteAskDelete As String = "You are going to delete the file. Are you sure to delete it?"
+Public Const gmsgDeleteAskCommit As String = "Do you go on to commit it?"
+Public Const gmsgAskSaveMod As String = "The active presentation is modified. Do you save it?"
 
 
