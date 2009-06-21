@@ -1,4 +1,4 @@
-﻿Attribute VB_Name = "Resource"
+Attribute VB_Name = "Resource"
 '------------------- Copy & paste from here to the Resource module of excelsvn.xla --------------------
 ' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
@@ -54,7 +54,7 @@ Public Const gfidDelete As Integer = 1786
 
 ' Message Strings
 Public Const gmsgFileNameCap As String = "File Name : "
-Public Const gmsgContentNameCap As String = "Book Name : "
+Public Const gmsgContentNameCap As String = "Workbook Name : "
 Public Const gmsgUpdateAskActiveContentMod As String = "The active workbook has been modified. Do you wish to abort the update? If you select [No], your changes will be discarded and the file will be replaced by the latest from the repository."
 Public Const gmsgCommitErrActiveContentFileReadOnly As String = "Cannot commit the active workbook. It has been modified but the file attribute has been set to read only."
 Public Const gmsgCommitAskSaveMod As String = "The active workbook has been modified. Do you wish to save it?"
