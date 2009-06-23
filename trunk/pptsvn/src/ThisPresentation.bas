@@ -53,7 +53,7 @@ Sub Auto_Open()
     WriteIniToolBarInstStat gIniValToolBarInstalled
   End If
 
-  RegisterShortcutKey
+  'RegisterShortcutKey
   'RegisterEventHandler
 End Sub
 
