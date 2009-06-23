@@ -86,7 +86,6 @@ End Function
 ' :Function: Close the active content
 ' :Retrun value: True = success, False = fail
 Function CloseFile(ByVal bDisplayAlerts As Boolean) As Boolean
-  Dim SaveOption As WdSaveOptions
   Dim PrevDisplayAlerts As Long
 
   If Len(mName) = 0 Then
@@ -155,7 +154,7 @@ Function SaveFile(ByVal bDisplayAlerts As Boolean) As Boolean
   End If
 
   PrevDisplayAlerts = Application.DisplayAlerts
-  If bDisplayAlerts == False Then
+  If bDisplayAlerts = False Then
     Application.DisplayAlerts = ppAlertsNone
   End If
 

@@ -18,6 +18,6 @@ Public Const gIniFileName As String = "pptsvn.ini"
 
 ' :Function: Get this add-in path.
 Public Function GetThisAddInPath() As String
-  GetThisAddInPath = ThisPresentation.Path
+  GetThisAddInPath = AddIns("pptsvn").Path
 End Function
 
