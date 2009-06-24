@@ -23,7 +23,7 @@ Attribute VB_Name = "ThisPresentation"
 
 Option Explicit
 
-Dim MsOfficeSvnAppEvent As New AppEvent
+'Dim MsOfficeSvnAppEvent As New AppEvent
 
 ' :Function: Install Subversion menu and command bar
 ' :Remarks:  This function is called when MS-PowerPoint starts
@@ -41,11 +41,13 @@ Sub Auto_Open()
   ' Install tool bar once when this add-in is loaded in Office 97 first time.
   ' Because tool bar's position is not saved if reinstall it.
   ' NOTE: I'm not sure wether it happens to only Office 97 or not.
-  If GetAppMajorVersionNum < gOffice2000MajorVer Then
+  ' -> This happens to PowerPoint2003 also.
+  '    So, removed the version check and avoid reinstallation in any Office version.
+  'If GetAppMajorVersionNum < gOffice2007MajorVer Then
     If GetIniToolBarInstStat = gIniValToolBarInstalled Then
       bNeedInstToolBar = False
     End If
-  End If
+  'End If
 
   ' Build the SVN Tool bar
   If bNeedInstToolBar Then
@@ -64,15 +66,16 @@ Sub Auto_Close()
   DeleteSvnMenu
 
   ' Don't delete the tool bar to keep the tool bar position in the case of Office 97
-  If gOffice2000MajorVer <= GetAppMajorVersionNum Then
-    DeleteSvnToolBar
-  End If
+  ' -> Made not to delete tool bar in any Office version.
+  'If gOffice2007MajorVer <= GetAppMajorVersionNum Then
+  '  DeleteSvnToolBar
+  'End If
 End Sub
 
 
 ' :Function: Register event handler for Application
-Sub RegisterEventHandler()
-  Set MsOfficeSvnAppEvent.App = Application
-End Sub
+'Sub RegisterEventHandler()
+'  Set MsOfficeSvnAppEvent.App = Application
+'End Sub
 
 
