@@ -3,10 +3,10 @@ BEGIN
   MultiUse = -1  'True
 END
 Attribute VB_Name = "AppEvent"
-Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+
 '------------------- Copy & paste from here to the AppEvent class module of pptsvn.ppa --------------------
 ' $Rev: 323 $
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
@@ -25,8 +25,8 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Public WithEvents App As PowerPoint.Application
-Attribute App.VB_VarHelpID = -1
+'Public WithEvents App As PowerPoint.Application
+
  ' Delete "Attribute App.VB_VarHelpID = -1" line
  ' when you copy and paste the source code to excelsvn.xla
 

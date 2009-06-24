@@ -3,10 +3,10 @@ BEGIN
   MultiUse = -1  'True
 END
 Attribute VB_Name = "ActiveContent"
-Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+
 
 
 '------------------- Copy & paste from here to the ActiveContent class module of pptsvn.ppa --------------------
@@ -86,24 +86,26 @@ End Function
 ' :Function: Close the active content
 ' :Retrun value: True = success, False = fail
 Function CloseFile(ByVal bDisplayAlerts As Boolean) As Boolean
-  Dim PrevDisplayAlerts As Long
+  'Dim PrevDisplayAlerts As Long
 
   If Len(mName) = 0 Then
     CloseFile = False
     Exit Function
   End If
 
-  PrevDisplayAlerts = Application.DisplayAlerts
+  'PrevDisplayAlerts = Application.DisplayAlerts
 
   If bDisplayAlerts Then
-    Application.DisplayAlerts = ppAlertsAll
+    'Application.DisplayAlerts = ppAlertsAll
+    'Application.DisplayAlerts = 2
   Else
-    Application.DisplayAlerts = ppAlertsNone
+    'Application.DisplayAlerts = ppAlertsNone
+    'Application.DisplayAlerts = 1
     Presentations(mName).Saved = msoTrue
   End If
 
   Presentations(mName).Close
-  Application.DisplayAlerts = PrevDisplayAlerts
+  'Application.DisplayAlerts = PrevDisplayAlerts
 
   If Err.Number = 0 Then
     CloseFile = True
@@ -155,11 +157,12 @@ Function SaveFile(ByVal bDisplayAlerts As Boolean) As Boolean
 
   PrevDisplayAlerts = Application.DisplayAlerts
   If bDisplayAlerts = False Then
-    Application.DisplayAlerts = ppAlertsNone
+    'Application.DisplayAlerts = ppAlertsNone
+    'Application.DisplayAlerts = 1
   End If
 
   Presentations(mName).Save
-  Application.DisplayAlerts = PrevDisplayAlerts
+  'Application.DisplayAlerts = PrevDisplayAlerts
 
   If Err.Number = 0 Then
     SaveFile = True
