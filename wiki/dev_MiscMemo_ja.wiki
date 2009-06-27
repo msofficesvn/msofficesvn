@@ -155,6 +155,7 @@ Wordで以下の問題が発生していたが、 %APPDATA%\Microsoft\Templates\
 
  * アドインを有効にするスクリプト
 
+Word2007
 {{{
 Set objWD = WScript.CreateObject("Word.Application")
 'objWD.Visible = True
@@ -163,9 +164,20 @@ objWD.AddIns( _
 ).Installed = True
 }}}
 
+ * Visible = True は、あってもなくてもアドイン有効無効には関係なさそう。
  * AddIns("path\to\addin").Installed = True で有効、Falseで無効。
-ただし、Trueの場合は最初のWord起動時にはアドインのメニュー、ツールバーが表示されない問題がある。
-Falseでは最初のWord起動でアドインのメニュー、ツールバーが消えている。
+    ただし、Trueの場合は最初のWord起動時にはアドインのメニュー、ツールバーが表示されない問題がある。
+    Falseでは最初のWord起動でアドインのメニュー、ツールバーが消えている。
+
+Excel2007
+{{{
+Set objXL = WScript.CreateObject("Excel.Application")
+objXL.Visible = True
+objXL.AddIns("Excelsvn").Installed = True
+}}}
+
+ * Visible = Trueを設定しないと、アドインを有効無効できない。
+ * Wordのような、アドインのメニュー、ツールバー表示問題はなさそう。
 
 =============================================================
 
