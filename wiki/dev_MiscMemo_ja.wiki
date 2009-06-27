@@ -131,7 +131,7 @@ DLL 関数から文字列を返す
 
 http://msdn.microsoft.com/ja-jp/library/cc376816.aspx
 
-Wordのアドインdotファイルを作成するときに、BVEでプロジェクトのコンパイルを実行してからdotファイルに保存しないと、アドインロード時のショートカットキー割り当てでエラーが発生し、ショートカットキー割り当てできなくなる。
+Wordのアドインdotファイルを作成するときに、VBEでプロジェクトのコンパイルを実行してからdotファイルに保存しないと、アドインロード時のショートカットキー割り当てでエラーが発生し、ショートカットキー割り当てできなくなる。
 
 Wordで以下の問題が発生していたが、 %APPDATA%\Microsoft\Templates\Normal.dotm を削除して新規作成すると直った。
  * Word2007でwordsvnをアンインストールすると、ツールバーは削除されるのに、なぜかメニューは削除されないことがある。
@@ -151,6 +151,21 @@ Wordで以下の問題が発生していたが、 %APPDATA%\Microsoft\Templates\
  * 手元の2007ではWord起動時にワーニングメッセージは表示されないのだが、セキュリティ設定をゆるゆるにしてしまっているのかな?要確認。
 　->特にセキュリティ設定を緩くしているわけでもない。2003と2007ではセキュリティ周りで仕様が異なるのか?
 
+インストーラ
+
+ * アドインを有効にするスクリプト
+
+{{{
+Set objWD = WScript.CreateObject("Word.Application")
+'objWD.Visible = True
+objWD.AddIns( _
+"C:\Documents and Settings\koki\Application Data\Microsoft\Word\STARTUP\wordsvn.dot" _
+).Installed = True
+}}}
+
+ * AddIns("path\to\addin").Installed = True で有効、Falseで無効。
+ただし、Trueの場合は最初のWord起動時にはアドインのメニュー、ツールバーが表示されない問題がある。
+Falseでは最初のWord起動でアドインのメニュー、ツールバーが消えている。
 
 =============================================================
 
