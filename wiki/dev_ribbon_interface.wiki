@@ -1,0 +1,13 @@
+#summary One-sentence summary of this page.
+
+= Ribbon Interface of Office2007 =
+
+== Reference Links ==
+
+http://fnya.cocolog-nifty.com/blog/2009/03/excel-2007-e739.html
+
+http://openxmldeveloper.org/articles/CustomUIeditor.aspx
+
+== MEMO ==
+
+ * .xlsm file is actually zip file. It contains  customUI.xml file where the custom ribbon interface is defined.
