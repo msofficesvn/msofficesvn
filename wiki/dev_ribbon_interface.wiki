@@ -9,3 +9,35 @@ http://openxmldeveloper.org/articles/CustomUIeditor.aspx
 == MEMO ==
 
  * .xlsm file is actually zip file. It contains  customUI.xml file where the custom ribbon interface is defined.
+     And vbaProject.bin contains VBA scripts.
+
+{{{
+\
+│  [Content_Types].xml
+│
+├─customUI
+│      customUI.xml   <*>
+│
+├─docProps
+│      app.xml
+│      core.xml
+│
+├─xl
+│  │  styles.xml
+│  │  vbaProject.bin <*>
+│  │  workbook.xml
+│  │
+│  ├─theme
+│  │      theme1.xml
+│  │
+│  ├─worksheets
+│  │      sheet1.xml
+│  │      sheet2.xml
+│  │      sheet3.xml
+│  │
+│  └─_rels
+│          workbook.xml.rels
+│
+└─_rels
+        .rels
+}}}
