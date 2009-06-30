@@ -2,9 +2,19 @@
 
 == Reference Links ==
 
+(Japanese)
+
 http://fnya.cocolog-nifty.com/blog/2009/03/excel-2007-e739.html
 
+(English)
+
 http://openxmldeveloper.org/articles/CustomUIeditor.aspx
+
+(English)
+
+http://msdn.microsoft.com/en-us/library/aa338202.aspx
+
+(Japanese)
 
 http://msdn.microsoft.com/ja-jp/library/aa338202.aspx
 
