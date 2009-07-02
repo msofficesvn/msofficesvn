@@ -8,6 +8,10 @@ http://officesvn.tigris.org/
 
 http://www.clearvision-cm.com/office-subversion-integration/flypage_images.tpl.html
 
+CollabNet Desktop - Microsoft Windows Edition
+
 http://www.open.collab.net/products/desktops/windows.html
+
+OfficeSVN
 
 http://mhano.com/software/
