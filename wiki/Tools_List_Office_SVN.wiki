@@ -1,0 +1,7 @@
+http://code.google.com/p/svn4msoffice/
+
+http://www.codeplex.com/officesvn/
+
+http://svn4office.tigris.org/
+
+http://officesvn.tigris.org/
