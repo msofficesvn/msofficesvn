@@ -7,3 +7,5 @@ http://svn4office.tigris.org/
 http://officesvn.tigris.org/
 
 http://www.clearvision-cm.com/office-subversion-integration/flypage_images.tpl.html
+
+http://www.open.collab.net/products/desktops/windows.html
