@@ -1,5 +1,9 @@
 =msofficesvn UI デザイン=
 
+==FaceID一覧==
+
+http://www2s.biglobe.ne.jp/~iryo/2vba/sankou.html
+
 ==TSVNのメニューと順序==
 
 ||	メニュー                       	||	ツールバーの有無	||
