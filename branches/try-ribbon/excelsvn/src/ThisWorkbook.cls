@@ -28,16 +28,16 @@ Dim MsOfficeSvnAppEvent As New AppEvent
 ' :Function: Install Subversion menu and command bar
 Private Sub Workbook_AddinInstall()
   ' Build the SVN Menu
-  InstallSvnMenu
+  'InstallSvnMenu
   ' Build the SVN Tool bar
-  InstallSvnToolBar
+  'InstallSvnToolBar
 End Sub
 
 
 ' :Function: Uninstall Subversion menu and command bar
 Private Sub Workbook_AddinUninstall()
-  DeleteSvnMenu
-  DeleteSvnToolBar
+  'DeleteSvnMenu
+  'DeleteSvnToolBar
 End Sub
 
 
@@ -53,6 +53,7 @@ End Sub
 Public Sub RegisterEventHandler()
   Set MsOfficeSvnAppEvent.App = Application
 End Sub
+
 
 
 

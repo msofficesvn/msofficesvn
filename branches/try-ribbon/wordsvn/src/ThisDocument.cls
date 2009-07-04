@@ -43,7 +43,7 @@ Sub AutoExec()
   bNeedInstToolBar = True
 
   ' Build the SVN Menu
-  InstallSvnMenu
+  'InstallSvnMenu
 
   ' Install tool bar once when this add-in is loaded in Office 97 first time.
   ' Because tool bar's position is not saved if reinstall it.
@@ -56,7 +56,7 @@ Sub AutoExec()
 
   ' Build the SVN Tool bar
   If bNeedInstToolBar Then
-    InstallSvnToolBar
+    'InstallSvnToolBar
     WriteIniToolBarInstStat gIniValToolBarInstalled
   End If
 
@@ -68,11 +68,11 @@ End Sub
 ' :Function: Uninstall Subversion menu and command bar
 ' :Remarks: This function is called when MS-Word exits
 Sub AutoExit()
-  DeleteSvnMenu
+  'DeleteSvnMenu
 
   ' Don't delete the tool bar to keep the tool bar position in the case of Office 97
   If gOffice2000MajorVer <= GetAppMajorVersionNum Then
-    DeleteSvnToolBar
+    'DeleteSvnToolBar
   End If
 End Sub
 
@@ -81,5 +81,6 @@ End Sub
 Sub RegisterEventHandler()
   Set MsOfficeSvnAppEvent.App = Application
 End Sub
+
 
 
