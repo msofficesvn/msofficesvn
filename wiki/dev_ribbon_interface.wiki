@@ -52,3 +52,15 @@ http://msdn.microsoft.com/ja-jp/library/aa338202.aspx
 └─_rels
         .rels
 }}}
+
+ * If you wish to add Japanese characters(Shift-JIS) to customUI.xml, add the following line to top of the file, then add Japanese characters.
+
+   Custom UI Editor does not support Japanese. So, change the extension of the addin file to "zip" and edit customUI.xml by your editor.
+
+{{{
+
+<?xml version="1.0" encoding="Shift-JIS"?>
+
+}}}
+
+
