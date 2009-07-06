@@ -135,9 +135,9 @@ Wordのアドインdotファイルを作成するときに、VBEでプロジェ�
 →Word2007で、dotファイルを開いてコンパイル後保存しても「指定したキーの機能を変更できません」エラーが出る。
 アドインとして開いた状態でコンパイルして保存するとエラーが解消された。
 
-Wordで以下の問題が発生していたが、 %APPDATA%\Microsoft\Templates\Normal.dotm (Word2003の場合はNormal.dot)を削除して新規作成すると直った。
+Wordで以下の問題が発生していたが、 %APPDATA%\Microsoft\Templates\Normal.dotm (Word2003の場合はNormal.dot)を削除してWordを起動しなおす(Normal.dotmは新規作成される)と直った。
  * Word2007でwordsvnをアンインストールすると、ツールバーは削除されるのに、なぜかメニューは削除されないことがある。
- * Word2003でwordsvnをアンインストールすると一応メニューバー、ツールバーは削除されるが次回起動するとツールバーが表示される。
+ * Word2003でwordsvnをアンインストールするとメニューバーが残り、ツールバーは一応削除されるが次回起動するとメニューバーも、ツールバーも表示される。
  * wordsvn.iniで、以下の設定をしても、なぜかShift+Ctrl+uの割り当てだけが残っている。
 {{{
     [ShortcutKey]
