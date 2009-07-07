@@ -80,6 +80,8 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/j
 
 また、[エクスプローラを開く]は、アクティブな文書やワークブックを選択した状態で、エクスプローラを開くことができますので、他のTortoiseSVNの機能を利用したいときに、素早く利用することができます。
 
+===Office2700リボンインターフェース対応(ver.1.2.0 新機能)===
+
 ===ショートカットキー(ver.1.1.0 新機能)===
 
 コマンドにショートカットキーを割り当てることができます。
@@ -131,4 +133,3 @@ GNU General Public License v2 にしたがってご利用ください。
 何かご意見がございましたら、メールでご連絡ください。
 
 Koki Yamamoto <kokiya@gmail.com>
-
