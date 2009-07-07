@@ -65,6 +65,7 @@ NOTE! This document is for ver.1.0.0. The latest document is [http://code.google
  # Clear the "wordsvn.dot" check box in [Global templates and add-ins] list box.
  # [Subversion] menu and the command bar disappear.
  # Delete wordsvn.dot that you copied in installation.
+ # If Subversion menu and command bar still remain after uninstallation, exit Word and delete Normal.dot and start Word again. New Normal.dot will be created and the remaining menu and command bar will disappear.
 
 ==Office2007==
 
@@ -81,3 +82,4 @@ NOTE! This document is for ver.1.0.0. The latest document is [http://code.google
  # Clear the "wordsvn.dot" check box in [Add-Ins available] list box.
  # [Subversion] menu and the command bar disappear.
  # Delete wordsvn.dot that you copied in installation.
+ # If Subversion menu and command bar still remain after uninstallation, exit Word and delete Normal.dotm and start Word again. New Normal.dotm will be created and the remaining menu and command bar will disappear.

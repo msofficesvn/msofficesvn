@@ -115,6 +115,8 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 
 4. Delete the files of Word add-in that you copied in installation.
 
+5. If Subversion menu and command bar still remain after uninstallation, exit Word and delete Normal.dot and start Word again. New Normal.dot will be created and the remaining menu and command bar will disappear.
+
 ==Office2007==
 
 ===Excel===
@@ -136,3 +138,5 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 3. [Subversion] menu and the command bar disappear.
 
 4. Delete wordsvn.dot that you copied in installation.
+
+5. If Subversion menu and command bar still remain after uninstallation, exit Word and delete Normal.dotm and start Word again. New Normal.dotm will be created and the remaining menu and command bar will disappear.

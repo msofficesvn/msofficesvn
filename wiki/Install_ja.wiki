@@ -105,6 +105,8 @@ C:\Documents and Settings\koki\Application Data
 
 3. インストール時にコピーした、Wordアドイン用ファイルを削除してください。
 
+4. アンインストール後も、Subversionメニューやツールバーが残ってしまう場合は、Wordを終了しNormal.dotを削除し、再度Wordを起動してください。Normal.dotが新規作成され、残っていたSubversionメニューやツールバーが表示されなくなります。
+
 ==Office2007の場合==
 
 ===Excel===
@@ -126,3 +128,6 @@ C:\Documents and Settings\koki\Application Data
 3. [Subversion]メニューとコマンドバーが削除されます。
 
 4. インストール時にコピーした、Wordアドイン用ファイルを削除してください。
+
+5. アンインストール後も、Subversionメニューやツールバーが残ってしまう場合は、Wordを終了しNormal.dotmを削除し、再度Wordを起動してください。Normal.dotmが新規作成され、残っていたSubversionメニューやツールバーが表示されなくなります。
+
