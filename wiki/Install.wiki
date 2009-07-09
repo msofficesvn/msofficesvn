@@ -7,6 +7,7 @@
 Please refer to 
 
 [Install_100 Installation/Uninstallation for ver.1.00]
+
 [Install_11x Installation/Uninstallation for ver.1.1.x]
 
 for unistallation.
@@ -49,8 +50,8 @@ Add-in files under 97-2003 folder has menu and toolbar interface, and they work 
 
 1. Copy files of Excel add-in to the following folders.
 
-* excelsvn.ini
-* excelsvn.xla
+ * excelsvn.ini
+ * excelsvn.xla
 
 || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
 || Office2000 || C:\Program Files\Microsoft Office\Office\Library\ ||
@@ -75,8 +76,8 @@ If you input the %APPDATA% to the address bar of Explorer, it displays "Applicat
 
 1. Copy the files of Word add-in to the following folders.
 
-* wordsvn.dot
-* wordsvn.ini
+ * wordsvn.dot
+ * wordsvn.ini
 
 || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
 || Office2000 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
@@ -93,8 +94,8 @@ If you input the %APPDATA% to the address bar of Explorer, it displays "Applicat
 
 1. Copy the files of Excel add-in to the following folders.
 
-* excelsvn.ini
-* excelsvn.xlam
+ * excelsvn.ini
+ * excelsvn.xlam
 
 {{{
 %APPDATA%\Microsoft\AddIns\
@@ -110,8 +111,8 @@ If you input the %APPDATA% to the address bar of Explorer, it displays "Applicat
 
 1. Copy the files of Word add-in to the following folders.
 
-* wordsvn.dotm
-* wordsvn.ini
+ * wordsvn.dotm
+ * wordsvn.ini
 
 {{{
 %APPDATA%\Microsoft\Word\STARTUP\
