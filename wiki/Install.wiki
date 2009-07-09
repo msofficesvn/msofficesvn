@@ -42,7 +42,8 @@ http://tortoisesvn.net/downloads
 
 Add-in files under 2007 folder has Office2007 ribbon interface, and they work on Office2007 but does not work on older Office.
 
-Add-in files under 97-2003 folder has menu and toolbar interface, and they work on Office97 to Office2007.
+Add-in files under 97-2003 folder has legacy menu and toolbar interface, and they work on Office97 to Office2007. 
+Of course I recommend you to install ribbon interface add-in files under 2007 folder for Office2007. 
 
 ==Office97SR2 to Office2003==
 
