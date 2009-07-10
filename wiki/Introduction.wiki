@@ -24,10 +24,10 @@ Each commands can be invoked from the menu and the command bar.
 <NO IMAGE>
 
   Word2007
-http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/en/wd2007menu.jpg
+http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_common/doc/en/wd2007menu.jpg
 
   Excel2007
-http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/en/xl2007menu.jpg
+http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_common/doc/en/xl2007menu.jpg
 
 ==Operating Environment==
 
@@ -41,7 +41,7 @@ I tested on the following environment.
 
  * Windows XP Professional
  * Office97 SR2, Office2007
- * TortoiseSVN 1.4.7, 1.5.2
+ * TortoiseSVN 1.4.7, 1.5.2, 1.6.3
 
 ==Installation and Uninstallation==
 
