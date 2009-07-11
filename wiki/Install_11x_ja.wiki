@@ -1,3 +1,5 @@
+注記! これはver.1.1.x用の文書です。最新の文書は、[http://code.google.com/p/msofficesvn/wiki/Install_ja]です。
+
 =インストール方法=
 
 ==準備==
@@ -130,4 +132,3 @@ C:\Documents and Settings\koki\Application Data
 4. インストール時にコピーした、Wordアドイン用ファイルを削除してください。
 
 5. アンインストール後も、Subversionメニューやツールバーが残ってしまう場合は、Wordを終了しNormal.dotmを削除し、再度Wordを起動してください。Normal.dotmが新規作成され、残っていたSubversionメニューやツールバーが表示されなくなります。
-
