@@ -1,3 +1,5 @@
+[Install English Page]
+
 =インストール方法=
 
 ==準備==
@@ -11,19 +13,34 @@ http://tortoisesvn.net/downloads
 
 3. 本サイトのDownloadsページより、最新バージョンの `msofficesvn_<version>_ja.zip` ファイルをダウンロードし、解凍してください。以下のファイルが得られます。
 
-Excelアドイン用ファイル
- * excelsvn.xla
- * excelsvn.ini
-
-Wordアドイン用ファイル
- * wordsvn.dot
- * wordsvn.ini
+{{{
++-2007
+|  +-excel
+|  | excelsvn.ini
+|  | excelsvn.xlam
+|  |
+|  +-word
+|    wordsvn.dotm
+|    wordsvn.ini
+|
++-97-2003
+    +-excel
+    | excelsvn.ini
+    | excelsvn.xla
+    |
+    +-word
+      wordsvn.dot
+      wordsvn.ini
+}}}
 
 ==Office97SR2～Office2003の場合==
 
 ===Excel===
 
 1. Excelアドイン用ファイルを以下のフォルダへコピーしてください。
+
+ * excelsvn.xla
+ * excelsvn.ini
 
 || Office97 SR2 || C:\Program Files\Microsoft Office\Office\Library\ ||
 || Office2000 || C:\Program Files\Microsoft Office\Office\Library\ ||
@@ -46,6 +63,9 @@ C:\Documents and Settings\koki\Application Data
 
 1. Wordアドイン用ファイルを以下のフォルダへコピーしてください。
 
+ * wordsvn.dot
+ * wordsvn.ini
+
 || Office97 SR2 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
 || Office2000 || C:\Program Files\Microsoft Office\Office\STARTUP\ ||
 || OfficeXP || C:\Program Files\Microsoft Office\Office10\STARTUP\ ||
@@ -60,6 +80,10 @@ C:\Documents and Settings\koki\Application Data
 ===Excel===
 
 1. Excelアドイン用ファイルを以下のフォルダへコピーしてください。
+
+ * excelsvn.xlam
+ * excelsvn.ini
+
 {{{
 %APPDATA%\Microsoft\AddIns\
 }}}
@@ -73,6 +97,10 @@ C:\Documents and Settings\koki\Application Data
 ===Word===
 
 1. Wordアドイン用ファイルを以下のフォルダへコピーしてください。
+
+ * wordsvn.dotm
+ * wordsvn.ini
+
 {{{
 %APPDATA%\Microsoft\Word\STARTUP\
 }}}
@@ -130,4 +158,3 @@ C:\Documents and Settings\koki\Application Data
 4. インストール時にコピーした、Wordアドイン用ファイルを削除してください。
 
 5. アンインストール後も、Subversionメニューやツールバーが残ってしまう場合は、Wordを終了しNormal.dotmを削除し、再度Wordを起動してください。Normal.dotmが新規作成され、残っていたSubversionメニューやツールバーが表示されなくなります。
-
