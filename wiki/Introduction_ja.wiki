@@ -49,7 +49,7 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/j
 
  * Windows XP Professional
  * Office97 SR2, Office2007
- * TortoiseSVN 1.4.8, 1.5.2
+ * TortoiseSVN 1.4.8, 1.5.2, 1.6.3
 
 ==インストール/アンインストール==
 ----------------------------------
@@ -80,13 +80,15 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/j
 
 また、[エクスプローラを開く]は、アクティブな文書やワークブックを選択した状態で、エクスプローラを開くことができますので、他のTortoiseSVNの機能を利用したいときに、素早く利用することができます。
 
-===Office2700リボンインターフェース対応(ver.1.2.0 新機能)===
+===特長===
 
-===ショートカットキー(ver.1.1.0 新機能)===
+====Office2700リボンインターフェース対応(ver.1.2.0 新機能)====
+
+====ショートカットキー(ver.1.1.0 新機能)====
 
 コマンドにショートカットキーを割り当てることができます。
 
-===オプション設定(ver.1.1.0 新機能)===
+====オプション設定(ver.1.1.0 新機能)====
 
 以下のオプション設定ができます。
 
@@ -94,10 +96,10 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.0.x/msofficesvn_common/doc/j
  * コミットコマンド実行時のファイルの閉じる／再度開くのオン／オフ
  * [更新]、[コミット]のコマンド終了時の進行ダイアログボックスの自動終了
 
-<注記>
+_*注記*
 
-ver.1.1.0 新機能を利用するには、インストール後別途設定が必要なことがあります。
-[CustomSetting_ja カスタマイズ方法]をご参照ください。
+ショートカットキーとオプション設定を利用するには、インストール後別途設定が必要です。
+詳しくは[CustomSetting_ja カスタマイズ方法]をご参照ください。
 
 
 ==メリット/デメリット==
