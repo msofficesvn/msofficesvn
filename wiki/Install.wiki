@@ -106,7 +106,7 @@ If you input the %APPDATA% to the address bar of Explorer, it displays "Applicat
 
 3. Check the "Excelsvn" check box in [Add-Ins available] list box.
 
-4. [Subversion] menu and the command bar appear.
+4. [Subversion] ribbon appears.
 
 ===Word===
 
@@ -121,7 +121,7 @@ If you input the %APPDATA% to the address bar of Explorer, it displays "Applicat
 
 2. Start Word. 
 
-3. [Subversion] menu and the command bar appear.
+3. [Subversion] ribbon appears.
 
 
 Now, you can use msoffiecesvn already, but if you wish to customize it, please refer to [CustomSetting Customization].
@@ -161,7 +161,7 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 
 2. Clear the "Excelsvn" check box in [Add-Ins available] list box.
 
-3. [Subversion] menu and the command bar disappear.
+3. [Subversion] ribbon disappears.
 
 4. Delete the files of Excel add-in that you copied in installation.
 
@@ -171,8 +171,6 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 
 2. Clear the "wordsvn.dotm" check box in [Add-Ins available] list box.
 
-3. [Subversion] menu and the command bar disappear.
+3. [Subversion] ribbon disappears.
 
 4. Delete wordsvn.dotm that you copied in installation.
-
-5. If you install Addin for Word97-2003, Subversion menu and command bar might still remain after uninstallation. In such a case, exit Word and delete Normal.dotm and start Word again. New Normal.dotm will be created and the remaining menu and command bar will disappear.
