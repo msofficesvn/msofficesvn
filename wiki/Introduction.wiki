@@ -66,13 +66,15 @@ In the case of [SVN Update], [SVN Get lock], [SVN Commit] and [SVN Release lock]
 
 [Open Explorer] command open Explorer with selecting the active document or book, so you can use the other commands quickly that can't be invoked from the add-ins.
 
-==Office2007 ribbon interface is supported (ver.1.2.0 New feature)==
+==Features==
 
-==Shortcut key (Ver.1.1.1 New feature)==
+===Office2007 ribbon interface is supported (Supported in Ver.1.2.0)===
+
+===Shortcut key (Supported in Ver.1.1.1)===
 
 Shortcut keys can be assigned to commands.
 
-==Option Setting (Ver.1.1.1 New feature)==
+==Option Setting (Supported in Ver.1.1.1)==
 
 Following option settings are available.
 
@@ -81,10 +83,9 @@ Following option settings are available.
  * Turn on/off auto closing of the progress dialog box in the end of performing [SVN Update], [SVN Commit].
 
 
-<NOTE>
+_*NOTE*
 
-Some customizations are needed to use ver.1.1.0 new features after installation.
-Please refer to [CustomSetting Customization] for details.
+Customizations are needed for shortcut key assignment and option settings after installation. Please refer to [CustomSetting Customization] for details.
 
 
 ==Merit and Demerit==
