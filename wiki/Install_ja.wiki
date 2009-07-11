@@ -96,7 +96,7 @@ C:\Documents and Settings\koki\Application Data
 
 3. アドイン画面で、Excelsvnチェックボックスが表示されますので、オンにしてください。
 
-4. [Subversion]メニューとコマンドバーが表示されます。
+4. [Subversion]リボンが表示されます。
 
 ===Word===
 
@@ -111,7 +111,7 @@ C:\Documents and Settings\koki\Application Data
 
 2. Wordを起動してください。 
 
-3. [Subversion]メニューとコマンドバーが表示されます。
+3. [Subversion]リボンが表示されます。
 
 
 これでmsofficesvnを使用することができますが、よりカスタマイズをしたい場合は、[CustomSetting_ja カスタマイズ方法]をご参照ください。
@@ -147,7 +147,7 @@ C:\Documents and Settings\koki\Application Data
 
 2. アドイン画面で、Excelsvnチェックボックスが表示されますので、オフにしてください。
 
-3. [Subversion]メニューとコマンドバーが削除されます。
+3. [Subversion]リボンが削除されます。
 
 4. インストール時にコピーした、Excelアドイン用ファイルを削除してください。
 
@@ -157,8 +157,6 @@ C:\Documents and Settings\koki\Application Data
 
 2. アドイン画面で、Wordsvnチェックボックスが表示されますので、オフにしてください。
 
-3. [Subversion]メニューとコマンドバーが削除されます。
+3. [Subversion]リボンが削除されます。
 
 4. インストール時にコピーした、Wordアドイン用ファイルを削除してください。
-
-5. Word97-2003用アドインをインストールしている場合は、アンインストール後も、Subversionメニューやツールバーが残ってしまうことがあります。そのような場合は、Wordを終了しNormal.dotmを削除し、再度Wordを起動してください。Normal.dotmが新規作成され、残っていたSubversionメニューやツールバーが表示されなくなります。
