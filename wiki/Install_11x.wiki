@@ -1,5 +1,7 @@
 =Installation/Uninstallation=
 
+NOTE! This document is for ver.1.1.x. The latest document is http://code.google.com/p/msofficesvn/wiki/Install. 
+
 ==Preparation==
 
 1. If you install old version msofficesvn already, please uninstall it. Please refer to [Install_100 Installation/Uninstallation] for unistallation.
