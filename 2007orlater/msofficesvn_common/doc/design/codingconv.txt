@@ -1,5 +1,0 @@
-CommandBar cmb
-Menu       mnu
-Control    ctl
-Access Key String aky
-Caption String    cap

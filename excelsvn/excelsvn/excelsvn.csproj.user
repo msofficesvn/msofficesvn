@@ -1,0 +1,13 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}" xmlns="">
+        <ProjectClient>
+          <VSTO_CompatibleProducts ErrorProduct="このプロジェクトには Microsoft Office Excel 2007 と登録済みのプライマリ相互運用機能アセンブリが必要ですが、まだインストールされていません。" ErrorPIA="このプロジェクトで参照されている Microsoft Office Excel 2007 のプライマリ相互運用機能アセンブリがインストールされていません。">
+            <Product Code="{XX12XXXX-XXXX-XXXX-X000-X000000FF1CE}" Feature="EXCELFiles" PIAFeature="EXCEL_PIA" />
+          </VSTO_CompatibleProducts>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
