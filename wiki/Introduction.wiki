@@ -33,21 +33,21 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_
 
 I guess that the add-ins work on the following environment.
 
- * Windows OS(32bit) where WSH is installed.
+ * Windows OS (32bit) where WSH is installed.
  * Microsoft Office97 to Office2007
  * TortoiseSVN must be installed.
 
 I tested on the following environment.
 
- * Windows XP Professional
+ * Windows XP Professional (32bit)
  * Office97 SR2, Office2007
- * TortoiseSVN 1.4.7, 1.5.2, 1.6.3
+ * TortoiseSVN 1.4.7, 1.5.2, 1.6.3 (32bit)
 
 I get a report that Excel-addin works on the following 64bit OS environment.
 
- * Windows 7 Home Premium(64bit)
+ * Windows 7 Home Premium (64bit)
  * Excel2007
- * TortoiseSVN 1.6.7(32bit)
+ * TortoiseSVN 1.6.7 (32bit)
 
 It seems that msoffice add-ins can't invoke 64bit TortoiseSVN.
 
