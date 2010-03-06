@@ -57,7 +57,7 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_
  * Excel2007(32bit)
  * TortoiseSVN 1.6.7(32bit)
 
-TortoiseSVN(64bit)では、msofficesvnアドインからTortoiseProc.exeを呼び出すことはできないようです。
+msofficesvnアドインから64bit版TortoiseSVNを呼び出すことはできないようです。
 
 また、TortoiseSVNは、64bit版と32bit版を同時にインストールすることができるようです。
 
