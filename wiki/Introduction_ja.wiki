@@ -54,7 +54,7 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_
 64bit OSでは以下の環境で動作したとの報告をいただきました。
 
  * Windows 7 Home Premium(64bit)
- * Excel2007(32bit)
+ * Excel2007
  * TortoiseSVN 1.6.7(32bit)
 
 msofficesvnアドインから64bit版TortoiseSVNを呼び出すことはできないようです。
