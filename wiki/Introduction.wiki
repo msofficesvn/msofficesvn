@@ -43,7 +43,7 @@ I tested on the following environment.
  * Office97 SR2, Office2007
  * TortoiseSVN 1.4.7, 1.5.2, 1.6.3
 
-I got a report that it works on 64bit OS environment.
+I get a report that Excel-addin works on the following 64bit OS environment.
 
  * Windows 7 Home Premium(64bit)
  * Excel2007
