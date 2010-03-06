@@ -62,9 +62,11 @@ TortoiseSVN(64bit)では、msofficesvnアドインからTortoiseProc.exeを呼�
 また、TortoiseSVNは、64bit版と32bit版を同時にインストールすることができるようです。
 
 http://tortoisesvn.net/downloads
-
-Note for x64 users: you can install both the 32 and 64-bit version side by side. This will enable the TortoiseSVN features also for 32-bit applications. 
-
+{{{
+Note for x64 users:
+you can install both the 32 and 64-bit version side by side.
+This will enable the TortoiseSVN features also for 32-bit applications. 
+}}}
 
 ==インストール/アンインストール==
 ----------------------------------
