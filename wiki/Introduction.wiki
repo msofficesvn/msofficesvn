@@ -51,7 +51,7 @@ I get a report that Excel-addin works on the following 64bit OS environment.
 
 It seems that msoffice add-ins can't invoke 64bit TortoiseSVN.
 
-Both 32 bit and 64 bit can be installed on 64bit OS all together.
+Both 32 bit and 64 bit TortoiseSVN can be installed on 64bit OS all together.
 
 http://tortoisesvn.net/downloads
 {{{
