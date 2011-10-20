@@ -1,5 +1,7 @@
 =Microsoft Office VBA add-ins that invoke TortoiseSVN commands=
 
+*NOTE: These add-ins do not support TortoiseSVN ver.1.7 or later.*
+
 I've been using Subversion for document management. I thought that it was convenient if I could control the version of Word and Excel data files while I edit them. So, I had been looking for such programs and had found the followings.
 
 Excel
