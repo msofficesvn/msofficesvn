@@ -11,82 +11,50 @@ http://tortoisesvn.net/docs/release/TortoiseSVN_ja/tsvn-subwcrev-com-interface.h
 VBスクリプトの場合
 
 {{{
-// SubWCRevCOMTest.js - javascript file
-// test script for the SubWCRev COM/Automation-object
+' SubWCRevCOMTest.vbs - vbscript file'
+' test script for the SubWCRev COM/Automation-object
 
-filesystem = new ActiveXObject("Scripting.FileSystemObject");
+Set FileSysObj = CreateObject("Scripting.FileSystemObject")
 
-revObject1 = new ActiveXObject("SubWCRev.object");
-revObject2 = new ActiveXObject("SubWCRev.object");
-revObject3 = new ActiveXObject("SubWCRev.object");
-revObject4 = new ActiveXObject("SubWCRev.object");
+Set WCRevObj = CreateObject("SubWCRev.object")
 
-revObject1.GetWCInfo(
-    filesystem.GetAbsolutePathName("."), 1, 1);
-revObject2.GetWCInfo(
-    filesystem.GetAbsolutePathName(".."), 1, 1);
-revObject3.GetWCInfo(
-    filesystem.GetAbsolutePathName("達人プログラマー.doc"), 1, 1);
-revObject4.GetWCInfo(
-    filesystem.GetAbsolutePathName("..\\.."), 1, 1);
+strFilePath = FileSysObj.GetAbsolutePathName("達人プログラマー.doc")
+WCRevObj.GetWCInfo strFilePath, 1, 1
 
-wcInfoString1 = "Revision = " + revObject1.Revision +
-                "\nMin Revision = " + revObject1.MinRev +
-                "\nMax Revision = " + revObject1.MaxRev +
-                "\nDate = " + revObject1.Date +
-                "\nURL = " + revObject1.Url + "\nAuthor = " +
-                revObject1.Author + "\nHasMods = " +
-                revObject1.HasModifications + "\nIsSvnItem = " +
-                revObject1.IsSvnItem + "\nNeedsLocking = " +
-                revObject1.NeedsLocking + "\nIsLocked = " +
-                revObject1.IsLocked + "\nLockCreationDate = " +
-                revObject1.LockCreationDate + "\nLockOwner = " +
-                revObject1.LockOwner + "\nLockComment = " +
-                revObject1.LockComment;
-wcInfoString2 = "Revision = " + revObject2.Revision +
-                "\nMin Revision = " + revObject2.MinRev +
-                "\nMax Revision = " + revObject2.MaxRev +
-                "\nDate = " + revObject2.Date +
-                "\nURL = " + revObject2.Url + "\nAuthor = " +
-                revObject2.Author + "\nHasMods = " +
-                revObject2.HasModifications + "\nIsSvnItem = " +
-                revObject2.IsSvnItem + "\nNeedsLocking = " +
-                revObject2.NeedsLocking + "\nIsLocked = " +
-                revObject2.IsLocked + "\nLockCreationDate = " +
-                revObject2.LockCreationDate + "\nLockOwner = " +
-                revObject2.LockOwner + "\nLockComment = " +
-                revObject2.LockComment;
-wcInfoString3 = "Revision = " + revObject3.Revision +
-                "\nMin Revision = " + revObject3.MinRev +
-                "\nMax Revision = " + revObject3.MaxRev +
-                "\nDate = " + revObject3.Date +
-                "\nURL = " + revObject3.Url + "\nAuthor = " +
-                revObject3.Author + "\nHasMods = " +
-                revObject3.HasModifications + "\nIsSvnItem = " +
-                revObject3.IsSvnItem + "\nNeedsLocking = " +
-                revObject3.NeedsLocking + "\nIsLocked = " +
-                revObject3.IsLocked + "\nLockCreationDate = " +
-                revObject3.LockCreationDate + "\nLockOwner = " +
-                revObject3.LockOwner + "\nLockComment = " +
-                revObject3.LockComment;
-wcInfoString4 = "Revision = " + revObject4.Revision +
-                "\nMin Revision = " + revObject4.MinRev +
-                "\nMax Revision = " + revObject4.MaxRev +
-                "\nDate = " + revObject4.Date +
-                "\nURL = " + revObject4.Url + "\nAuthor = " +
-                revObject4.Author + "\nHasMods = " +
-                revObject4.HasModifications + "\nIsSvnItem = " +
-                revObject4.IsSvnItem + "\nNeedsLocking = " +
-                revObject4.NeedsLocking + "\nIsLocked = " +
-                revObject4.IsLocked + "\nLockCreationDate = " +
-                revObject4.LockCreationDate + "\nLockOwner = " +
-                revObject4.LockOwner + "\nLockComment = " +
-                revObject4.LockComment;
+wcInfoString1 = "Revision = " & WCRevObj.Revision & vbLF & _
+                "Min Revision = " & WCRevObj.MinRev & vbLF & _
+                "Max Revision = " & WCRevObj.MaxRev & vbLF & _
+                "Date = " & WCRevObj.Date & vbLF & _
+                "URL = " & WCRevObj.Url & vbLF & _
+                "Author = " & WCRevObj.Author & vbLF & _
+                "HasMods = " & WCRevObj.HasModifications & vbLF & _
+                "IsSvnItem = " & WCRevObj.IsSvnItem & vbLF & _
+                "NeedsLocking = " & WCRevObj.NeedsLocking & vbLF & _
+                "IsLocked = " & WCRevObj.IsLocked & vbLF & _ 
+                "LockCreationDate = " & WCRevObj.LockCreationDate & vbLF & _
+                "LockOwner = " & WCRevObj.LockOwner & vbLF & _
+                "LockComment = " & WCRevObj.LockComment
 
-WScript.Echo(wcInfoString1);
-WScript.Echo(wcInfoString2);
-WScript.Echo(wcInfoString3);
-WScript.Echo(wcInfoString4);
+WScript.Echo(wcInfoString1)
+}}}
 
+出力結果例
+{{{
+C:\work\subwcreccom>cscript SubWCRevTest.vbs
+Microsoft (R) Windows Script Host Version 5.7
+Copyright (C) Microsoft Corporation 1996-2001. All rights reserved.
 
+Revision = 394
+Min Revision = 609
+Max Revision = 609
+Date = 2008/07/01 02:04:09
+URL = file:///C:/repos/svntest/達人プログラマー.doc
+Author = koki
+HasMods = False
+IsSvnItem = True
+NeedsLocking = True
+IsLocked = True
+LockCreationDate = 2011/12/14 00:04:39
+LockOwner = koki
+LockComment =
 }}}
