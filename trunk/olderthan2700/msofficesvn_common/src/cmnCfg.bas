@@ -31,7 +31,6 @@ Public Const gAutoCloseIfNoErrConflMerge = 3
 Public Const gAutoCloseIfNoErrConflMergeLocal = 4
 
 Private Const mIniSecNameConfig As String = "Configuration"
-Private Const mIniKeyNameFileNameCharEncoding As String = "FileNameCharEncoding"
 
 Private Const mIniKeyCiCloseReopenFile As String = "CiCloseReopenFile"
 Private Const mIniKeyCiAutoCloseProgressDlg As String = "CiAutoCloseProgressDlg"
@@ -42,9 +41,6 @@ Private mDispAskSaveModMsg As Long
 ' Options in comitting
 Private mCiCloseReopenFile As Long
 Private mCiAutoCloseProgressDlg As Long
-' File name character encoding of MS-Office data file
-Private mFileNameCharEncoding As String * 128
-
 
 Public Sub LoadConfig()
   mDispAskSaveModMsg = _
@@ -59,13 +55,6 @@ Public Sub LoadConfig()
   GetPrivateProfileInt(mIniSecNameConfig, mIniKeyCiAutoCloseProgressDlg, _
                        gAutoCloseIfNoErrConflMerge, GetIniFileFullPath)
 
-  ' Get file name character encoding setting from ini file.
-  GetPrivateProfileString mIniSecNameConfig, _
-                          mIniKeyNameFileNameCharEncoding, _
-                          "iso-8859-1", _
-                          mFileNameCharEncoding, _
-                          Len(mFileNameCharEncoding), _
-                          GetIniFileFullPath
 End Sub
 
 
@@ -94,17 +83,5 @@ Public Function GetCiAutoCloseProgressDlg(ByVal bRead As Boolean) As Long
                          gAutoCloseIfNoErrConflMergeLocal, GetIniFileFullPath)
   End If
   GetCiAutoCloseProgressDlg = mCiAutoCloseProgressDlg
-End Function
-
-Public Function GetFileNameCharEncoding(ByVal bRead As Boolean) As String
-  If bRead = True Then
-    GetPrivateProfileString mIniSecNameConfig, _
-                            mIniKeyNameFileNameCharEncoding, _
-                            "iso-8859-1", _
-                            mFileNameCharEncoding, _
-                            Len(mFileNameCharEncoding), _
-                            GetIniFileFullPath
-  End If
-  GetFileNameCharEncoding = mFileNameCharEncoding
 End Function
 
