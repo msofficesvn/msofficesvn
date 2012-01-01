@@ -1,13 +1,92 @@
-#summary One-sentence summary of this page.
+# ワーキングコピーの状態取得方法
 
-= Introduction =
+= 概要 =
 
-Add your content here.
+SubWCRevのCOMインターフェイスを利用して、ワーキングコピーの状態を取得する。
+
+http://tortoisesvn.net/docs/release/TortoiseSVN_ja/tsvn-subwcrev-com-interface.html
+
+= コード =
+
+VBスクリプトの場合
+
+{{{
+// SubWCRevCOMTest.js - javascript file
+// test script for the SubWCRev COM/Automation-object
+
+filesystem = new ActiveXObject("Scripting.FileSystemObject");
+
+revObject1 = new ActiveXObject("SubWCRev.object");
+revObject2 = new ActiveXObject("SubWCRev.object");
+revObject3 = new ActiveXObject("SubWCRev.object");
+revObject4 = new ActiveXObject("SubWCRev.object");
+
+revObject1.GetWCInfo(
+    filesystem.GetAbsolutePathName("."), 1, 1);
+revObject2.GetWCInfo(
+    filesystem.GetAbsolutePathName(".."), 1, 1);
+revObject3.GetWCInfo(
+    filesystem.GetAbsolutePathName("達人プログラマー.doc"), 1, 1);
+revObject4.GetWCInfo(
+    filesystem.GetAbsolutePathName("..\\.."), 1, 1);
+
+wcInfoString1 = "Revision = " + revObject1.Revision +
+                "\nMin Revision = " + revObject1.MinRev +
+                "\nMax Revision = " + revObject1.MaxRev +
+                "\nDate = " + revObject1.Date +
+                "\nURL = " + revObject1.Url + "\nAuthor = " +
+                revObject1.Author + "\nHasMods = " +
+                revObject1.HasModifications + "\nIsSvnItem = " +
+                revObject1.IsSvnItem + "\nNeedsLocking = " +
+                revObject1.NeedsLocking + "\nIsLocked = " +
+                revObject1.IsLocked + "\nLockCreationDate = " +
+                revObject1.LockCreationDate + "\nLockOwner = " +
+                revObject1.LockOwner + "\nLockComment = " +
+                revObject1.LockComment;
+wcInfoString2 = "Revision = " + revObject2.Revision +
+                "\nMin Revision = " + revObject2.MinRev +
+                "\nMax Revision = " + revObject2.MaxRev +
+                "\nDate = " + revObject2.Date +
+                "\nURL = " + revObject2.Url + "\nAuthor = " +
+                revObject2.Author + "\nHasMods = " +
+                revObject2.HasModifications + "\nIsSvnItem = " +
+                revObject2.IsSvnItem + "\nNeedsLocking = " +
+                revObject2.NeedsLocking + "\nIsLocked = " +
+                revObject2.IsLocked + "\nLockCreationDate = " +
+                revObject2.LockCreationDate + "\nLockOwner = " +
+                revObject2.LockOwner + "\nLockComment = " +
+                revObject2.LockComment;
+wcInfoString3 = "Revision = " + revObject3.Revision +
+                "\nMin Revision = " + revObject3.MinRev +
+                "\nMax Revision = " + revObject3.MaxRev +
+                "\nDate = " + revObject3.Date +
+                "\nURL = " + revObject3.Url + "\nAuthor = " +
+                revObject3.Author + "\nHasMods = " +
+                revObject3.HasModifications + "\nIsSvnItem = " +
+                revObject3.IsSvnItem + "\nNeedsLocking = " +
+                revObject3.NeedsLocking + "\nIsLocked = " +
+                revObject3.IsLocked + "\nLockCreationDate = " +
+                revObject3.LockCreationDate + "\nLockOwner = " +
+                revObject3.LockOwner + "\nLockComment = " +
+                revObject3.LockComment;
+wcInfoString4 = "Revision = " + revObject4.Revision +
+                "\nMin Revision = " + revObject4.MinRev +
+                "\nMax Revision = " + revObject4.MaxRev +
+                "\nDate = " + revObject4.Date +
+                "\nURL = " + revObject4.Url + "\nAuthor = " +
+                revObject4.Author + "\nHasMods = " +
+                revObject4.HasModifications + "\nIsSvnItem = " +
+                revObject4.IsSvnItem + "\nNeedsLocking = " +
+                revObject4.NeedsLocking + "\nIsLocked = " +
+                revObject4.IsLocked + "\nLockCreationDate = " +
+                revObject4.LockCreationDate + "\nLockOwner = " +
+                revObject4.LockOwner + "\nLockComment = " +
+                revObject4.LockComment;
+
+WScript.Echo(wcInfoString1);
+WScript.Echo(wcInfoString2);
+WScript.Echo(wcInfoString3);
+WScript.Echo(wcInfoString4);
 
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+}}}
