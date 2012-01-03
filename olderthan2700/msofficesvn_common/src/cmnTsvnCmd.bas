@@ -47,7 +47,10 @@ Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) 
     Exit Function
   End If
 
-  TsvnProcPath = WsShellObj.RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath")
+  'TsvnProcPath = WsShellObj.RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\TortoiseSVN\ProcPath")
+  Const HKEY_LOCAL_MACHINE = &H80000002
+  TsvnProcPath = ReadRegStr(HKEY_LOCAL_MACHINE, "SOFTWARE\TortoiseSVN", "ProcPath", 64)
+
   If Len(TsvnProcPath) = 0 Then
     MsgBox "Failed to read TortoiseSVN path from registory."
   End If
@@ -70,6 +73,33 @@ Function ExecTsvnCmd(ByVal TsvnCmd As String, ByVal ContFileFullName As String) 
   ' Unfortunately TSVN commands always return 0 even if they fail.
   ' So, this function returns True always.
   ExecTsvnCmd = True
+End Function
+
+
+' Reads a REG_SZ value from the local computer's registry using WMI.
+' Parameters:
+' RootKey - The registry hive (see http://msdn.microsoft.com/en-us/library/aa390788(VS.85).aspx for a list of possible values).
+' Key - The key that contains the desired value.
+' Value - The value that you want to get.
+' RegType - The registry bitness: 32 or 64.
+'
+Function ReadRegStr(RootKey, Key, Value, RegType)
+Dim oCtx, oLocator, oReg, oInParams, oOutParams
+
+Set oCtx = CreateObject("WbemScripting.SWbemNamedValueSet")
+oCtx.Add "__ProviderArchitecture", RegType
+
+Set oLocator = CreateObject("Wbemscripting.SWbemLocator")
+Set oReg = oLocator.ConnectServer("", "root\default", "", "", , , , oCtx).Get("StdRegProv")
+
+Set oInParams = oReg.Methods_("GetStringValue").InParameters
+oInParams.hDefKey = RootKey
+oInParams.sSubKeyName = Key
+oInParams.sValueName = Value
+
+Set oOutParams = oReg.ExecMethod_("GetStringValue", oInParams, , oCtx)
+
+ReadRegStr = oOutParams.sValue
 End Function
 
 
