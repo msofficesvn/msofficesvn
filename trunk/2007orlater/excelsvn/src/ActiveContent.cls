@@ -219,40 +219,44 @@ End Function
 ' :Function: Test whether the file exist in the file under version control.
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFolderUnderSvnControl() As Boolean
-  Dim DotSvnFolder As String ' Subversion control folder ".svn"
+  Dim WCRevObj As Object
 
   If Len(mPath) = 0 Then
     IsFolderUnderSvnControl = False
     Exit Function
   End If
 
-  DotSvnFolder = mPath & "\.svn"
+  Set WCRevObj = CreateObject("SubWCRev.object")
+  WCRevObj.GetWCInfo mPath, 1, 1
 
-  If mFileSysObj.FolderExists(DotSvnFolder) Then
+  If WCRevObj.IsSvnItem Then
     IsFolderUnderSvnControl = True
   Else
     IsFolderUnderSvnControl = False
   End If
+  Set WCRevObj = Nothing
 End Function
 
 
 ' :Function: Test whether the file is under subversion control.
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFileUnderSvnControl() As Boolean
-  Dim TextBaseFile As String ' Base file full path name
+  Dim WCRevObj As Object
 
-  If Len(mPath) = 0 Then
+  If Len(mFullName) = 0 Then
     IsFileUnderSvnControl = False
     Exit Function
   End If
 
-  TextBaseFile = mPath & "\.svn\text-base\" & mName & ".svn-base"
+  Set WCRevObj = CreateObject("SubWCRev.object")
+  WCRevObj.GetWCInfo mFullName, 1, 1
 
-  If mFileSysObj.FileExists(TextBaseFile) Then
+  If WCRevObj.IsSvnItem Then
     IsFileUnderSvnControl = True
   Else
     IsFileUnderSvnControl = False
   End If
+  Set WCRevObj = Nothing
 End Function
 
 
