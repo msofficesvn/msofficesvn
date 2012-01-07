@@ -25,7 +25,9 @@ Alt + F11 でVisual Basic Editorを起動する。
 をそれぞれ選択し、実行する。ソースコードが読み込まれBook2が生成される。
 ThisWorkbook.clsがノートパッドで開かれるので、
 
+{{{
 '------------------- Copy & paste from here to the ThisWorkbook module of excelsvn.xla --------------------
+}}}
 
 以下のコードを生成されたBook?のMicrosoft Excel Objects | ThisWorkbook へコピー＆ペーストする。
 
