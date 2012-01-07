@@ -46,16 +46,22 @@ Office 2007より古いバージョン用と同様に、ソースファイルか
 
 作成したexcelsvn.xlamをOffice 2007 Custom UI Editorで開き、
 
+英語版の場合
+C:\work\msofficesvn\trunk\2007orlater\msofficesvn_common\src\customUI\en\customUI.xml
+
+の内容をCustom UIタブへ貼り付け保存する。
+
 日本語版の場合
+英語版と同じように、まず
+C:\work\msofficesvn\trunk\2007orlater\msofficesvn_common\src\customUI\en\customUI.xml
 
-C:\work\msofficesvn\trunk\2007orlater\msofficesvn_common\src\customUI\ja\customUI.xml
-
-の内容をCustom UIタブへ貼り付け保存する。ただし、これだと日本語部分が文字化けして、Excelへ組み込んだときにもリボンが表示されない。
+の内容をCustom UIタブへ貼り付け保存する。この時日本語版customUI.xmlは使用しないこと。使用するとaddinが正常に作成されず、Excelへ組み込んだときにもリボンが表示されない。
 
 excelsvn.xlamはzipファイルなので、拡張子としてファイル名に.zipを追加し、
 excelsvn.xlam.zipとして、圧縮ファイル中の
-customUI\customUI.xmlファイルを元のcustomUI.xmlファイルへ置き換える。
+customUI\customUI.xmlファイルを日本語版customUI.xmlファイル、すなわち、
+C:\work\msofficesvn\trunk\2007orlater\msofficesvn_common\src\customUI\ja\customUI.xml
 
-
+へ置き換える。
 
 = Word =
