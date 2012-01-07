@@ -2,11 +2,13 @@
 
 = Excel =
 
+== Office 2007より古いバージョン用 ==
+
 以下のパスはC:\work\msofficesvn\へソースをチェックアウトした場合
 
 ExcelSvn addinをアンインストールする
 
-C:\work\msofficesvn\trunk\olderthan2700\addin\excelsvn\ImpExpCode.xls
+C:\work\msofficesvn\trunk\olderthan2007\addin\excelsvn\ImpExpCode.xls
 を開く。
 
 リボンの下に
@@ -32,5 +34,13 @@ VBAProject(Book?)を選択し、デバッグ | VBAProjectのコンパイルを�
 ファイル | Book?の上書き保存を選択する。名前を付けて保存画面が表示される。
 
 ファイルの種類で、"Excel 97-2003 アドイン(*.xla)"を選択し、日本語版、英語版それぞれ、excelsvn.xlaというファイル名で保存する。
+
+== Office 2007以降のバージョン用 ==
+
+C:\work\msofficesvn\trunk\2007orlater\addin\excelsvn\ImpExpCode.xls
+を開く。
+
+Office 2007より古いバージョン用と同様に、ソースファイルからexcelsvn.xlaを作成する。
+
 
 = Word =
