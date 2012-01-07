@@ -4,6 +4,8 @@
 
 以下のパスはC:\work\msofficesvn\へソースをチェックアウトした場合
 
+ExcelSvn addinをアンインストールする
+
 C:\work\msofficesvn\trunk\olderthan2700\addin\excelsvn\ImpExpCode.xls
 を開く。
 
