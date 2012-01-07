@@ -15,6 +15,10 @@ C:\work\msofficesvn\trunk\olderthan2700\addin\excelsvn\ImpExpCode.xls
 
 Alt + F11 でVisual Basic Editorを起動する。
 
+実行 | Sub/ユーザーフォームの実行を選択。
 
+マクロ画面で、
+ImportCodeJa
+ImportCodeEn
 
 = Word =
