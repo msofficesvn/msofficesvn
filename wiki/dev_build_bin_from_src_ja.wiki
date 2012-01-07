@@ -52,6 +52,10 @@ C:\work\msofficesvn\trunk\2007orlater\msofficesvn_common\src\customUI\ja\customU
 
 の内容をCustom UIタブへ貼り付け保存する。ただし、これだと日本語部分が文字化けして、Excelへ組み込んだときにもリボンが表示されない。
 
+excelsvn.xlamはzipファイルなので、拡張子としてファイル名に.zipを追加し、
+excelsvn.xlam.zipとして、圧縮ファイル中の
+customUI\customUI.xmlファイルを元のcustomUI.xmlファイルへ置き換える。
+
 
 
 = Word =
