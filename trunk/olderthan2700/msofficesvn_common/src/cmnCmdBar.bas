@@ -120,7 +120,8 @@ End Sub
 ' :Function: Install Subversion menu control
 Sub InstallSvnMenu()
   ' Menu control object
-  Dim ctlMainMenu As CommandBarPopup
+  Dim ctlMainMenu As CommandBarControl
+  Dim ctlMainMenuPopup As CommandBarPopup
   Dim mnuSvn      As CommandBarControl
   Dim mnuSub1     As CommandBarButton
   Dim mnuSub2     As CommandBarButton
@@ -135,11 +136,14 @@ Sub InstallSvnMenu()
 
   ' If Subversion menu control already exists, exit subroutine.
   For Each ctlMainMenu In Application.CommandBars(gMainMenuName).Controls
-    If ctlMainMenu.Caption = gcapSvnMenuBar Then
-      Exit Sub
+    If ctlMainMenu.Type = msoControlPopup Then
+        Set ctlMainMenuPopup = ctlMainMenu
+        If ctlMainMenuPopup.Caption = gcapSvnMenuBar Then
+            Exit Sub
+        End If
     End If
   Next
-
+  
   ' Build the Subversion Menu
   Set mnuSvn = _
   Application.CommandBars(gMainMenuName).Controls.Add(Type:=msoControlPopup)
@@ -198,13 +202,16 @@ End Sub
 
 ' :Function: Delete Subversion menu control
 Sub DeleteSvnMenu()
-  ' Command bar control object
-  Dim ctlMainMenu As CommandBarPopup
+  Dim ctlMainMenu As CommandBarControl
+  Dim ctlMainMenuPopup As CommandBarPopup
 
   ' If Subversion menu exists, delete it.
   For Each ctlMainMenu In Application.CommandBars(gMainMenuName).Controls
-    If ctlMainMenu.Caption = gcapSvnMenuBar Then
-      Application.CommandBars(gMainMenuName).Controls(gcapSvnMenuBar).Delete
+    If ctlMainMenu.Type = msoControlPopup Then
+        Set ctlMainMenuPopup = ctlMainMenu
+        If ctlMainMenuPopup.Caption = gcapSvnMenuBar Then
+            Application.CommandBars(gMainMenuName).Controls(gcapSvnMenuBar).Delete
+        End If
     End If
   Next
 End Sub
