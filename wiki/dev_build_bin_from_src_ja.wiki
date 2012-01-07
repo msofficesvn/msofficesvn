@@ -20,5 +20,17 @@ Alt + F11 でVisual Basic Editorを起動する。
 マクロ画面で、
 ImportCodeJa
 ImportCodeEn
+を選択し、実行する。ソースコードが読み込まれBook?が生成される。
+ThisWorkbook.clsがノートパッドで開かれるので、
+
+'------------------- Copy & paste from here to the ThisWorkbook module of excelsvn.xla --------------------
+
+以下のコードを生成されたBook?のMicrosoft Excel Objects | ThisWorkbook へコピー＆ペーストする。
+
+VBAProject(Book?)を選択し、デバッグ | VBAProjectのコンパイルを実行し、コンパイルする。
+
+ファイル | Book?の上書き保存を選択する。名前を付けて保存画面が表示される。
+
+ファイルの種類で、"Excel 97-2003 アドイン(*.xla)"を選択し、excelsvn.xlaというファイル名で保存する。
 
 = Word =
