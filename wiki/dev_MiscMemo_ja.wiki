@@ -220,3 +220,7 @@ objXL.AddIns("Excelsvn").Installed = True
 HKEY_CURRENT_USER\Software\TortoiseSVN
 
 HKEY_CURRENT_USER\Software\TortoiseSVN\DiffTools
+
+
+* msofficesvnのセットアップ(Win7+Office2010)
+http://d.hatena.ne.jp/blueskynet/20110826/1314324910
