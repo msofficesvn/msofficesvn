@@ -40,7 +40,18 @@ VBAProject(Book?)を選択し、デバッグ | VBAProjectのコンパイルを�
 C:\work\msofficesvn\trunk\2007orlater\addin\excelsvn\ImpExpCode.xls
 を開く。
 
-Office 2007より古いバージョン用と同様に、ソースファイルからexcelsvn.xlaを作成する。
+Office 2007より古いバージョン用と同様に、ソースファイルからアドインファイルを作成する。
+
+ファイルの種類は、"Excel アドイン(*.xlam)"を選択し、日本語版、英語版それぞれ、excelsvn.xlamというファイル名で保存する。
+
+作成したexcelsvn.xlamをOffice 2007 Custom UI Editorで開き、
+
+日本語版の場合
+
+C:\work\msofficesvn\trunk\2007orlater\msofficesvn_common\src\customUI\ja\customUI.xml
+
+の内容をCustom UIタブへ貼り付け保存する。ただし、これだと日本語部分が文字化けして、Excelへ組み込んだときにもリボンが表示されない。
+
 
 
 = Word =
