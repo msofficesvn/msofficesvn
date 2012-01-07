@@ -1,10 +1,10 @@
 #addinバイナリファイルをソースファイルから作成する方法
 
+以下のパスはC:\work\msofficesvn\へソースをチェックアウトした場合
+
 = Excel =
 
 == Office 2007より古いバージョン用 ==
-
-以下のパスはC:\work\msofficesvn\へソースをチェックアウトした場合
 
 ExcelSvn addinをアンインストールする
 
@@ -22,16 +22,16 @@ Alt + F11 でVisual Basic Editorを起動する。
 マクロ画面で、
 日本語版の場合:ImportCodeJa
 英語版の場合:ImportCodeEn
-をそれぞれ選択し、実行する。ソースコードが読み込まれBook?が生成される。
+をそれぞれ選択し、実行する。ソースコードが読み込まれBook2が生成される。
 ThisWorkbook.clsがノートパッドで開かれるので、
 
 '------------------- Copy & paste from here to the ThisWorkbook module of excelsvn.xla --------------------
 
 以下のコードを生成されたBook?のMicrosoft Excel Objects | ThisWorkbook へコピー＆ペーストする。
 
-VBAProject(Book?)を選択し、デバッグ | VBAProjectのコンパイルを実行し、コンパイルする。
+VBAProject(Book2)を選択し、デバッグ | VBAProjectのコンパイルを実行し、コンパイルする。
 
-ファイル | Book?の上書き保存を選択する。名前を付けて保存画面が表示される。
+ファイル | Book2の上書き保存を選択する。名前を付けて保存画面が表示される。
 
 ファイルの種類で、"Excel 97-2003 アドイン(*.xla)"を選択し、日本語版、英語版それぞれ、excelsvn.xlaというファイル名で保存する。
 
@@ -65,3 +65,15 @@ C:\work\msofficesvn\trunk\2007orlater\msofficesvn_common\src\customUI\ja\customU
 へ置き換える。
 
 = Word =
+
+== Office 2007より古いバージョン用 ==
+
+wordsvn addinをアンインストールする。
+
+C:\work\msofficesvn\trunk\olderthan2007\addin\wordsvn\ImpExpCode.doc
+を開いて、excelsvnと同様に、日本語版、英語版、各々のwordsvn.dotファイルを作成する。
+
+[注記]
+Excelとは異なり、Wordでは、アドインのコードをVisual Basic Editorで編集できない(ロックされてソースコードをひらくことができない)。コードを編集したいときは、wordsvn addinをアンインストールしてwordsvn.dotファイルを直接wordで開くとVBEで編集できるようになる。
+
+== Office 2007以降のバージョン用 ==
