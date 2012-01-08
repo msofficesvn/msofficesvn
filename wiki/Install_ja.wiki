@@ -50,6 +50,8 @@ http://tortoisesvn.net/downloads
 || Office2000 || C:\Program Files\Microsoft Office\Office\Library\ ||
 || OfficeXP || C:\Program Files\Microsoft Office\Office10\Library\ ||
 || Office2003 || %APPDATA%\Microsoft\AddIns\ ||
+|| or ||
+|| Office2003 || C:\Program Files\Microsoft Office\OFFICE11\STARTUP || 
 
 %APPDATA%は、ログインユーザのApplication Dataフォルダを指します。
 
