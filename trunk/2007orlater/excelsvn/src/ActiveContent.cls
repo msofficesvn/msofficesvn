@@ -38,18 +38,44 @@ Private mabsRow As Long
 Private mabsCol As Long
 ' File System Object
 Private mFileSysObj As Object
+' 0:Not test it, 1:Test it
+Private mTestFolderUnderControlOfSvn As Long
+' 0:Not test it, 1:Test it
+Private mTestFileUnderControlOfSvn As Long
 
+' These flags to bypass the test that determin the folder and the file is under control of svn
+' to walk around the unstable result problem of IsSvnItem - especially for the folder.
+' It sometimes gets False despite that the folder is under control of svn.
+
+' Section name and key name in the ini file
+Private Const mIniSectNameActiveContent As String = "ActiveContent"
+Private Const mIniKeyTestFolderUnderCtrlSvn As String = "TestFolderUnderControlOfSvn"
+Private Const mIniKeyTestFileUnderCtrlSvn As String = "TestFileUnderControlOfSvn"
+' Test Flag Constant
+Private Const mNotTest As Long = 0
+Private Const mTest As Long = 1
 
 ' :Function: Initialize class module
 Private Sub Class_Initialize()
   If ActiveWorkbook Is Nothing Then
     Exit Sub
   End If
-  
+
   mFullName = ActiveWorkbook.FullName
   mName = ActiveWorkbook.Name
   mPath = ActiveWorkbook.Path
   Set mFileSysObj = CreateObject("Scripting.FileSystemObject")
+
+  mTestFolderUnderControlOfSvn = _
+    GetPrivateProfileInt(mIniSectNameActiveContent, _
+                         mIniKeyTestFolderUnderCtrlSvn, _
+                         mTest, GetIniFileFullPath)
+
+  mTestFileUnderControlOfSvn = _
+    GetPrivateProfileInt(mIniSectNameActiveContent, _
+                         mIniKeyTestFileUnderCtrlSvn, _
+                         mTest, GetIniFileFullPath)
+
 End Sub
 
 
@@ -221,6 +247,11 @@ End Function
 Function IsFolderUnderSvnControl() As Boolean
   Dim WCRevObj As Object
 
+  If mTestFolderUnderControlOfSvn = mNotTest Then
+    IsFolderUnderSvnControl = True
+    Exit Function
+  End If
+
   If Len(mPath) = 0 Then
     IsFolderUnderSvnControl = False
     Exit Function
@@ -242,6 +273,11 @@ End Function
 ' :Return value: True=Under version control, False=Not under version control
 Function IsFileUnderSvnControl() As Boolean
   Dim WCRevObj As Object
+
+  If mTestFileUnderControlOfSvn = mNotTest Then
+    IsFileUnderSvnControl = True
+    Exit Function
+  End If
 
   If Len(mFullName) = 0 Then
     IsFileUnderSvnControl = False
