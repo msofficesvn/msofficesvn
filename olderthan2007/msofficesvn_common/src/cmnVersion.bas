@@ -17,7 +17,7 @@ Attribute VB_Name = "cmnVersion"
 Option Explicit
 
 ' Release Version Number of msofficesvn
-Public Const gVersion As String = "1.2.0"
+Public Const gVersion As String = "1.3.1"
 
 ' MS-Office application major version number
 Public Const gOffice97MajorVer = 8
