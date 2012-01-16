@@ -21,5 +21,10 @@ Polarion® Requirements 2.0
 http://www.polarion.com/index.php
 
 
-http://www.pushok.com/soft_svncom.php
 SVNCOM is a set of COM objects designed to provide subversion functionality for purposes of automatization without direct usage of sources or command line client. 
+
+http://www.pushok.com/soft_svncom.php
+
+MagnetSVN is a Handy Microsoft Office Subversion Add-In
+
+http://magnetsvn.com/index.html
