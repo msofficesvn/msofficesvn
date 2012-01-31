@@ -28,3 +28,7 @@ http://www.pushok.com/soft_svncom.php
 MagnetSVN is a Handy Microsoft Office Subversion Add-In
 
 http://magnetsvn.com/index.html
+
+Git version
+
+https://github.com/knok/excelgit/wiki
