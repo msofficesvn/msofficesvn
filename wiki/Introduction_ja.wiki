@@ -50,8 +50,8 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_
 以下の環境で動作することは確認しました。
 
  * Windows XP Professional (32bit)
- * Office97 SR2, Office2007
- * TortoiseSVN 1.6, 1.7 (32bit, Subwcrev COM インターフェイスが使えるバージョン)
+ * Office97 SR2, Office2010(32bit)
+ * TortoiseSVN 1.6, 1.7 (32bit/64bit, Subwcrev COM インターフェイスが使えるバージョン)
 
 64bit OSでは以下の環境で動作したとの報告をいただきました。
 
@@ -59,6 +59,7 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_
  * Excel2007
  * TortoiseSVN 1.6.7 (32bit)
 
+~~
 msofficesvnアドインから64bit版TortoiseSVNを呼び出すことはできないようです。
 
 また、TortoiseSVNは、64bit版と32bit版を同時にインストールすることができるようです。
@@ -69,6 +70,7 @@ Note for x64 users:
 you can install both the 32 and 64-bit version side by side.
 This will enable the TortoiseSVN features also for 32-bit applications. 
 }}}
+~~
 
 ==インストール/アンインストール==
 ----------------------------------
