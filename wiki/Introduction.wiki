@@ -43,7 +43,7 @@ I tested on the following environment.
 
  * Windows XP Professional (32bit)
  * Office97 SR2, Office2007
- * TortoiseSVN from ver.1.6, ver.1.7 (32bit, Subwcrev COM interface available version)
+ * TortoiseSVN from ver.1.6, ver.1.7 (32bit/64bit, Subwcrev COM interface available version)
 
 I get a report that Excel-addin works on the following 64bit OS environment.
 
@@ -51,17 +51,19 @@ I get a report that Excel-addin works on the following 64bit OS environment.
  * Excel2007
  * TortoiseSVN 1.6.7 (32bit)
 
-It seems that msoffice add-ins can't invoke 64bit TortoiseSVN.
+~~It seems that msoffice add-ins can't invoke 64bit TortoiseSVN.~~
 
-Both 32 bit and 64 bit TortoiseSVN can be installed on 64bit OS all together.
+~~Both 32 bit and 64 bit TortoiseSVN can be installed on 64bit OS all together.~~
 
-http://tortoisesvn.net/downloads
-{{{
-Note for x64 users:
-you can install both the 32 and 64-bit version side by side.
-This will enable the TortoiseSVN features also for 32-bit applications. 
-}}}
+~~ http://tortoisesvn.net/downloads ~~
+~~Note for x64 users:~~
+~~you can install both the 32 and 64-bit version side by side. This will enable the TortoiseSVN features also for 32-bit applications.~~
 
+msofficesvn add-in seems to work under the following condition.
+
+ * 64 bit OS
+ * 32 bit Microsoft Office
+ * 64 bit TortoiseSVN
 
 ==Installation and Uninstallation==
 
