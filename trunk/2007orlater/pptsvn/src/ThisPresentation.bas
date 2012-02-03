@@ -36,7 +36,7 @@ Sub Auto_Open()
   bNeedInstToolBar = True
 
   ' Build the SVN Menu
-  InstallSvnMenu
+  'InstallSvnMenu
 
   ' Install tool bar once when this add-in is loaded in Office 97 first time.
   ' Because tool bar's position is not saved if reinstall it.
@@ -44,16 +44,16 @@ Sub Auto_Open()
   ' -> This happens to PowerPoint2003 also.
   '    So, removed the version check and avoid reinstallation in any Office version.
   'If GetAppMajorVersionNum < gOffice2007MajorVer Then
-    If GetIniToolBarInstStat = gIniValToolBarInstalled Then
-      bNeedInstToolBar = False
-    End If
+  '  If GetIniToolBarInstStat = gIniValToolBarInstalled Then
+  '    bNeedInstToolBar = False
+  '  End If
   'End If
 
   ' Build the SVN Tool bar
-  If bNeedInstToolBar Then
-    InstallSvnToolBar
-    WriteIniToolBarInstStat gIniValToolBarInstalled
-  End If
+  'If bNeedInstToolBar Then
+  '  InstallSvnToolBar
+  '  WriteIniToolBarInstStat gIniValToolBarInstalled
+  'End If
 
   'RegisterShortcutKey
   'RegisterEventHandler
@@ -63,7 +63,7 @@ End Sub
 ' :Function: Uninstall Subversion menu and command bar
 ' :Remarks: This function is called when MS-PowerPoint exits
 Sub Auto_Close()
-  DeleteSvnMenu
+  'DeleteSvnMenu
 
   ' Don't delete the tool bar to keep the tool bar position in the case of Office 97
   ' -> Made not to delete tool bar in any Office version.
