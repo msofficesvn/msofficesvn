@@ -1,3 +1,6 @@
+MSAccess SVN
+http://accesssvn.codeplex.com/
+
 http://code.google.com/p/svn4msoffice/
 
 http://www.codeplex.com/officesvn/
