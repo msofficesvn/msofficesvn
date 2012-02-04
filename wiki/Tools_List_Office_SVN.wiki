@@ -1,3 +1,7 @@
+VBE IDE addin for comparing and versioning VBA using SVN or CVS
+
+http://www.codeproject.com/Articles/18029/SourceTools-xla
+
 MSAccess SVN
 
 http://accesssvn.codeplex.com/
