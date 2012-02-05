@@ -58,8 +58,6 @@ Of course I recommend you to install ribbon interface add-in files under 2007 fo
 || Office2000 || C:\Program Files\Microsoft Office\Office\Library\ ||
 || Office XP || C:\Program Files\Microsoft Office\Office10\Library\ ||
 || Office2003 || %APPDATA%\Microsoft\AddIns\ ||
-|| or ||
-|| Office2003 || C:\Program Files\Microsoft Office\OFFICE11\STARTUP ||
 
 %APPDATA% means the "Application Data folder" of the login user.
 
