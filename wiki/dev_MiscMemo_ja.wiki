@@ -229,3 +229,11 @@ http://d.hatena.ne.jp/blueskynet/20110826/1314324910
 * Office 2010 の信頼できる場所の設定を計画する
 
 http://technet.microsoft.com/ja-jp/library/cc179039.aspx
+
+* アドイン置き場所
+Power Users
+
+C:\Documents and Settings\koki2\Application Data\Microsoft\Word\STARTUP
+
+Power Usersでもつかえる
+C:\Program Files\Microsoft Office\Office12\XLSTART
