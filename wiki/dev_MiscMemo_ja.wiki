@@ -223,4 +223,9 @@ HKEY_CURRENT_USER\Software\TortoiseSVN\DiffTools
 
 
 * msofficesvnのセットアップ(Win7+Office2010)
+
 http://d.hatena.ne.jp/blueskynet/20110826/1314324910
+
+* Office 2010 の信頼できる場所の設定を計画する
+
+http://technet.microsoft.com/ja-jp/library/cc179039.aspx
