@@ -231,9 +231,13 @@ http://d.hatena.ne.jp/blueskynet/20110826/1314324910
 http://technet.microsoft.com/ja-jp/library/cc179039.aspx
 
 * アドイン置き場所
-Power Users
 
-C:\Documents and Settings\koki2\Application Data\Microsoft\Word\STARTUP
+Usersで使えない 
 
-Power Usersでもつかえる
-C:\Program Files\Microsoft Office\Office12\XLSTART
+C:\Program Files\Microsoft Office\Office12\STARTUP
+
+Usersでもつかえる
+
+C:\Program Files\Microsoft Office\Office12\XLSTART 
+
+%appdata%\Microsoft\Word\STARTUP 
