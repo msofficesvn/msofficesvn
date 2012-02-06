@@ -13,6 +13,8 @@
 
 [Install_11x_ja インストール/アンインストール方法(ver.1.1.x)]
 
+[Install_12x_ja インストール/アンインストール方法(ver.1.2.x)]
+
 2. まず、TortoiseSVNをインストールしてください。  
 
 http://tortoisesvn.net/downloads
@@ -85,7 +87,7 @@ C:\Documents and Settings\koki\Application Data
 
 以下はOffice2003でのインストール手順。他のバージョンでも同じかどうかは不明(特にセキュリティ設定周り)。
 
-1. Wordアドインと同じフォルダへ以下のファイルをコピーしてください。
+1. Excelアドインと同じフォルダへ以下のファイルをコピーしてください。
 
  * pptsvn.ppa
  * pptsvn.ini
@@ -101,7 +103,7 @@ C:\Documents and Settings\koki\Application Data
  注記: セキュリティ設定を"低"に設定したままでは危険です。必ず、元のセキュリティレベルへ戻しましょう。
 
 
-==Office2007の場合==
+==Office2007, 2010の場合==
 
 ===Excel===
 
@@ -138,6 +140,16 @@ C:\Documents and Settings\koki\Application Data
 
 これでmsofficesvnを使用することができますが、よりカスタマイズをしたい場合は、[CustomSetting_ja カスタマイズ方法]をご参照ください。
 
+===Power Point===
+
+1. Excelアドインと同じフォルダへ以下のファイルをコピーしてください。
+
+ * pptsvn.ppam
+ * pptsvn.ini
+
+2. Power Pointを起動してください。
+
+3. ツール/アドイン/新規追加でコピーしたpptsvn.ppamを選択してください。アドイン画面の一覧に"pptsvn"が表示され、チェックマークが付いていることを確認してください。また、メインメニューにSubversionメニューと、Subversionツールバーが表示されていることを確認してください。
 
 =アンインストール方法=
 
@@ -161,7 +173,7 @@ C:\Documents and Settings\koki\Application Data
 
 4. アンインストール後も、Subversionメニューやツールバーが残ってしまう場合は、Wordを終了しNormal.dotを削除し、再度Wordを起動してください。Normal.dotが新規作成され、残っていたSubversionメニューやツールバーが表示されなくなります。
 
-==Office2007の場合==
+==Office2007, 2010の場合==
 
 ===Excel===
 
