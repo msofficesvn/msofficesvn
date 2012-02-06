@@ -1,5 +1,7 @@
 [Install English Page]
 
+注記! これはver.1.2.x用の文書です。最新の文書は、http://code.google.com/p/msofficesvn/wiki/Install_jaです。 
+
 =インストール方法=
 
 ==準備==
