@@ -43,13 +43,13 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_
 
 おそらく以下の環境で動作します。
 
- * WSHがインストールされているWindowsOS (32bit)
- * Office97 ～ Office2007
+ * WSHがインストールされているWindowsOS (32bit, 64bit)
+ * Office97 ～ Office2010(32bit)
  * TortoiseSVNがインストールされていること。
 
 以下の環境で動作することは確認しました。
 
- * Windows XP Professional (32bit)
+ * Windows XP Professional(32bit), Windows Server 2008(64bit)
  * Office97 SR2, Office2010(32bit)
  * TortoiseSVN 1.6, 1.7 (32bit/64bit, Subwcrev COM インターフェイスが使えるバージョン)
 
@@ -106,13 +106,13 @@ msofficesvnアドインは一応以下の組み合わせで動作するようで
 
 ===特長===
 
-====Office2700リボンインターフェース対応(ver.1.2.0 新機能)====
+====Office2003以前のツールバーとOffice2700リボンインターフェースの両方対応====
 
-====ショートカットキー(ver.1.1.0 新機能)====
+====ショートカットキー====
 
-コマンドにショートカットキーを割り当てることができます。
+Word, Excelはコマンドにショートカットキーを割り当てることができます。
 
-====オプション設定(ver.1.1.0 新機能)====
+====オプション設定====
 
 以下のオプション設定ができます。
 
