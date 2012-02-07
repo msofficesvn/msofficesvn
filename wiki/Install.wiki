@@ -79,7 +79,7 @@ C:\Documents and Settings\koki\Application Data
 
 If you input the %APPDATA% to the address bar of Explorer, it displays "Application Data folder".
 
-2. Start Excel and check Excelsvn check box in {{{[Tool]/[Add-Ins...]}}} of main menu.
+2. Start Excel and check Excelsvn check box in `[Tool]/[Add-Ins...]` of main menu.
 
 3. `[Subversion]` menu and the command bar appear.
 
@@ -108,11 +108,11 @@ If you input the %APPDATA% to the address bar of Explorer, it displays "Applicat
 
 2. Start PowerPoint.
 
-3. Remember the current setting of`'[Tool]/[Option]/[Security]/[Macro Security]/[Security Level]`, and set security level to "Low".
+3. Remember the current setting of`[Tool]/[Option]/[Security]/[Macro Security]/[Security Level]`, and set security level to "Low".
 
-4. Select pptsvn.ppa in [Tool]/[Add-Ins...]/[Add]. Then, checked pptsvn item is displayed on the list in Addin dialog box. And, Subversion menu and tool bar are displayed on main menu.
+4. Select pptsvn.ppa in `[Tool]/[Add-Ins...]/[Add]`. Then, checked pptsvn item is displayed on the list in Addin dialog box. And, Subversion menu and tool bar are displayed on main menu.
 
-5. Go back to [Tool]/[Option]/[Security]/[Macro Security]/[Security Level], and set the security level back to the original setting.
+5. Go back to `[Tool]/[Option]/[Security]/[Macro Security]/[Security Level]`, and set the security level back to the original setting.
 
 NOTE: It's dangerous to leave the security level low. Make sure it back to the original level.
 
