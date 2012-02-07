@@ -9,6 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 
 
+
 '------------------- Copy & paste from here to the ActiveContent class module of excelsvn.xla --------------------
 ' $Rev$
 ' Copyright (C) 2008 Koki Yamamoto <kokiya@gmail.com>
@@ -107,7 +108,8 @@ End Function
 ' :Function: Close the active content
 ' :Retrun value: True = success, False = fail
 Function CloseFile(ByVal bDisplayAlerts As Boolean) As Boolean
-  Dim SaveOption As WdSaveOptions
+  'Dim SaveOption As WdSaveOptions >> WdSaveOptions causes an error in Office97.
+  Dim SaveOption As Variant
   
   If Len(mName) = 0 Then
     CloseFile = False
