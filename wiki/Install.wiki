@@ -10,6 +10,8 @@ Please refer to
 
 [Install_11x Installation/Uninstallation for ver.1.1.x]
 
+[Install_12x Installation/Uninstallation for ver.1.2.x]
+
 for unistallation.
 
 2. First, Install TortoiseSVN.
@@ -26,6 +28,10 @@ http://tortoisesvn.net/downloads
 |  | excelsvn.ini
 |  | excelsvn.xlam
 |  |
+|  +-pptsvn
+|  |  pptsvn.ini
+|  |  pptsvn.ppam
+|  |
 |  +-word
 |    wordsvn.dotm
 |    wordsvn.ini
@@ -34,6 +40,10 @@ http://tortoisesvn.net/downloads
     +-excel
     | excelsvn.ini
     | excelsvn.xla
+    |
+    +-pptsvn
+    |  pptsvn.ini
+    |  pptsvn.ppa
     |
     +-word
       wordsvn.dot
@@ -89,6 +99,24 @@ If you input the %APPDATA% to the address bar of Explorer, it displays "Applicat
 
 3. [Subversion] menu and the command bar appear.
 
+===PowerPoint ===
+
+1. Copy files of PowerPoint add-in to the folders same as Excel add-in.
+
+ * pptsvn.ppa
+ * pptsvn.ini
+
+2. Start PowerPoint.
+
+3. Remember the current setting of [Tool]/[Option]/[Security]/[Macro Security]/[Security Level], and set security level to "Low".
+
+4. Select pptsvn.ppa in [Tool]/[Add-Ins...]/[Add]. Then, checked pptsvn item is displayed on the list in Addin dialog box. And, Subversion menu and tool bar are displayed on main menu.
+
+5. Go back to [Tool]/[Option]/[Security]/[Macro Security]/[Security Level], and set the security level back to the original setting.
+
+NOTE: It's dangerous to leave the security level low. Make sure it back to the original level.
+
+
 ==Office2007==
 
 ===Excel===
@@ -127,6 +155,18 @@ If you input the %APPDATA% to the address bar of Explorer, it displays "Applicat
 Now, you can use msoffiecesvn already, but if you wish to customize it, please refer to [CustomSetting Customization].
 
 
+===PowerPoint ===
+
+1. Copy files of PowerPoint add-in to the folders same as Excel add-in.
+
+ * pptsvn.ppa
+ * pptsvn.ini
+
+2. Start PowerPoint.
+
+3. Select pptsvn.ppa in [Tool]/[Add-Ins...]/[Add]. Then, checked pptsvn item is displayed on the list in Addin dialog box. And, Subversion menu and tool bar are displayed on main menu.
+
+
 =Uninstallation=
 
 ==Office97SR2 to Office2003==
@@ -153,6 +193,17 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 
 5. If Subversion menu and command bar still remain after uninstallation, exit Word and delete Normal.dot and start Word again. New Normal.dot will be created and the remaining menu and command bar will disappear.
 
+===PowerPoint===
+
+1. Start PowerPoint and select [Tool]/[Add-Ins...] menu item of main menu. Add-Ins dialog box appears.
+
+2. Clear the "pptsvn" check box in [Add-Ins available] list box.
+
+3. [Subversion] menu and the command bar disappear.
+
+4. Delete the files of Excel add-in that you copied in installation.
+
+
 ==Office2007==
 
 ===Excel===
@@ -174,3 +225,14 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 3. [Subversion] ribbon disappears.
 
 4. Delete wordsvn.dotm that you copied in installation.
+
+===PowerPoint===
+
+1. Start PowerPoint and select [Tool]/[Add-Ins...] menu item of main menu. Add-Ins dialog box appears.
+
+2. Clear the "pptsvn" check box in [Add-Ins available] list box.
+
+3. [Subversion] menu and the command bar disappear.
+
+4. Delete the files of PowerPoint add-in that you copied in installation.
+
