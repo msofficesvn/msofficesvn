@@ -174,18 +174,18 @@ End Function
 ' :Function: Save active workbook.
 ' :Retrun value: True = success, False = fail
 Function SaveFile(ByVal bDisplayAlerts As Boolean) As Boolean
-  Dim PrevDisplayAlerts As Long
+  'Dim PrevDisplayAlerts As Long
 
   If Len(mName) = 0 Then
     SaveFile = False
     Exit Function
   End If
 
-  PrevDisplayAlerts = Application.DisplayAlerts
-  If bDisplayAlerts = False Then
-    'Application.DisplayAlerts = ppAlertsNone
-    'Application.DisplayAlerts = 1
-  End If
+  'PrevDisplayAlerts = Application.DisplayAlerts
+  'If bDisplayAlerts = False Then
+  '  Application.DisplayAlerts = ppAlertsNone
+  '  Application.DisplayAlerts = 1
+  'End If
 
   Presentations(mName).Save
   'Application.DisplayAlerts = PrevDisplayAlerts
