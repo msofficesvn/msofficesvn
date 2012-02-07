@@ -179,6 +179,14 @@ C:\Documents and Settings\koki\Application Data
 
 4. アンインストール後も、Subversionメニューやツールバーが残ってしまう場合は、Wordを終了しNormal.dotを削除し、再度Wordを起動してください。Normal.dotが新規作成され、残っていたSubversionメニューやツールバーが表示されなくなります。
 
+===Power Point===
+
+1. Power Pointを起動し、[ツール]/[アドイン...]メニューより表示される画面で、pptsvnチェックボックスをオフにしてください。
+
+2. [Subversion]メニューとコマンドバーが削除されます。
+
+3. インストール時にコピーした、Excelアドイン用ファイルを削除してください。
+
 ==Office2007, 2010の場合==
 
 ===Excel===
@@ -200,3 +208,12 @@ C:\Documents and Settings\koki\Application Data
 3. [Subversion]リボンが削除されます。
 
 4. インストール時にコピーした、Wordアドイン用ファイルを削除してください。
+
+===Power Point===
+
+1. Power Pointを起動し、[ツール]/[アドイン...]メニューより表示される画面で、pptsvnチェックボックスをオフにしてください。
+
+2. [Subversion]メニューとコマンドバーが削除されます。
+
+3. インストール時にコピーした、PowerPoint アドイン用ファイルを削除してください。
+
