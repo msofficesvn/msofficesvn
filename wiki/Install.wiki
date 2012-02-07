@@ -108,7 +108,7 @@ If you input the %APPDATA% to the address bar of Explorer, it displays "Applicat
 
 2. Start PowerPoint.
 
-3. Remember the current setting of [Tool]/[Option]/[Security]/[Macro Security]/[Security Level], and set security level to "Low".
+3. Remember the current setting of`'[Tool]/[Option]/[Security]/[Macro Security]/[Security Level]`, and set security level to "Low".
 
 4. Select pptsvn.ppa in [Tool]/[Add-Ins...]/[Add]. Then, checked pptsvn item is displayed on the list in Addin dialog box. And, Subversion menu and tool bar are displayed on main menu.
 
