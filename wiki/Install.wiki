@@ -79,9 +79,9 @@ C:\Documents and Settings\koki\Application Data
 
 If you input the %APPDATA% to the address bar of Explorer, it displays "Application Data folder".
 
-2. Start Excel and check Excelsvn check box in [Tool]/[Add-Ins...] of main menu.
+2. Start Excel and check Excelsvn check box in {{{[Tool]/[Add-Ins...]}}} of main menu.
 
-3. [Subversion] menu and the command bar appear.
+3. `[Subversion]` menu and the command bar appear.
 
 ===Word===
 
@@ -235,4 +235,3 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 3. [Subversion] menu and the command bar disappear.
 
 4. Delete the files of PowerPoint add-in that you copied in installation.
-
