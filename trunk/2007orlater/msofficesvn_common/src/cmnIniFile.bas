@@ -18,7 +18,7 @@ Option Explicit
 
 ' :Function: Get numeric value from INI file
 ' :Remarks:  Declaration of Windows API
-Public Declare Function GetPrivateProfileInt Lib "kernel32" _
+Public Declare PtrSafe Function GetPrivateProfileInt Lib "kernel32" _
                          Alias "GetPrivateProfileIntA" _
                          (ByVal lpApplicationName As String, _
                           ByVal lpKeyName As String, _
@@ -27,7 +27,7 @@ Public Declare Function GetPrivateProfileInt Lib "kernel32" _
 
 ' :Function: Get string from INI file
 ' :Remarks:  Declaration of Windows API
-Public Declare Function GetPrivateProfileString Lib "kernel32" _
+Public Declare PtrSafe Function GetPrivateProfileString Lib "kernel32" _
                          Alias "GetPrivateProfileStringA" _
                          (ByVal lpApplicationName As String, _
                           ByVal lpKeyName As Any, _
@@ -38,7 +38,7 @@ Public Declare Function GetPrivateProfileString Lib "kernel32" _
 
 ' :Function: Write string to INI file
 ' :Remarks:  Declaration of Windows API
-Public Declare Function WritePrivateProfileString Lib "kernel32" _
+Public Declare PtrSafe Function WritePrivateProfileString Lib "kernel32" _
                          Alias "WritePrivateProfileStringA" _
                          (ByVal lpApplicationName As String, _
                           ByVal lpKeyName As Any, _
