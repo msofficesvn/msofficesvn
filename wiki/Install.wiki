@@ -130,11 +130,11 @@ NOTE: It's dangerous to leave the security level low. Make sure it back to the o
 %APPDATA%\Microsoft\AddIns\
 }}}
 
-2. Start Excel and select "Excel Add-Ins" in [Office button]/[Excel Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
+2. Start Excel and select "Excel Add-Ins" in `[Office button]/[Excel Options]/[Add-Ins]/[Manage]` and click `[Go...]` button. Add-Ins dialog box appears.
 
-3. Check the "Excelsvn" check box in [Add-Ins available] list box.
+3. Check the "Excelsvn" check box in `[Add-Ins available]` list box.
 
-4. [Subversion] ribbon appears.
+4. `[Subversion]` ribbon appears.
 
 ===Word===
 
@@ -149,7 +149,7 @@ NOTE: It's dangerous to leave the security level low. Make sure it back to the o
 
 2. Start Word. 
 
-3. [Subversion] ribbon appears.
+3. `[Subversion]` ribbon appears.
 
 
 Now, you can use msoffiecesvn already, but if you wish to customize it, please refer to [CustomSetting Customization].
@@ -164,7 +164,7 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 
 2. Start PowerPoint.
 
-3. Select pptsvn.ppa in [Tool]/[Add-Ins...]/[Add]. Then, checked pptsvn item is displayed on the list in Addin dialog box. And, Subversion menu and tool bar are displayed on main menu.
+3. Select pptsvn.ppa in `[Tool]/[Add-Ins...]/[Add]`. Then, checked pptsvn item is displayed on the list in Addin dialog box. And, Subversion menu and tool bar are displayed on main menu.
 
 
 =Uninstallation=
@@ -173,21 +173,21 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 
 ===Excel===
 
-1. Start Excel and select [Tool]/[Add-Ins...] menu item of main menu. Add-Ins dialog box appears.
+1. Start Excel and select `[Tool]/[Add-Ins...]` menu item of main menu. Add-Ins dialog box appears.
 
-2. Clear the "Excelsvn" check box in [Add-Ins available] list box.
+2. Clear the "Excelsvn" check box in `[Add-Ins available]` list box.
 
-3. [Subversion] menu and the command bar disappear.
+3. `[Subversion]` menu and the command bar disappear.
 
 4. Delete the files of Excel add-in that you copied in installation.
 
 ===Word===
 
-1. Start Word and select [Tool]/[Add-Ins...] menu item of main menu. Templates and Add-Ins dialog box appears.
+1. Start Word and select `[Tool]/[Add-Ins...]` menu item of main menu. Templates and Add-Ins dialog box appears.
 
-2. Clear the "wordsvn.dot" check box in [Global templates and add-ins] list box.
+2. Clear the "wordsvn.dot" check box in `[Global templates and add-ins]` list box.
 
-3. [Subversion] menu and the command bar disappear.
+3. `[Subversion]` menu and the command bar disappear.
 
 4. Delete the files of Word add-in that you copied in installation.
 
@@ -195,11 +195,11 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 
 ===PowerPoint===
 
-1. Start PowerPoint and select [Tool]/[Add-Ins...] menu item of main menu. Add-Ins dialog box appears.
+1. Start PowerPoint and select `[Tool]/[Add-Ins...]` menu item of main menu. Add-Ins dialog box appears.
 
-2. Clear the "pptsvn" check box in [Add-Ins available] list box.
+2. Clear the "pptsvn" check box in `[Add-Ins available]` list box.
 
-3. [Subversion] menu and the command bar disappear.
+3. `[Subversion]` menu and the command bar disappear.
 
 4. Delete the files of Excel add-in that you copied in installation.
 
@@ -208,30 +208,30 @@ Now, you can use msoffiecesvn already, but if you wish to customize it, please r
 
 ===Excel===
 
-1. Start Excel and select "Excel Add-Ins" in [Office button]/[Excel Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
+1. Start Excel and select "Excel Add-Ins" in `[Office button]/[Excel Options]/[Add-Ins]/[Manage]` and click `[Go...]` button. Add-Ins dialog box appears.
 
-2. Clear the "Excelsvn" check box in [Add-Ins available] list box.
+2. Clear the "Excelsvn" check box in `[Add-Ins available]` list box.
 
-3. [Subversion] ribbon disappears.
+3. `[Subversion]` ribbon disappears.
 
 4. Delete the files of Excel add-in that you copied in installation.
 
 ===Word===
 
-1. Start Word and select "Word Add-Ins" in [Office button]/[Word Options]/[Add-Ins]/[Manage] and click [Go...] button. Add-Ins dialog box appears.
+1. Start Word and select "Word Add-Ins" in `[Office button]/[Word Options]/[Add-Ins]/[Manage]` and click `[Go...]` button. Add-Ins dialog box appears.
 
-2. Clear the "wordsvn.dotm" check box in [Add-Ins available] list box.
+2. Clear the "wordsvn.dotm" check box in `[Add-Ins available]` list box.
 
-3. [Subversion] ribbon disappears.
+3. `[Subversion]` ribbon disappears.
 
 4. Delete wordsvn.dotm that you copied in installation.
 
 ===PowerPoint===
 
-1. Start PowerPoint and select [Tool]/[Add-Ins...] menu item of main menu. Add-Ins dialog box appears.
+1. Start PowerPoint and select `[Tool]/[Add-Ins...]` menu item of main menu. Add-Ins dialog box appears.
 
-2. Clear the "pptsvn" check box in [Add-Ins available] list box.
+2. Clear the "pptsvn" check box in `[Add-Ins available]` list box.
 
-3. [Subversion] menu and the command bar disappear.
+3. `[Subversion]` menu and the command bar disappear.
 
 4. Delete the files of PowerPoint add-in that you copied in installation.
