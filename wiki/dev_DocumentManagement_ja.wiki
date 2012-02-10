@@ -2,6 +2,10 @@ Links
 
 =English=
 
+(Just geeks) Configuring Subversion for MS Office files 
+
+http://justgeeks.blogspot.com/2011/08/configuring-subversion-for-ms-office.html
+
 Document file format and repository size.
 
 http://svn.haxx.se/tsvnusers/archive-2008-03/0121.shtml
