@@ -23,6 +23,13 @@ Attribute VB_Exposed = True
 
 Option Explicit
 
+' Section name and key name in the ini file
+Private Const mIniSectNameActiveContent As String = "ActiveContent"
+Private Const mIniKeyTestModToLock As String = "TestModToLock"
+' Test Flag Constant
+Private Const mNotTest As Long = 0
+Private Const mTest As Long = 1
+
 Dim MsOfficeSvnAppEvent As New AppEvent
 
 ' :Function: Install Subversion menu and command bar
@@ -42,20 +49,19 @@ End Sub
 
 
 ' :Function: Initialize variables because this function is executed when Excel starts.
-'Private Sub Workbook_Open()
+Private Sub Workbook_Open()
   'MsgBox "Workbook_Open"
 '  RegisterShortcutKey
-'  RegisterEventHandler
-'End Sub
-
-
-' :Function: Register event handler for Application
-Public Sub RegisterEventHandler()
-  Set MsOfficeSvnAppEvent.App = Application
+' 0:Not test it, 1:Test it
+  Dim mTestModToLock As Long
+  
+  mTestModToLock = _
+    GetPrivateProfileInt(mIniSectNameActiveContent, _
+                         mIniKeyTestModToLock, _
+                         mNotTest, GetIniFileFullPath)
+  If mTestModToLock Then
+    MsOfficeSvnAppEvent.RegisterEventHandler
+  End If
 End Sub
-
-
-
-
 
 
