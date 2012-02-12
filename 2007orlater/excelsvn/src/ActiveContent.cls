@@ -202,10 +202,16 @@ Sub JumpToStoredPos()
     Exit Sub
   End If
 
+  Dim ws As Worksheet
   Dim ActiveRange As Range
+  
   Set ActiveRange = Cells(mabsRow, mabsCol)
-  Worksheets(mActiveContentName).Activate
-  Range(ActiveRange.Address).Activate
+  For Each ws In Worksheets
+    If (ws.Name = mActiveContentName) Then
+      Worksheets(mActiveContentName).Activate
+      Range(ActiveRange.Address).Activate
+    End If
+  Next
 End Sub
 
 
@@ -295,6 +301,11 @@ Function IsFileUnderSvnControl() As Boolean
   Set WCRevObj = Nothing
 End Function
 
+' :Function: Test whether the file has the svn:needs-lock property or not.
+' :Return value: True=has the property, False=Not have the property
+Function HasNeedsLockProperty()
+  HasNeedsLockProperty = CheckNeedsLockProperty(mFullName)
+End Function
 
 ' :Funtion: Add workbook if no workbook exist before open a file.
 ' :Remarks: This subroutine is required to avoid application Error

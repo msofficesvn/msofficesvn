@@ -23,7 +23,6 @@ Attribute VB_Exposed = False
 '               This class is to handle application events they are issued
 '               when a workbook is manipulated.
 
-
 Option Explicit
 
 Public WithEvents App As Application
@@ -31,11 +30,43 @@ Attribute App.VB_VarHelpID = -1
  ' Delete "Attribute App.VB_VarHelpID = -1" line
  ' when you copy and paste the source code to excelsvn.xla
 
+Dim mActCont As ActiveContent
+
+' :Function: Register event handler for Application
+Public Sub RegisterEventHandler()
+  Set App = Application
+End Sub
+
+' :Function:  Event handler for that the cell of the worksheet is modified
+' :Arguments: Sh     [i] Worksheet
+'             Target [i]
+Private Sub App_SheetChange(ByVal Sh As Object, ByVal Target As Range)
+  Dim ans As Integer
+
+  If (mActCont.FileExist()) Then
+    If (mActCont.IsFileReadOnly()) Then
+      If (mActCont.HasNeedsLockProperty()) Then
+        ans = MsgBox(gmsgAskLockModActWb, vbYesNo)
+        If ans = vbYes Then
+          TsvnLock
+        End If
+      End If
+    End If
+  End If
+End Sub
 
 ' :Function:  Event handler for open workbook
 ' :Arguments: Wb     [i] Workbook
 Private Sub App_WorkbookOpen(ByVal Wb As Workbook)
   'MsgBox "workbook opened! : " & Wb.FullName
+End Sub
+
+' :Function:  Event handler for that the workbook is activated.
+' :Arguments: Wb     [i] Workbook
+Private Sub App_WorkbookActivate(ByVal Wb As Workbook)
+  ' Switch active content object when the workbook is activated.
+  Set mActCont = Nothing
+  Set mActCont = New ActiveContent
 End Sub
 
 
