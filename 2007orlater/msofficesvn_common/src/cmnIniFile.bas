@@ -18,16 +18,36 @@ Option Explicit
 
 ' :Function: Get numeric value from INI file
 ' :Remarks:  Declaration of Windows API
-Public Declare PtrSafe Function GetPrivateProfileInt Lib "kernel32" _
+#If Win64 Then
+  Public Declare PtrSafe Function GetPrivateProfileInt Lib "kernel32" _
+                         Alias "GetPrivateProfileIntA" _
+                         (ByVal lpApplicationName As String, _
+                          ByVal lpKeyName As String, _
+                          ByVal nDefault As Long, _
+                          ByVal lpFileName As String) As Long
+#Else
+  Public Declare Function GetPrivateProfileInt Lib "kernel32" _
                          Alias "GetPrivateProfileIntA" _
                          (ByVal lpApplicationName As String, _
                           ByVal lpKeyName As String, _
                           ByVal nDefault As Long, _
                           ByVal lpFileName As String) As Long
 
+#End If
+
 ' :Function: Get string from INI file
 ' :Remarks:  Declaration of Windows API
-Public Declare PtrSafe Function GetPrivateProfileString Lib "kernel32" _
+#If Win64 Then
+  Public Declare PtrSafe Function GetPrivateProfileString Lib "kernel32" _
+                         Alias "GetPrivateProfileStringA" _
+                         (ByVal lpApplicationName As String, _
+                          ByVal lpKeyName As Any, _
+                          ByVal lpDefault As String, _
+                          ByVal lpReturnedString As String, _
+                          ByVal nSize As Long, _
+                          ByVal lpFileName As String) As Long
+#Else
+  Public Declare Function GetPrivateProfileString Lib "kernel32" _
                          Alias "GetPrivateProfileStringA" _
                          (ByVal lpApplicationName As String, _
                           ByVal lpKeyName As Any, _
@@ -36,14 +56,26 @@ Public Declare PtrSafe Function GetPrivateProfileString Lib "kernel32" _
                           ByVal nSize As Long, _
                           ByVal lpFileName As String) As Long
 
+#End If
+
 ' :Function: Write string to INI file
 ' :Remarks:  Declaration of Windows API
-Public Declare PtrSafe Function WritePrivateProfileString Lib "kernel32" _
+#If Win64 Then
+  Public Declare PtrSafe Function WritePrivateProfileString Lib "kernel32" _
                          Alias "WritePrivateProfileStringA" _
                          (ByVal lpApplicationName As String, _
                           ByVal lpKeyName As Any, _
                           ByVal lpString As Any, _
                           ByVal lpFileName As String) As Long
+#Else
+  Public Declare Function WritePrivateProfileString Lib "kernel32" _
+                         Alias "WritePrivateProfileStringA" _
+                         (ByVal lpApplicationName As String, _
+                          ByVal lpKeyName As Any, _
+                          ByVal lpString As Any, _
+                          ByVal lpFileName As String) As Long
+
+#End If
 
 
 ' :Function: Get ini file full path name.
