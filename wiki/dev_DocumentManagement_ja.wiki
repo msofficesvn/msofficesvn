@@ -93,3 +93,7 @@ http://japan.zdnet.com/sp/feature/shinder/story/0,2000087897,20348737-3,00.htm
  Version Extraction Tool
 
  「Office Migration Planning Manager（OMPM）」に含まれているツールである。このツールを使用することで、Officeの旧バージョンで作成されたドキュメントの異なる版を複数のファイルに保存できるようになる（Office 2007は版の管理機能をサポートしていない）。
+
+==Excelは曲者==
+
+http://feather.cocolog-nifty.com/weblog/2011/01/excel-c579.html
