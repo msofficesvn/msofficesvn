@@ -96,4 +96,6 @@ http://japan.zdnet.com/sp/feature/shinder/story/0,2000087897,20348737-3,00.htm
 
 ==Excelは曲者==
 
+Excelをバージョン管理するための基礎知識
+
 http://feather.cocolog-nifty.com/weblog/2011/01/excel-c579.html
