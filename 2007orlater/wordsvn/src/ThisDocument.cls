@@ -61,7 +61,7 @@ Sub AutoExec()
   'End If
 
   RegisterShortcutKey
-  'RegisterEventHandler
+  MsOfficeSvnAppEvent.RegisterEventHandler
 End Sub
 
 
@@ -75,13 +75,4 @@ Sub AutoExit()
   '  DeleteSvnToolBar
   'End If
 End Sub
-
-
-' :Function: Register event handler for Application
-Sub RegisterEventHandler()
-  Set MsOfficeSvnAppEvent.App = Application
-End Sub
-
-
-
 
