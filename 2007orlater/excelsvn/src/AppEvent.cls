@@ -41,24 +41,27 @@ End Sub
 ' :Arguments: Sh     [i] Worksheet
 '             Target [i]
 Private Sub App_SheetChange(ByVal Sh As Object, ByVal Target As Range)
-  Dim ans As Integer
+'  Dim ans As Integer
 
-  If (mActCont.FileExist()) Then
-    If (mActCont.IsFileReadOnly()) Then
-      If (mActCont.HasNeedsLockProperty()) Then
-        ans = MsgBox(gmsgAskLockModActWb, vbYesNo)
-        If ans = vbYes Then
-          TsvnLock
-        End If
-      End If
-    End If
-  End If
+'  If (mActCont.FileExist()) Then
+'    If (mActCont.IsFileReadOnly()) Then
+'      If (mActCont.HasNeedsLockProperty()) Then
+'        ans = MsgBox(gmsgAskLockMod, vbYesNo)
+'        If ans = vbYes Then
+'          TsvnLock
+'        End If
+'      End If
+'    End If
+'  End If
+
 End Sub
 
 ' :Function:  Event handler for open workbook
 ' :Arguments: Wb     [i] Workbook
 Private Sub App_WorkbookOpen(ByVal Wb As Workbook)
   'MsgBox "workbook opened! : " & Wb.FullName
+  bLockStatusCheckOn = True
+  LockStatusCheckTimer
 End Sub
 
 ' :Function:  Event handler for that the workbook is activated.
@@ -67,6 +70,8 @@ Private Sub App_WorkbookActivate(ByVal Wb As Workbook)
   ' Switch active content object when the workbook is activated.
   Set mActCont = Nothing
   Set mActCont = New ActiveContent
+  bLockStatusCheckOn = True
+
 End Sub
 
 
