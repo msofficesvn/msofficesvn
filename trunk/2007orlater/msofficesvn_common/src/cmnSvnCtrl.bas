@@ -41,7 +41,7 @@ End Function
 '                This timer provides auto-lock function.
 Public Sub LockStatusCheckTimer()
   If bLockStatusCheckOn = False Then
-    Application.OnTime When:=Now + TimeValue("00:00:03"), Name:="LockStatusCheckTimer"
+    Application.OnTime Now + TimeValue("00:00:03"), "LockStatusCheckTimer"
     Exit Sub ' Exit this subroutine
   End If
 
@@ -61,6 +61,6 @@ Public Sub LockStatusCheckTimer()
           End If
         End If
       End If
-      Application.OnTime When:=Now + TimeValue("00:00:03"), Name:="LockStatusCheckTimer"
+      Application.OnTime Now + TimeValue("00:00:03"), "LockStatusCheckTimer"
     End If
 End Sub
