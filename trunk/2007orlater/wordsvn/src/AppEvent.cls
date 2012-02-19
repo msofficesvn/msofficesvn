@@ -44,6 +44,7 @@ End Sub
 ' :Arguments: Doc    [i] Document
 Private Sub App_DocumentOpen(ByVal Doc As Document)
 '  MsgBox "App_DocumentOpen" & Doc.FullName
+   bLockStatusCheckOn = True
    LockStatusCheckTimer
 End Sub
 
