@@ -23,8 +23,6 @@ Attribute VB_Exposed = True
 
 Option Explicit
 
-Dim MsOfficeSvnAppEvent As New AppEvent
-
 ' :Function: Install Subversion menu and command bar
 Private Sub Workbook_AddinInstall()
   ' Build the SVN Menu
@@ -42,19 +40,7 @@ End Sub
 
 
 ' :Function: Initialize variables because this function is executed when Excel starts.
-'Private Sub Workbook_Open()
+Private Sub Workbook_Open()
   'MsgBox "Workbook_Open"
-'  RegisterShortcutKey
-'  RegisterEventHandler
-'End Sub
-
-
-' :Function: Register event handler for Application
-Public Sub RegisterEventHandler()
-  Set MsOfficeSvnAppEvent.App = Application
 End Sub
-
-
-
-
 
