@@ -30,11 +30,22 @@ Attribute App.VB_VarHelpID = -1
  ' Delete "Attribute App.VB_VarHelpID = -1" line
  ' when you copy and paste the source code to excelsvn.xla
 
+' :Function: Register event handler for Application
+Sub RegisterEventHandler()
+  Set App = Application
+End Sub
+
+Private Sub App_DocumentChange()
+  ' Start to check to need lock or not when a document is activated.
+  bLockStatusCheckOn = True
+End Sub
 
 ' :Function:  Event handler for open document
 ' :Arguments: Doc    [i] Document
 Private Sub App_DocumentOpen(ByVal Doc As Document)
 '  MsgBox "App_DocumentOpen" & Doc.FullName
+   bLockStatusCheckOn = True
+   LockStatusCheckTimer
 End Sub
 
 

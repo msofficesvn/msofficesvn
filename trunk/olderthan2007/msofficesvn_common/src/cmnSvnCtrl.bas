@@ -17,6 +17,9 @@ Attribute VB_Name = "cmnSvnCtrl"
 
 Option Explicit
 
+' True=Check wether the modified active file is needed to be locked or not.
+Public bLockStatusCheckOn As Boolean
+
 ' :Function:     Check svn:needs-lock property of the file.
 ' :Arguments:    FullPathName [i] Full path name of the file
 ' :Return value: True = The file has svn:needs-lock property
@@ -34,3 +37,30 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   Set WCRevObj = Nothing
 End Function
 
+' :Function:     Timer to check the active file is need to be locked when it is modified.
+'                This timer provides auto-lock function.
+Public Sub LockStatusCheckTimer()
+  If bLockStatusCheckOn = False Then
+    Application.OnTime Now + TimeValue("00:00:03"), "LockStatusCheckTimer"
+    Exit Sub ' Exit this subroutine
+  End If
+
+  Dim ActCont As New ActiveContent
+    If ActCont.FileExist Then
+      If ActCont.IsFileReadOnly Then
+        If CheckNeedsLockProperty(ActCont.GetFullName) Then
+          If (ActCont.IsSaved = False) Then
+            Dim ans As Integer
+            ans = MsgBox(gmsgAskLockMod, vbYesNo)
+            If (ans = vbYes) Then
+              TsvnLock
+            Else
+              ' If user select "No", do not check anymore during this session.
+              bLockStatusCheckOn = False
+            End If
+          End If
+        End If
+      End If
+      Application.OnTime Now + TimeValue("00:00:03"), "LockStatusCheckTimer"
+    End If
+End Sub
