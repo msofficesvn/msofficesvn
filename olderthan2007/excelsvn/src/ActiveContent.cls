@@ -218,6 +218,11 @@ End Sub
 ' :Function:Test whether the active content is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
 Function FileExist() As Boolean
+  If Workbooks.Count < 1 Then
+    FileExist = False
+    Exit Function
+  End If
+
   If Len(mName) = 0 Then
     FileExist = False
     Exit Function
