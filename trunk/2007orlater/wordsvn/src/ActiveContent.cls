@@ -209,8 +209,15 @@ End Sub
 ' :Function: Jump the cursor to the position that is sotred previously
 '            by StoreCurCursorPos function.
 Sub JumpToStoredPos()
+  Dim SetLinePos As Integer
+  If absLinePos < 1 Then
+    SetLinePos = 0
+  Else
+    SetLinePos = absLinePos -1
+  End If
+
   Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=absPageNum, Name:=""
-  Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=(absLinePos - 1), Name:=""
+  Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=SetLinePos, Name:=""
 End Sub
 
 
