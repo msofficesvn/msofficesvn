@@ -352,7 +352,7 @@ End Sub
 
 
 ' :Function: Lock
-Sub TsvnLock()
+Sub TsvnLock(Optional ByVal bCheckReadOnly As Boolean = True)
   ' Return value of MessageBox
   Dim ans As Integer
   ' Message
@@ -392,17 +392,22 @@ Sub TsvnLock()
   If ActiveContent.IsSaved = False Then
   ' Active content is modified but not saved yet.
     ' Test the active content file attributes
-    If ActiveContent.IsFileReadOnly Then
-      msgErrReadOnly = _
-      AddActiveContentNameToMsg(gmsgLockAskActiveContentFileReadOnly, _
-                                gmsgFileNameCap, True, ActiveContent)
-      ans = MsgBox(msgErrReadOnly, vbYesNo)
-      If ans = vbYes Then
-        Exit Sub
-      ElseIf ans = vbNo Then
-        bDiscardChangeAndLock = True
-        bAlertsOnClosing = False
+    If bCheckReadOnly Then
+      If ActiveContent.IsFileReadOnly Then
+        msgErrReadOnly = _
+        AddActiveContentNameToMsg(gmsgLockAskActiveContentFileReadOnly, _
+                                  gmsgFileNameCap, True, ActiveContent)
+        ans = MsgBox(msgErrReadOnly, vbYesNo)
+        If ans = vbYes Then
+          Exit Sub
+        ElseIf ans = vbNo Then
+          bDiscardChangeAndLock = True
+          bAlertsOnClosing = False
+        End If
       End If
+    Else
+      bDiscardChangeAndLock = True
+      bAlertsOnClosing = False
     End If
 
     If bDiscardChangeAndLock = False Then
