@@ -24,3 +24,5 @@ Wordにはドキュメント変更イベントハンドラは無さそうなの�
 タイマーはWindows APIを使う必要があるらしい。
 
 http://social.msdn.microsoft.com/Forums/en-US/isvvba/thread/9f6891f2-d0c4-47a6-b63f-48405aae4022/
+
+http://www.h3.dion.ne.jp/~sakatsu/Excel_Tips15.htm
