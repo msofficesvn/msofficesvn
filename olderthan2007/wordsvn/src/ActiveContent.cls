@@ -229,13 +229,12 @@ End Sub
 ' :Function:Test whether the active content is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
 Function FileExist() As Boolean
-  If Len(mName) = 0 Then
+  If Len(mFullName) = 0 Then
     FileExist = False
     Exit Function
   End If
-
-  If Documents(mName).Path = "" Then
-    ' Judge that no file exists when no path exists.
+  
+  If Not mFileSysObj.FileExists(mFullName) Then
     FileExist = False
   Else
     FileExist = True

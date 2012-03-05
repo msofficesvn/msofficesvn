@@ -55,21 +55,22 @@ Public Sub LockStatusCheckTimer()
   End If
 
   Dim ActCont As New ActiveContent
-    If ActCont.FileExist Then
-      If ActCont.IsFileReadOnly Then
-        If CheckNeedsLockProperty(ActCont.GetFullName) Then
-          If (ActCont.IsSaved = False) Then
-            Dim ans As Integer
-            ans = MsgBox(gmsgAskLockMod, vbYesNo)
-            If (ans = vbYes) Then
-              TsvnLock False
-            Else
-              ' If user select "No", do not check anymore during this session.
-              bLockStatusCheckOn = False
-            End If
+  If ActCont.FileExist Then
+    If ActCont.IsFileReadOnly Then
+      If CheckNeedsLockProperty(ActCont.GetFullName) Then
+        If (ActCont.IsSaved = False) Then
+          Dim ans As Integer
+          ans = MsgBox(gmsgAskLockMod, vbYesNo)
+          If (ans = vbYes) Then
+            TsvnLock False
+          Else
+            ' If user select "No", do not check anymore during this session.
+            bLockStatusCheckOn = False
           End If
         End If
       End If
-      Application.OnTime Now + TimeValue("00:00:03"), "LockStatusCheckTimer"
     End If
-End Sub
+  End If
+  Application.OnTime Now + TimeValue("00:00:03"), "LockStatusCheckTimer"
+
+  End Sub
