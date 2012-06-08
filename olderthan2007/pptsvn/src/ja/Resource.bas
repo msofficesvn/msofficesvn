@@ -71,4 +71,5 @@ Public Const gmsgErrFileNotUnderCtrl As String = "アクティブプレゼンテーションは
 Public Const gmsgDeleteAskDelete As String = "ファイルを削除しようとしています。よろしいですか？"
 Public Const gmsgDeleteAskCommit As String = "続けてコミットを実行しますか?"
 Public Const gmsgAskSaveMod As String = "アクティブプレゼンテーションには変更があります。上書き保存しますか？"
+Public Const gmsgAskLockMod As String = "SVN管理下のロック属性付アクティブプレゼンテーションに変更があります。ロックを取得しますか?ロックを取得すると今行った変更は破棄されます。"
 
