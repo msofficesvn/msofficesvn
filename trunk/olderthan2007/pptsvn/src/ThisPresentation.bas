@@ -23,7 +23,14 @@ Attribute VB_Name = "ThisPresentation"
 
 Option Explicit
 
-'Dim MsOfficeSvnAppEvent As New AppEvent
+Dim MsOfficeSvnAppEvent As New AppEvent
+
+' Section name and key name in the ini file
+Private Const mIniSectNameActiveContent As String = "ActiveContent"
+Private Const mIniKeyTestModToLock As String = "TestModToLock"
+' Test Flag Constant
+Private Const mNotTest As Long = 0
+Private Const mTest As Long = 1
 
 ' :Function: Install Subversion menu and command bar
 ' :Remarks:  This function is called when MS-PowerPoint starts
@@ -57,6 +64,18 @@ Sub Auto_Open()
 
   'RegisterShortcutKey
   'RegisterEventHandler
+
+    '0:Not test it, 1:Test it
+  Dim mTestModToLock As Long
+  
+  mTestModToLock = _
+    GetPrivateProfileInt(mIniSectNameActiveContent, _
+                         mIniKeyTestModToLock, _
+                         mNotTest, GetIniFileFullPath)
+  If mTestModToLock Then
+    'MsgBox "RegisterEventHandler Called."
+    MsOfficeSvnAppEvent.RegisterEventHandler
+  End If
 End Sub
 
 
