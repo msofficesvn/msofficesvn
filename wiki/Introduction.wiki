@@ -1,4 +1,4 @@
-=Microsoft Office (Excel, Word, PowerPoint?) add-ins that assist document version control=
+=Microsoft Office (Excel, Word, PowerPoint) add-ins that assist document version control=
 
 You can invoke TortoiseSVN commands from tool bar or ribbon interface of Microsoft Office .
 
