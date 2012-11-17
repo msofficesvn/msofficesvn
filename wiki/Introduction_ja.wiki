@@ -5,7 +5,7 @@
 ==概要==
 マイクロソフト オフィス文書のバージョン管理を支援するソフトウェアです。
 
-Microsoft Officeのアドインとして機能し、ワード、エクセル、パワーポイントからバージョン管理ソフトとして定評のある[http://d.hatena.ne.jp/sinsoku/20100405/1270397683 TortoiseSVN]のコマンドを実行することができます。
+Microsoft Officeのアドインとして機能し、ワード、エクセル、パワーポイントからバージョン管理ソフトとして定評のある[http://jibun.atmarkit.co.jp/lskill01/rensai/tool10/04/03.html TortoiseSVN]のコマンドを実行することができます。
 
 *注記 : このアドインプログラムはver.1.30からTortoiseSVN ver.1.7以上に対応しました。*
 
