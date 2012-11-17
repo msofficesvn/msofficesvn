@@ -1,18 +1,8 @@
-=Microsoft Office VBA add-ins that invoke TortoiseSVN commands=
+=Microsoft Office (Excel, Word, PowerPoint?) add-ins that assist document version control=
 
-*NOTE: ver.1.30 or later supports TortoiseSVN ver.1.7.*
+You can invoke TortoiseSVN commands from tool bar or ribbon interface of Microsoft Office . TortoiseSVN is established version control software. 
 
-I've been using Subversion for document management. I thought that it was convenient if I could control the version of Word and Excel data files while I edit them. So, I had been looking for such programs and had found the followings.
-
-Excel
-
-http://dkiroku.com/2005-07-01-11.html
-
-Word
-
-http://www.nekoconeko.com/~nagamori/wordsvn/
-
-But, these programs work not well on MS-Office97 SR2 that I use and they don't support lock functions. Lock functions are required when you share and edit binary data files in cooperation with others. So, I modified them.
+*NOTE: ver.1.30 or later supports TortoiseSVN ver.1.7. or later*
 
 ==Looks==
 
@@ -128,6 +118,19 @@ Demerit
 ==License==
 
 Please use these programs under GNU General Public License v2.
+
+== How and Why ==
+I've been using Subversion for document management. I thought that it was convenient if I could control the version of Word and Excel data files while I edit them. So, I had been looking for such programs and had found the followings.
+
+Excel
+
+http://dkiroku.com/2005-07-01-11.html
+
+Word
+
+http://www.nekoconeko.com/~nagamori/wordsvn/
+
+But, these programs work not well on MS-Office97 SR2 that I use and they don't support lock functions. Lock functions are required when you share and edit binary data files in cooperation with others. So, I modified them.
 
 ==Acknowledgment==
 
