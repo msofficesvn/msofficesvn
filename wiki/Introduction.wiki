@@ -1,6 +1,8 @@
 =Microsoft Office (Excel, Word, PowerPoint?) add-ins that assist document version control=
 
-You can invoke TortoiseSVN commands from tool bar or ribbon interface of Microsoft Office . TortoiseSVN is established version control software. 
+You can invoke TortoiseSVN commands from tool bar or ribbon interface of Microsoft Office .
+
+TortoiseSVN is established version control software. 
 
 *NOTE: ver.1.30 or later supports TortoiseSVN ver.1.7. or later*
 
