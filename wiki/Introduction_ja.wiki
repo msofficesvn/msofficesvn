@@ -8,6 +8,7 @@
 Microsoft Officeのアドインとして機能し、ワード、エクセル、パワーポイントのツールバーやリボンインターフェースからバージョン管理ソフトである[http://tortoisesvn.net/downloads.html TortoiseSVN]のコマンドを実行することができます。
 
 TortoiseSVNは、ソフトウェアのソースコードのバージョン管理をするのに定評のあるソフトウェアですが、[http://jibun.atmarkit.co.jp/lskill01/rensai/tool10/04/03.html 文書ファイルのバージョン管理にも便利に利用できます]。
+マイクロソフト オフィスファイルの文書管理が必要な場合、TortoiseSVNの利用をご検討されることをお勧めします。
 
 *注記 : このアドインプログラムはver.1.30からTortoiseSVN ver.1.7以上に対応しました。*
 
