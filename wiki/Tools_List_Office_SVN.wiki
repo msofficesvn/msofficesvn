@@ -40,3 +40,7 @@ http://magnetsvn.com/index.html
 Git version
 
 https://github.com/knok/excelgit/wiki
+
+Mercurial version
+
+https://code.google.com/p/msofficehg/
