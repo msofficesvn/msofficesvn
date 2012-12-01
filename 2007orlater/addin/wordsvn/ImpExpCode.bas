@@ -129,23 +129,24 @@ Function ExportCode(ByVal LangFlag As String)
   
   ' Search the target content file (xla, dot, ppa, etc.).
   For Each Proj In Application.VBE.VBProjects
-    Debug.Print Proj.Name & vbCrLf
-    Debug.Print Proj.Filename & vbCrLf
-    'Debug.Print Proj.Description & vbCrLf
-    'Debug.Print Proj.Protection & vbCrLf
+      Debug.Print Proj.Name & vbCrLf
+      Debug.Print Proj.Filename & vbCrLf
+      'Debug.Print Proj.Description & vbCrLf
+      'Debug.Print Proj.Protection & vbCrLf
+      
+  '    Dim FoundPos As Integer
+      Dim ProjFileNameWoFldrName As String
+      ProjFileNameWoFldrName = Space(260)
+      ProjFileNameWoFldrName = Trim(SubtractFileName(Proj.Filename))
+      
+  '    FoundPos = InStr(Proj.Filename, gTargetContentFile)
+  '    If FoundPos <> 0 Then
+      If StrComp(ProjFileNameWoFldrName, gTargetContentFile) = 0 Then
+        ' The target content file is found and it is stored in Proj variable.
+        bTargetContentFileExist = True
+        Exit For
+      End If
     
-'    Dim FoundPos As Integer
-    Dim ProjFileNameWoFldrName As String
-    ProjFileNameWoFldrName = Space(260)
-    ProjFileNameWoFldrName = Trim(SubtractFileName(Proj.Filename))
-    
-'    FoundPos = InStr(Proj.Filename, gTargetContentFile)
-'    If FoundPos <> 0 Then
-    If StrComp(ProjFileNameWoFldrName, gTargetContentFile) = 0 Then
-      ' The target content file is found and it is stored in Proj variable.
-      bTargetContentFileExist = True
-      Exit For
-    End If
   Next
   
   If bTargetContentFileExist = False Then
