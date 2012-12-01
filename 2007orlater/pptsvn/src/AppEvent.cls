@@ -30,11 +30,23 @@ Option Explicit
  ' Delete "Attribute App.VB_VarHelpID = -1" line
  ' when you copy and paste the source code to excelsvn.xla
 
+' :Function: Register event handler for Application
+Sub RegisterEventHandler()
+  Set App = Application
+End Sub
+
+Private Sub App_PresentationChange()
+  ' Start to check to need lock or not when a document is activated.
+  bLockStatusCheckOn = True
+End Sub
 
 ' :Function:  Event handler for open Presentation
 ' :Arguments: Doc    [i] Presentation
 Private Sub App_PresentationOpen(ByVal Doc As Presentation)
 '  MsgBox "App_PresentationOpen" & Doc.FullName
+   bLockStatusCheckOn = True
+   ' Commnet out the following line becasue LockStatusCheckTimer function doesn't work in pptsvn now.
+   'LockStatusCheckTimer
 End Sub
 
 
