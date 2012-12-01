@@ -34,9 +34,9 @@ Private mName As String
 ' Path of the active content
 Private mPath As String
 ' The page number of the cursor position.
-Private absPageNum As Long
+Private mabsPageNum As Long
 ' The line number of the top of the page of the cursor position.
-Private absLinePos As Long
+Private mabsLinePos As Long
 ' File System Object
 Private mFileSysObj As Object
 ' 0:Not test it, 1:Test it
@@ -219,7 +219,10 @@ Sub StoreCurCursorPos()
   'absPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
   'absLinePos = Selection.Information(wdFirstCharacterLineNumber)
   'MsgBox "Page:" & absPageNum & "," & "Line:" & absLinePos
-  absPageNum = ActiveWindow.Selection.SlideRange.SlideIndex
+  mabsPageNum = ActiveWindow.Selection.SlideRange.SlideIndex
+  If mabsPageNum < 1 Then
+    mabsPageNum = 1
+  End If
 End Sub
 
 
@@ -228,21 +231,21 @@ End Sub
 Sub JumpToStoredPos()
   'Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=absPageNum, Name:=""
   'Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=(absLinePos - 1), Name:=""
-  ActiveWindow.View.GotoSlide Index:=absPageNum
+  ActiveWindow.View.GotoSlide Index:=mabsPageNum
 End Sub
 
 
 ' :Function:Test whether the active content is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
 Function FileExist() As Boolean
-  If Len(mName) = 0 Then
+  If Len(mFullName) = 0 Then
     FileExist = False
     Exit Function
   End If
 
-  If Presentations(mName).Path = "" Then
-
-    ' Judge that no file exists when no path exists.
+  ' Judge that no file exists when no path exists.
+  
+  If Not mFileSysObj.FileExists(mFullName) Then
     FileExist = False
   Else
     FileExist = True
