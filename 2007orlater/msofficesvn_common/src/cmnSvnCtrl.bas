@@ -37,9 +37,18 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   Set WCRevObj = Nothing
 End Function
 
-' :Function:     Timer to check the active file is need to be locked when it is modified.
+' :Function:     Timer to check the active file must be locked when it is modified.
 '                This timer provides auto-lock function.
 Public Sub LockStatusCheckTimer()
+  ' Check whether a content (document, worksheet, etc.) exist or not.
+  ' Do not anything except just keeping timer. 
+  Dim CurContents As New Contents
+  If CurContents.ContentExist = False Then
+    Application.OnTime Now + TimeValue("00:00:03"), "LockStatusCheckTimer"
+    Exit Sub ' Exit this subroutine
+  End If
+
+  ' Do not anything except just keeping timer. 
   If bLockStatusCheckOn = False Then
     Application.OnTime Now + TimeValue("00:00:03"), "LockStatusCheckTimer"
     Exit Sub ' Exit this subroutine
@@ -53,7 +62,7 @@ Public Sub LockStatusCheckTimer()
             Dim ans As Integer
             ans = MsgBox(gmsgAskLockMod, vbYesNo)
             If (ans = vbYes) Then
-              TsvnLock
+              TsvnLock False
             Else
               ' If user select "No", do not check anymore during this session.
               bLockStatusCheckOn = False

@@ -71,4 +71,4 @@ Public Const gmsgErrFileNotUnderCtrl As String = "The active workbook is current
 Public Const gmsgDeleteAskDelete As String = "Are you sure you want to delete the file?"
 Public Const gmsgDeleteAskCommit As String = "Are you sure you want to commit the deletion?"
 Public Const gmsgAskSaveMod As String = "The active workbook has been modified. Do you wish to save it?"
-Public Const gmsgAskLockMod As String = "The active workbook is under control of svn and has needs-lock property. It has been modified. Do you wish to lock it?"
+Public Const gmsgAskLockMod As String = "The active workbook is under control of svn and has needs-lock property. It has been modified. Do you wish to lock it? The changes you have done now will be dsicarded if you lock it."

@@ -34,9 +34,9 @@ Private mName As String
 ' Path of the active content
 Private mPath As String
 ' The page number of the cursor position.
-Private absPageNum As Long
+Private mabsPageNum As Long
 ' The line number of the top of the page of the cursor position.
-Private absLinePos As Long
+Private mabsLinePos As Long
 ' File System Object
 Private mFileSysObj As Object
 ' 0:Not test it, 1:Test it
@@ -200,42 +200,39 @@ End Function
 
 ' :Function: Store current cursor position as page number and line number of the page.
 Sub StoreCurCursorPos()
-  absPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
-  absLinePos = Selection.Information(wdFirstCharacterLineNumber)
-  'MsgBox "Page:" & absPageNum & "," & "Line:" & absLinePos
+  mabsPageNum = Selection.Information(wdActiveEndAdjustedPageNumber)
+  mabsLinePos = Selection.Information(wdFirstCharacterLineNumber)
+  'MsgBox "Page:" & mabsPageNum & "," & "Line:" & mabsLinePos
 End Sub
 
 
 ' :Function: Jump the cursor to the position that is sotred previously
 '            by StoreCurCursorPos function.
 Sub JumpToStoredPos()
-  Dim SetLinePos As Integer
-  If absLinePos < 1 Then
-    SetLinePos = 0
+ If mabsLinePos < 2 Then
+    mabsLinePos = 1
   Else
-    SetLinePos = absLinePos -1
+    mabsLinePos = mabsLinePos -1
   End If
 
-  Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=absPageNum, Name:=""
-  Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=SetLinePos, Name:=""
+  If mabsPageNum < 1 Then
+    mabsPageNum = 1
+  End If
+
+  Selection.GoTo What:=wdGoToPage, Which:=wdGoToFirst, Count:=mabsPageNum, Name:=""
+  Selection.GoTo What:=wdGoToLine, Which:=wdGoToRelative, Count:=mabsLinePos, Name:=""
 End Sub
 
 
 ' :Function:Test whether the active content is saved as a file or not.
 ' :Return value:True=The file exists., False=No file exists.
 Function FileExist() As Boolean
-  If Documents.Count < 1 Then
-    FileExist = False
-    Exit Function
-  End If
-
   If Len(mName) = 0 Then
     FileExist = False
     Exit Function
   End If
 
   If Documents(mName).Path = "" Then
-
     ' Judge that no file exists when no path exists.
     FileExist = False
   Else
