@@ -34,7 +34,7 @@ I guess that the add-ins work on the following environment.
 I tested on the following environment.
 
  * Windows XP Professional (32bit)
- * Office97 SR2, Office2007
+ * Office97 SR2, Office2010(32bit)
  * TortoiseSVN from ver.1.6, ver.1.7 (32bit/64bit, Subwcrev COM interface available version)
 
 I get a report that Excel-addin works on the following 64bit OS environment.
