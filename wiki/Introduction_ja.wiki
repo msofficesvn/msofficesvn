@@ -54,16 +54,6 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_
  * Excel2007
  * TortoiseSVN 1.6.7 (32bit)
 
-~~msofficesvnアドインから64bit版TortoiseSVNを呼び出すことはできないようです。~~
-
-~~また、TortoiseSVNは、64bit版と32bit版を同時にインストールすることができるようです。~~
-
-~~ http://tortoisesvn.net/downloads ~~
-~~Note for x64 users:~~
-~~you can install both the 32 and 64-bit version side by side. This will enable the TortoiseSVN features also for 32-bit applications.~~
-
-TortoiseSVNは、64bit版と32bit版同時インストールが可能なのはver.1.6xまでのようです。ver.1.7x以降は64bit OSには64bit版しかインストールできません。
-
 msofficesvnアドインは一応以下の組み合わせで動作するようです。
 
  * 64bit OS
