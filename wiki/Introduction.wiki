@@ -28,7 +28,7 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_
 I guess that the add-ins work on the following environment.
 
  * Windows OS (32bit) where WSH is installed.
- * Microsoft Office97 to Office2007
+ * Microsoft Office97 to Office2010(32bit)
  * TortoiseSVN must be installed.
 
 I tested on the following environment.
