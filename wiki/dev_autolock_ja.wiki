@@ -26,3 +26,14 @@ Wordにはドキュメント変更イベントハンドラは無さそうなの�
 http://social.msdn.microsoft.com/Forums/en-US/isvvba/thread/9f6891f2-d0c4-47a6-b63f-48405aae4022/
 
 http://www.h3.dion.ne.jp/~sakatsu/Excel_Tips15.htm
+
+== 実装試行結果 ==
+
+Excel, WordでOnTime()を利用したタイマー方式で実装してみた。
+ワークシートやドキュメントを多く開いているとPCへの負荷が大きくなる感じ。特にExcelはCPU timeを消費しやすいように感じる。wordはそれほどでもない。
+マウスカーソルには、ポインタの横に常に砂時計が表示される状態となる。
+
+[結論]
+
+タイマー方式はできるだけ避け、必要最小限の利用となるようにするべき。
+ユーザーがチェックをオフにできるUIも設けるべきだろう。
