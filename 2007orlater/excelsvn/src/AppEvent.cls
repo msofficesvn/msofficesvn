@@ -41,18 +41,18 @@ End Sub
 ' :Arguments: Sh     [i] Worksheet
 '             Target [i]
 Private Sub App_SheetChange(ByVal Sh As Object, ByVal Target As Range)
-'  Dim ans As Integer
+  Dim ans As Integer
 
-'  If (mActCont.FileExist()) Then
-'    If (mActCont.IsFileReadOnly()) Then
-'      If (mActCont.HasNeedsLockProperty()) Then
-'        ans = MsgBox(gmsgAskLockMod, vbYesNo)
-'        If ans = vbYes Then
-'          TsvnLock
-'        End If
-'      End If
-'    End If
-'  End If
+  If (mActCont.FileExist()) Then
+    If (mActCont.IsFileReadOnly()) Then
+      If (mActCont.HasNeedsLockProperty()) Then
+        ans = MsgBox(gmsgAskLockMod, vbYesNo)
+        If ans = vbYes Then
+          TsvnLock False
+        End If
+      End If
+    End If
+  End If
 
 End Sub
 
@@ -61,7 +61,9 @@ End Sub
 Private Sub App_WorkbookOpen(ByVal Wb As Workbook)
   'MsgBox "workbook opened! : " & Wb.FullName
   bLockStatusCheckOn = True
-  LockStatusCheckTimer
+  'Timer sometimes make Excel too slow to use, so timer should not be used.
+  'Active content modification detection should be done in App_SheetChange.
+  'LockStatusCheckTimer
 End Sub
 
 ' :Function:  Event handler for that the workbook is activated.
