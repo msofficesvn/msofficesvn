@@ -18,7 +18,7 @@ Dim MsOfficeSvnAppEvent As New AppEvent
 
 ' Section name and key name in the ini file
 Private Const mIniSectNameActiveContent As String = "ActiveContent"
-Private Const mIniKeyTestModToLock As String = "TestModToLock"
+Private Const mIniKeyAutoLock As String = "AutoLock"
 ' Test Flag Constant
 Private Const mNotTest As Long = 0
 Private Const mTest As Long = 1
@@ -29,13 +29,13 @@ Sub Auto_Open()
   'MsgBox "Auto_Open"
   RegisterShortcutKey
   '0:Not test it, 1:Test it
-  Dim mTestModToLock As Long
+  Dim mAutoLock As Long
   
-  mTestModToLock = _
+  mAutoLock = _
     GetPrivateProfileInt(mIniSectNameActiveContent, _
-                         mIniKeyTestModToLock, _
+                         mIniKeyAutoLock, _
                          mNotTest, GetIniFileFullPath)
-  If mTestModToLock Then
+  If mAutoLock Then
     'MsgBox "RegisterEventHandler Called."
     MsOfficeSvnAppEvent.RegisterEventHandler
   End If
