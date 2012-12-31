@@ -42,25 +42,30 @@ End Sub
 '             Target [i]
 Private Sub App_SheetChange(ByVal Sh As Object, ByVal Target As Range)
   Dim ans As Integer
-
-  If (mActCont.FileExist()) Then
-    If (mActCont.IsFileReadOnly()) Then
-      If (mActCont.HasNeedsLockProperty()) Then
-        ans = MsgBox(gmsgAskLockMod, vbYesNo)
-        If ans = vbYes Then
-          TsvnLock False
+  If gbLockStatusCheckOn Then
+    If (mActCont.FileExist()) Then
+      If (mActCont.IsFileReadOnly()) Then
+        If (mActCont.HasNeedsLockProperty()) Then
+          If (mActCont.IsSaved = False) Then
+      	    ans = MsgBox(gmsgAskLockMod, vbYesNo)
+            If ans = vbYes Then
+              TsvnLock False
+            Else
+              ' If user select "No", do not check anymore during this session.
+              gbLockStatusCheckOn = False
+            End If
+          End If
         End If
       End If
     End If
   End If
-
 End Sub
 
 ' :Function:  Event handler for open workbook
 ' :Arguments: Wb     [i] Workbook
 Private Sub App_WorkbookOpen(ByVal Wb As Workbook)
   'MsgBox "workbook opened! : " & Wb.FullName
-  bLockStatusCheckOn = True
+  gbLockStatusCheckOn = True
   'Timer sometimes make Excel too slow to use, so timer should not be used.
   'Active content modification detection should be done in App_SheetChange.
   'LockStatusCheckTimer
@@ -72,7 +77,7 @@ Private Sub App_WorkbookActivate(ByVal Wb As Workbook)
   ' Switch active content object when the workbook is activated.
   Set mActCont = Nothing
   Set mActCont = New ActiveContent
-  bLockStatusCheckOn = True
+  gbLockStatusCheckOn = True
 
 End Sub
 

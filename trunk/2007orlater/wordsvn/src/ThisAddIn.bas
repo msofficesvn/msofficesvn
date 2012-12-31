@@ -21,3 +21,9 @@ Public Function GetThisAddInPath() As String
   GetThisAddInPath = ThisDocument.Path
 End Function
 
+' :Function: Debug subroutine to call from VBA workbench
+Sub StartLockStatusCheckTimer()
+  gbLockStatusCheckOn = True
+  gAutoLockCheckInterval = GetAutoLockCheckIntervalStr
+  LockStatusCheckTimer
+End Sub

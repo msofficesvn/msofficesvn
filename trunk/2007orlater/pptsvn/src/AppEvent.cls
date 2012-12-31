@@ -3,6 +3,7 @@ BEGIN
   MultiUse = -1  'True
 END
 Attribute VB_Name = "AppEvent"
+Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
@@ -25,7 +26,8 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-'Public WithEvents App As PowerPoint.Application
+Public WithEvents App As PowerPoint.Application
+Attribute App.VB_VarHelpID = -1
 
  ' Delete "Attribute App.VB_VarHelpID = -1" line
  ' when you copy and paste the source code to excelsvn.xla
@@ -37,14 +39,14 @@ End Sub
 
 Private Sub App_PresentationChange()
   ' Start to check to need lock or not when a document is activated.
-  bLockStatusCheckOn = True
+  gbLockStatusCheckOn = True
 End Sub
 
 ' :Function:  Event handler for open Presentation
 ' :Arguments: Doc    [i] Presentation
 Private Sub App_PresentationOpen(ByVal Doc As Presentation)
 '  MsgBox "App_PresentationOpen" & Doc.FullName
-   bLockStatusCheckOn = True
+   gbLockStatusCheckOn = True
    ' Commnet out the following line becasue LockStatusCheckTimer function doesn't work in pptsvn now.
    'LockStatusCheckTimer
 End Sub

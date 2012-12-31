@@ -42,6 +42,20 @@ Private mDispAskSaveModMsg As Long
 Private mCiCloseReopenFile As Long
 Private mCiAutoCloseProgressDlg As Long
 
+' AutoLock Options
+' Perform autolock or not flag
+' Section name and key name in the ini file
+Private Const mIniSectNameActiveContent As String = "ActiveContent"
+Private Const mIniKeyAutoLock As String = "AutoLock"
+' Test Flag Constant
+Private Const mNotTest As Long = 0
+Private Const mTest As Long = 1
+' AutoLock status check interval
+' Key name in the ini file
+Private Const mIniKeyAutoLockCheckInterval As String = "AutoLockCheckInterval"
+Private Const mDefAutoLockCheckInterval As Long = 3
+
+
 Public Sub LoadConfig()
   mDispAskSaveModMsg = _
   GetPrivateProfileInt(mIniSecNameConfig, mIniKeyDispAskSaveModMsg, _
@@ -84,4 +98,48 @@ Public Function GetCiAutoCloseProgressDlg(ByVal bRead As Boolean) As Long
   End If
   GetCiAutoCloseProgressDlg = mCiAutoCloseProgressDlg
 End Function
+
+' :Function:     Get the flag indicates whether perform autolock or not.
+' :Return value: True:Perfrom autolock, False:Not perform autolock
+Public Function GetAutoLock() As Boolean
+  Dim Flag As Long
+  Flag = _
+  GetPrivateProfileInt(mIniSectNameActiveContent, _
+                       mIniKeyAutoLock, _
+                       mNotTest, GetIniFileFullPath)
+  If Flag = mTest Then
+    GetAutoLock = True
+  Else
+    GetAutoLock = False
+  End If
+End Function
+
+' :Function:     Get the file status check interval for autolock.
+' :Return value: interval string for OnTime function. The interval is 1 - 60 seconds.
+Public Function GetAutoLockCheckIntervalStr() As String
+  Dim CheckInterval As Long
+  Dim Seconds As String
+  CheckInterval = _
+  GetPrivateProfileInt(mIniSectNameActiveContent, _
+                       mIniKeyAutoLockCheckInterval, _
+                       mDefAutoLockCheckInterval, GetIniFileFullPath)
+                       
+  ' Check Interval must be greater than 0 sec and less than or equal 60 sec.
+  If CheckInterval <= 0 Then
+    CheckInterval = 1
+  ElseIf CheckInterval > 60 Then
+    CheckInterval = 60
+  End If
+  
+  If CheckInterval < 10 Then
+    Seconds = "0" & Trim(Str(CheckInterval))
+  Else
+    Seconds = Trim(Str(CheckInterval))
+  End If
+  
+  GetAutoLockCheckIntervalStr = "00:00:" & Seconds & ""
+  
+End Function
+
+
 

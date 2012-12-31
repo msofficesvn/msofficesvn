@@ -18,7 +18,9 @@ Attribute VB_Name = "cmnSvnCtrl"
 Option Explicit
 
 ' True=Check wether the modified active file is needed to be locked or not.
-Public bLockStatusCheckOn As Boolean
+Public gbLockStatusCheckOn As Boolean
+' Check file status interval for autolock and used to make arguments value for OnTime function.
+Public gAutoLockCheckInterval As String
 
 ' :Function:     Check svn:needs-lock property of the file.
 ' :Arguments:    FullPathName [i] Full path name of the file
@@ -37,20 +39,32 @@ Function CheckNeedsLockProperty(ByVal FullPathName As String) As Boolean
   Set WCRevObj = Nothing
 End Function
 
+' Set PPT = 1 in Tools | VBAProject Properties | General | Conditional Compilation Arguments
+' not to compile the following codes.
+#If (PPT = 1) Then
+#Else
 ' :Function:     Timer to check the active file must be locked when it is modified.
 '                This timer provides auto-lock function.
 Public Sub LockStatusCheckTimer()
   ' Check whether a content (document, worksheet, etc.) exist or not.
-  ' Do not anything except just keeping timer. 
+  ' Do not anything except just keeping timer.
   Dim CurContents As New Contents
+  'MsgBox "CurContents.ContentExist:" & CurContents.ContentExist
+  
+  If Len(gAutoLockCheckInterval) = 0 Then
+    gAutoLockCheckInterval = "00:00:03"
+  End If
+  
   If CurContents.ContentExist = False Then
-    Application.OnTime Now + TimeValue("00:00:03"), "LockStatusCheckTimer"
+    Application.OnTime Now + TimeValue(gAutoLockCheckInterval), "LockStatusCheckTimer"
     Exit Sub ' Exit this subroutine
   End If
 
-  ' Do not anything except just keeping timer. 
-  If bLockStatusCheckOn = False Then
-    Application.OnTime Now + TimeValue("00:00:03"), "LockStatusCheckTimer"
+  ' Do not anything except just keeping timer.
+  'MsgBox "gbLockStatusCheckOn:" & gbLockStatusCheckOn
+  
+  If gbLockStatusCheckOn = False Then
+    Application.OnTime Now + TimeValue(gAutoLockCheckInterval), "LockStatusCheckTimer"
     Exit Sub ' Exit this subroutine
   End If
 
@@ -65,12 +79,12 @@ Public Sub LockStatusCheckTimer()
             TsvnLock False
           Else
             ' If user select "No", do not check anymore during this session.
-            bLockStatusCheckOn = False
+            gbLockStatusCheckOn = False
           End If
         End If
       End If
     End If
   End If
-  Application.OnTime Now + TimeValue("00:00:03"), "LockStatusCheckTimer"
-
+  Application.OnTime Now + TimeValue(gAutoLockCheckInterval), "LockStatusCheckTimer"
   End Sub
+#End If
