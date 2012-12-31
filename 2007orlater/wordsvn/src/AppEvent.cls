@@ -37,17 +37,18 @@ End Sub
 
 Private Sub App_DocumentChange()
   ' Start to check to need lock or not when a document is activated.
-  bLockStatusCheckOn = True
+  'MsgBox "App_DocumentChange"
+  gbLockStatusCheckOn = True
 End Sub
 
 ' :Function:  Event handler for open document
 ' :Arguments: Doc    [i] Document
 Private Sub App_DocumentOpen(ByVal Doc As Document)
-'  MsgBox "App_DocumentOpen" & Doc.FullName
-   bLockStatusCheckOn = True
-   LockStatusCheckTimer
+  'MsgBox "App_DocumentOpen" & Doc.FullName
+  gbLockStatusCheckOn = True
+  gAutoLockCheckInterval = GetAutoLockCheckIntervalStr
+  LockStatusCheckTimer
 End Sub
-
 
 ' :Function:  Event handler for before close document
 ' :Arguments: Doc    [i] Document
