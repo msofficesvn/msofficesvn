@@ -214,7 +214,7 @@ Sub JumpToStoredPos()
  If mabsLinePos < 2 Then
     mabsLinePos = 1
   Else
-    mabsLinePos = mabsLinePos -1
+    mabsLinePos = mabsLinePos - 1
   End If
 
   If mabsPageNum < 1 Then

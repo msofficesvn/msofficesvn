@@ -25,7 +25,7 @@ Public Const gOffice2000MajorVer = 9
 Public Const gOfficeXPMajorVer = 10
 Public Const gOffice2003MajorVer = 11
 Public Const gOffice2007MajorVer = 12
-
+Public Const gOffice2010MajorVer = 14
 
 ' :Function:     Get MS-Office major version number
 ' :Return value: Major version number of MS-Office
