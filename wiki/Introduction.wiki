@@ -27,27 +27,15 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_
 
 I guess that the add-ins work on the following environment.
 
- * Windows OS (32bit) where WSH is installed.
- * Microsoft Office97 to Office2010(32bit)
+ * Windows OS (32bit, 64bit) where WSH is installed.
+ * Microsoft Office97 to Office2010(32bit and maybe 64bit)
  * TortoiseSVN must be installed.
 
 I tested on the following environment.
 
- * Windows XP Professional (32bit)
- * Office97 SR2, Office2010(32bit)
+ * Windows XP Professional (32bit), Windows7 Home Premium (64bit)
+ * Office97 SR2, Office2007(32bit), Office2010(32bit)
  * TortoiseSVN from ver.1.6, ver.1.7 (32bit/64bit, Subwcrev COM interface available version)
-
-I get a report that Excel-addin works on the following 64bit OS environment.
-
- * Windows 7 Home Premium (64bit)
- * Excel2007
- * TortoiseSVN 1.6.7 (32bit)
-
-msofficesvn add-in seems to work under the following condition.
-
- * 64 bit OS
- * 32 bit Microsoft Office
- * 64 bit TortoiseSVN
 
 ==Installation and Uninstallation==
 
@@ -73,6 +61,8 @@ In the case of [SVN Update], [SVN Get lock], [SVN Commit] and [SVN Release lock]
 [Open Explorer] command open Explorer with selecting the active document or book, so you can use the other commands quickly that can't be invoked from the add-ins.
 
 ==Features==
+
+===Auto-lock function for the files that have svn:needs-lock property is supported in Word and Excel add-ins, not supported in PowerPoint add-in. (Supported in Ver.1.40)===
 
 ===Office2007 ribbon interface is supported (Supported in Ver.1.2.0)===
 
