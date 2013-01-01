@@ -41,26 +41,13 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_
 おそらく以下の環境で動作します。
 
  * WSHがインストールされているWindowsOS (32bit, 64bit)
- * Office97 ～ Office2010(32bit)
+ * Office97 ～ Office2010(32bit, たぶん64bitでもOK)
  * TortoiseSVNがインストールされていること。
 
 以下の環境で動作することは確認しました。
-
- * Windows XP Professional(32bit), Windows Server 2008(64bit)
- * Office97 SR2, Office2010(32bit)
+ * Windows XP Professional(32bit), Windows7 Home Premium(64bit)
+ * Office97 SR2, Office2007(32bit), Office2010(32bit)
  * TortoiseSVN 1.6, 1.7 (32bit/64bit, Subwcrev COM インターフェイスが使えるバージョン)
-
-64bit OSでは以下の環境で動作したとの報告をいただきました。
-
- * Windows 7 Home Premium (64bit)
- * Excel2007
- * TortoiseSVN 1.6.7 (32bit)
-
-msofficesvnアドインは一応以下の組み合わせで動作するようです。
-
- * 64bit OS
- * 32bit Microsoft Office
- * 64bit TortoiseSVN
 
 ==インストール/アンインストール==
 ----------------------------------
@@ -92,6 +79,8 @@ msofficesvnアドインは一応以下の組み合わせで動作するようで
 また、[エクスプローラを開く]は、アクティブな文書やワークブックを選択した状態で、エクスプローラを開くことができますので、他のTortoiseSVNの機能を利用したいときに、素早く利用することができます。
 
 ===特長===
+
+==== svn:needs-lock属性を持つファイルへのオートロック機能。(Excel, Wordアドインはサポート。PowerPointアドインは未サポート) ====
 
 ====Office2003以前のツールバーとOffice2700リボンインターフェースの両方対応====
 
