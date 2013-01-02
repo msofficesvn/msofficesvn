@@ -208,3 +208,30 @@ CiAutoCloseProgressDlg=3
 
 Set up wordsvn.ini as in the case of Excel.
 
+==autolock function settings==
+
+===Excel===
+
+{{{
+[ActiveContent]
+AutoLock=1
+}}}
+
+|| Key || Description ||
+|| AutoLock || 1:auto-lock ON、0:auto-lock OFF ||
+
+===Word===
+
+{{{
+[ActiveContent]
+AutoLock=1
+AutoLockCheckInterval=3
+}}}
+
+|| Key || Description ||
+|| AutoLock || 1:auto-lock ON、0:auto-lock OFF ||
+|| AutoLockCheckInterval|| File status check interval setting for auto-lock. 1second to 60 seconds available.　||
+
+===PowerPoint===
+
+Not support auto-lock.
