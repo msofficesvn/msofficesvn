@@ -89,3 +89,11 @@ C:\work\msofficesvn\trunk\2007orlater\addin\wordsvn\ImpExpCode.doc
 Excelとは異なり、Wordでは、アドインのコードをVisual Basic Editorで編集できない(ロックされてソースコードをひらくことができない)。コードを編集したいときは、wordsvn addinをアンインストールしてwordsvn.dotmファイルを直接wordで開くとVBEで編集できるようになる。
 
 = Power Point =
+
+VBEの[ファイル|ファイルのインポート]ですべてのアドインソースファイルを読み込む。
+
+[ツール|VBAProjectのプロパティ|条件付きコンパイル引数]へ以下を入力する。
+
+PPT = 1
+
+[デバッグ|VBAProjectのコンパイル]でコンパイル後、アドインファイルとして保存する。
