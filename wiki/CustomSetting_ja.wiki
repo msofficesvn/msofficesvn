@@ -178,3 +178,23 @@ CiAutoCloseProgressDlg=3
 
 wordsvn.iniにExcelと同様に設定をしてください。
 
+==autolock機能の設定==
+
+===Excel===
+
+{{{
+[ActiveContent]
+AutoLock=1
+}}}
+
+===Word===
+
+{{{
+[ActiveContent]
+AutoLock=1
+AutoLockCheckInterval=3
+}}}
+
+===PowerPoint===
+
+autolock機能に対応していません。
