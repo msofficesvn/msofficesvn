@@ -187,6 +187,9 @@ wordsvn.iniにExcelと同様に設定をしてください。
 AutoLock=1
 }}}
 
+|| キー || 説明 ||
+|| AutoLock || 1:autolock機能オン、0:autolock機能オフ ||
+
 ===Word===
 
 {{{
@@ -194,6 +197,10 @@ AutoLock=1
 AutoLock=1
 AutoLockCheckInterval=3
 }}}
+
+|| キー || 説明 ||
+|| AutoLock || 1:autolock機能オン、0:autolock機能オフ ||
+|| AutoLockCheckInterval|| autolock機能のための、ファイル状況確認の周期設定。1秒から60秒まで設定可。　||
 
 ===PowerPoint===
 
