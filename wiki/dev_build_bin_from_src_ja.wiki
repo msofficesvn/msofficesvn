@@ -48,6 +48,8 @@ Office 2007より古いバージョン用と同様に、ソースファイルか
 
 作成したexcelsvn.xlamをCustom UI Editor for Microsoft Office で開き、ツリービューに表示されるアドインファイル名を右クリックし、[Office2007 Custom UI Part]を選択しUIを追加する。
 
+http://msdn.microsoft.com/ja-jp/library/office/ee691832%28v=office.14%29.aspx
+
 英語版の場合
 C:\work\msofficesvn\trunk\2007orlater\msofficesvn_common\src\customUI\en\customUI.xml
 
