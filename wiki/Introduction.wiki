@@ -35,13 +35,15 @@ I tested on the following environment.
 
  * Windows XP Professional (32bit), Windows7 Home Premium (64bit)
  * Office97 SR2, Office2007(32bit), Office2010(32bit)
- * TortoiseSVN from ver.1.6, ver.1.7 (32bit/64bit, Subwcrev COM interface available version)
+ * TortoiseSVN ver.1.6, ver.1.7 (32bit/64bit, Subwcrev COM interface available version)
 
 ==Installation and Uninstallation==
 
 Please refer to [Install Installation/Uninstallation Page].
 
 ==Functional Overview==
+
+=== Commands ===
 
 The add-ins can apply the following commands to the active workbook and document.
 
@@ -60,17 +62,22 @@ In the case of [SVN Update], [SVN Get lock], [SVN Commit] and [SVN Release lock]
 
 [Open Explorer] command open Explorer with selecting the active document or book, so you can use the other commands quickly that can't be invoked from the add-ins.
 
-==Features==
+=== Features ===
 
-===Auto-lock function for the files that have svn:needs-lock property is supported in Word and Excel add-ins, not supported in PowerPoint add-in. (Supported in Ver.1.40)===
+==== Auto-lock function prevents to start editing without updating and getting lock ====
 
-===Office2007 ribbon interface is supported (Supported in Ver.1.2.0)===
+Have you ever had any troubles by editing Word and Excel files under svn control without updating and getting lock?
+Just add svn:needs-lock property to Word and Excel files. If you are going to edit the files, add-ins ask you whether get lock or not for the files. (PowerPoint add-in doesn't support auto-lock function.)
 
-===Shortcut key (Supported in Ver.1.1.1)===
+==== Both tool bar and ribbon interface are supported ====
+
+These add-ins support tool bar for 2003 or older and ribbon interface for 2007 or later.
+
+==== Shortcut key ====
 
 Shortcut keys can be assigned to commands.
 
-==Option Setting (Supported in Ver.1.1.1)==
+==== Option Setting ====
 
 Following option settings are available.
 
@@ -84,7 +91,7 @@ _*NOTE*
 Customizations are needed for shortcut key assignment and option settings after installation. Please refer to [CustomSetting Customization] for details.
 
 
-==Merit and Demerit==
+== Merit and Demerit ==
 
 Merit
 
@@ -95,11 +102,11 @@ Demerit
 
  * The add-ins apply the commands to only the active document or book, so you can't use it when you wish to edit multiple files and commit them at the same time to make a "change set".
 
-==Tutorial==
+== Tutorial ==
 
 <NOT CREATED YET>
 
-==License==
+== License ==
 
 Please use these programs under GNU General Public License v2.
 
@@ -116,11 +123,11 @@ http://www.nekoconeko.com/~nagamori/wordsvn/
 
 But, these programs work not well on MS-Office97 SR2 that I use and they don't support lock functions. Lock functions are required when you share and edit binary data files in cooperation with others. So, I modified them.
 
-==Acknowledgment==
+== Acknowledgment ==
 
 I appreciate Mr. Osamu OKANO and Mr. Kazuyuki NAGAMORI, who created original programs and opened their source code to public.
 
-==Contact==
+== Contact ==
 
 If you have some comments about these programs, e-mail me.
 
