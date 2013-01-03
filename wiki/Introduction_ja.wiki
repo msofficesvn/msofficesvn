@@ -87,6 +87,8 @@ Subversion管理下のExcel, Wordのファイルを更新とロックの取得�
 
 svn:needs-lock属性については以下をご参照ください。
 
+http://tortoisesvn.net/docs/nightly/TortoiseSVN_ja/tsvn-dug-locking.html
+
 http://hide.xsv.info/tips/svnmanual/filelock/
 
 http://cha.la.coocan.jp/doc/Subversion.html#sec13
