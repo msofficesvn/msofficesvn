@@ -69,6 +69,10 @@ In the case of [SVN Update], [SVN Get lock], [SVN Commit] and [SVN Release lock]
 Have you ever had any troubles by editing Word and Excel files under svn control without updating and getting lock?
 Just add svn:needs-lock property to Word and Excel files. If you are going to edit the files, add-ins ask you whether get lock or not for the files. (PowerPoint add-in doesn't support auto-lock function.)
 
+Please refer to the following URL for svn:needs-lock property.
+
+http://tortoisesvn.net/docs/nightly/TortoiseSVN_en/tsvn-dug-locking.html
+
 ==== Both tool bar and ribbon interface are supported ====
 
 These add-ins support tool bar for 2003 or older and ribbon interface for 2007 or later.
