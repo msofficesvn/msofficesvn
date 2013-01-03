@@ -89,6 +89,8 @@ svn:needs-lock属性については以下をご参照ください。
 
 http://hide.xsv.info/tips/svnmanual/filelock/
 
+http://cha.la.coocan.jp/doc/Subversion.html#sec13
+
 ==== ツールバーとリボンインターフェース両方に対応====
 
 Office2003以前のツールバーとOffice2700リボンインターフェースの両方に対応しています。
