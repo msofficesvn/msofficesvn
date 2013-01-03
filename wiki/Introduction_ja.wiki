@@ -85,6 +85,10 @@ http://msofficesvn.googlecode.com/svn/branches/rb-1.2.x/2007orlater/msofficesvn_
 Subversion管理下のExcel, Wordのファイルを更新とロックの取得を忘れ編集してしまい、ファイルを保存＆コミットするときに後悔したことはありませんか?
 本アドインを使用すれば、Excel, Wordのファイルにsvn:needs-lock属性をつけておくと、それらのファイルの編集時にアドインがロックを取得するかどうか聞いてくれます。(ただし、PowerPointアドインはオートロック機能をサポートしていません。)
 
+svn:needs-lock属性については以下をご参照ください。
+
+http://hide.xsv.info/tips/svnmanual/filelock/
+
 ==== ツールバーとリボンインターフェース両方に対応====
 
 Office2003以前のツールバーとOffice2700リボンインターフェースの両方に対応しています。
