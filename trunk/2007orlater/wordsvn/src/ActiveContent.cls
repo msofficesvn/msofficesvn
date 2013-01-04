@@ -76,10 +76,15 @@ Private Sub Class_Initialize()
                          mIniKeyTestFolderUnderCtrlSvn, _
                          mTest, GetIniFileFullPath)
 
+  PrintVal "GetIniFileFullPath", GetIniFileFullPath
+  PrintVal "mTestFolderUnderControlOfSvn", mTestFolderUnderControlOfSvn
+
   mTestFileUnderControlOfSvn = _
     GetPrivateProfileInt(mIniSectNameActiveContent, _
                          mIniKeyTestFileUnderCtrlSvn, _
                          mTest, GetIniFileFullPath)
+  
+  PrintVal "mTestFileUnderControlOfSvn", mTestFileUnderControlOfSvn
 
 End Sub
 
