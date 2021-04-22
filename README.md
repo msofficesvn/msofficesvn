@@ -1,10 +1,10 @@
-# MS_Office_SVN
+# MSOfficeSVN
 
 
 ## What is it
 
-MS_Office_SVN is a set of add-ins for Microsoft Office Excel, Word and PowerPoint that assists for document version control through Subversion (SVN).\
-Thanks to the MS_Office_SVN package, you can now easily version-control your MS Office files right from the MS Office menu!
+MSOfficeSVN is a set of add-ins for Microsoft Office Excel, Word and PowerPoint that assists for document version control through Subversion (SVN).\
+Thanks to the MSOfficeSVN package, you can now easily version-control your MS Office files right from the MS Office menu!
 
 ![Word 2007 ribbon menu](https://github.com/msofficesvn/msofficesvn/raw/master/2007orlater/msofficesvn_common/doc/en/wd2007menu.jpg)
 ![Excel 2007 ribbon menu](https://github.com/msofficesvn/msofficesvn/raw/master/2007orlater/msofficesvn_common/doc/en/xl2007menu.jpg)
@@ -17,8 +17,8 @@ Main features:
 
 ## How to use
 
-1. MS_Office_SVN is based on [TortoiseSVN](https://tortoisesvn.net/), that's why **you need to have previously installed [TortoiseSVN](https://tortoisesvn.net/)** for MS_Office_SVN to work!
-2. MS_Office_SVN comes as a package of multiple add-ins. Follow the instructions to install the add-in(s) of your choice:  
+1. MSOfficeSVN is based on [TortoiseSVN](https://tortoisesvn.net/), that's why **you need to have previously installed [TortoiseSVN](https://tortoisesvn.net/)** for MSOfficeSVN to work!
+2. MSOfficeSVN comes as a package of multiple add-ins. Follow the instructions to install the add-in(s) of your choice:  
   a. [English Instruction](https://github.com/msofficesvn/msofficesvn/wiki/Install)  
   b. [Japanese Instruction](https://github.com/msofficesvn/msofficesvn/wiki/Install_ja)
 
@@ -29,8 +29,8 @@ More detailed information:\
 
 ## Compatibility
 
-Because TortoiseSVN is a Windows-only software, so does MS_Office_SVN.\
-In other words, MS_Office_SVN is **not** compatible with Mac OS versions of Microsoft Office.
+Because TortoiseSVN is a Windows-only software, so does MSOfficeSVN.\
+In other words, MSOfficeSVN is **not** compatible with Mac OS versions of Microsoft Office.
 
 The [latest release 1.4.0](https://github.com/msofficesvn/msofficesvn/releases/tag/rel-1.4.0) is compatible:
 * Up to Microsoft Office 2019 (at least)
@@ -38,7 +38,7 @@ The [latest release 1.4.0](https://github.com/msofficesvn/msofficesvn/releases/t
 * Up to TortoiseSVN 1.14.1 (at least)
 * With Windows 10
 
-Since [release 1.3.0](https://github.com/msofficesvn/msofficesvn/releases/tag/rel-1.3.0), MS_Office_SVN supports TortoiseSVN 1.7 (or later).
+Since [release 1.3.0](https://github.com/msofficesvn/msofficesvn/releases/tag/rel-1.3.0), MSOfficeSVN supports TortoiseSVN 1.7 (or later).
 
 Legacy: Support Office97sr2\
 _TBD: check this assumption or remove it_
