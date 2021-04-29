@@ -65,8 +65,6 @@ You should have received a copy of the GNU General Public License along with thi
 
 Koki Yamamoto (kokiya@gmail.com)
 
-Originally based on works found on:\
-http://dkiroku.com/ (http://dkiroku.com/2005-07-01-11.html)\
-http://www.nekoconeko.com/ (http://www.nekoconeko.com/~nagamori/wordsvn/)
-
-I appreciate Mr. Osamu OKANO and Mr. Kazuyuki NAGAMORI, who created the original programs and opened their source code to the public.
+We appreciate the valuable contribution of the original authors who created the initial programs and opened their source code to the public:\
+Mr. Osamu OKANO (http://dkiroku.com/2005-07-01-11.html) \
+Mr. Kazuyuki NAGAMORI (http://www.nekoconeko.com/~nagamori/wordsvn/)
