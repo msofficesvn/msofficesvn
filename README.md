@@ -26,8 +26,8 @@ Excel 97 (JA) | ![Excel 97 ribbon menu, Japanese](https://github.com/msofficesvn
   b. [Japanese Instruction](https://github.com/msofficesvn/msofficesvn/wiki/Install_ja)
 
 More detailed information:\
-[English documentation](https://github.com/msofficesvn/msofficesvn/wiki)\
-[Japanese documentation](https://github.com/msofficesvn/msofficesvn/wiki/Introduction_ja)
+[English documentation](https://github.com/msofficesvn/msofficesvn/wiki/Home)\
+[Japanese documentation](https://github.com/msofficesvn/msofficesvn/wiki/Home_ja)
 
 
 ## Compatibility
@@ -64,3 +64,9 @@ You should have received a copy of the GNU General Public License along with thi
 ## Credits
 
 Koki Yamamoto (kokiya@gmail.com)
+
+Originally based on works found on:\
+http://dkiroku.com/ (http://dkiroku.com/2005-07-01-11.html)\
+http://www.nekoconeko.com/ (http://www.nekoconeko.com/~nagamori/wordsvn/)
+
+I appreciate Mr. Osamu OKANO and Mr. Kazuyuki NAGAMORI, who created the original programs and opened their source code to the public.
