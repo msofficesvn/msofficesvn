@@ -29,8 +29,10 @@ More detailed information:\
 
 ## Compatibility
 
-Because TortoiseSVN is a Windows-only software, so does MSOfficeSVN.\
+TortoiseSVN is a Windows-only software, so does MSOfficeSVN.\
 In other words, MSOfficeSVN is **not** compatible with Mac OS versions of Microsoft Office.
+
+_As of April 29, 2021, we decided to stop supporting MS Office 2003 and older. [Already released versions](https://github.com/msofficesvn/msofficesvn/releases/) of MSOfficeSVN may fortunately be compatible with those old versions of MS Office._
 
 The [latest release 1.4.0](https://github.com/msofficesvn/msofficesvn/releases/tag/rel-1.4.0) is compatible:
 * Up to Microsoft Office 2019 (at least)
@@ -39,9 +41,6 @@ The [latest release 1.4.0](https://github.com/msofficesvn/msofficesvn/releases/t
 * With Windows 10
 
 Since [release 1.3.0](https://github.com/msofficesvn/msofficesvn/releases/tag/rel-1.3.0), MSOfficeSVN supports TortoiseSVN 1.7 (or later).
-
-Legacy: Support Office97sr2\
-_TBD: check this assumption or remove it_
 
 
 ## How to contribute
