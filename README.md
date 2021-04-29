@@ -6,13 +6,16 @@
 MSOfficeSVN is a set of add-ins for Microsoft Office Excel, Word and PowerPoint that assists for document version control through Subversion (SVN).\
 Thanks to the MSOfficeSVN package, you can now easily version-control your MS Office files right from the MS Office menu!
 
-![Word 2007 ribbon menu](https://github.com/msofficesvn/msofficesvn/raw/master/2007orlater/msofficesvn_common/doc/en/wd2007menu.jpg)
-![Excel 2007 ribbon menu](https://github.com/msofficesvn/msofficesvn/raw/master/2007orlater/msofficesvn_common/doc/en/xl2007menu.jpg)
-
 Main features:
 * Invoke the most frequently used version control commands directly from Microsoft Office: Update, Lock, Commit, Diff, Log, and others
 * Allow shortcut keys to trigger SVN commands
 * Notify the user if the `svn:needs-lock` property is in use (i.e. trying to edit a read-only file)
+
+edition | screenshot
+--- | ---
+PowerPoint 2016 (EN) | ![PowerPoint 2016 ribbon menu, English](https://github.com/msofficesvn/msofficesvn/raw/master/doc/en/msofficesvn_powerpoint2016.png)
+Word 2007 (EN) | ![Word 2007 ribbon menu, English](https://github.com/msofficesvn/msofficesvn/raw/master/doc/en/wd2007menu.jpg)
+Excel 97 (JA) | ![Excel 97 ribbon menu, Japanese](https://github.com/msofficesvn/msofficesvn/raw/master/doc/ja/xl97menu.jpg)
 
 
 ## How to use
