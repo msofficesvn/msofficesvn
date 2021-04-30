@@ -1,4 +1,4 @@
-[English Page](https://github.com/msofficesvn/msofficesvn/wiki/Home.md)
+[English Page](https://github.com/msofficesvn/msofficesvn/blob/master/README.md)
 
 # マイクロソフト オフィス文書のバージョン管理支援ソフト #
 

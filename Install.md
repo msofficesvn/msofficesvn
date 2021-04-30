@@ -94,7 +94,7 @@ UNINSTALLATION:
 
 ### Customization
 
-For any tweaking, please check the [customization documentation page](https://github.com/msofficesvn/msofficesvn/Settings.md).
+For any tweaking, please check the [customization documentation page](https://github.com/msofficesvn/msofficesvn/blob/master/Settings.md).
 
 
 ## Office 97 SR2 to Office 2003 (legacy documentation)
@@ -193,4 +193,4 @@ UNINSTALLATION:
 
 ### Customization
 
-For any tweaking, please check the [customization documentation page](https://github.com/msofficesvn/msofficesvn/Settings.md).
+For any tweaking, please check the [customization documentation page](https://github.com/msofficesvn/msofficesvn/blob/master/Settings.md).

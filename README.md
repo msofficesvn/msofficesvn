@@ -24,8 +24,8 @@ Excel 97 (JA) | ![Excel 97 ribbon menu, Japanese](https://github.com/msofficesvn
 
 1. MSOfficeSVN is based on [TortoiseSVN](https://tortoisesvn.net/), that's why **you need to have previously installed [TortoiseSVN](https://tortoisesvn.net/)** for MSOfficeSVN to work!
 2. MSOfficeSVN comes as a package of multiple add-ins. Follow the instructions to install the add-in(s) of your choice:  
-  a. [English Instructions](https://github.com/msofficesvn/msofficesvn/Install.md)  
-  b. [Japanese Instructions](https://github.com/msofficesvn/msofficesvn/Install_ja.md)
+  a. [English Instructions](https://github.com/msofficesvn/msofficesvn/blob/master/Install.md)  
+  b. [Japanese Instructions](https://github.com/msofficesvn/msofficesvn/blob/master/Install_ja.md)
 
 
 ## Compatibility
@@ -75,6 +75,9 @@ Mr. Osamu OKANO (http://dkiroku.com/2005-07-01-11.html) \
 Mr. Kazuyuki NAGAMORI (http://www.nekoconeko.com/~nagamori/wordsvn/)
 
 
+--------------------------------------------------------------------------------
+
+
 ## Functional overview
 
 ### Commands
@@ -117,7 +120,7 @@ For versions where Office 2003 and older is supported (no ribbon), we provide a 
 ### Shortcut keys
 
 Shortcut keys are assigned by default for the Subversion commands.\
-You may [edit the shortcuts mapping](https://github.com/msofficesvn/msofficesvn/Settings.md) if you want.
+You may [edit the shortcuts mapping](https://github.com/msofficesvn/msofficesvn/blob/master/Settings.md) if you want.
 
 
 ### Option settings
@@ -128,7 +131,7 @@ The following option settings are available.
 * Turn on/off closing and reopening the data file in performing commit command.
 * Turn on/off auto closing of the progress dialog box in the end of performing `Update`, `Commit`.
 
-Instructions for those settings to be edited are given by the [customization documentation page](https://github.com/msofficesvn/msofficesvn/Settings.md).
+Instructions for those settings to be edited are given by the [customization documentation page](https://github.com/msofficesvn/msofficesvn/blob/master/Settings.md).
 
 
 ## Screenshots of the available packages

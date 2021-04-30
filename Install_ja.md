@@ -1,4 +1,4 @@
-[English Page](Install.md)
+[English Page](https://github.com/msofficesvn/msofficesvn/blob/master/Install.md)
 
 # インストール方法 #
 
