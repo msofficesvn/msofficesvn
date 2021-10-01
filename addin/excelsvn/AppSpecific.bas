@@ -10,6 +10,8 @@ Function GetIniFullPath(ByVal LangFlag As String) As String
     IniFileName = gIniFileNameJa
   ElseIf LangFlag = "En" Then
     IniFileName = gIniFileNameEn
+  ElseIf LangFlag = "Fr" Then
+    IniFileName = gIniFileNameFr
   Else
     MsgBox "Invalid LangFlag!"
   End If

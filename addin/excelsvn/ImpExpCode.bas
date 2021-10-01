@@ -4,6 +4,7 @@ Option Explicit
 ' INI file name
 Public Const gIniFileNameJa As String = "ImpExpCodeJa.ini"
 Public Const gIniFileNameEn As String = "ImpExpCodeEn.ini"
+Public Const gIniFileNameFr As String = "ImpExpCodeFr.ini"
 Public Const gIniSectionName As String = "ExcelImportFiles"
 
 ' :Function: Get numeric value from INI file
@@ -51,8 +52,16 @@ Sub ImportCodeEn()
   ImportCode "En"
 End Sub
 
+Sub ImportCodeFr()
+  ImportCode "Fr"
+End Sub
+
 Sub ExportCodeJa()
   ExportCode "Ja"
+End Sub
+
+Sub ExportCodeFr()
+  ExportCode "Fr"
 End Sub
 
 Function ImportCode(ByVal LangFlag As String)
